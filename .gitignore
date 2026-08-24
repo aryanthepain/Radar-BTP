@@ -1,0 +1,34 @@
+# Python Bytecode and Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Testing and Typecheck Caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Processed Heavy Binaries / Large Radar Tensors
+data/processed/*.npy
+data/processed/*.npz
+data/processed/*.h5
+data/processed/*.pt
+
+# OS Cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Agent Ephemera
+.vscode/
+.idea/
