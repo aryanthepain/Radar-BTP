@@ -8,7 +8,8 @@
 - **Run Unit Test Suite**: `python -m unittest discover -s tests`
 - **Run Targeted Test**: `python -m unittest tests/test_radar_dsp.py`
 - **Universal Verification**: `pwsh -File ./scripts/verify.ps1`
-- **Audio Completion Alert**: `pwsh -File ./scripts/agent-alarm.ps1 -Type Success -SoundOnly`
+- **Audio & Spoken Completion Alert**: `pwsh -File ./scripts/agent-alarm.ps1 -Type Success -Message "Task complete. All verification gates passed."`
+
 
 ## 2. Repository Architecture & Layout
 - `src/sim/`: High-fidelity 77 GHz FMCW radar simulation (Chirp synthesizer, target RCS & kinematics, micro-Doppler pedestrian modulations, ground clutter & thermal noise).

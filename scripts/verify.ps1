@@ -135,7 +135,6 @@ if ($failed) {
     if ($Alarm -or $Voice) {
         if (Test-Path $alarmScript) {
             $alarmArgs = @("-Type", "Failure", "-Message", "Verification failed. Attention required.")
-            if (-not $Voice) { $alarmArgs += "-SoundOnly" }
             pwsh -File $alarmScript @alarmArgs
         } else {
             try { [System.Media.SystemSounds]::Hand.Play() } catch {}
@@ -148,8 +147,7 @@ Write-Host ""
 Write-Host "🎉 [VERIFICATION PASSED] All deterministic gates green." -ForegroundColor Green
 if ($Alarm -or $Voice) {
     if (Test-Path $alarmScript) {
-        $alarmArgs = @("-Type", "Success", "-Message", "All verification gates green.")
-        if (-not $Voice) { $alarmArgs += "-SoundOnly" }
+        $alarmArgs = @("-Type", "Success", "-Message", "All verification gates are green. All unit tests passed.")
         pwsh -File $alarmScript @alarmArgs
     } else {
         try { [System.Media.SystemSounds]::Asterisk.Play() } catch {}
