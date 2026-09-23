@@ -12,6 +12,7 @@ env/
 ENV/
 
 # Testing and Typecheck Caches
+.cache/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/

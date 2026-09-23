@@ -29,8 +29,8 @@ A phased journey to prepare an undergraduate thesis exploratory presentation for
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01: Structure and enrich `01_radar_classical_dsp.ipynb` with top-level and section-by-section Mermaid diagrams and academic markdown.
-- [ ] 01-02: Structure and enrich `02_radar_deep_learning_detection.ipynb` with deep learning Mermaid architecture diagrams and clear narrative explanations.
+- [x] 01-01: Structure and enrich `01_radar_classical_dsp.ipynb` with top-level and section-by-section Mermaid diagrams and academic markdown.
+- [x] 01-02: Structure and enrich `02_radar_deep_learning_detection.ipynb` with deep learning Mermaid architecture diagrams and clear narrative explanations.
 
 ### Phase 2: Multi-Level Decoupled Radar Data Ingestion
 **Goal**: Build a universal `RadarDataAdapter` allowing direct data injection at all pipeline levels (Level 1: Raw ADC cubes, Level 2: RDM/RAD tensors, Level 3: Point Cloud DataFrames) independently of the simulator for internal project flexibility.
