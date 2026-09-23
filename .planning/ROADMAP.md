@@ -26,7 +26,7 @@ A phased journey to prepare an undergraduate thesis exploratory presentation for
   2. Section-level Mermaid flow diagrams for each discrete DSP block detailing inputs, functions, math, and outputs in one diagram per section.
   3. Deep learning pipeline and architecture Mermaid diagrams embedded in `02_radar_deep_learning_detection.ipynb`.
   4. Both notebooks execute cleanly end-to-end with high-contrast presentation figures and self-contained narrative.
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 - [ ] 01-01: Structure and enrich `01_radar_classical_dsp.ipynb` with top-level and section-by-section Mermaid diagrams and academic markdown.
