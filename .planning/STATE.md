@@ -56,6 +56,7 @@ Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
 - [Phase 1]: Presentation prioritized as Phase 1 with Mermaid diagrams and academic markdown for professor presentation.
+- [Phase 1 Context]: Dual-embedded Mermaid + collapsible SVG fallbacks, hybrid TD/LR topology, physical + tensor shape annotations, grounded math without heavy proofs, pre-rendered dark cyber-radar outputs, balanced smoke test.
 - [Phase 2]: Radar data decoupling handled in Phase 2 for internal architecture flexibility.
 - [Config]: Configured git branching strategy to create dedicated branch per phase (`gsd/phase-{phase}-{slug}`).
 
@@ -73,9 +74,12 @@ None yet.
 |----------|------|--------|-------------|-----------|
 | Benchmark | Full RadDet/CARRADA training sequence | Deferred | 2026-09-23 | v1.0 |
 | Hardware | TI mmWave real-time SDR streaming | Deferred | 2026-09-23 | v1.0 |
+| Math | Formal textbook proofs & Neyman-Pearson lemmas | Deferred | 2026-09-23 | v1.0 |
+| Architecture | Complex-Valued CNNs & 4D Radar Tensors | Deferred | 2026-09-23 | v1.0 |
 
 ## Session Continuity
 
-Last session: 2026-09-23 15:35
-Stopped at: Project initialization complete. Ready for Phase 1.
-Resume file: None
+Last session: 2026-09-23 15:58
+Stopped at: Phase 1 context gathered
+Resume file: .planning/phases/01-compartmentalized-jupyter-walkthroughs-mermaid-diagrams/01-CONTEXT.md
+
