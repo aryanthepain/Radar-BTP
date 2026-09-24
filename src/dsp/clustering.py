@@ -2,6 +2,8 @@
 Radar Point Cloud Clustering and Object Entity Extraction Module
 Transforms CFAR detections into Cartesian BEV space and clusters reflections via DBSCAN.
 """
+import os
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", str(os.cpu_count() or 4))
 from typing import List, Dict
 import numpy as np
 from sklearn.cluster import DBSCAN
@@ -14,7 +16,7 @@ class RadarClusterer:
     def __init__(self, eps: float = 1.5, min_samples: int = 1):
         self.eps = eps
         self.min_samples = min_samples
-        self.dbscan = DBSCAN(eps=self.eps, min_samples=self.min_samples)
+        self.dbscan = DBSCAN(eps=self.eps, min_samples=self.min_samples, n_jobs=1)
 
     def cluster_detections(self, detections: List[Dict[str, float]]) -> List[Dict[str, float]]:
         """

@@ -8,6 +8,12 @@ Executes:
 """
 import os
 import sys
+import warnings
+
+# Suppress joblib loky physical core detection warning on Windows
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", str(os.cpu_count() or 4))
+warnings.filterwarnings("ignore", category=UserWarning, module="joblib")
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec

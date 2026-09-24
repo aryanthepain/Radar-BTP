@@ -32,11 +32,8 @@ PRINT_ENHANCEMENT_CSS = """
         print-color-adjust: exact !important;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
     }
-    /* Expand all collapsible architecture SVG diagrams */
-    details, details[open] {
-        display: block !important;
-    }
-    details summary, summary {
+    /* Hide collapsible details containing raw mermaid source in print */
+    details, summary {
         display: none !important;
     }
     /* Hide duplicate raw mermaid text code blocks */

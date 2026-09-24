@@ -1,6 +1,12 @@
-"""
-FMCW Radar Configuration and Physics Constants
-"""
+import os
+import warnings
+
+# Windows 11 compatibility: prevent joblib/loky subprocess failure when counting physical cores
+_n_cpus = os.cpu_count() or 4
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", str(max(_n_cpus - 1, 1)))
+warnings.filterwarnings("ignore", message=r".*Could not find the number of physical cores.*")
+warnings.filterwarnings("ignore", module=r".*loky.*")
+
 import numpy as np
 from dataclasses import dataclass
 
