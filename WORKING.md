@@ -2,7 +2,7 @@
 
 ## Current Objective
 - **Project**: Radar DSP & AI Detection Testbench (BTP)
-- **Status**: Phase 1 Complete & Verified (12/12 Deterministic Unit Tests Passing)
+- **Status**: Phase 1 Complete, Sub-Issues #5 to #10 of Issue #4 Resolved & Verified (12/12 Deterministic Unit Tests Passing, Zero Warnings)
 - **Verification Gate**: `pwsh -File ./scripts/verify.ps1`
 
 ---
@@ -14,10 +14,17 @@
 - [x] 4. Two-part academic walkthrough Jupyter notebooks generated with Dark Cyber-Radar Theme in root:
   - `01_radar_classical_dsp.ipynb` (Physics, Range FFT, MTI, Doppler FFT, 2D CA-CFAR, MUSIC AoA, DBSCAN BEV, Micro-Doppler).
   - `02_radar_deep_learning_detection.ipynb` (Range-Doppler CNN, Multi-task loss, Training curves, Unseen frame inference, Academic comparison).
-- [x] 5. Phase 1 Equipped with 17 Dual-Embedded Mermaid Architecture Diagrams + Collapsible SVG Fallbacks:
-  - 11 diagrams in `01_radar_classical_dsp.ipynb` (Top-level signal chain + 10 section flowcharts with tensor dimensions & function signatures).
-  - 6 diagrams in `02_radar_deep_learning_detection.ipynb` (Top-level flow, Gaussian splatting, Multi-branch CNN architecture, Training loop, Inference flow, Classical vs DL trade-offs).
-- [ ] 6. Next Phase: Phase 2 — Multi-Level Decoupled Radar Data Ingestion (`RadarDataAdapter` for ADC cubes, RDM tensors, and point cloud DataFrames).
+- [x] 5. Phase 1 Equipped with 17 Architecture Diagrams with Primary SVG rendering and collapsible Mermaid source:
+  - 11 diagrams in `01_radar_classical_dsp.ipynb` (Top-level snake flow + 10 clean conceptual module diagrams).
+  - 6 diagrams in `02_radar_deep_learning_detection.ipynb` (Top-level snake flow, splatting, CNN architecture, training loop, inference, trade-offs).
+- [x] 6. Resolved Sub-Issues #5 to #10 of Issue #4:
+  - #5: Primary SVGs rendered directly in Markdown; snake-like multi-row flow for top diagrams.
+  - #6: Physically accurate 2-panel FMCW chirp sequence and dechirped beat frequency waveform in NB1 Fig 1.
+  - #7: Publication-grade academic Markdown interpretations below every figure in both notebooks.
+  - #8: Mathematical equations and dimensions removed from Mermaid diagram boxes.
+  - #9: Zero warning pollution across execution streams (Agg non-interactive & Windows joblib/loky silenced).
+  - #10: Rich multi-target composite ground truth and active channel heatmaps with bounding boxes in NB2 Plot 1.
+- [ ] 7. Next Phase: Phase 2 — Multi-Level Decoupled Radar Data Ingestion (`RadarDataAdapter` for ADC cubes, RDM tensors, and point cloud DataFrames).
 
 ---
 
@@ -27,9 +34,9 @@
 --- [Python Gate] ---
 Running pytest...
 ............                                                             [100%]
-12 passed, 1 warning in 8.87s
+12 passed in 33.75s
 ✅ pytest tests passed.
-🎉 [VERIFICATION PASSED] All deterministic gates green.
+🎉 [VERIFICATION PASSED] All deterministic gates green. Zero warnings.
 ```
 
 ---
