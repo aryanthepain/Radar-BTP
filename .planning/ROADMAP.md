@@ -63,6 +63,7 @@ Plans:
 - [x] 01.1-04: Integrate notebook test runners into `tests/test_walkthrough_notebooks.py` and verify all deterministic gates via `scripts/verify.ps1`.
 - [x] 01.1-05: Deploy and execute limited prototype on Kaggle GPU via Kaggle CLI (`aryanguptaji/raddet-phase1-1-prototype`), retrieve metrics, and validate detection figures.
 
+
 ### Phase 1.2: Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)
 
 **Goal**: Conduct full-scale training and benchmark evaluation of RadDet across the complete 20,000-frame training set on Kaggle GPU for the **S ($128^2$)** resolution variant for 100 epochs with early stopping safety, automated multi-SNR evaluation (-20 dB to +20 dB), and dedicated real-time latency/FPS benchmarking matching Table III of the ICASSP 2025 paper. (M-256 and L-512 resolutions deferred to subsequent phases).
@@ -76,7 +77,13 @@ Plans:
 3. Final benchmark comparison table matching the S-128 row of Table III in the ICASSP 2025 paper.
 4. Dedicated real-time inference latency pass (batch size 1, CUDA sync) reporting operational FPS.
 5. All local deterministic test gates pass with 100% success under `verify.ps1`.
-   **Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+
+- [ ] 01.2-01: In-place notebook upgrade with smart cached extraction, empirical batch smoke test, and 100-epoch YOLOv9 loop.
+- [ ] 01.2-02: Automated 6-bin multi-SNR evaluation loop, Table III exporter, and single-frame latency profiler.
+- [ ] 01.2-03: Kaggle CLI artifact pull/status automation and dual-mode CI verification.
 
 ### Phase 1.3: High-Coverage Deterministic Unit & Integration Testing (INSERTED)
 
@@ -91,7 +98,7 @@ Plans:
 3. Total core `src/` coverage reaches >=90% across all modules.
 4. CLI pipeline runners and notebook builders are covered with non-interactive smoke tests.
 5. All tests run deterministically in under 30 seconds with 100% pass rate.
-**Plans**: 3 plans
+   **Plans**: 3 plans
 
 Plans:
 
@@ -141,11 +148,11 @@ Plans:
 **Execution Order:**
 Phases execute in numeric order: 1 → 2 → 3
 
-| Phase                                                                        | Plans Complete | Status            | Completed  |
-| ---------------------------------------------------------------------------- | -------------- | ----------------- | ---------- |
-| 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams                 | 2/2            | Completed         | 2026-09-23 |
-| 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice) | 5/5            | Completed         | 2026-11-02 |
-| 1.2. Full-Scale RadDet Benchmark on Kaggle                                   | 0/1            | Queued            | -          |
-| 1.3. High-Coverage Deterministic Unit & Integration Testing                  | 0/3            | In Progress       | -          |
-| 2. Multi-Level Decoupled Radar Data Ingestion                                | 0/2            | Not started       | -          |
-| 3. Pipeline Integration & Deterministic Verification Gates                   | 0/2            | Not started       | -          |
+| Phase                                                                        | Plans Complete | Status      | Completed  |
+| ---------------------------------------------------------------------------- | -------------- | ----------- | ---------- |
+| 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams                 | 2/2            | Completed   | 2026-09-23 |
+| 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice) | 5/5            | Completed   | 2026-11-02 |
+| 1.2. Full-Scale RadDet Benchmark on Kaggle                                   | 0/1            | Queued      | -          |
+| 1.3. High-Coverage Deterministic Unit & Integration Testing                  | 0/3            | In Progress | -          |
+| 2. Multi-Level Decoupled Radar Data Ingestion                                | 0/2            | Not started | -          |
+| 3. Pipeline Integration & Deterministic Verification Gates                   | 0/2            | Not started | -          |
