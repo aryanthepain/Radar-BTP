@@ -107,6 +107,7 @@ import time
 import math
 import shutil
 import tarfile
+import subprocess
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Optional, Dict, List, Tuple
@@ -123,7 +124,7 @@ from PIL import Image
 
 # Dual-Environment Path Abstraction
 IS_KAGGLE = Path("/kaggle").exists()
-BASE_INPUT_DIR = Path("/kaggle/input/raddet-icassp-2025") if IS_KAGGLE else Path("data/raddet_sample")
+BASE_INPUT_DIR = Path("/kaggle/input") if IS_KAGGLE else Path("data/raddet_sample")
 WORKING_DIR = Path("/kaggle/working") if IS_KAGGLE else Path("data/kaggle_outputs")
 WORKING_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -222,46 +223,109 @@ if cache_hit:
 else:
     # 1. Search for Kaggle RadDet-9T-128 archive (e.g. RadDet40k128HW009Tv2.tar.part-aa or *.tar*)
     kaggle_archive = None
-    if BASE_INPUT_DIR.is_dir():
-        candidates = (
-            list(BASE_INPUT_DIR.rglob("*128*009*")) +
-            list(BASE_INPUT_DIR.rglob("RadDet40k128HW009Tv2.tar.part-aa")) +
-            list(BASE_INPUT_DIR.rglob("*.tar*"))
-        )
+    input_search_roots = [Path("/kaggle/input"), BASE_INPUT_DIR] if IS_KAGGLE else [BASE_INPUT_DIR]
+    
+    print(f"[DATASET] Scanning input search roots: {[str(r) for r in input_search_roots if r.exists()]}")
+    for root in input_search_roots:
+        if not root.exists():
+            continue
+        try:
+            entries = [p.name for p in root.iterdir()]
+            print(f"[DATASET] Mount entries in {root}: {entries}")
+        except Exception as e:
+            print(f"[DATASET] Note: Could not list entries in {root}: {e}")
+        
+        all_candidate_files = [f for f in root.rglob("*") if f.is_file()]
+        print(f"[DATASET] Found {len(all_candidate_files)} total files in {root}")
+        
+        # Match S-128 RadDet-9T archive
+        candidates = [
+            f for f in all_candidate_files
+            if ("128" in f.name and "009" in f.name) or "raddet40k128" in f.name.lower() or f.name == "RadDet40k128HW009Tv2.tar.part-aa"
+        ]
+        if not candidates:
+            # Fallback to any 128 tar or part-aa
+            candidates = [f for f in all_candidate_files if "128" in f.name and (".tar" in f.name or ".part" in f.name)]
+        if not candidates:
+            candidates = [f for f in all_candidate_files if ".tar" in f.name or ".part-aa" in f.name]
+            
         if candidates:
             kaggle_archive = candidates[0]
+            print(f"[DATASET] Selected RadDet archive: {kaggle_archive} ({kaggle_archive.stat().st_size / (1024**2):.1f} MB)")
+            break
 
     extracted = 0
     if kaggle_archive and kaggle_archive.exists():
-        print(f"[DATASET] Found Kaggle archive: {kaggle_archive}. Decompressing into {dataset_dir}...")
+        print(f"[DATASET] Extracting archive: {kaggle_archive} -> {dataset_dir}...")
         tracker_ext = StageProgressTracker(stage_name="Dataset Extraction (S-128)", total_steps=80000, stage_idx=2, total_stages=8)
         
-        def is_safe_member(name: str, target: Path) -> bool:
-            target_resolved = target.resolve()
-            dest_resolved = (target / name).resolve()
-            return dest_resolved.is_relative_to(target_resolved) and not name.startswith(("/", "\\")) and ".." not in name.replace("\\", "/").split("/")
+        # Method 1: System tar (native Linux / C speed)
+        if IS_KAGGLE or shutil.which("tar"):
+            try:
+                print(f"[DATASET] Invoking system tar: tar -xf {kaggle_archive} -C {dataset_dir}")
+                proc = subprocess.run(
+                    ["tar", "-xf", str(kaggle_archive), "-C", str(dataset_dir)],
+                    capture_output=True,
+                    text=True,
+                    check=False
+                )
+                if proc.returncode == 0:
+                    extracted = len(list(dataset_dir.rglob("*.png")))
+                    print(f"[DATASET] System tar extracted {extracted} image files successfully.")
+                    tracker_ext.step(count=max(0, 80000 - tracker_ext.current_step), force_log=True)
+                else:
+                    print(f"[WARN] System tar failed with code {proc.returncode}: {proc.stderr[:200]}")
+            except Exception as e_tar:
+                print(f"[WARN] System tar execution error: {e_tar}")
         
-        try:
-            with tarfile.open(kaggle_archive, "r:*") as tar:
-                max_extract = 80000 if FULL_BENCHMARK else 1500
-                for member in tar:
-                    if extracted >= max_extract:
-                        break
-                    if not is_safe_member(member.name, dataset_dir):
-                        print(f"[SECURITY] Skipped unsafe member: {member.name}")
-                        continue
-                    if member.name.endswith(".png") or member.name.endswith(".txt") or member.name.endswith("data.yaml"):
-                        tar.extract(member, path=dataset_dir)
-                        extracted += 1
-                        if extracted % 5000 == 0:
-                            tracker_ext.step(count=5000)
-            tracker_ext.step(count=max(0, 80000 - tracker_ext.current_step), force_log=True)
-            print(f"[DATASET] Extracted {extracted} files from {kaggle_archive.name}.")
-        except Exception as e:
-            print(f"[WARN] Archive extraction encountered: {e}. Falling back to self-contained generator.")
+        # Method 2: Python tarfile fallback
+        if extracted == 0:
+            def is_safe_member(name: str, target: Path) -> bool:
+                target_resolved = target.resolve()
+                dest_resolved = (target / name).resolve()
+                return dest_resolved.is_relative_to(target_resolved) and not name.startswith(("/", "\\")) and ".." not in name.replace("\\", "/").split("/")
+            
+            try:
+                with tarfile.open(kaggle_archive, "r:*") as tar:
+                    max_extract = 80000 if FULL_BENCHMARK else 1500
+                    for member in tar:
+                        if extracted >= max_extract:
+                            break
+                        if not is_safe_member(member.name, dataset_dir):
+                            continue
+                        if member.name.endswith((".png", ".txt", ".yaml")):
+                            tar.extract(member, path=dataset_dir)
+                            extracted += 1
+                            if extracted % 5000 == 0:
+                                tracker_ext.step(count=5000)
+                tracker_ext.step(count=max(0, 80000 - tracker_ext.current_step), force_log=True)
+                print(f"[DATASET] Python tarfile extracted {extracted} files from {kaggle_archive.name}.")
+            except Exception as e:
+                print(f"[WARN] Python tarfile extraction encountered: {e}.")
 
-    # 2. If no archive or extraction empty and no cache hit, generate self-contained micro-slice
-    if extracted == 0 and not cache_hit:
+    # Normalize nested directory structure if archive extracted into subfolder
+    sub_trains = list(dataset_dir.glob("**/images/train"))
+    if sub_trains and sub_trains[0] != images_dir / "train":
+        nested_root = sub_trains[0].parent.parent
+        print(f"[DATASET] Moving nested folder hierarchy from {nested_root} to {dataset_dir}...")
+        for child in nested_root.iterdir():
+            target_dst = dataset_dir / child.name
+            if target_dst != child:
+                if target_dst.exists() and target_dst.is_dir() and not any(target_dst.iterdir()):
+                    target_dst.rmdir()
+                if not target_dst.exists():
+                    shutil.move(str(child), str(target_dst))
+
+    # Guardrail: on Kaggle with FULL_BENCHMARK, ensure extracted dataset is present
+    train_imgs = list((images_dir / "train").glob("*.png"))
+    if IS_KAGGLE and FULL_BENCHMARK and len(train_imgs) < 1000:
+        raise RuntimeError(
+            f"[FATAL] FULL_BENCHMARK requested on Kaggle but extracted train count ({len(train_imgs)}) < 1000! "
+            f"Archive: {kaggle_archive}. Aborting to prevent invalid benchmark."
+        )
+
+    # 2. Local fallback only: generate self-contained micro-slice if not on Kaggle or fast prototype
+    if len(train_imgs) == 0 and not cache_hit:
         print(f"[DATASET] Synthesizing self-contained micro-slice frames in {dataset_dir}...")
         def generate_spectrogram_frame(sample_idx: int):
             rng = np.random.default_rng(42 + sample_idx)
