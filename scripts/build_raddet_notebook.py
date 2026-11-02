@@ -238,13 +238,15 @@ else:
         all_candidate_files = [f for f in root.rglob("*") if f.is_file()]
         print(f"[DATASET] Found {len(all_candidate_files)} total files in {root}")
         
-        # Match S-128 RadDet-9T archive
+        # Match S-128 RadDet-9T archive (009T primary for Table III dense environment)
         candidates = [
             f for f in all_candidate_files
-            if ("128" in f.name and "009" in f.name) or "raddet40k128" in f.name.lower() or f.name == "RadDet40k128HW009Tv2.tar.part-aa"
+            if "128" in f.name and "009" in f.name
         ]
         if not candidates:
-            # Fallback to any 128 tar or part-aa
+            # Fallback to 1T or any S-128 archive
+            candidates = [f for f in all_candidate_files if "128" in f.name and "raddet" in f.name.lower()]
+        if not candidates:
             candidates = [f for f in all_candidate_files if "128" in f.name and (".tar" in f.name or ".part" in f.name)]
         if not candidates:
             candidates = [f for f in all_candidate_files if ".tar" in f.name or ".part-aa" in f.name]
@@ -303,7 +305,30 @@ else:
             except Exception as e:
                 print(f"[WARN] Python tarfile extraction encountered: {e}.")
 
-    # Normalize nested directory structure if archive extracted into subfolder
+    # 1. Normalize if archive extracted split folders directly (e.g. train/ with .png and .txt)
+    for split in ("train", "val", "test"):
+        split_dirs = [
+            d for d in dataset_dir.glob(f"**/{split}")
+            if d.is_dir() and "images" not in d.parts and "labels" not in d.parts
+        ]
+        if split_dirs:
+            src_split_dir = split_dirs[0]
+            target_img_dir = images_dir / split
+            target_lbl_dir = labels_dir / split
+            target_img_dir.mkdir(parents=True, exist_ok=True)
+            target_lbl_dir.mkdir(parents=True, exist_ok=True)
+            print(f"[DATASET] Segregating files from {src_split_dir} into images/{split} and labels/{split}...")
+            for f in list(src_split_dir.iterdir()):
+                if f.suffix.lower() == ".png":
+                    dest_p = target_img_dir / f.name
+                    if not dest_p.exists():
+                        shutil.move(str(f), str(dest_p))
+                elif f.suffix.lower() == ".txt":
+                    dest_l = target_lbl_dir / f.name
+                    if not dest_l.exists():
+                        shutil.move(str(f), str(dest_l))
+
+    # 2. Normalize if archive extracted images/train into a nested subdirectory
     sub_trains = list(dataset_dir.glob("**/images/train"))
     if sub_trains and sub_trains[0] != images_dir / "train":
         nested_root = sub_trains[0].parent.parent
