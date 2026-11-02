@@ -18,6 +18,8 @@ ENV/
 .ruff_cache/
 .coverage
 htmlcov/
+.tmp_mpl/
+.kaggle_build/
 
 # Processed Heavy Binaries / Large Radar Tensors
 data/processed/*.npy
