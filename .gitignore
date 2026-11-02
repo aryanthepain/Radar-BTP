@@ -12,11 +12,14 @@ env/
 ENV/
 
 # Testing and Typecheck Caches
+.cache/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 .coverage
 htmlcov/
+.tmp_mpl/
+.kaggle_build/
 
 # Processed Heavy Binaries / Large Radar Tensors
 data/processed/*.npy

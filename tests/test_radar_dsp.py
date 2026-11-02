@@ -3,6 +3,14 @@ Deterministic Unit Tests for FMCW Radar DSP Primitives and Neural Network Detect
 """
 import os
 import sys
+import warnings
+
+# Suppress joblib loky physical core detection warning on Windows
+_n_cpus = os.cpu_count() or 4
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", str(max(_n_cpus - 1, 1)))
+warnings.filterwarnings("ignore", message=r".*Could not find the number of physical cores.*")
+warnings.filterwarnings("ignore", module=r".*loky.*")
+
 import unittest
 import numpy as np
 import torch

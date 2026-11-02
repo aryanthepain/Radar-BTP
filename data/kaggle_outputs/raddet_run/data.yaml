@@ -1,0 +1,16 @@
+path: /kaggle/working/raddet_run
+train: images/train
+val: images/val
+test: images/test
+names:
+  0: Rect
+  1: Barker
+  2: Frank
+  3: P1
+  4: P2
+  5: P3
+  6: P4
+  7: Px
+  8: ZadoffChu
+  9: LFM
+  10: FMCW
