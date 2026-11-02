@@ -24,6 +24,18 @@
 - [ ] **VERIF-01**: Unit test suite (`tests/test_radar_data_adapter.py`) validating decoupled ingestion across Level 1 (raw cube), Level 2 (RDM/RAD tensor), and Level 3 (point cloud DataFrame).
 - [ ] **VERIF-02**: Universal deterministic verification gate (`pwsh -File ./scripts/verify.ps1`) passes cleanly with all unit tests and pipeline testbenches intact.
 
+### RadDet Full-Scale Benchmark on Kaggle (RADDET-BENCH)
+
+- [ ] **RADDET-BENCH-01**: Execute full 20,000-frame training run of RadDet S (128²) on Kaggle GPU for up to 100 epochs using Ultralytics YOLOv9 with early stopping, periodic checkpoints, and paper RF augmentations.
+- [ ] **RADDET-BENCH-02**: Automated multi-SNR evaluation loop across 6 discrete SNR bins (-20 dB to +20 dB) exporting Table III markdown/CSV benchmark metrics, Fig 3(c) curves, and real-time single-frame latency ($FPS_{avg}$) benchmarking.
+
+### High-Coverage Test Suite & Pytest-Cov Integration (TEST-COV)
+
+- [ ] **TEST-COV-01**: Dedicated unit test suite `tests/test_dsp_edge_cases.py` targeting OS-CFAR, Capon/MUSIC AoA, MTI cancellers, Doppler windowing, and Range FFT scaling.
+- [ ] **TEST-COV-02**: Dedicated unit test suite `tests/test_radar_dataset.py` targeting synthetic `RadarDataset` generation, box coordinate math, multi-task heatmap encoding, and DataLoader collate functions (raising `src/models/radar_dataset.py` to >=90%).
+- [ ] **TEST-COV-03**: Automated integration smoke tests `tests/test_pipeline_scripts.py` covering `scripts/run_radar_pipeline.py`, `scripts/push_kaggle_kernel.py`, and notebook generators.
+- [ ] **TEST-COV-04**: Universal verification gate (`scripts/verify.ps1`) enforces `>=90%` code coverage with `pytest-cov` while maintaining deterministic, sub-30s local execution.
+
 ## v2 Requirements
 
 ### Full Benchmark Dataset Integration (BENCH)
@@ -37,32 +49,40 @@
 
 ## Out of Scope
 
-| Feature | Reason |
-|---------|--------|
-| Downloading multi-GB RadDet datasets in v1 | Deferred until professor delivers formal thesis problem statement. |
-| External web app dashboard (Streamlit / React) | Excluded to keep existing Jupyter notebooks self-contained and directly presentable. |
-| Real-time physical radar SDR streaming in v1 | Requires physical hardware setup; exploratory phase focuses on algorithmic perception and data decoupling. |
+| Feature                                        | Reason                                                                                                     |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Downloading multi-GB RadDet datasets in v1     | Deferred until professor delivers formal thesis problem statement.                                         |
+| External web app dashboard (Streamlit / React) | Excluded to keep existing Jupyter notebooks self-contained and directly presentable.                       |
+| Real-time physical radar SDR streaming in v1   | Requires physical hardware setup; exploratory phase focuses on algorithmic perception and data decoupling. |
 
 ## Traceability
 
-| Requirement | Phase | Status |
-|-------------|-------|--------|
-| PRES-01 | Phase 1 | Pending |
-| PRES-02 | Phase 1 | Pending |
-| PRES-03 | Phase 1 | Pending |
-| PRES-04 | Phase 1 | Pending |
-| DATA-01 | Phase 2 | Pending |
-| DATA-02 | Phase 2 | Pending |
-| DATA-03 | Phase 2 | Pending |
-| DATA-04 | Phase 2 | Pending |
-| VERIF-01 | Phase 2 | Pending |
-| VERIF-02 | Phase 3 | Pending |
+| Requirement | Phase     | Status  |
+| ----------- | --------- | ------- |
+| PRES-01     | Phase 1   | Pending |
+| PRES-02     | Phase 1   | Pending |
+| PRES-03     | Phase 1   | Pending |
+| PRES-04     | Phase 1   | Pending |
+| DATA-01     | Phase 2   | Pending |
+| DATA-02     | Phase 2   | Pending |
+| DATA-03     | Phase 2   | Pending |
+| DATA-04     | Phase 2   | Pending |
+| VERIF-01    | Phase 2   | Pending |
+| VERIF-02    | Phase 3   | Pending |
+| RADDET-BENCH-01 | Phase 1.2 | Pending |
+| RADDET-BENCH-02 | Phase 1.2 | Pending |
+| TEST-COV-01 | Phase 1.3 | Pending |
+| TEST-COV-02 | Phase 1.3 | Pending |
+| TEST-COV-03 | Phase 1.3 | Pending |
+| TEST-COV-04 | Phase 1.3 | Pending |
 
 **Coverage:**
-- v1 requirements: 10 total
-- Mapped to phases: 10
+
+- v1 requirements: 16 total
+- Mapped to phases: 16
 - Unmapped: 0 ✓
 
 ---
-*Requirements defined: 2026-09-23*
-*Last updated: 2026-09-23 after initial definition*
+
+_Requirements defined: 2026-09-23_
+_Last updated: 2026-09-23 after initial definition_
