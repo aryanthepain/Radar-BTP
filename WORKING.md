@@ -4,8 +4,8 @@
 
 - **Project**: Radar DSP & AI Detection Testbench (BTP)
 - **Status**: Phase 1 Complete. Phase 1.1 Complete. Phase 1.2 Local Complete & Kaggle GPU Cloud Benchmark Deployed.
-- **Active Kaggle Kernel**: [`aryanguptaji/raddet-s-128-full-scale-benchmark`](https://www.kaggle.com/code/aryanguptaji/raddet-s-128-full-scale-benchmark)
-- **Kaggle Kernel Status**: `KernelWorkerStatus.RUNNING` (GPU accelerated, full 100-epoch benchmark)
+- **Active Kaggle Kernel**: [`aryanguptaji/raddet-s-128-full-scale-benchmark`](https://www.kaggle.com/code/aryanguptaji/raddet-s-128-full-scale-benchmark) (Version 5)
+- **Kaggle Kernel Status**: `KernelWorkerStatus.RUNNING` (Active full 100-epoch training loop on Kaggle GPU across 20,000 frames; >7 minutes elapsed, initial epochs confirmed)
 - **Active Branch**: `gsd/phase-01.2-full-scale-raddet-benchmark-on-kaggle`
 - **Verification Gate**: `pwsh -File ./scripts/verify.ps1`
 - **Active Test Status**: 27/27 tests green in 11.4s.
