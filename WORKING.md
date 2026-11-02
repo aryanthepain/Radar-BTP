@@ -3,8 +3,9 @@
 ## Current Objective
 
 - **Project**: Radar DSP & AI Detection Testbench (BTP)
-- **Status**: Phase 1 Complete. Phase 1.1 Complete. Phase 1.2 Complete. Phase 1.3 Initialized.
-- **Active Phase**: Phase 1.3: High-Coverage Deterministic Unit & Integration Testing (Ready to Execute)
+- **Status**: Phase 1 Complete. Phase 1.1 Complete. Phase 1.2 Local Complete & Kaggle GPU Cloud Benchmark Deployed.
+- **Active Kaggle Kernel**: [`aryanguptaji/raddet-s-128-full-scale-benchmark`](https://www.kaggle.com/code/aryanguptaji/raddet-s-128-full-scale-benchmark)
+- **Kaggle Kernel Status**: `KernelWorkerStatus.RUNNING` (GPU accelerated, full 100-epoch benchmark)
 - **Active Branch**: `gsd/phase-01.2-full-scale-raddet-benchmark-on-kaggle`
 - **Verification Gate**: `pwsh -File ./scripts/verify.ps1`
 - **Active Test Status**: 27/27 tests green in 11.4s.
@@ -18,6 +19,7 @@
   - Dedicated single-frame CUDA-synchronized latency benchmark ($FPS_{avg}$ at batch size 1).
   - 4-panel qualitative detection grid (`multi_snr_qualitative_grid.png`).
   - Automated Kaggle CLI pull/status capabilities in `scripts/push_kaggle_kernel.py`.
+  - Deployed live on Kaggle GPU: `https://www.kaggle.com/code/aryanguptaji/raddet-s-128-full-scale-benchmark`.
 
 ---
 
@@ -34,4 +36,5 @@
 - [x] 9. Phase 1.2 S-128 Data Pipeline, Empirical Batch Sizing & YOLOv9 100-Epoch Training complete (01.2-01).
 - [x] 10. Phase 1.2 Multi-SNR Evaluation, Table III Exporter, Latency Profiler & Qualitative Grid complete (01.2-02).
 - [x] 11. Phase 1.2 Kaggle CLI Pull/Status Automation & Extended Test Coverage complete (01.2-03).
-- [x] 12. Universal verification gate `scripts/verify.ps1` passes cleanly with 100% green rate.
+- [x] 12. Phase 1.2 Cloud Benchmark Pushed and Running on Kaggle GPU (`aryanguptaji/raddet-s-128-full-scale-benchmark`).
+- [x] 13. Universal verification gate `scripts/verify.ps1` passes cleanly with 100% green rate.
