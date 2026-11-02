@@ -1,7 +1,7 @@
 {
   "model_profile": "adaptive",
   "commit_docs": true,
-  "parallelization": false,
+  "parallelization": true,
   "search_gitignored": false,
   "brave_search": false,
   "firecrawl": false,
@@ -32,7 +32,7 @@
     "human_verify_mode": "end-of-phase",
     "context_guard_mode": "warn",
     "text_mode": false,
-    "research_before_questions": false,
+    "research_before_questions": true,
     "discuss_mode": "discuss",
     "skip_discuss": false,
     "code_review": true,
@@ -63,6 +63,6 @@
     "source_grounding_authority": "grep"
   },
   "resolve_model_ids": "omit",
-  "granularity": "standard",
+  "granularity": "fine",
   "mode": "interactive"
 }

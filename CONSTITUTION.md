@@ -35,3 +35,14 @@
 - **Deterministic Gate**: All code modifications must pass `./scripts/verify.ps1` before completion.
 - **Backward Compatibility**: Preserve existing DSP primitive APIs (`RangeProcessor`, `DopplerProcessor`, `CFARDetector2D`, `AngleEstimator`, `ClutterFilter`).
 
+---
+
+## 5. Kaggle Cloud & In-Container Invariants
+- **Read-Only Input Boundary**: Code running in Kaggle cloud runtime must treat `/kaggle/input/` as strictly read-only. Never attempt to create, write, or mutate files within `/kaggle/input/`.
+- **Writable Output Target**: All generated model weights, checkpoints, metrics, evaluation reports, and figures must be directed to `/kaggle/working/` (or `./output/` locally).
+- **Mandatory In-Container Telemetry (Zero External Polling Dependency)**:
+  - Any pipeline or notebook executing inside Kaggle must self-report progress and compute its own Expected Time to Completion (ETC / ETA) using `src.telemetry.StageProgressTracker`.
+  - Structured, timestamped logging (`[YYYY-MM-DD HH:MM:SS] [LEVEL] [STAGE X/Y] ...`) is mandatory for all multi-stage workloads.
+- **Output Buffer Safety**: Throttle log volume and suppress high-frequency progress loops to keep total notebook cell output well below Kaggle's 20MB limit.
+- **Headless Execution**: Enforce `matplotlib.use('Agg')` across all batch scripts and notebooks running in headless or background environments.
+- **Dual-Mode Portability**: Every radar ML model, loader, and benchmark pipeline must be capable of running locally on CPU/GPU with micro-samples and on Kaggle cloud with full-scale datasets.
