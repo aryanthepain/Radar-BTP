@@ -57,24 +57,24 @@
 
 ## Traceability
 
-| Requirement | Phase     | Status  |
-| ----------- | --------- | ------- |
-| PRES-01     | Phase 1   | Pending |
-| PRES-02     | Phase 1   | Pending |
-| PRES-03     | Phase 1   | Pending |
-| PRES-04     | Phase 1   | Pending |
-| DATA-01     | Phase 2   | Pending |
-| DATA-02     | Phase 2   | Pending |
-| DATA-03     | Phase 2   | Pending |
-| DATA-04     | Phase 2   | Pending |
-| VERIF-01    | Phase 2   | Pending |
-| VERIF-02    | Phase 3   | Pending |
-| RADDET-BENCH-01 | Phase 1.2 | Pending |
-| RADDET-BENCH-02 | Phase 1.2 | Pending |
-| TEST-COV-01 | Phase 1.3 | Pending |
-| TEST-COV-02 | Phase 1.3 | Pending |
-| TEST-COV-03 | Phase 1.3 | Pending |
-| TEST-COV-04 | Phase 1.3 | Pending |
+| Requirement     | Phase     | Status  |
+| --------------- | --------- | ------- |
+| PRES-01         | Phase 1   | Pending |
+| PRES-02         | Phase 1   | Pending |
+| PRES-03         | Phase 1   | Pending |
+| PRES-04         | Phase 1   | Pending |
+| DATA-01         | Phase 2   | Pending |
+| DATA-02         | Phase 2   | Pending |
+| DATA-03         | Phase 2   | Pending |
+| DATA-04         | Phase 2   | Pending |
+| VERIF-01        | Phase 2   | Pending |
+| VERIF-02        | Phase 3   | Pending |
+| RADDET-BENCH-01 | Phase 1.2 | Complete |
+| RADDET-BENCH-02 | Phase 1.2 | Complete |
+| TEST-COV-01     | Phase 1.3 | Pending |
+| TEST-COV-02     | Phase 1.3 | Pending |
+| TEST-COV-03     | Phase 1.3 | Pending |
+| TEST-COV-04     | Phase 1.3 | Pending |
 
 **Coverage:**
 
