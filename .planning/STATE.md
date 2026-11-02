@@ -1,13 +1,20 @@
 ---
 gsd_state_version: "1.0"
+current_phase: "1.3"
+current_phase_name: Planning Gate Complete
 status: executing
-granularity: fine
+stopped_at: Phase 1.2 context gathered
+last_updated: "2026-11-02T13:55:55.142Z"
+last_activity: 2026-11-02
+last_activity_desc: Established Phase 1.3 context and roadmap plans targeting >=90% test coverage with pytest-cov across src/ and scripts/.
+state_head: 7e1e37a5e8fd3544b4a40531ae6f69460d6b33c2
 progress:
-  total_phases: 5
+  total_phases: 6
   completed_phases: 2
-  total_plans: 11
+  total_plans: 10
   completed_plans: 7
-  percent: 64
+  percent: 33
+granularity: fine
 ---
 
 # Project State
@@ -17,71 +24,50 @@ progress:
 See: .planning/PROJECT.md (updated 2026-09-23)
 
 **Core value:** Modular, decoupled radar perception enabling multi-level data ingestion (raw ADC cubes, Range-Doppler tensors, or point cloud dataframes) and transparent academic presentation of radar signal processing.
-**Current focus:** Phase 1.1: RadDet Dataset Integration & Spectrum Sensing Benchmark (Completed)
+**Current focus:** Phase 1.3: High-Coverage Deterministic Unit & Integration Testing (In Progress)
 
 ## Current Position
 
-Phase: 1.1 of 5 (RadDet Dataset Integration & Spectrum Sensing Benchmark) — Certified (UAT 4/4 Passed)
-Plan: 5 of 5 in current phase (Complete)
-Status: All 5 plans and 4 UAT tests certified green. High-res SVG Mermaid embedding resolved. Phase 1.1 officially certified complete.
-Last activity: 2026-11-02 — Completed Phase 1.1 UAT (01.1-UAT.md): verified local micro-slice, decoupled src/raddet/ package, 03_raddet_spectrum_detection_kaggle.ipynb with pre-compiled SVG Mermaid flow, Kaggle GPU prototype artifacts in data/kaggle_outputs/, and 23/23 deterministic tests passing.
+Phase: 1.3 of 6 (High-Coverage Deterministic Unit & Integration Testing) — Planning Gate Complete
+Plan: 0 of 3 in current phase (Ready for Wave 1 execution)
+Status: Phase 1.3 inserted and planned (01.3-01, 01.3-02, 01.3-03). Ready to execute Wave 1.
+Last activity: 2026-11-02 — Established Phase 1.3 context and roadmap plans targeting >=90% test coverage with pytest-cov across src/ and scripts/.
 
-Progress: [███████░░░] 64%
+Progress: [███░░░░░░░] 33%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 2
+- Total plans completed: 7
 - Average duration: 15 min
-- Total execution time: 0.5 hours
+- Total execution time: 1.75 hours
 
 **By Phase:**
 
 | Phase                                                        | Plans | Total | Avg/Plan |
 | ------------------------------------------------------------ | ----- | ----- | -------- |
 | 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams | 2     | 2     | 15 min   |
-| 2. Multi-Level Decoupled Radar Data Ingestion                | 0     | 0     | -        |
-| 3. Pipeline Integration & Deterministic Verification Gates   | 0     | 0     | -        |
+| 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark | 5     | 5     | 15 min   |
+| 1.3. High-Coverage Deterministic Unit & Integration Testing  | 0     | 3     | -        |
+| 2. Multi-Level Decoupled Radar Data Ingestion                | 0     | 2     | -        |
+| 3. Pipeline Integration & Deterministic Verification Gates   | 0     | 2     | -        |
 
 **Recent Trend:**
 
-- Last 5 plans: 01-01 (complete), 01-02 (complete)
+- Last 5 plans: 01.1-01 (complete), 01.1-02 (complete), 01.1-03 (complete), 01.1-04 (complete), 01.1-05 (complete)
 - Trend: Green / On Track
-
-_Updated after each plan completion_
 
 ## Accumulated Context
 
 ### Decisions
 
-Decisions are logged in PROJECT.md Key Decisions table.
-Recent decisions affecting current work:
+Decisions are logged in PROJECT.md Key Decisions table and Phase Context documents:
+- Phase 1.1: RadDet ICASSP 2025 integration with local micro-slice and Ultralytics YOLOv8n detector.
+- Phase 1.3: Target >=90% deterministic coverage on src/ and scripts/ using modular test suites.
 
-- [Phase 1]: Presentation prioritized as Phase 1 with Mermaid diagrams and academic markdown for professor presentation.
-- [Phase 1 Context]: Dual-embedded Mermaid + collapsible SVG fallbacks, hybrid TD/LR topology, physical + tensor shape annotations, grounded math without heavy proofs, pre-rendered dark cyber-radar outputs, balanced smoke test.
-- [Phase 2]: Radar data decoupling handled in Phase 2 for internal architecture flexibility.
-- [Config]: Configured git branching strategy to create dedicated branch per phase (`gsd/phase-{phase}-{slug}`).
+## Session
 
-### Pending Todos
-
-None yet.
-
-### Blockers/Concerns
-
-None yet.
-
-## Deferred Items
-
-| Category     | Item                                           | Status   | Deferred At | Milestone |
-| ------------ | ---------------------------------------------- | -------- | ----------- | --------- |
-| Benchmark    | Full RadDet/CARRADA training sequence          | Deferred | 2026-09-23  | v1.0      |
-| Hardware     | TI mmWave real-time SDR streaming              | Deferred | 2026-09-23  | v1.0      |
-| Math         | Formal textbook proofs & Neyman-Pearson lemmas | Deferred | 2026-09-23  | v1.0      |
-| Architecture | Complex-Valued CNNs & 4D Radar Tensors         | Deferred | 2026-09-23  | v1.0      |
-
-## Session Continuity
-
-Last session: 2026-09-23 15:58
-Stopped at: Phase 1 context gathered
-Resume file: .planning/phases/01-compartmentalized-jupyter-walkthroughs-mermaid-diagrams/01-CONTEXT.md
+**Last session:** 2026-11-02T13:55:55.082Z
+**Stopped at:** Phase 1.2 context gathered
+**Resume file:** .planning/phases/01.2-full-scale-raddet-benchmark-on-kaggle/01.2-CONTEXT.md
