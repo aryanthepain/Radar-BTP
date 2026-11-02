@@ -305,23 +305,41 @@ else:
             except Exception as e:
                 print(f"[WARN] Python tarfile extraction encountered: {e}.")
 
-    # 1. Normalize if archive extracted split folders directly (e.g. train/ with .png and .txt)
-    for split in ("train", "val", "test"):
-        split_dirs = [
-            d for d in dataset_dir.glob(f"**/{split}")
-            if d.is_dir() and "images" not in d.parts and "labels" not in d.parts
-        ]
-        if split_dirs:
-            # Exclude inspection or preview directories to target the full corpus
-            valid_dirs = [d for d in split_dirs if "inspection" not in d.parts and "preview" not in d.parts and "sample" not in d.parts]
-            chosen_dirs = valid_dirs if valid_dirs else split_dirs
-            target_img_dir = images_dir / split
-            target_lbl_dir = labels_dir / split
-            target_img_dir.mkdir(parents=True, exist_ok=True)
-            target_lbl_dir.mkdir(parents=True, exist_ok=True)
-            for src_split_dir in chosen_dirs:
-                print(f"[DATASET] Segregating files from {src_split_dir} into images/{split} and labels/{split}...")
-                for f in list(src_split_dir.iterdir()):
+    # 1. Normalize nested directory structure:
+    # Check if images directory is nested inside an archive root (e.g. RadDet40k128HW009Tv2/images)
+    sub_images = [p for p in dataset_dir.glob("**/images") if p.is_dir() and p != images_dir]
+    if sub_images:
+        nested_root = sub_images[0].parent
+        print(f"[DATASET] Detected nested archive root at: {nested_root}. Moving items to {dataset_dir}...")
+        for child in list(nested_root.iterdir()):
+            target_dst = dataset_dir / child.name
+            if target_dst == child:
+                continue
+            if target_dst.exists():
+                if target_dst.is_dir():
+                    shutil.rmtree(target_dst)
+                else:
+                    target_dst.unlink()
+            shutil.move(str(child), str(target_dst))
+        try:
+            nested_root.rmdir()
+        except Exception:
+            pass
+
+    # 2. Fallback: if images/train still has 0 images, check any flat split folders
+    if len(list((images_dir / "train").glob("*.png"))) == 0:
+        for split in ("train", "val", "test"):
+            split_dirs = [
+                d for d in dataset_dir.glob(f"**/{split}")
+                if d.is_dir() and "images" not in d.parts and "labels" not in d.parts and "metadata" not in d.parts and "inspection" not in d.parts
+            ]
+            for sdir in split_dirs:
+                target_img_dir = images_dir / split
+                target_lbl_dir = labels_dir / split
+                target_img_dir.mkdir(parents=True, exist_ok=True)
+                target_lbl_dir.mkdir(parents=True, exist_ok=True)
+                print(f"[DATASET] Moving fallback files from {sdir} into images/{split} and labels/{split}...")
+                for f in list(sdir.iterdir()):
                     if f.suffix.lower() == ".png":
                         dest_p = target_img_dir / f.name
                         if not dest_p.exists():
@@ -331,21 +349,11 @@ else:
                         if not dest_l.exists():
                             shutil.move(str(f), str(dest_l))
 
-    # 2. Normalize if archive extracted images/train into a nested subdirectory
-    sub_trains = list(dataset_dir.glob("**/images/train"))
-    if sub_trains and sub_trains[0] != images_dir / "train":
-        nested_root = sub_trains[0].parent.parent
-        print(f"[DATASET] Moving nested folder hierarchy from {nested_root} to {dataset_dir}...")
-        for child in nested_root.iterdir():
-            target_dst = dataset_dir / child.name
-            if target_dst != child:
-                if target_dst.exists() and target_dst.is_dir() and not any(target_dst.iterdir()):
-                    target_dst.rmdir()
-                if not target_dst.exists():
-                    shutil.move(str(child), str(target_dst))
-
     # Guardrail: on Kaggle with FULL_BENCHMARK, ensure extracted dataset is present
     train_imgs = list((images_dir / "train").glob("*.png"))
+    val_imgs = list((images_dir / "val").glob("*.png"))
+    test_imgs = list((images_dir / "test").glob("*.png"))
+    print(f"[DATASET] Normalization complete. Verified frame counts: train={len(train_imgs)}, val={len(val_imgs)}, test={len(test_imgs)}")
     if IS_KAGGLE and FULL_BENCHMARK and len(train_imgs) < 1000:
         raise RuntimeError(
             f"[FATAL] FULL_BENCHMARK requested on Kaggle but extracted train count ({len(train_imgs)}) < 1000! "
