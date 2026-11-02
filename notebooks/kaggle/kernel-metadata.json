@@ -1,0 +1,18 @@
+{
+  "id": "aryanguptaji/raddet-phase-1-1-spectrum-detection-prototype",
+  "title": "RadDet Phase 1.1 Spectrum Detection Prototype",
+  "code_file": "03_raddet_spectrum_detection_kaggle.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_tpu": "false",
+  "enable_internet": "true",
+  "dataset_sources": [
+    "abcxyzi/raddet-icassp-2025"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}
+

@@ -10,6 +10,7 @@ Validates:
 """
 import os
 import sys
+from pathlib import Path
 import unittest
 import numpy as np
 import nbformat
@@ -37,6 +38,7 @@ class TestWalkthroughNotebooks(unittest.TestCase):
     def setUpClass(cls):
         cls.nb1_path = os.path.join(ROOT_DIR, "01_radar_classical_dsp.ipynb")
         cls.nb2_path = os.path.join(ROOT_DIR, "02_radar_deep_learning_detection.ipynb")
+        cls.nb3_path = os.path.join(ROOT_DIR, "03_raddet_spectrum_detection_kaggle.ipynb")
 
     def test_01_notebook_files_exist_and_parse(self):
         """Verify that both notebooks exist on disk and parse cleanly via nbformat."""
@@ -176,6 +178,38 @@ class TestWalkthroughNotebooks(unittest.TestCase):
         # Expected shape: (batch_size, num_classes, H, W) and (batch_size, 4, H, W)
         self.assertEqual(cls_out.shape, (2, 5, 128, 129))
         self.assertEqual(box_out.shape, (2, 4, 128, 129))
+
+    def test_06_raddet_kaggle_notebook_structure(self):
+        """Verify 03_raddet_spectrum_detection_kaggle.ipynb structure, telemetry, and dual paths."""
+        self.assertTrue(os.path.exists(self.nb3_path), f"Missing {self.nb3_path}")
+
+        with open(self.nb3_path, "r", encoding="utf-8") as f:
+            nb3 = nbformat.read(f, as_version=4)
+
+        self.assertGreaterEqual(len(nb3.cells), 10, "Notebook 03 must contain at least 10 cells.")
+
+        all_text = "".join("".join(c.get("source", [])) for c in nb3.cells)
+        code_text = "".join("".join(c.get("source", [])) for c in nb3.cells if c.cell_type == "code")
+
+        # Telemetry verification
+        self.assertIn("StageProgressTracker", code_text, "Notebook 03 must embed StageProgressTracker.")
+        self.assertIn("ETC:", code_text, "StageProgressTracker must log ETC.")
+
+        # Dual-path abstraction verification
+        self.assertIn("/kaggle/input", code_text, "Notebook 03 must handle /kaggle/input.")
+        self.assertIn("/kaggle/working", code_text, "Notebook 03 must handle /kaggle/working.")
+
+        # Section coverage
+        self.assertIn("Executive Summary", all_text)
+        self.assertIn("Environment Setup", all_text)
+        self.assertIn("Dataset Ingestion", all_text)
+        self.assertIn("YOLO", all_text)
+        self.assertIn("Validation & Loss Curves", all_text)
+        self.assertIn("Inference & Detection Overlays", all_text)
+
+        # Validate with push_kaggle_kernel validation routine
+        from scripts.push_kaggle_kernel import validate_notebook
+        validate_notebook(Path(self.nb3_path))
 
 
 if __name__ == "__main__":

@@ -88,7 +88,38 @@ DIAGRAMS = {
     E --> F["Perception Output<br/>Classified Dynamic Tracks"]
 """,
 
-    # Notebook 2: Deep Learning Radar Detection — Snake Flow (4 Rows)
+    # Notebook 3: RadDet Spectrum Detection & Sensing Benchmark
+    "nb3_top": """flowchart TD
+    subgraph Row1 ["Stage 1: RF Front-End & Wideband Baseband I/Q Acquisition"]
+        direction LR
+        A["500 MHz Wideband RF Environment"] --> B["1M Complex I/Q Samples (2 ms)"] --> C["STFT Time-Frequency Analysis"] --> D["Max-Hold Spectrogram Compression"]
+    end
+
+    subgraph Row2 ["Stage 2: Spectrogram Normalization & YOLO Bounding Boxes"]
+        direction RL
+        E["128x128 Max-Hold Spectrogram"] --> F["YOLO Ground-Truth Annotations"] --> G["11 Radar Modulation Classes"] --> H["Batch Tensor Preparation"]
+    end
+
+    subgraph Row3 ["Stage 3: Deep Feature Pyramid & Detection Backbone"]
+        direction LR
+        I["YOLOv8 Darknet Backbone"] --> J["C2f Feature Extraction"] --> K["PANet Feature Pyramid"] --> L["Decoupled Detection Heads"]
+    end
+
+    subgraph Row4 ["Stage 4: Cognitive EW Inference & mAP Evaluation"]
+        direction RL
+        M["Real-Time Spectrogram Inference"] --> N["NMS Bounding Box Regression"] --> O["Quantitative mAP50 / mAP50:95"] --> P["High-Contrast Detection Overlays"]
+    end
+
+    D --> E
+    H --> I
+    L --> M
+""",
+    "nb3_sec1": """graph LR
+    A["Wideband RF Signals"] --> B["1M Baseband I/Q Samples"]
+    B --> C["Short-Time Fourier Transform"]
+    C --> D["Max-Hold Pooling Across Time/Freq"]
+    D --> E["128x128 Spectrogram Representation"]
+""",
     "nb2_top": """flowchart TD
     subgraph Row1 ["Stage 1: Multi-Target Simulation & Tensor Preparation"]
         direction LR
@@ -196,9 +227,21 @@ def render_mermaid_dual_block(mermaid_code: str, fallback_title: str = "Fallback
                 check=True,
                 capture_output=True
             )
+        except Exception:
+            pass
         finally:
             if os.path.exists(mmd_path):
                 os.remove(mmd_path)
+
+    if not os.path.exists(cache_path):
+        return f"""<details open>
+<summary><b>{fallback_title} (Mermaid Pipeline Flow)</b></summary>
+
+```mermaid
+{mermaid_code.strip()}
+```
+
+</details>"""
 
     with open(cache_path, "r", encoding="utf-8") as f:
         svg_content = f.read()
