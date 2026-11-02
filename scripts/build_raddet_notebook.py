@@ -312,21 +312,24 @@ else:
             if d.is_dir() and "images" not in d.parts and "labels" not in d.parts
         ]
         if split_dirs:
-            src_split_dir = split_dirs[0]
+            # Exclude inspection or preview directories to target the full corpus
+            valid_dirs = [d for d in split_dirs if "inspection" not in d.parts and "preview" not in d.parts and "sample" not in d.parts]
+            chosen_dirs = valid_dirs if valid_dirs else split_dirs
             target_img_dir = images_dir / split
             target_lbl_dir = labels_dir / split
             target_img_dir.mkdir(parents=True, exist_ok=True)
             target_lbl_dir.mkdir(parents=True, exist_ok=True)
-            print(f"[DATASET] Segregating files from {src_split_dir} into images/{split} and labels/{split}...")
-            for f in list(src_split_dir.iterdir()):
-                if f.suffix.lower() == ".png":
-                    dest_p = target_img_dir / f.name
-                    if not dest_p.exists():
-                        shutil.move(str(f), str(dest_p))
-                elif f.suffix.lower() == ".txt":
-                    dest_l = target_lbl_dir / f.name
-                    if not dest_l.exists():
-                        shutil.move(str(f), str(dest_l))
+            for src_split_dir in chosen_dirs:
+                print(f"[DATASET] Segregating files from {src_split_dir} into images/{split} and labels/{split}...")
+                for f in list(src_split_dir.iterdir()):
+                    if f.suffix.lower() == ".png":
+                        dest_p = target_img_dir / f.name
+                        if not dest_p.exists():
+                            shutil.move(str(f), str(dest_p))
+                    elif f.suffix.lower() == ".txt":
+                        dest_l = target_lbl_dir / f.name
+                        if not dest_l.exists():
+                            shutil.move(str(f), str(dest_l))
 
     # 2. Normalize if archive extracted images/train into a nested subdirectory
     sub_trains = list(dataset_dir.glob("**/images/train"))
