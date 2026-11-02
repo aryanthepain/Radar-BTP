@@ -2,7 +2,8 @@
 """Automated Kaggle Kernel Builder & CLI Push Utility.
 
 Generates kernel-metadata.json, performs deterministic pre-push validation on
-notebook structure, and pushes the notebook to Kaggle kernels via the Kaggle CLI.
+notebook structure, pushes the notebook to Kaggle kernels, queries status,
+and pulls output artifacts via the Kaggle CLI.
 """
 
 import argparse
@@ -42,6 +43,55 @@ def validate_notebook(notebook_path: Path) -> dict:
         raise ValueError("Notebook contains zero cells.")
     print(f"  [+] Validated notebook '{notebook_path.name}' ({len(cells)} cells)")
     return nb_data
+
+
+def pull_kernel_outputs(kernel_id: str, output_dir: Path) -> Path:
+    """Download output artifacts from Kaggle kernel via Kaggle CLI."""
+    if "/" not in kernel_id or len(kernel_id.split("/")) != 2:
+        raise ValueError(f"Invalid kernel_id '{kernel_id}'. Expected format 'username/slug'.")
+
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    print(f"\n[PULL] Downloading artifacts from Kaggle kernel '{kernel_id}' to '{output_dir}'...")
+    try:
+        res = subprocess.run(
+            ["kaggle", "kernels", "output", kernel_id, "-p", str(output_dir)],
+            capture_output=True,
+            text=True,
+            check=True,
+            shell=False,
+        )
+        print("  [+] Kaggle CLI Output:")
+        print(res.stdout)
+        files = list(output_dir.glob("*"))
+        print(f"  [*] Downloaded {len(files)} files/directories to {output_dir}")
+        return output_dir
+    except subprocess.CalledProcessError as e:
+        print(f"  [!] Error pulling kernel outputs: {e.stderr}", file=sys.stderr)
+        raise
+
+
+def get_kernel_status(kernel_id: str) -> str:
+    """Retrieve execution status of a Kaggle kernel via Kaggle CLI."""
+    if "/" not in kernel_id or len(kernel_id.split("/")) != 2:
+        raise ValueError(f"Invalid kernel_id '{kernel_id}'. Expected format 'username/slug'.")
+
+    print(f"\n[STATUS] Querying execution status for Kaggle kernel '{kernel_id}'...")
+    try:
+        res = subprocess.run(
+            ["kaggle", "kernels", "status", kernel_id],
+            capture_output=True,
+            text=True,
+            check=True,
+            shell=False,
+        )
+        status_line = res.stdout.strip()
+        print(f"  [+] Status Output: {status_line}")
+        return status_line
+    except subprocess.CalledProcessError as e:
+        print(f"  [!] Error querying kernel status: {e.stderr}", file=sys.stderr)
+        raise
 
 
 def build_and_push_kernel(
@@ -99,6 +149,7 @@ def build_and_push_kernel(
                 capture_output=True,
                 text=True,
                 check=True,
+                shell=False,
             )
             print("  [+] Kaggle CLI Output:")
             print(res.stdout)
@@ -113,7 +164,7 @@ def build_and_push_kernel(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Kaggle Kernel Staging & Push CLI")
+    parser = argparse.ArgumentParser(description="Kaggle Kernel Staging, Push & Retrieval CLI")
     parser.add_argument(
         "--notebook",
         type=Path,
@@ -171,8 +222,35 @@ def main() -> None:
         action="store_true",
         help="Execute 'kaggle kernels push' after staging",
     )
+    parser.add_argument(
+        "--pull",
+        action="store_true",
+        help="Download output files from Kaggle kernel",
+    )
+    parser.add_argument(
+        "--status",
+        action="store_true",
+        help="Check execution status of Kaggle kernel",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=Path("data/benchmark_results/s128"),
+        help="Destination directory for pulled outputs",
+    )
 
     args = parser.parse_args()
+    kernel_id = f"{args.username}/{args.slug}"
+
+    if args.status:
+        status = get_kernel_status(kernel_id)
+        print(f"[*] Kernel '{kernel_id}' status: {status}")
+        return
+
+    if args.pull:
+        out_dir = pull_kernel_outputs(kernel_id=kernel_id, output_dir=args.output_dir)
+        print(f"[*] Artifacts successfully retrieved to: {out_dir}")
+        return
 
     datasets = args.datasets or ["abcxyzi/raddet-icassp-2025"]
 

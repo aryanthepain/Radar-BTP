@@ -7,11 +7,17 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 # Ensure workspace root is in sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from scripts.push_kaggle_kernel import build_and_push_kernel, validate_notebook
+from scripts.push_kaggle_kernel import (
+    build_and_push_kernel,
+    get_kernel_status,
+    pull_kernel_outputs,
+    validate_notebook,
+)
 from src.telemetry import StageProgressTracker, format_duration
 
 
@@ -123,6 +129,48 @@ class TestKaggleKernelBuilder(unittest.TestCase):
         self.assertEqual(meta["enable_gpu"], "true")
         self.assertEqual(meta["enable_internet"], "false")
         self.assertEqual(meta["is_private"], "true")
+
+    @patch("subprocess.run")
+    def test_pull_kernel_outputs_success(self, mock_run):
+        mock_res = MagicMock()
+        mock_res.stdout = "Output files downloaded successfully."
+        mock_run.return_value = mock_res
+
+        out_dest = self.temp_path / "pulled_artifacts"
+        ret = pull_kernel_outputs("testuser/test-slug", out_dest)
+
+        self.assertEqual(ret, out_dest)
+        mock_run.assert_called_once_with(
+            ["kaggle", "kernels", "output", "testuser/test-slug", "-p", str(out_dest)],
+            capture_output=True,
+            text=True,
+            check=True,
+            shell=False,
+        )
+
+    def test_pull_kernel_outputs_invalid_kernel_id(self):
+        with self.assertRaises(ValueError):
+            pull_kernel_outputs("invalid_id_no_slash", self.temp_path)
+
+    @patch("subprocess.run")
+    def test_get_kernel_status_success(self, mock_run):
+        mock_res = MagicMock()
+        mock_res.stdout = 'testuser/test-slug has status "complete"'
+        mock_run.return_value = mock_res
+
+        status = get_kernel_status("testuser/test-slug")
+        self.assertIn("complete", status)
+        mock_run.assert_called_once_with(
+            ["kaggle", "kernels", "status", "testuser/test-slug"],
+            capture_output=True,
+            text=True,
+            check=True,
+            shell=False,
+        )
+
+    def test_get_kernel_status_invalid_kernel_id(self):
+        with self.assertRaises(ValueError):
+            get_kernel_status("invalid_format")
 
 
 if __name__ == "__main__":
