@@ -55,3 +55,4 @@ This pull request completes Phase 01.2, executing the full-scale S-128 RadDet sp
 - **D-02 (RF Physics Invariance)**: Disabled HSV color jitter and spatial flips to protect Doppler sign and physical frequency orientation.
 - **D-03 (Discrete Multi-SNR Binning)**: Evaluated discrete points `[-20, -12, -4, 4, 12, 20]` dB reproducing paper Table III format.
 - **D-04 (Hardware-Synchronized Latency Profiling)**: Batch size 1 latency measurement with CUDA event timers to determine true operational digitizer latency.
+
