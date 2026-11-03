@@ -61,6 +61,13 @@ function initLightbox() {
   function openLightbox(src, captionText) {
     modalImg.setAttribute("src", src);
     modalCaption.textContent = captionText || "";
+    if (src && src.toLowerCase().endsWith(".svg")) {
+      modalImg.style.width = "92vw";
+      modalImg.style.maxWidth = "1200px";
+    } else {
+      modalImg.style.width = "auto";
+      modalImg.style.maxWidth = "90vw";
+    }
     modal.style.display = "flex";
     document.body.style.overflow = "hidden";
   }
@@ -68,6 +75,8 @@ function initLightbox() {
   function closeLightbox() {
     modal.style.display = "none";
     modalImg.removeAttribute("src");
+    modalImg.style.width = "";
+    modalImg.style.maxWidth = "";
     modalCaption.textContent = "";
     document.body.style.overflow = "";
   }

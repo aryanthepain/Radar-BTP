@@ -825,20 +825,23 @@ body {
 
 .lightbox-content {
   position: relative;
-  max-width: 90vw;
-  max-height: 88vh;
+  max-width: 95vw;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 #lightbox-img {
-  max-width: 90vw;
-  max-height: 80vh;
+  max-width: 92vw;
+  max-height: 82vh;
+  width: auto;
   object-fit: contain;
   border-radius: var(--radius-sm);
   border: 1px solid rgba(0, 240, 255, 0.3);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  background: var(--bg-card);
 }
 
 #lightbox-caption {
@@ -939,6 +942,110 @@ body {
   height: 100vh;
   background: rgba(0, 0, 0, 0.6);
   z-index: 99;
+}
+
+/* ==========================================================================
+   MATHEMATICAL TYPOGRAPHY & FORMULA BLOCKS
+   ========================================================================== */
+
+.math {
+  font-family: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: var(--accent-cyan);
+  font-size: 0.9em;
+  font-style: normal;
+  letter-spacing: 0.2px;
+  background: rgba(0, 240, 255, 0.08);
+  padding: 0.12em 0.38em;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  white-space: nowrap;
+}
+
+.math-symbol {
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  color: #38bdf8;
+}
+
+.equation-box {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-color);
+  border-left: 3px solid var(--accent-cyan);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 1.5rem;
+  margin: 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+}
+
+.eq-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px dashed rgba(51, 65, 85, 0.5);
+}
+
+.eq-row:last-child {
+  border-bottom: none;
+}
+
+.eq-formula {
+  color: #f8fafc;
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.eq-formula strong {
+  color: var(--accent-cyan);
+}
+
+.eq-label {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  text-align: center;
+  padding: 0 0.25rem;
+  font-size: 0.92em;
+  line-height: 1.1;
+}
+
+.frac > .num {
+  border-bottom: 1.5px solid #38bdf8;
+  padding-bottom: 2px;
+  color: #38bdf8;
+}
+
+.frac > .den {
+  padding-top: 2px;
+  color: #38bdf8;
+}
+
+.code-block-wrapper pre[class*="language-"] {
+  font-size: 0.86rem;
+  line-height: 1.65;
+  background: #070c14;
+}
+
+.code-block-wrapper code {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 @media (max-width: 1024px) {
