@@ -225,3 +225,4 @@ document.addEventListener("DOMContentLoaded", () => {
   initMobileDrawer();
   console.log("⚡ BTP Radar Perception Showcase initialized successfully.");
 });
+
