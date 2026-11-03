@@ -35,7 +35,7 @@
         </div>
         <div>
           <div class="brand-title">Radar<span>BTP</span></div>
-          <div class="brand-meta">77 GHz FMCW · Deep Learning</div>
+          <!-- <div class="brand-meta">77 GHz FMCW · Deep Learning</div> -->
         </div>
       </a>
 
@@ -107,33 +107,17 @@
           </p>
         </div>
 
-        <div class="grid-2">
-          <div class="card">
-            <h3 style="font-size: 1.1rem; color: var(--accent-cyan); margin-bottom: 0.75rem;">Research Motivation &amp; Problem Statement</h3>
-            <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1rem;">
-              Autonomous automotive platforms rely on 77 GHz frequency-modulated continuous-wave (FMCW) radar for all-weather, day/night sensing. 
-              However, classical detection paradigms based on cell-averaging constant false alarm rate (CA-CFAR) suffer from three critical bottlenecks: 
-              severe sensitivity to stationary ground clutter, heuristic threshold tuning (<span class="math"><i>P</i><sub>fa</sub></span>), and complete inability to perform semantic object classification.
-            </p>
-            <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6;">
-              This showcase highlights our three-stage progression bridging first-principles radar electromagnetics, anchor-free deep learning, 
-              and state-of-the-art vision backbones tested on 20,000 empirical radar frames from the ICASSP 2025 RadDet dataset.
-            </p>
-          </div>
-
-          <div class="spec-box">
-            <div class="spec-title">Hardware Profile &amp; Radar Parameters</div>
-            <ul class="spec-list">
-              <li><span>Carrier Frequency (<span class="math"><i>f</i><sub>c</sub></span>)</span> <span class="spec-val">77.0 GHz (<span class="math">&lambda; = 3.9 mm</span>)</span></li>
-              <li><span>Sweep Bandwidth (<span class="math"><i>B</i></span>)</span> <span class="spec-val">1.0 GHz (Range res: 15.0 cm)</span></li>
-              <li><span>Chirp Ramp Duration (<span class="math"><i>T</i><sub>c</sub></span>)</span> <span class="spec-val">40.0 &mu;s (<span class="math"><i>S</i> = 25 MHz/&mu;s</span>)</span></li>
-              <li><span>ADC Sampling Rate (<span class="math"><i>f</i><sub>s</sub></span>)</span> <span class="spec-val">12.8 MHz (512 fast-time samples)</span></li>
-              <li><span>Chirps per Frame (<span class="math"><i>N</i><sub>chirps</sub></span>)</span> <span class="spec-val">128 (Doppler res: 0.19 m/s)</span></li>
-              <li><span>Rx Antenna Array</span> <span class="spec-val">4-Element ULA (<span class="math"><i>d</i> = &lambda;/2 = 1.95 mm</span>)</span></li>
-              <li><span>Max Unambiguous Range</span> <span class="spec-val">76.8 meters</span></li>
-              <li><span>Max Radial Velocity</span> <span class="spec-val">&plusmn;24.3 m/s (&plusmn;87.5 km/h)</span></li>
-            </ul>
-          </div>
+        <div class="card" style="margin-top: 1rem;">
+          <h3 style="font-size: 1.15rem; color: var(--accent-cyan); margin-bottom: 0.75rem;">Research Motivation &amp; Problem Statement</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; margin-bottom: 1rem;">
+            Autonomous automotive platforms rely on 77 GHz frequency-modulated continuous-wave (FMCW) radar for all-weather, day/night sensing. 
+            However, classical detection paradigms based on cell-averaging constant false alarm rate (CA-CFAR) suffer from three critical bottlenecks: 
+            severe sensitivity to stationary ground clutter, heuristic threshold tuning (<span class="math"><i>P</i><sub>fa</sub></span>), and complete inability to perform semantic object classification.
+          </p>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65;">
+            This showcase highlights our three-stage progression bridging first-principles radar electromagnetics, anchor-free deep learning, 
+            and state-of-the-art vision backbones tested on 20,000 empirical radar frames from the ICASSP 2025 RadDet dataset.
+          </p>
         </div>
 
         <!-- Interactive Showcase Features (Temporarily Commented Out)
@@ -262,6 +246,59 @@
             <span class="math">&Delta;&phi;</span>, while the 4-element Uniform Linear Array (ULA) samples spatial phase gradients 
             <span class="math">&Delta;&psi;</span> across antenna elements with half-wavelength spacing <span class="math"><i>d</i> = &lambda;/2</span>.
           </p>
+        </div>
+
+        <!-- Hardware Profile & Synthetic Dataset Generation Grid -->
+        <div class="grid-2" style="margin-top: 1.5rem; margin-bottom: 2rem;">
+          
+          <!-- Hardware Profile & Radar Parameters -->
+          <div class="spec-box">
+            <div class="spec-title">Hardware Profile &amp; Radar Parameters</div>
+            <ul class="spec-list">
+              <li><span>Carrier Frequency (<span class="math"><i>f</i><sub>c</sub></span>)</span> <span class="spec-val">77.0 GHz (<span class="math">&lambda; = 3.9 mm</span>)</span></li>
+              <li><span>Sweep Bandwidth (<span class="math"><i>B</i></span>)</span> <span class="spec-val">1.0 GHz (Range res: 15.0 cm)</span></li>
+              <li><span>Chirp Ramp Duration (<span class="math"><i>T</i><sub>c</sub></span>)</span> <span class="spec-val">40.0 &mu;s (<span class="math"><i>S</i> = 25 MHz/&mu;s</span>)</span></li>
+              <li><span>ADC Sampling Rate (<span class="math"><i>f</i><sub>s</sub></span>)</span> <span class="spec-val">12.8 MHz (512 fast-time samples)</span></li>
+              <li><span>Chirps per Frame (<span class="math"><i>N</i><sub>chirps</sub></span>)</span> <span class="spec-val">128 (Doppler res: 0.19 m/s)</span></li>
+              <li><span>Rx Antenna Array</span> <span class="spec-val">4-Element ULA (<span class="math"><i>d</i> = &lambda;/2 = 1.95 mm</span>)</span></li>
+              <li><span>Max Unambiguous Range</span> <span class="spec-val">76.8 meters</span></li>
+              <li><span>Max Radial Velocity</span> <span class="spec-val">&plusmn;24.3 m/s (&plusmn;87.5 km/h)</span></li>
+            </ul>
+          </div>
+
+          <!-- How the Synthetic FMCW Dataset is Created -->
+          <div class="card">
+            <h4 style="font-size: 1.05rem; color: var(--accent-cyan); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span>🔬</span> How the Synthetic FMCW Dataset is Created
+            </h4>
+            <p style="color: var(--text-secondary); font-size: 0.88rem; line-height: 1.55; margin-bottom: 0.75rem;">
+              Using the hardware parameters shown alongside, we implemented a first-principles radar electromagnetics simulator 
+              (<code>src/sim/radar_sim.py</code>) to synthesize realistic raw ADC data cubes and supervisory ground truths:
+            </p>
+            <ul style="color: var(--text-secondary); font-size: 0.84rem; line-height: 1.6; margin-left: 1.15rem;">
+              <li>
+                <strong style="color: var(--accent-sky);">1. 3D ADC Cube Synthesis:</strong> 
+                Synthesizes complex baseband I/Q data cubes of shape <span class="math">(4 Rx, 128 Chirps, 512 Samples)</span> across fast-time, slow-time, and spatial antenna channels.
+              </li>
+              <li>
+                <strong style="color: var(--accent-violet);">2. Multi-Target Kinematics &amp; RCS:</strong> 
+                Injects 4 automotive target classes (Car, Truck, Pedestrian, Bike) with realistic RCS (0.5 to 10 dBsm), randomized positions (1 to 60 m), and radial velocities (&minus;15 to +15 m/s) with <span class="math">1/R<sup>2</sup></span> path loss.
+              </li>
+              <li>
+                <strong style="color: var(--accent-rose);">3. Pedestrian Micro-Doppler Gait:</strong> 
+                Simulates dynamic swinging limbs via sinusoidal harmonic modulation <span class="math"><i>R</i>(<i>t</i>) = <i>R</i><sub>0</sub> &minus; <i>v</i><i>t</i> + (<i>a</i><sub>md</sub> / 2&pi;<i>f</i><sub>md</sub>) sin(2&pi;<i>f</i><sub>md</sub><i>t</i>)</span> creating &plusmn;150 Hz sidebands.
+              </li>
+              <li>
+                <strong style="color: var(--accent-amber);">4. Ground Clutter &amp; Thermal AWGN:</strong> 
+                Injects 50 stationary Rayleigh clutter scatterers at zero Doppler (guardrails, road beds) plus complex AWGN thermal noise across defined SNR regimes.
+              </li>
+              <li>
+                <strong style="color: var(--accent-emerald);">5. Continuous 2D Gaussian Splatting:</strong> 
+                Converts discrete targets into smooth 2D Gaussian probability heatmaps <span class="math"><i>G</i>(<i>x</i>, <i>y</i>) = exp(&minus;((<i>x</i> &minus; <i>x</i><sub>0</sub>)<sup>2</sup> + (<i>y</i> &minus; <i>y</i><sub>0</sub>)<sup>2</sup>) / 2&sigma;<sup>2</sup>)</span> to prevent vanishing gradients during neural training.
+              </li>
+            </ul>
+          </div>
+
         </div>
 
         <!-- 2. Pre-rendered Flowchart -->
@@ -481,50 +518,18 @@ music_spectrum = 1.0 / np.sum(np.abs(a_theta.conj().T @ noise_subspace)**2, axis
           </p>
         </div>
 
-        <!-- 1. Objective Card & Synthetic Data Pipeline -->
+        <!-- 1. Objective Card -->
         <div class="card">
           <h3 style="font-size: 1.15rem; color: var(--accent-violet); margin-bottom: 0.6rem;">Part 1: The Deep Learning Paradigm Shift</h3>
-          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1.25rem;">
+          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1rem;">
             Notebook 02 replaces sequential CFAR peak extraction, MUSIC AoA, and DBSCAN clustering with an anchor-free multi-task convolutional neural network 
             (<code>RadarObjectDetectorCNN</code>). 
             Input Range-Doppler tensors are mapped simultaneously to (1) multi-class semantic confidence heatmaps with continuous 2D Gaussian splatting, 
             and (2) dense continuous bounding box coordinate offsets <span class="math">[dx, dy, w, h]</span> in a single unified GPU forward pass (10 ms).
           </p>
-
-          <h4 style="font-size: 1.02rem; color: var(--text-primary); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-            <span>🔬</span> How the Synthetic FMCW Dataset is Created
-          </h4>
-          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.75rem;">
-            To rigorously train and evaluate the deep learning model with ground-truth supervisory labels, we developed a high-fidelity physics simulator 
-            (<code>src/sim/radar_sim.py</code>) adhering to first-principles radar electromagnetics:
+          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6;">
+            By decoupling the feature extraction backbone from task-specific prediction heads, the network learns rich spatial representations directly from complex RF return spectra, bypassing brittle manual threshold tuning (<span class="math"><i>P</i><sub>fa</sub></span>) and enabling instantaneous multi-class semantic classification across all detected road entities.
           </p>
-          <ul style="color: var(--text-secondary); font-size: 0.88rem; line-height: 1.65; margin-left: 1.25rem; margin-bottom: 1rem;">
-            <li>
-              <strong style="color: var(--accent-cyan);">1. 3D FMCW ADC Cube Synthesis:</strong> 
-              Models a 77 GHz radar (<span class="math"><i>B</i> = 1.0 GHz</span>, <span class="math"><i>T</i><sub>c</sub> = 40.0 &mu;s</span>, <span class="math"><i>f</i><sub>s</sub> = 12.8 MHz</span>) generating a complex baseband I/Q radar cube of dimensions 
-              <span class="math">(4 Rx Channels, 128 Chirps, 512 Fast-Time Samples)</span>.
-            </li>
-            <li>
-              <strong style="color: var(--accent-violet);">2. Multi-Target Kinematics &amp; RCS:</strong> 
-              Injects 4 automotive target classes (Car, Truck, Pedestrian, Bicycle) with realistic radar cross-sections (0.5 to 10 dBsm), randomized ranges (1 to 60 m), radial velocities (&minus;15 to +15 m/s), and azimuth angles (&minus;45&deg; to +45&deg;), scaled by inverse-square path loss.
-            </li>
-            <li>
-              <strong style="color: var(--accent-rose);">3. Biomechanical Pedestrian Micro-Doppler Gait:</strong> 
-              Simulates dynamic swinging arm and leg cadence by modulating target range with sinusoidal harmonics: 
-              <span class="math"><i>R</i>(<i>t</i>) = <i>R</i><sub>0</sub> &minus; <i>v</i><i>t</i> + (<i>a</i><sub>md</sub> / 2&pi;<i>f</i><sub>md</sub>) sin(2&pi;<i>f</i><sub>md</sub><i>t</i>)</span>, 
-              generating realistic &plusmn;150 Hz Doppler sidebands around the pedestrian torso.
-            </li>
-            <li>
-              <strong style="color: var(--accent-amber);">4. Environmental Clutter &amp; Thermal Noise:</strong> 
-              Injects 50 stationary Rayleigh-distributed clutter scatterers at zero Doppler (road surfaces and guardrails) plus complex Additive White Gaussian Noise (AWGN) to establish controlled Signal-to-Noise Ratio (SNR) regimes.
-            </li>
-            <li>
-              <strong style="color: var(--accent-emerald);">5. Continuous 2D Gaussian Splatting:</strong> 
-              Converts discrete target positions in the Range-Doppler Matrix into smooth 2D Gaussian probability heatmaps: 
-              <span class="math"><i>G</i>(<i>x</i>, <i>y</i>) = exp(&minus;((<i>x</i> &minus; <i>x</i><sub>0</sub>)<sup>2</sup> + (<i>y</i> &minus; <i>y</i><sub>0</sub>)<sup>2</sup>) / 2&sigma;<sup>2</sup>)</span>. 
-              This provides continuous, dense gradient flow that eliminates vanishing gradients inherent in sparse single-bin annotations.
-            </li>
-          </ul>
         </div>
 
         <!-- 2. Pre-rendered Flowcharts -->
@@ -820,6 +825,7 @@ with torch.no_grad():
             </div>
           </div>
 
+          <!-- Figure 3.7 (Temporarily Commented Out)
           <div class="plot-card">
             <div class="plot-img-wrapper">
               <img src="./assets/nb3/BoxPR_curve.png" alt="Precision-Recall Curves per Class" class="zoomable">
@@ -833,13 +839,14 @@ with torch.no_grad():
               </div>
             </div>
           </div>
+          -->
 
           <div class="plot-card" style="grid-column: 1 / -1;">
             <div class="plot-img-wrapper">
               <img src="./assets/nb3/multi_snr_qualitative_grid.png" alt="Qualitative Detections Across 4 SNR Regimes" class="zoomable" style="max-height: 400px; object-fit: contain;">
             </div>
             <div class="plot-body">
-              <div class="plot-title">Figure 3.8: Qualitative Detection Grid Across 4 SNR Regimes (+20 dB, +10 dB, 0 dB, &minus;20 dB)</div>
+              <div class="plot-title">Figure 3.7: Qualitative Detection Grid Across 4 SNR Regimes (+20 dB, +10 dB, 0 dB, &minus;20 dB)</div>
               <div class="plot-desc">Visual demonstration of model robustness: high SNR yields sharp high-confidence boxes; extreme &minus;20 dB exhibits graceful degradation without false hallucinations.</div>
               <div class="inference-callout">
                 <strong>Robustness Inference</strong>
