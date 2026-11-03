@@ -35,3 +35,4 @@
 - **Offline Resilience**: Zero external CDN font/CSS/JS links to guarantee zero-fail offline presentation during professor reviews.
 - **Dark Cyber-Radar Design System**: High-contrast palette (`#0a0e17`, `#00f0ff`, `#f59e0b`) tailored for radar spectrograms and signal representations.
 - **Automated Pages Deployment**: GitHub Actions workflow triggers on push to `main` deploying `./docs` artifact directly to GitHub Pages.
+
