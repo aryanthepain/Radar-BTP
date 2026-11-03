@@ -13,7 +13,8 @@ A phased journey to prepare an undergraduate thesis exploratory presentation for
 
 - [x] **Phase 1: Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams** - Structure notebooks with unified Mermaid flowcharts and academic narrative for the professor presentation.
 - [x] **Phase 1.1: RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice)** (INSERTED) - Ingest real-world RadDet ICASSP 2025 dataset with minimal local micro-slice, YOLOv8/v9 spectrum detector, and limited Kaggle run.
-- [ ] **Phase 1.2: Full-Scale RadDet Benchmark on Kaggle** (INSERTED) - Execute 20,000-frame full training run across multiple resolutions and SNR settings on Kaggle GPU.
+- [x] **Phase 1.2: Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)** (INSERTED) - Execute 20,000-frame full training run on S (128²) resolution across multi-SNR settings on Kaggle GPU for up to 100 epochs.
+- [ ] **Phase 1.3: High-Coverage Deterministic Unit & Integration Testing** (INSERTED) - Comprehensive test expansion achieving >=90% code coverage across DSP algorithms, PyTorch dataset/models, and pipeline scripts with pytest-cov.
 - [ ] **Phase 2: Multi-Level Decoupled Radar Data Ingestion** - Implement internal data adapter decoupling pipeline from simulator (Raw ADC cubes, RDM/RAD tensors, Point Cloud DataFrames).
 - [ ] **Phase 3: Pipeline Integration & Deterministic Verification Gates** - Integrate decoupled data flow into pipeline testbench and pass all deterministic gates.
 
@@ -51,6 +52,7 @@ Plans:
 3. Deterministic unit tests in `tests/test_raddet.py` pass verifying coordinate math, label parsing, and PyTorch model forward pass.
 4. Self-contained Kaggle notebook `03_raddet_spectrum_detection_kaggle.ipynb` configured for `abcxyzi/raddet-icassp-2025` limited run with validation mAP metrics and multi-panel detection plots.
 5. All existing synthetic radar tests and notebooks continue to pass 100% without modification.
+
 **Plans**: 5 plans
 
 Plans:
@@ -61,18 +63,47 @@ Plans:
 - [x] 01.1-04: Integrate notebook test runners into `tests/test_walkthrough_notebooks.py` and verify all deterministic gates via `scripts/verify.ps1`.
 - [x] 01.1-05: Deploy and execute limited prototype on Kaggle GPU via Kaggle CLI (`aryanguptaji/raddet-phase1-1-prototype`), retrieve metrics, and validate detection figures.
 
-### Phase 1.2: Full-Scale RadDet Benchmark on Kaggle
+### Phase 1.2: Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)
 
-**Goal**: Conduct full-scale training and benchmark evaluation of RadDet across the complete 20,000-frame training set on Kaggle GPU, comparing multi-resolution performance ($128^2, 256^2, 512^2$) and multi-SNR intervals.
+**Goal**: Conduct full-scale training and benchmark evaluation of RadDet across the complete 20,000-frame training set on Kaggle GPU for the **S ($128^2$)** resolution variant for 100 epochs with early stopping safety, automated multi-SNR evaluation (-20 dB to +20 dB), and dedicated real-time latency/FPS benchmarking matching Table III of the ICASSP 2025 paper. (M-256 and L-512 resolutions deferred to subsequent phases).
 **Mode**: mvp
 **Depends on**: Phase 1.1
 **Requirements**: RADDET-BENCH-01, RADDET-BENCH-02
 **Success Criteria** (what must be TRUE):
 
-1. Full training run executed on Kaggle GPU for 100 epochs.
-2. Multi-SNR breakdown (-20 dB to +20 dB) reproducing paper benchmark trends.
-3. Final benchmark comparison table matching Table III of ICASSP 2025 paper.
-   **Plans**: TBD
+1. Full training run executed on Kaggle GPU for up to 100 epochs on S (128²) with Ultralytics YOLOv9/v8.
+2. Automated multi-SNR breakdown (-20 dB to +20 dB) reproducing paper benchmark trends and Fig 3(c) curves.
+3. Final benchmark comparison table matching the S-128 row of Table III in the ICASSP 2025 paper.
+4. Dedicated real-time inference latency pass (batch size 1, CUDA sync) reporting operational FPS.
+5. All local deterministic test gates pass with 100% success under `verify.ps1`.
+   **Plans**: 3 plans
+
+Plans:
+
+- [x] 01.2-01: In-place notebook upgrade with smart cached extraction, empirical batch smoke test, and 100-epoch YOLOv9 loop.
+- [x] 01.2-02: Automated 6-bin multi-SNR evaluation loop, Table III exporter, and single-frame latency profiler.
+- [x] 01.2-03: Kaggle CLI artifact pull/status automation and dual-mode CI verification.
+
+### Phase 1.3: High-Coverage Deterministic Unit & Integration Testing (INSERTED)
+
+**Goal**: Expand deterministic test coverage using `pytest-cov` to achieve >=90% total coverage across core radar signal processing (`src/dsp/`), synthetic dataset generation (`src/models/radar_dataset.py`), real-world RadDet parsing (`src/raddet/`), and CLI pipeline execution scripts (`scripts/`).
+**Mode**: standard
+**Depends on**: Phase 1.1
+**Requirements**: TEST-COV-01, TEST-COV-02, TEST-COV-03, TEST-COV-04
+**Success Criteria** (what must be TRUE):
+
+1. Dedicated modular test suites added: `tests/test_dsp_edge_cases.py`, `tests/test_radar_dataset.py`, and `tests/test_pipeline_scripts.py`.
+2. Coverage for `src/models/radar_dataset.py` increases from 19% to >=90%.
+3. Total core `src/` coverage reaches >=90% across all modules.
+4. CLI pipeline runners and notebook builders are covered with non-interactive smoke tests.
+5. All tests run deterministically in under 30 seconds with 100% pass rate.
+   **Plans**: 3 plans
+
+Plans:
+
+- [ ] 01.3-01: Author `tests/test_dsp_edge_cases.py` targeting OS-CFAR, Capon/MUSIC AoA, MTI cancellers, Doppler windowing, and Range FFT scaling.
+- [ ] 01.3-02: Author `tests/test_radar_dataset.py` targeting synthetic `RadarDataset` generation, box coordinate math, multi-task heatmap encoding, and DataLoader collate functions.
+- [ ] 01.3-03: Author `tests/test_pipeline_scripts.py` targeting `scripts/run_radar_pipeline.py`, `scripts/push_kaggle_kernel.py`, and update `scripts/verify.ps1` with strict `pytest-cov` enforcement.
 
 ### Phase 2: Multi-Level Decoupled Radar Data Ingestion
 
@@ -116,10 +147,11 @@ Plans:
 **Execution Order:**
 Phases execute in numeric order: 1 → 2 → 3
 
-| Phase                                                                        | Plans Complete | Status            | Completed  |
-| ---------------------------------------------------------------------------- | -------------- | ----------------- | ---------- |
-| 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams                 | 2/2            | Completed         | 2026-09-23 |
-| 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice) | 5/5            | Completed         | 2026-11-02 |
-| 1.2. Full-Scale RadDet Benchmark on Kaggle                                   | 0/1            | Queued            | -          |
-| 2. Multi-Level Decoupled Radar Data Ingestion                                | 0/2            | Not started       | -          |
-| 3. Pipeline Integration & Deterministic Verification Gates                   | 0/2            | Not started       | -          |
+| Phase                                                                        | Plans Complete | Status      | Completed  |
+| ---------------------------------------------------------------------------- | -------------- | ----------- | ---------- |
+| 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams                 | 2/2            | Completed   | 2026-09-23 |
+| 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice) | 5/5            | Completed   | 2026-11-02 |
+| 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                   | 3/3            | Completed   | 2026-11-03 |
+| 1.3. High-Coverage Deterministic Unit & Integration Testing                  | 0/3            | In Progress | -          |
+| 2. Multi-Level Decoupled Radar Data Ingestion                                | 0/2            | Not started | -          |
+| 3. Pipeline Integration & Deterministic Verification Gates                   | 0/2            | Not started | -          |

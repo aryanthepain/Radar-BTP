@@ -27,6 +27,31 @@ data/processed/*.npz
 data/processed/*.h5
 data/processed/*.pt
 
+# Model Weights & Checkpoints (PyTorch, YOLO, ONNX)
+*.pt
+*.pth
+*.bin
+*.onnx
+*.weights
+
+# Compressed Archives & Outputs
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+
+# Execution Logs & Terminal Output
+*.log
+kaggle_*log*.txt
+*_log.txt
+
+# Extracted Benchmark Datasets & Run Checkpoints
+data/raddet_full_128/
+data/benchmark_results/**/data/
+data/benchmark_results/**/runs/
+data/benchmark_results/**/weights/
+
 # OS Cruft
 .DS_Store
 Thumbs.db
@@ -35,3 +60,4 @@ desktop.ini
 # IDE / Agent Ephemera
 .vscode/
 .idea/
+.planning/state.json

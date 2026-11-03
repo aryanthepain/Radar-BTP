@@ -207,6 +207,17 @@ class TestWalkthroughNotebooks(unittest.TestCase):
         self.assertIn("Validation & Loss Curves", all_text)
         self.assertIn("Inference & Detection Overlays", all_text)
 
+        # Phase 01.2: Full-Scale RadDet Benchmark structural assertions
+        self.assertIn('FULL_BENCHMARK = True', code_text, 'Notebook 03 must define FULL_BENCHMARK toggle.')
+        self.assertIn('run_empirical_batch_smoke_test', code_text, 'Notebook 03 must include empirical batch smoke test.')
+        self.assertIn('yolov9c.pt', code_text, 'Notebook 03 must reference YOLOv9c architecture.')
+        self.assertIn('raddet_s128_table_iii.md', code_text, 'Notebook 03 must export Table III markdown.')
+        self.assertIn('raddet_s128_table_iii.csv', code_text, 'Notebook 03 must export Table III csv.')
+        self.assertIn('benchmark_single_frame_latency', code_text, 'Notebook 03 must include latency profiler.')
+        self.assertIn('torch.cuda.Event', code_text, 'Latency benchmark must use CUDA events.')
+        self.assertIn('multi_snr_map_curves.png', code_text, 'Notebook 03 must export multi-SNR curves figure.')
+        self.assertIn('multi_snr_qualitative_grid.png', code_text, 'Notebook 03 must export 4-panel qualitative grid.')
+
         # Validate with push_kaggle_kernel validation routine
         from scripts.push_kaggle_kernel import validate_notebook
         validate_notebook(Path(self.nb3_path))
