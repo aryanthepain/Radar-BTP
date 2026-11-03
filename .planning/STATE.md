@@ -29,8 +29,8 @@ See: .planning/PROJECT.md (updated 2026-09-23)
 
 Phase: 1.3 (High-Coverage Deterministic Unit & Integration Testing) — READY TO EXECUTE
 Plan: 0 of 3 in current phase
-Status: Phase 1.2 completed and verified (01.2-01, 01.2-02, 01.2-03 complete; 01.2-UAT.md 4/4 passed). Phase 1.3 plans prepared (01.3-01, 01.3-02, 01.3-03).
-Last activity: 2026-11-03 — Verified Phase 1.2 full-scale RadDet benchmark data pipeline, empirical batch sizing, 100-epoch YOLOv9 loop, multi-SNR evaluation, Table III exporter, single-frame latency profiler, and Kaggle push/pull automation.
+Status: Phase 01.2 shipped — PR #12
+Last activity: 2026-11-03 — Shipped Phase 01.2 via PR #12 (Full-Scale RadDet Benchmark on Kaggle, S-128 Variant). Verification passed and PR ready for review.
 
 Progress: [████████░░] 77%
 
