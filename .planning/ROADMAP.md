@@ -90,10 +90,17 @@ Plans:
 **Goal:** Deliver a lightweight, clean, interactive presentation website for the supervising professor illustrating the end-to-end BTP journey across all three notebooks (`01_radar_classical_dsp`, `02_radar_deep_learning_detection`, `03_raddet_spectrum_detection_kaggle`), showcasing key DSP/DL code snippets, visual flowcharts, benchmark metrics, and clear comparative progression (analytical toy baseline -> synthetic FMCW radar simulation -> real-world RadDet ICASSP 2025 dataset).
 **Requirements**: PRES-WEB-01, PRES-WEB-02, PRES-WEB-03
 **Depends on:** Phase 1.2
-**Plans:** 0 plans
+**Plans:** 3 plans
 
 Plans:
-- [ ] TBD (run /gsd-plan-phase 01.2.1 to break down)
+**Wave 1**
+- [ ] 01.2.1-01: Asset Pipeline, Automated Notebook Extraction & Vector Diagrams
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 01.2.1-02: Zero-Build Static Website Implementation
+
+**Wave 3** *(blocked on Wave 2 completion)*
+- [ ] 01.2.1-03: Deterministic Smoke Test Suite & Gate Verification
 
 ### Phase 1.3: High-Coverage Deterministic Unit & Integration Testing (INSERTED)
 
