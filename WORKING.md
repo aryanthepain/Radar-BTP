@@ -3,23 +3,19 @@
 ## Current Objective
 
 - **Project**: Radar DSP & AI Detection Testbench (BTP)
-- **Status**: Phase 1 Complete. Phase 1.1 Complete. Phase 1.2 Local Complete & Kaggle GPU Cloud Benchmark Deployed.
+- **Status**: Phase 1 Complete. Phase 1.1 Complete. Phase 1.2 Full-Scale Cloud Benchmark & Comparative Evaluation Complete.
 - **Active Kaggle Kernel**: [`aryanguptaji/raddet-s-128-full-scale-benchmark`](https://www.kaggle.com/code/aryanguptaji/raddet-s-128-full-scale-benchmark) (Version 5)
-- **Kaggle Kernel Status**: `KernelWorkerStatus.RUNNING` (Active full 100-epoch training loop on Kaggle GPU across 20,000 frames; >7 minutes elapsed, initial epochs confirmed)
+- **Kaggle Kernel Status**: `KernelWorkerStatus.COMPLETE` (Full 66 epochs trained on Kaggle GPU across 40,003 frames; 1h 11m training time; all artifacts pulled)
 - **Active Branch**: `gsd/phase-01.2-full-scale-raddet-benchmark-on-kaggle`
 - **Verification Gate**: `pwsh -File ./scripts/verify.ps1`
 - **Active Test Status**: 27/27 tests green in 11.4s.
 - **Phase 1.2 Achievements**:
-  - Full-scale RadDet S-128 dataset pipeline configured in `03_raddet_spectrum_detection_kaggle.ipynb` via `scripts/build_raddet_notebook.py`.
-  - Smart cached archive extraction with path traversal protection and `StageProgressTracker` telemetry.
-  - Automated pre-flight empirical batch sizing (`run_empirical_batch_smoke_test`) evaluating batches 32, 64, 128 under AMP FP16 (<85% VRAM).
-  - Ultralytics YOLOv9 100-epoch training loop (`yolov9c.pt`, AdamW, patience 20, paper RF augmentations).
-  - 6-bin multi-SNR quantitative evaluation loop (`[-20, -12, -4, 4, 12, 20]` dB) and Table III exporter (`raddet_s128_table_iii.md`, `raddet_s128_table_iii.csv`).
-  - Fig. 3(c) multi-SNR performance curves (`multi_snr_map_curves.png`).
-  - Dedicated single-frame CUDA-synchronized latency benchmark ($FPS_{avg}$ at batch size 1).
-  - 4-panel qualitative detection grid (`multi_snr_qualitative_grid.png`).
-  - Automated Kaggle CLI pull/status capabilities in `scripts/push_kaggle_kernel.py`.
-  - Deployed live on Kaggle GPU: `https://www.kaggle.com/code/aryanguptaji/raddet-s-128-full-scale-benchmark`.
+  - Full-scale RadDet S-128 dataset pipeline executed on Kaggle GPU over 40,003 frames (14,001 train / 6,001 val / 20,001 test) across 11 classes.
+  - Reproduces ICASSP 2025 Table III: YOLOv9-C achieves grand mean mAP50 = 25.25% (vs paper 25.93%) and mAP50:95 = 19.03% (vs paper 19.47%) across 6 multi-SNR bins (-20 dB to +20 dB).
+  - Peak validation performance: mAP50 = 32.53% (Epoch 60), mAP50:95 = 23.77% (Epoch 46), Recall = 72.60% (Epoch 25).
+  - Real-time hardware latency benchmark: 1.12 ms mean latency (892.9 FPS on Tesla T4 at batch size 1), matching paper 896.6 FPS within 0.4%.
+  - Comprehensive comparative analysis between small prototype run (40 synthetic frames, collapsed) and full-scale run (40,003 real frames, monotonic convergence).
+  - Full report generated at `data/benchmark_results/s128_full/COMPARATIVE_BENCHMARK_REPORT.md` and user-facing artifact.
 
 ---
 
