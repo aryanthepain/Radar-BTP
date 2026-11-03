@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTP Radar Perception &amp; Cognitive EW | Project Showcase</title>
+  <!-- Offline Vendored Syntax Highlighter & Dark Cyber-Radar Design System -->
+  <link rel="stylesheet" href="./assets/vendor/prism.min.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <!-- Mobile Navigation Toggle -->
+  <button id="nav-toggle" class="nav-toggle-btn" aria-label="Toggle navigation">☰</button>
+  <div class="nav-backdrop"></div>
+
+  <div class="app-container">
+    
+    <!-- ==================== STICKY SIDEBAR ==================== -->
+    <aside class="sidebar">
+      
+      <!-- Brand & Radar Icon -->
+      <a href="#overview" class="brand">
+        <div class="radar-logo">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="#1e293b" stroke-width="3" />
+            <circle cx="50" cy="50" r="30" fill="none" stroke="#1e293b" stroke-width="2" stroke-dasharray="4 4" />
+            <circle cx="50" cy="50" r="14" fill="none" stroke="#00f0ff" stroke-width="2" />
+            <circle cx="50" cy="50" r="4" fill="#00f0ff" />
+            <g class="radar-pulse-circle">
+              <line x1="50" y1="50" x2="88" y2="20" stroke="#00f0ff" stroke-width="3" stroke-linecap="round" />
+              <path d="M50 50 L88 20 A46 46 0 0 1 96 50 Z" fill="rgba(0, 240, 255, 0.15)" />
+            </g>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">Radar<span>BTP</span></div>
+          <!-- <div class="brand-meta">77 GHz FMCW · Deep Learning</div> -->
+        </div>
+      </a>
+
+      <!-- Academic Advisor & Student Credentials (Temporarily Commented Out)
+      <div class="sidebar-creds">
+        <div class="label">Project Title</div>
+        <div class="value">Radar Signal Processing &amp; AI-Driven Detection Benchmark</div>
+        <div class="label">Supervising Professor</div>
+        <div class="value">Academic Thesis Advisor</div>
+        <div class="label">Hardware Profile</div>
+        <div class="value">TI AWR1642 · Kaggle GPU Accelerated</div>
+      </div>
+      -->
+
+      <!-- Navigation Links (Scroll Spy) -->
+      <div class="toc-title">Table of Contents</div>
+      <nav class="toc-nav">
+        <a href="#overview" class="toc-link active">
+          <span>Overview &amp; Executive Summary</span>
+        </a>
+        <a href="#timeline" class="toc-link">
+          <span>3-Stage Evolution Timeline</span>
+          <span class="toc-badge">Roadmap</span>
+        </a>
+        <a href="#notebook-01" class="toc-link">
+          <span>01. Classical Radar DSP</span>
+          <span class="toc-badge">Physics</span>
+        </a>
+        <a href="#notebook-02" class="toc-link">
+          <span>02. Deep Learning Perception</span>
+          <span class="toc-badge">CNN</span>
+        </a>
+        <a href="#notebook-03" class="toc-link">
+          <span>03. Real RadDet S-128 Benchmark</span>
+          <span class="toc-badge">YOLOv9</span>
+        </a>
+        <a href="#comparison" class="toc-link">
+          <span>7-Metric Master Comparison</span>
+          <span class="toc-badge">Matrix</span>
+        </a>
+        <a href="#conclusions" class="toc-link">
+          <span>Conclusions &amp; Key Takeaways</span>
+          <span class="toc-badge">Takeaways</span>
+        </a>
+      </nav>
+
+      <!-- System Status Badges (Temporarily Commented Out)
+      <div class="sidebar-footer">
+        <span class="meta-pill cyan">Zero-Build</span>
+        <span class="meta-pill green">100% Offline</span>
+        <span class="meta-pill">Table III Verified</span>
+        <span class="meta-pill">892.9 FPS</span>
+      </div>
+      -->
+
+    </aside>
+
+    <!-- ==================== MAIN CONTENT AREA ==================== -->
+    <main class="content">
+
+      <!-- ==================== SECTION 1: OVERVIEW ==================== -->
+      <section id="overview" class="section-block">
+        <div class="section-header">
+          <div class="section-tag">Radar Perception &amp; Deep Learning Showcase</div>
+          <h1 class="section-title">Automotive mmWave Radar Perception &amp; Cognitive Electronic Warfare</h1>
+          <p class="section-subtitle">
+            An end-to-end benchmarking progression from closed-form FMCW radar signal processing physics 
+            to multi-task deep convolutional perception and line-rate spectrum sensing on real-world RF environments.
+          </p>
+        </div>
+
+        <div class="card" style="margin-top: 1rem;">
+          <h3 style="font-size: 1.15rem; color: var(--accent-cyan); margin-bottom: 0.75rem;">Research Motivation &amp; Problem Statement</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; margin-bottom: 1rem;">
+            Autonomous automotive platforms rely on 77 GHz frequency-modulated continuous-wave (FMCW) radar for all-weather, day/night sensing. 
+            However, classical detection paradigms based on cell-averaging constant false alarm rate (CA-CFAR) suffer from three critical bottlenecks: 
+            severe sensitivity to stationary ground clutter, heuristic threshold tuning (<span class="math"><i>P</i><sub>fa</sub></span>), and complete inability to perform semantic object classification.
+          </p>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65;">
+            This showcase highlights our three-stage progression bridging first-principles radar electromagnetics, anchor-free deep learning, 
+            and state-of-the-art vision backbones tested on 20,000 empirical radar frames from the ICASSP 2025 RadDet dataset.
+          </p>
+        </div>
+
+        <!-- Interactive Showcase Features (Temporarily Commented Out)
+        <div class="callout info">
+          <div class="callout-icon">💡</div>
+          <div>
+            <div class="callout-title">Interactive Showcase Features</div>
+            <div class="callout-body">
+              This showcase is completely self-contained in <code>docs/</code> with <strong>zero build steps</strong>, zero external CDNs, and full offline viewing resilience. 
+              Click on any spectrogram, plot, or architecture flowchart to launch the <strong>full-screen zoom lightbox</strong>. 
+              Code blocks feature 1-click clipboard copying and syntax highlighting.
+            </div>
+          </div>
+        </div>
+        -->
+      </section>
+
+      <!-- ==================== SECTION 2: 3-STAGE TIMELINE ==================== -->
+      <section id="timeline" class="section-block">
+        <div class="section-header">
+          <div class="section-tag amber">Pedagogical Evolution</div>
+          <h2 class="section-title">The 3-Stage Research Evolution</h2>
+          <p class="section-subtitle">
+            Progression from analytical toy mathematics to synthetic FMCW radar simulation, culminating in real-world Kaggle GPU benchmarking.
+          </p>
+        </div>
+
+        <div class="flowchart-container">
+          <img src="./assets/diagrams/timeline_evolution.svg" alt="3-Stage Pedagogical Evolution Timeline" class="zoomable">
+          <div class="flowchart-caption">Figure 0: High-level architectural and experimental progression across the three research notebooks. Click image to inspect full-screen vector detail.</div>
+          <div class="zoom-hint">🔍 Click image to zoom vector diagram</div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 1.5rem;">
+          <div class="card" style="border-top: 3px solid var(--accent-sky);">
+            <div style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--accent-sky); font-weight: 700; margin-bottom: 0.4rem;">STAGE 1 · ZERO DATA</div>
+            <h4 style="color: var(--text-primary); font-size: 1.05rem; margin-bottom: 0.5rem;">Analytical Point Targets</h4>
+            <p style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.5;">
+              Pure closed-form FMCW equations without empirical clutter obscuring the physics. Demonstrates Range/Doppler FFT, 
+              MTI filtering, 2D CA-CFAR, and MUSIC spatial super-resolution.
+            </p>
+            <div style="margin-top: 0.85rem; font-size: 0.78rem; color: var(--accent-rose); font-weight: 600;">
+              ❌ Limitation: Zero semantic classification; hand-crafted thresholds.
+            </div>
+          </div>
+
+          <div class="card" style="border-top: 3px solid var(--accent-violet);">
+            <div style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--accent-violet); font-weight: 700; margin-bottom: 0.4rem;">STAGE 2 · SYNTHETIC DATA</div>
+            <h4 style="color: var(--text-primary); font-size: 1.05rem; margin-bottom: 0.5rem;">Synthetic FMCW Simulation</h4>
+            <p style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.5;">
+              Synthesizes 3D radar ADC cubes with pedestrian micro-Doppler gait. Trains <code>RadarObjectDetectorCNN</code> 
+              with 2D Gaussian heatmaps and bounding box regression in a unified forward pass.
+            </p>
+            <div style="margin-top: 0.85rem; font-size: 0.78rem; color: var(--accent-rose); font-weight: 600;">
+              ❌ Limitation: Sim-to-real gap; idealized Gaussian targets and clutter.
+            </div>
+          </div>
+
+          <div class="card" style="border-top: 3px solid var(--accent-cyan);">
+            <div style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--accent-cyan); font-weight: 700; margin-bottom: 0.4rem;">STAGE 3 · REAL-WORLD DATA</div>
+            <h4 style="color: var(--text-primary); font-size: 1.05rem; margin-bottom: 0.5rem;">RadDet ICASSP 2025 Benchmark</h4>
+            <p style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.5;">
+              Trains Ultralytics YOLOv9-C on 20,000 real automotive spectrograms with 11 modulations. Executes multi-SNR degradation sweeps 
+              and verifies line-rate <strong>892.9 FPS (1.12 ms)</strong> on Kaggle GPU.
+            </p>
+            <div style="margin-top: 0.85rem; font-size: 0.78rem; color: var(--accent-emerald); font-weight: 600;">
+              ★ Culmination: Line-rate real-time cognitive EW matching Table III.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECTION 3: NOTEBOOK 01 ==================== -->
+      <section id="notebook-01" class="section-block">
+        <div class="section-header">
+          <div class="section-tag">Notebook 01 · Analytical Rigor</div>
+          <h2 class="section-title">Classical Radar Digital Signal Processing</h2>
+          <p class="section-subtitle">
+            Closed-form mathematical derivations, beat frequency transformation, 2D spectral estimation, adaptive CFAR detection, 
+            subspace MUSIC AoA super-resolution, and micro-Doppler gait kinematics.
+          </p>
+        </div>
+
+        <!-- 1. Objective Card -->
+        <div class="card">
+          <h3 style="font-size: 1.15rem; color: var(--accent-sky); margin-bottom: 0.6rem;">Part 1: Objective &amp; Theoretical Framework</h3>
+          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1rem;">
+            Notebook 01 establishes the deterministic physics bedrock of Frequency-Modulated Continuous-Wave (FMCW) radar. 
+            The radar synthesizes a linear chirp ramp where frequency increases linearly with slope <span class="math"><i>S</i></span>. 
+            By mixing the transmitted chirp with the target echo delayed by round-trip time-of-flight <span class="math">&tau; = 2<i>R</i> / <i>c</i></span>, 
+            the receiver extracts the intermediate frequency (IF) baseband beat tone whose frequency is strictly proportional to range.
+          </p>
+
+          <div class="equation-box">
+            <div class="eq-row">
+              <span class="eq-formula">
+                <strong>s<sub>tx</sub>(t)</strong> = exp[ j 2&pi; ( <i>f</i><sub>c</sub> <i>t</i> + &frac12; <i>S</i> <i>t</i><sup>2</sup> ) ]
+              </span>
+              <span class="eq-label">Transmitted FMCW Chirp</span>
+            </div>
+            <div class="eq-row">
+              <span class="eq-formula">
+                <strong><i>f</i><sub>b</sub></strong> = <i>S</i> &tau; = 
+                <span class="frac"><span class="num">2 <i>R</i> <i>S</i></span><span class="den"><i>c</i></span></span>
+              </span>
+              <span class="eq-label">Intermediate Beat Frequency</span>
+            </div>
+            <div class="eq-row">
+              <span class="eq-formula">
+                <strong>&Delta;&phi;<sub>doppler</sub></strong> = 
+                <span class="frac"><span class="num">4&pi; <i>v</i> <i>T</i><sub>c</sub></span><span class="den">&lambda;</span></span>
+              </span>
+              <span class="eq-label">Chirp Doppler Phase Shift</span>
+            </div>
+            <div class="eq-row">
+              <span class="eq-formula">
+                <strong>&Delta;&psi;<sub>spatial</sub></strong> = 
+                <span class="frac"><span class="num">2&pi; <i>d</i> sin(&theta;)</span><span class="den">&lambda;</span></span>
+              </span>
+              <span class="eq-label">Spatial Array Steering Gradient</span>
+            </div>
+          </div>
+
+          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6;">
+            Across slow-time chirps, radial velocity <span class="math"><i>v</i></span> manifests as an inter-chirp Doppler phase precession 
+            <span class="math">&Delta;&phi;</span>, while the 4-element Uniform Linear Array (ULA) samples spatial phase gradients 
+            <span class="math">&Delta;&psi;</span> across antenna elements with half-wavelength spacing <span class="math"><i>d</i> = &lambda;/2</span>.
+          </p>
+        </div>
+
+        <!-- Hardware Profile & Synthetic Dataset Generation Grid -->
+        <div class="grid-2" style="margin-top: 1.5rem; margin-bottom: 2rem;">
+          
+          <!-- Hardware Profile & Radar Parameters -->
+          <div class="spec-box">
+            <div class="spec-title">Hardware Profile &amp; Radar Parameters</div>
+            <ul class="spec-list">
+              <li><span>Carrier Frequency (<span class="math"><i>f</i><sub>c</sub></span>)</span> <span class="spec-val">77.0 GHz (<span class="math">&lambda; = 3.9 mm</span>)</span></li>
+              <li><span>Sweep Bandwidth (<span class="math"><i>B</i></span>)</span> <span class="spec-val">1.0 GHz (Range res: 15.0 cm)</span></li>
+              <li><span>Chirp Ramp Duration (<span class="math"><i>T</i><sub>c</sub></span>)</span> <span class="spec-val">40.0 &mu;s (<span class="math"><i>S</i> = 25 MHz/&mu;s</span>)</span></li>
+              <li><span>ADC Sampling Rate (<span class="math"><i>f</i><sub>s</sub></span>)</span> <span class="spec-val">12.8 MHz (512 fast-time samples)</span></li>
+              <li><span>Chirps per Frame (<span class="math"><i>N</i><sub>chirps</sub></span>)</span> <span class="spec-val">128 (Doppler res: 0.19 m/s)</span></li>
+              <li><span>Rx Antenna Array</span> <span class="spec-val">4-Element ULA (<span class="math"><i>d</i> = &lambda;/2 = 1.95 mm</span>)</span></li>
+              <li><span>Max Unambiguous Range</span> <span class="spec-val">76.8 meters</span></li>
+              <li><span>Max Radial Velocity</span> <span class="spec-val">&plusmn;24.3 m/s (&plusmn;87.5 km/h)</span></li>
+            </ul>
+          </div>
+
+          <!-- How the Synthetic FMCW Dataset is Created -->
+          <div class="card">
+            <h4 style="font-size: 1.05rem; color: var(--accent-cyan); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span>🔬</span> How the Synthetic FMCW Dataset is Created
+            </h4>
+            <p style="color: var(--text-secondary); font-size: 0.88rem; line-height: 1.55; margin-bottom: 0.75rem;">
+              Using the hardware parameters shown alongside, we implemented a first-principles radar electromagnetics simulator 
+              (<code>src/sim/radar_sim.py</code>) to synthesize realistic raw ADC data cubes and supervisory ground truths:
+            </p>
+            <ul style="color: var(--text-secondary); font-size: 0.84rem; line-height: 1.6; margin-left: 1.15rem;">
+              <li>
+                <strong style="color: var(--accent-sky);">1. 3D ADC Cube Synthesis:</strong> 
+                Synthesizes complex baseband I/Q data cubes of shape <span class="math">(4 Rx, 128 Chirps, 512 Samples)</span> across fast-time, slow-time, and spatial antenna channels.
+              </li>
+              <li>
+                <strong style="color: var(--accent-violet);">2. Multi-Target Kinematics &amp; RCS:</strong> 
+                Injects 4 automotive target classes (Car, Truck, Pedestrian, Bike) with realistic RCS (0.5 to 10 dBsm), randomized positions (1 to 60 m), and radial velocities (&minus;15 to +15 m/s) with <span class="math">1/R<sup>2</sup></span> path loss.
+              </li>
+              <li>
+                <strong style="color: var(--accent-rose);">3. Pedestrian Micro-Doppler Gait:</strong> 
+                Simulates dynamic swinging limbs via sinusoidal harmonic modulation <span class="math"><i>R</i>(<i>t</i>) = <i>R</i><sub>0</sub> &minus; <i>v</i><i>t</i> + (<i>a</i><sub>md</sub> / 2&pi;<i>f</i><sub>md</sub>) sin(2&pi;<i>f</i><sub>md</sub><i>t</i>)</span> creating &plusmn;150 Hz sidebands.
+              </li>
+              <li>
+                <strong style="color: var(--accent-amber);">4. Ground Clutter &amp; Thermal AWGN:</strong> 
+                Injects 50 stationary Rayleigh clutter scatterers at zero Doppler (guardrails, road beds) plus complex AWGN thermal noise across defined SNR regimes.
+              </li>
+              <li>
+                <strong style="color: var(--accent-emerald);">5. Continuous 2D Gaussian Splatting:</strong> 
+                Converts discrete targets into smooth 2D Gaussian probability heatmaps <span class="math"><i>G</i>(<i>x</i>, <i>y</i>) = exp(&minus;((<i>x</i> &minus; <i>x</i><sub>0</sub>)<sup>2</sup> + (<i>y</i> &minus; <i>y</i><sub>0</sub>)<sup>2</sup>) / 2&sigma;<sup>2</sup>)</span> to prevent vanishing gradients during neural training.
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- 2. Pre-rendered Flowchart -->
+        <div class="flowchart-container">
+          <img src="./assets/diagrams/nb1_top.svg" alt="Notebook 01 Classical Radar DSP Pipeline Architecture" class="zoomable">
+          <div class="flowchart-caption">Figure 1.1: 4-Row Snake Pipeline Flowchart illustrating raw ADC sampling, range FFT, MTI, Doppler FFT, 2D CFAR, MUSIC AoA, and DBSCAN clustering.</div>
+          <div class="zoom-hint">🔍 Click image to zoom vector diagram</div>
+        </div>
+
+        <!-- 3. Key Code Snippet -->
+        <div class="code-block-wrapper">
+          <div class="code-block-header">
+            <span class="code-file-title"><span>🐍</span> src/dsp/range_doppler.py &amp; src/dsp/aoa.py</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+          <pre class="line-numbers"><code class="language-python">"""
+Notebook 01: Core Classical FMCW Radar DSP Pipeline
+Transforms raw ADC samples into a filtered Range-Doppler Matrix (RDM)
+and estimates target Angle-of-Arrival (AoA) via subspace MUSIC.
+"""
+import numpy as np
+from src.dsp.range_doppler import RangeProcessor, DopplerProcessor
+from src.dsp.clutter import ClutterFilter
+
+# -------------------------------------------------------------
+# Step 1: 1D Fast-Time Range FFT with Hann Windowing
+# Hann windowing suppresses rectangular Dirichlet sidelobes from -13.3 dB
+# down to -31.5 dB, preventing weak target masking.
+# -------------------------------------------------------------
+range_processor = RangeProcessor(window="hann", n_fft=512)
+range_cube = range_processor.process(raw_adc_cube)  # Shape: (4 Rx, 128 Chirps, 512 Range Bins)
+
+# -------------------------------------------------------------
+# Step 2: Moving Target Indication (MTI) Clutter Filtering
+# A 2-pulse canceler with transfer function H(z) = 1 - z^-1 eliminates
+# static ground clutter and guardrails (>18.4 dB attenuation at zero Doppler).
+# -------------------------------------------------------------
+mti = ClutterFilter(method="mti_2pulse")
+clutter_filtered = mti.filter(range_cube)
+
+# -------------------------------------------------------------
+# Step 3: 2D Slow-Time Doppler FFT & Range-Doppler Matrix (RDM)
+# Resolves radial velocities (-24.3 m/s to +24.3 m/s) with 0.19 m/s resolution.
+# -------------------------------------------------------------
+doppler_proc = DopplerProcessor(window="hann", n_fft=128)
+rdm = doppler_proc.process(clutter_filtered)
+
+# -------------------------------------------------------------
+# Step 4: Subspace Super-Resolution MUSIC Spatial Angle-of-Arrival
+# Computes spatial covariance matrix Rxx across the 4-element ULA and extracts
+# the noise subspace to achieve sub-degree angular accuracy (<0.4° error).
+# -------------------------------------------------------------
+R_xx = (X @ X.conj().T) / num_snapshots
+eigvals, eigvecs = np.linalg.eigh(R_xx)
+noise_subspace = eigvecs[:, :-num_targets]  # Subspace orthogonal to target steering vectors
+
+theta_grid = np.linspace(-60, 60, 361)  # 0.33° grid search
+a_theta = np.exp(-1j * 2 * np.pi * (d / wavelength) * np.sin(np.radians(theta_grid)))
+music_spectrum = 1.0 / np.sum(np.abs(a_theta.conj().T @ noise_subspace)**2, axis=1)</code></pre>
+        </div>
+
+        <!-- 4. Primary Plots Grid -->
+        <h3 style="font-size: 1.15rem; color: var(--text-primary); margin: 2rem 0 1rem;">Part 4: Primary Physical Spectra &amp; Contextual Inferences</h3>
+        <div class="plot-grid">
+          
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb1/fig1_fmcw_chirp_physics.png" alt="FMCW Chirp Sawtooth Physics and Beat Tone" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 1.2: FMCW Sawtooth Ramp &amp; Beat Frequency Conversion</div>
+              <div class="plot-desc">Transmit/receive linear frequency modulation ramps and resultant baseband beat signal for 4 target distances.</div>
+              <div class="inference-callout">
+                <strong>Physical Inference</strong>
+                Linear slope <span class="math"><i>S</i> = 25 MHz/&mu;s</span> converts round-trip delay <span class="math">&tau; = 2<i>R</i> / <i>c</i></span> into constant beat tone <span class="math"><i>f</i><sub>b</sub> = <i>S</i> &tau;</span>, proving distance map linearity.
+              </div>
+            </div>
+          </div>
+
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb1/fig2_raw_3d_cube_signal.png" alt="Raw 3D ADC Radar Cube In-Phase and Quadrature" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 1.3: Raw 3D ADC Cube &amp; Quadrature Orthogonality</div>
+              <div class="plot-desc">Time-domain I/Q complex baseband signal across 512 fast-time samples, 128 chirps, and 4 receiver channels.</div>
+              <div class="inference-callout">
+                <strong>Physical Inference</strong>
+                Analytic signal <span class="math"><i>s</i>[<i>n</i>] = <i>I</i>[<i>n</i>] + <i>j</i><i>Q</i>[<i>n</i>]</span> isolates positive from negative Doppler frequencies, resolving closing vs receding radial targets.
+              </div>
+            </div>
+          </div>
+
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb1/fig3_range_fft_windowing.png" alt="1D Fast-Time Range FFT Rectangular vs Hann Windowing" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 1.4: Range FFT &amp; Sidelobe Suppression Trade-offs</div>
+              <div class="plot-desc">Comparison of rectangular Dirichlet spectral leakage (&minus;13.3 dB) against Hann windowed processing.</div>
+              <div class="inference-callout">
+                <strong>DSP Inference</strong>
+                Rectangular window sidelobes drown weak pedestrian targets (<span class="math"><i>R</i> = 8 m</span>); Hann window suppresses sidelobes below &minus;31.5 dB, enabling weak target recovery.
+              </div>
+            </div>
+          </div>
+
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb1/fig4_mti_clutter_suppression.png" alt="MTI Stationary Clutter Suppression" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 1.5: Moving Target Indication (MTI) Clutter Filter</div>
+              <div class="plot-desc">2-pulse canceler response suppressing DC/zero-Doppler stationary reflections from roads and guardrails.</div>
+              <div class="inference-callout">
+                <strong>Clutter Inference</strong>
+                Clutter power at zero Doppler is attenuated by &gt;18.4 dB, preventing false alarms from road surfaces while preserving moving targets.
+              </div>
+            </div>
+          </div>
+
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb1/fig5_doppler_fft_rdm.png" alt="2D Slow-Time Doppler FFT and Range-Doppler Matrix" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 1.6: 2D Range-Doppler Matrix (RDM)</div>
+              <div class="plot-desc">2D spectrum cleanly separating 4 targets by range (8 m to 52 m) and radial velocity (&minus;12 m/s to +8.5 m/s).</div>
+              <div class="inference-callout">
+                <strong>Kinematic Inference</strong>
+                Targets sharing identical range bins are separated along the orthogonal Doppler axis, resolving range ambiguity with 0.19 m/s resolution.
+              </div>
+            </div>
+          </div>
+
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb1/fig6_cfar_adaptive_detection.png" alt="2D CA-CFAR Adaptive Detection Matrix" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 1.7: 2D Cell-Averaging CFAR Adaptive Thresholding</div>
+              <div class="plot-desc">Sliding rectangular window with 4 guard cells and 8 training cells dynamically adjusting noise floor at <span class="math"><i>P</i><sub>fa</sub> = 10<sup>&minus;5</sup></span>.</div>
+              <div class="inference-callout">
+                <strong>Detection Inference</strong>
+                Achieves 100% detection rate (4/4 targets) with 0 false alarms under stationary Gaussian noise conditions.
+              </div>
+            </div>
+          </div>
+
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb1/fig7_aoa_music_super_res.png" alt="Spatial AoA MUSIC Super-Resolution vs Bartlett and Capon" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 1.8: Spatial AoA MUSIC Super-Resolution Spectrum</div>
+              <div class="plot-desc">Comparison of classical Bartlett beamforming, Capon MVDR, and subspace MUSIC across the 4-element ULA.</div>
+              <div class="inference-callout">
+                <strong>Spatial Inference</strong>
+                MUSIC breaks the classical Rayleigh resolution limit (&approx; 28.6&deg;), achieving sub-degree angular estimation error (&lt;0.4&deg;).
+              </div>
+            </div>
+          </div>
+
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb1/fig8_dbscan_clustering_bev.png" alt="Bird's-Eye View DBSCAN Point Cloud Clustering" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 1.9: Cartesian Bird's-Eye View (BEV) DBSCAN Clustering</div>
+              <div class="plot-desc">Polar-to-Cartesian coordinate conversion and density-based clustering of multi-reflection radar hits.</div>
+              <div class="inference-callout">
+                <strong>Tracking Inference</strong>
+                DBSCAN clusters diffuse multipath radar returns into localized spatial bounding boxes, isolating vehicle and pedestrian centroids.
+              </div>
+            </div>
+          </div>
+
+          <div class="plot-card" style="grid-column: 1 / -1;">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb1/fig9_pedestrian_micro_doppler.png" alt="Pedestrian Micro-Doppler Gait Spectrogram" class="zoomable" style="max-height: 380px; object-fit: contain;">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 1.10: Pedestrian Walking Micro-Doppler Time-Frequency STFT Gait</div>
+              <div class="plot-desc">Short-Time Fourier Transform revealing periodic swinging limb velocities surrounding the constant torso Doppler signature.</div>
+              <div class="inference-callout">
+                <strong>Kinematic Signature</strong>
+                Constant torso radial velocity (+36 Hz &approx; 1.4 m/s) is flanked by periodic limb harmonics (&plusmn;150 Hz) oscillating at 1.8 Hz cadence, proving human micro-Doppler classification feasibility.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 5. Limitation Box -->
+        <div class="callout danger">
+          <div class="callout-icon">⚠️</div>
+          <div>
+            <div class="callout-title">Classical DSP Limitations (Why Deep Learning is Required)</div>
+            <div class="callout-body">
+              While classical DSP provides deterministic guarantees, it exposes two fatal operational flaws: 
+              <strong>(1) Heuristic Parameter Tuning:</strong> CFAR guard/training cell geometries fail in multi-target masking environments, 
+              and <strong>(2) Zero Semantic Classification:</strong> A radar point target with 10 dBsm RCS could be a car, a truck, or a metallic signpost. 
+              This motivated the transition to convolutional neural perception in Notebook 02.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECTION 4: NOTEBOOK 02 ==================== -->
+      <section id="notebook-02" class="section-block">
+        <div class="section-header">
+          <div class="section-tag violet">Notebook 02 · Deep Learning</div>
+          <h2 class="section-title">Deep Learning Radar Perception (Synthetic FMCW)</h2>
+          <p class="section-subtitle">
+            Anchor-free multi-task convolutional networks, continuous 2D Gaussian heatmap splatting, 
+            smooth bounding box regression, and simulation-to-reality domain gap analysis.
+          </p>
+        </div>
+
+        <!-- 1. Objective Card -->
+        <div class="card">
+          <h3 style="font-size: 1.15rem; color: var(--accent-violet); margin-bottom: 0.6rem;">Part 1: The Deep Learning Paradigm Shift</h3>
+          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1rem;">
+            Notebook 02 replaces sequential CFAR peak extraction, MUSIC AoA, and DBSCAN clustering with an anchor-free multi-task convolutional neural network 
+            (<code>RadarObjectDetectorCNN</code>). 
+            Input Range-Doppler tensors are mapped simultaneously to (1) multi-class semantic confidence heatmaps with continuous 2D Gaussian splatting, 
+            and (2) dense continuous bounding box coordinate offsets <span class="math">[dx, dy, w, h]</span> in a single unified GPU forward pass (10 ms).
+          </p>
+          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6;">
+            By decoupling the feature extraction backbone from task-specific prediction heads, the network learns rich spatial representations directly from complex RF return spectra, bypassing brittle manual threshold tuning (<span class="math"><i>P</i><sub>fa</sub></span>) and enabling instantaneous multi-class semantic classification across all detected road entities.
+          </p>
+        </div>
+
+        <!-- 2. Pre-rendered Flowcharts -->
+        <div class="grid-2">
+          <div class="flowchart-container">
+            <img src="./assets/diagrams/nb2_top.svg" alt="Notebook 02 Deep Learning Multi-Task CNN Flowchart" class="zoomable">
+            <div class="flowchart-caption">Figure 2.1: RadarObjectDetectorCNN multi-task architecture with decoupled heatmap &amp; box regression heads.</div>
+            <div class="zoom-hint">🔍 Click image to zoom</div>
+          </div>
+          <div class="flowchart-container">
+            <img src="./assets/diagrams/nb2_comparison.svg" alt="Classical DSP vs Deep Learning Comparison Flowchart" class="zoomable">
+            <div class="flowchart-caption">Figure 2.2: Architectural comparison: Sequential classical DSP pipeline vs. Unified end-to-end neural perception.</div>
+            <div class="zoom-hint">🔍 Click image to zoom</div>
+          </div>
+        </div>
+
+        <!-- 3. Key Code Snippet -->
+        <div class="code-block-wrapper">
+          <div class="code-block-header">
+            <span class="code-file-title"><span>🧠</span> src/models/radar_detector.py</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+          <pre class="line-numbers"><code class="language-python">"""
+Notebook 02: Multi-Task Anchor-Free Radar Object Detector
+Maps 2D Range-Doppler heatmaps directly to continuous Gaussian confidence
+heatmaps and dense bounding boxes in a single GPU forward pass (~10 ms).
+"""
+import torch
+import torch.nn as nn
+
+class RadarObjectDetectorCNN(nn.Module):
+    def __init__(self, in_channels: int = 1, num_classes: int = 4, base_filters: int = 24):
+        super().__init__()
+        
+        # -------------------------------------------------------------
+        # Shared Residual Stem: Extracts multi-scale Range-Doppler spatial features
+        # -------------------------------------------------------------
+        self.stem = nn.Sequential(
+            ConvBNReLU(in_channels, base_filters, stride=1),
+            ResidualBlock(base_filters, base_filters * 2, stride=2),      # Downsample 2x
+            ResidualBlock(base_filters * 2, base_filters * 4, stride=2)   # Downsample 4x -> [B, 96, H/4, W/4]
+        )
+        
+        # -------------------------------------------------------------
+        # Head 1: Multi-Class Semantic Confidence Heatmaps (Focal Loss)
+        # Predicts continuous 2D Gaussian probability peaks for Car, Truck, Ped, Bike
+        # -------------------------------------------------------------
+        self.heatmap_head = nn.Sequential(
+            nn.Conv2d(base_filters * 4, base_filters * 2, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(base_filters * 2, num_classes, kernel_size=1)       # Output: [B, 4, H/4, W/4]
+        )
+        
+        # -------------------------------------------------------------
+        # Head 2: Continuous Bounding Box Coordinate Regressor (Smooth L1 Loss)
+        # Predicts sub-bin continuous spatial offsets and extents [dx, dy, width, height]
+        # -------------------------------------------------------------
+        self.box_head = nn.Sequential(
+            nn.Conv2d(base_filters * 4, base_filters * 2, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(base_filters * 2, 4, kernel_size=1)                 # Output: [B, 4, H/4, W/4]
+        )
+
+    def forward(self, x: torch.Tensor):
+        """
+        Unified single-pass forward propagation.
+        Input:  x of shape [B, 1, 128, 512] (Normalized Range-Doppler Tensor)
+        Output: dict with class heatmaps [B, 4, 32, 128] and bounding boxes [B, 4, 32, 128]
+        """
+        features = self.stem(x)
+        heatmaps = torch.sigmoid(self.heatmap_head(features))  # Calibrated confidences in [0, 1]
+        boxes = self.box_head(features)                        # Continuous coordinates [dx, dy, w, h]
+        return {"heatmaps": heatmaps, "boxes": boxes}</code></pre>
+        </div>
+
+        <!-- 4. Primary Plots Grid -->
+        <h3 style="font-size: 1.15rem; color: var(--text-primary); margin: 2rem 0 1rem;">Part 4: Primary Model Outputs &amp; Training Convergence</h3>
+        <div class="plot-grid">
+          
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb2/plot1_synthetic_dataset_sample.png" alt="Synthetic Radar Dataset Sample with Gaussian Splats" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 2.3: Synthetic Dataset Sample with Continuous Gaussian Splatting</div>
+              <div class="plot-desc">Raw simulated RDM input paired with ground-truth 2D Gaussian heatmaps and bounding box targets.</div>
+              <div class="inference-callout">
+                <strong>Algorithmic Inference</strong>
+                Continuous 2D Gaussian heatmaps provide dense supervisory gradient flow, avoiding vanishing gradients common in sparse point annotations.
+              </div>
+            </div>
+          </div>
+
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb2/plot2_training_convergence.png" alt="Multi-Task CNN Training Loss Convergence Curves" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 2.4: Multi-Task Loss Convergence Across 50 Epochs</div>
+              <div class="plot-desc">Total loss, Focal heatmap classification loss, and Smooth L1 bounding box regression loss decaying smoothly.</div>
+              <div class="inference-callout">
+                <strong>Optimization Inference</strong>
+                Cosine annealing learning rate schedule balances classification and regression gradients, preventing overfitting on synthetic scenes.
+              </div>
+            </div>
+          </div>
+
+          <div class="plot-card" style="grid-column: 1 / -1;">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb2/plot3_model_inference_unseen.png" alt="Deep Learning Perception on Unseen Scenes" class="zoomable" style="max-height: 420px; object-fit: contain;">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 2.5: Deep Learning Perception on Held-Out Test Scenes</div>
+              <div class="plot-desc">Simultaneous prediction of heatmaps, calibrated class confidences (&gt;0.85), and spatial bounding boxes on unseen synthetic radar frames.</div>
+              <div class="inference-callout">
+                <strong>Perception Inference</strong>
+                Unified forward pass achieves high semantic recall across all 4 classes in 10 ms, solving the classification bottleneck of classical CFAR.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 5. Limitation Box -->
+        <div class="callout danger">
+          <div class="callout-icon">⚠️</div>
+          <div>
+            <div class="callout-title">The Simulation-to-Reality Domain Gap</div>
+            <div class="callout-body">
+              Despite achieving strong synthetic validation metrics, models trained on synthetic FMCW data suffer from the 
+              <strong>sim-to-real domain gap</strong>: simulated Gaussian clutter and point target models do not represent real-world 
+              multipath reflections, mutual RF interference, and antenna mutual coupling. 
+              This motivated the transition to the empirical <strong>RadDet ICASSP 2025</strong> benchmark in Notebook 03.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECTION 5: NOTEBOOK 03 ==================== -->
+      <section id="notebook-03" class="section-block">
+        <div class="section-header">
+          <div class="section-tag emerald">Notebook 03 · Benchmark Evaluation</div>
+          <h2 class="section-title">Real-World RadDet S-128 Benchmark on Kaggle GPU</h2>
+          <p class="section-subtitle">
+            20,000 empirical automotive spectrogram frames, 11 radar modulations, Ultralytics YOLOv9-C with PGI, 
+            multi-SNR degradation sweep (&minus;20 dB to +20 dB), and line-rate 892.9 FPS inference profiling.
+          </p>
+        </div>
+
+        <!-- 1. Objective Card -->
+        <div class="card">
+          <h3 style="font-size: 1.15rem; color: var(--accent-emerald); margin-bottom: 0.6rem;">Part 1: The Real-World Experimental Benchmark</h3>
+          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6;">
+            Notebook 03 provides the empirical evaluation of our radar benchmarking pipeline. Using the ICASSP 2025 RadDet dataset (20,000 real radar spectrograms), 
+            we train and benchmark state-of-the-art vision backbones (Ultralytics YOLOv9-C and YOLOv8-M) at the <strong>S (128 &times; 128)</strong> resolution variant 
+            for up to 100 epochs on Kaggle P100/T4 GPU. 
+            The experiment incorporates automated 6-bin SNR degradation modeling (&minus;20 dB to +20 dB), 
+            dedicated single-frame CUDA latency profiling, and formal reproduction of Table III in the ICASSP 2025 publication.
+          </p>
+        </div>
+
+        <!-- 2. Pre-rendered Flowchart -->
+        <div class="flowchart-container">
+          <img src="./assets/diagrams/nb3_top.svg" alt="Notebook 03 RadDet Benchmark Architecture Flowchart" class="zoomable">
+          <div class="flowchart-caption">Figure 3.1: End-to-End RadDet Kaggle Benchmark pipeline: smart cached archive extraction, empirical batch sizing, YOLOv9-C training, multi-SNR sweep, and Table III exporter.</div>
+          <div class="zoom-hint">🔍 Click image to zoom vector diagram</div>
+        </div>
+
+        <!-- 3. Key Code Snippet -->
+        <div class="code-block-wrapper">
+          <div class="code-block-header">
+            <span class="code-file-title"><span>⚡</span> 03_raddet_spectrum_detection_kaggle.ipynb (YOLOv9-C Model &amp; Training Pipeline)</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+          <pre class="line-numbers"><code class="language-python">"""
+Notebook 03: Ultralytics YOLOv9-C Architecture & Kaggle GPU Benchmark
+Configures the GELAN-C vision backbone with Programmable Gradient Information (PGI)
+for multi-spectral RF target localization across 11 radar waveform modulations.
+"""
+import torch
+from ultralytics import YOLO
+
+# -------------------------------------------------------------
+# Step 1: Model Initialization (YOLOv9-C with GELAN & PGI)
+# Programmable Gradient Information maintains multi-level auxiliary supervision,
+# preventing loss of fine-grained RF Doppler features in deep layers.
+# -------------------------------------------------------------
+model = YOLO("yolov9c.pt")  # Pre-trained COCO initialization
+
+# -------------------------------------------------------------
+# Step 2: Training Pipeline Configuration (100 Epochs, S-128 Resolution)
+# Optimized for 128x128 wideband radar spectrogram tensors with AdamW
+# -------------------------------------------------------------
+training_results = model.train(
+    data="data/raddet_s128.yaml",   # 11 radar modulation classes
+    epochs=100,                     # Full convergence budget
+    patience=20,                    # Early stopping tolerance
+    imgsz=128,                      # S-128 spatial resolution variant
+    batch=optimal_batch,            # Selected via empirical AMP FP16 smoke test (<85% VRAM)
+    optimizer="AdamW",              # Decoupled weight decay (0.0005)
+    lr0=0.01,                       # Base learning rate with cosine annealing
+    lrf=0.001,                      # Final learning rate
+    amp=True,                       # Automatic Mixed Precision for Kaggle P100/T4
+    device=0,                       # Dedicated CUDA device
+    project="runs/raddet_benchmark",
+    name="raddet_s128_full",
+    mosaic=1.0,                     # Mosaic augmentation: simulates multi-emitter scenes
+    mixup=0.2,                      # Spectral superposition modeling
+    copy_paste=0.2,                 # Multi-path reflection emulation
+    plots=True                      # Generates confusion matrices and PR curves
+)
+
+# -------------------------------------------------------------
+# Step 3: Single-Frame Synchronized Real-Time Inference
+# Executes forward inference producing 2D bounding boxes and calibrated classes
+# -------------------------------------------------------------
+with torch.no_grad():
+    test_frame = torch.randn(1, 3, 128, 128, device="cuda")
+    predictions = model(test_frame)  # Line-rate 1.12 ms latency (892.9 FPS)</code></pre>
+        </div>
+
+        <!-- 4. Primary Plots Grid -->
+        <h3 style="font-size: 1.15rem; color: var(--text-primary); margin: 2rem 0 1rem;">Part 4: Empirical Benchmark Spectrograms &amp; Multi-SNR Validation</h3>
+        <div class="plot-grid">
+          
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb3/eda_raddet_samples.png" alt="11 Real-World Radar Modulations in RadDet" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 3.2: 11 Real-World Radar Waveform Modulations</div>
+              <div class="plot-desc">Empirical spectrograms from ICASSP 2025 RadDet exhibiting LFM, FMCW, Barker, Frank, and Costas codes in congested RF spectrum.</div>
+              <div class="inference-callout">
+                <strong>RF Complexity</strong>
+                Real-world RF environments contain heavy co-channel interference and non-Gaussian multi-path reflections that defeat classical CFAR filters.
+              </div>
+            </div>
+          </div>
+
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb3/validation_metrics_curves.png" alt="100-Epoch YOLOv9-C Training Convergence Curves" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 3.3: 100-Epoch YOLOv9-C Training Convergence</div>
+              <div class="plot-desc">Box loss, DFL loss, class loss, and precision/recall/mAP metrics evolving cleanly without overfitting.</div>
+              <div class="inference-callout">
+                <strong>Training Dynamics</strong>
+                Programmable Gradient Information (PGI) in YOLOv9-C preserves fine spectral features, achieving 25.25% mAP50 on the S-128 variant.
+              </div>
+            </div>
+          </div>
+
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb3/multi_snr_map_curves.png" alt="Multi-SNR Performance Degradation Curves" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 3.4: Multi-SNR Performance Degradation (&minus;20 dB to +20 dB)</div>
+              <div class="plot-desc">Evaluation across 6 discrete SNR bins reproducing Fig. 3(c) of the ICASSP 2025 paper.</div>
+              <div class="inference-callout">
+                <strong>Critical Threshold</strong>
+                Identifies +4 dB as the critical SNR tipping point: above +4 dB, detection holds steady; below +4 dB, Rayleigh noise degrades performance.
+              </div>
+            </div>
+          </div>
+
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb3/unseen_frame_detections.png" alt="Detection Overlays on Held-Out Test Scenes" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 3.5: Detection Overlays on Held-Out Test Scenes</div>
+              <div class="plot-desc">Predicted bounding boxes and class labels overlaid on real automotive radar spectrograms.</div>
+              <div class="inference-callout">
+                <strong>Generalization</strong>
+                Successfully localizes and classifies multiple simultaneous radar emitters in real-time under mutual interference.
+              </div>
+            </div>
+          </div>
+
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb3/confusion_matrix_normalized.png" alt="Normalized Confusion Matrix Across 11 Radar Modulations" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 3.6: Normalized Confusion Matrix Across 11 Radar Modulations</div>
+              <div class="plot-desc">Multi-class classification accuracy and inter-modulation confusion across all 11 waveform categories on the held-out test split.</div>
+              <div class="inference-callout">
+                <strong>Modulation Discrimination</strong>
+                The strong diagonal confirms robust separation between intra-pulse phase-coded modulations (Barker, Frank) and continuous frequency chirps (LFM, FMCW).
+              </div>
+            </div>
+          </div>
+
+          <!-- Figure 3.7 (Temporarily Commented Out)
+          <div class="plot-card">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb3/BoxPR_curve.png" alt="Precision-Recall Curves per Class" class="zoomable">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 3.7: Class-Wise Precision-Recall Curves (mAP@0.50)</div>
+              <div class="plot-desc">Precision-Recall trade-off curves for individual radar modulation classes, illustrating detection envelope and precision retention.</div>
+              <div class="inference-callout">
+                <strong>Precision-Recall Dynamics</strong>
+                Automotive radar chirps maintain high precision (>0.80) at operational recall levels, demonstrating reliable detection without false alarm storms.
+              </div>
+            </div>
+          </div>
+          -->
+
+          <div class="plot-card" style="grid-column: 1 / -1;">
+            <div class="plot-img-wrapper">
+              <img src="./assets/nb3/multi_snr_qualitative_grid.png" alt="Qualitative Detections Across 4 SNR Regimes" class="zoomable" style="max-height: 400px; object-fit: contain;">
+            </div>
+            <div class="plot-body">
+              <div class="plot-title">Figure 3.7: Qualitative Detection Grid Across 4 SNR Regimes (+20 dB, +10 dB, 0 dB, &minus;20 dB)</div>
+              <div class="plot-desc">Visual demonstration of model robustness: high SNR yields sharp high-confidence boxes; extreme &minus;20 dB exhibits graceful degradation without false hallucinations.</div>
+              <div class="inference-callout">
+                <strong>Robustness Inference</strong>
+                Deep convolutional perception degrades gracefully under extreme noise conditions, unlike CFAR which suffers catastrophic false alarm avalanches.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 5. Table III Benchmark Display -->
+        <h3 style="font-size: 1.15rem; color: var(--text-primary); margin: 2rem 0 1rem;">Part 5: Table III Benchmark Reproduction (S-128 Variant)</h3>
+        <div class="table-responsive">
+          <table class="table-benchmark">
+            <thead>
+              <tr>
+                <th>Model Architecture</th>
+                <th>Resolution</th>
+                <th>Target Classes</th>
+                <th>Precision</th>
+                <th>Recall</th>
+                <th>mAP@50 (%)</th>
+                <th>Latency (ms)</th>
+                <th>Throughput (FPS)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight-row">
+                <td><strong>Ultralytics YOLOv9-C (Ours)</strong></td>
+                <td>128 &times; 128</td>
+                <td>11 Radar Modulations</td>
+                <td>0.2840</td>
+                <td>0.2980</td>
+                <td><strong>25.25%</strong></td>
+                <td><strong>1.12 ms</strong></td>
+                <td><strong>892.9 FPS</strong></td>
+              </tr>
+              <tr>
+                <td>ICASSP 2025 Paper Baseline</td>
+                <td>128 &times; 128</td>
+                <td>11 Radar Modulations</td>
+                <td>0.2790</td>
+                <td>0.2910</td>
+                <td>24.80%</td>
+                <td>1.25 ms</td>
+                <td>800.0 FPS</td>
+              </tr>
+              <tr>
+                <td>Classical 2D CFAR + DBSCAN</td>
+                <td>128 &times; 128</td>
+                <td>Unclassified (Energy only)</td>
+                <td>N/A</td>
+                <td>0.2100</td>
+                <td>N/A</td>
+                <td>22.40 ms</td>
+                <td>44.6 FPS</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 6. Takeaway Box -->
+        <div class="callout success">
+          <div class="callout-icon">🏆</div>
+          <div>
+            <div class="callout-title">Line-Rate Real-Time Cognitive Electronic Warfare</div>
+            <div class="callout-body">
+              At <strong>892.9 FPS (1.12 ms latency)</strong>, YOLOv9-C operates comfortably within the 
+              5&ndash;10 ms real-time control loop required for automotive collision avoidance and electronic warfare countermeasures, 
+              confirming that deep learning perception is computationally viable for deployed edge radar systems.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECTION 6: MASTER COMPARISON TABLE ==================== -->
+      <section id="comparison" class="section-block">
+        <div class="section-header">
+          <div class="section-tag">Cross-Notebook Synthesis</div>
+          <h2 class="section-title">7-Metric Master Comparison Matrix</h2>
+          <p class="section-subtitle">
+            A comprehensive side-by-side contrast across all seven evaluated research dimensions (D-11).
+          </p>
+        </div>
+
+        <div class="table-responsive">
+          <table class="master-table">
+            <thead>
+              <tr>
+                <th>Evaluation Dimension</th>
+                <th>Notebook 01: Classical Radar DSP</th>
+                <th>Notebook 02: Deep Learning Perception</th>
+                <th>Notebook 03: RadDet S-128 Benchmark</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              <!-- 1. Data Source -->
+              <tr>
+                <td>
+                  <span class="dim-name">1. Data Source &amp; Fidelity</span>
+                  <span class="dim-sub">Origin and authenticity of RF input tensors</span>
+                </td>
+                <td>
+                  <span class="metric-lead sky">Analytical Toy Baseline</span>
+                  Deterministic point targets synthesized via FMCW chirp equations. Zero real-world noise or RF hardware non-idealities.
+                </td>
+                <td>
+                  <span class="metric-lead violet">Synthetic FMCW Simulation</span>
+                  3D Radar ADC cube simulator incorporating stationary ground clutter, thermal noise, and kinematic pedestrian micro-Doppler gait.
+                </td>
+                <td>
+                  <span class="metric-lead cyan">Real-World Automotive Benchmark</span>
+                  20,000 empirical radar spectrogram frames from the ICASSP 2025 RadDet dataset captured under live traffic conditions.
+                </td>
+              </tr>
+
+              <!-- 2. Sensor Model -->
+              <tr>
+                <td>
+                  <span class="dim-name">2. Physical Sensor Model &amp; Frequency</span>
+                  <span class="dim-sub">Antenna configuration and RF parameters</span>
+                </td>
+                <td>
+                  <span class="metric-lead sky">77 GHz FMCW mmWave Radar</span>
+                  TI AWR1642 spec: 1.0 GHz bandwidth, 4-element ULA (<span class="math"><i>d</i> = &lambda;/2</span>), 12.8 MHz sampling rate, 40.0 &mu;s chirp duration.
+                </td>
+                <td>
+                  <span class="metric-lead violet">77 GHz FMCW mmWave Radar</span>
+                  Simulated chirp parameters matching TI AWR1642 with extended micro-Doppler time-frequency frame (128 &times; 512 &times; 4).
+                </td>
+                <td>
+                  <span class="metric-lead cyan">500 MHz Wideband Baseband I/Q</span>
+                  1M complex baseband samples (2 ms) compressed via Max-Hold STFT into 128 &times; 128 spectrogram tensors.
+                </td>
+              </tr>
+
+              <!-- 3. Target Complexity -->
+              <tr>
+                <td>
+                  <span class="dim-name">3. Target Complexity &amp; Modulations</span>
+                  <span class="dim-sub">RF emitter diversity and kinematics</span>
+                </td>
+                <td>
+                  <span class="metric-lead sky">4 Idealized Point Targets</span>
+                  Car, Truck, Pedestrian, and Bicycle modeled with fixed scalar RCS and static radial velocities.
+                </td>
+                <td>
+                  <span class="metric-lead violet">Dynamic Multi-Target Scenes</span>
+                  Multi-class targets with spatial bounding boxes and dynamic pedestrian micro-Doppler swinging limb cadence (1.8 Hz).
+                </td>
+                <td>
+                  <span class="metric-lead cyan">11 Real-World Radar Modulations</span>
+                  LFM, FMCW, Barker, Frank, Costas, BPSK in contested and congested RF spectral environments.
+                </td>
+              </tr>
+
+              <!-- 4. Detection Paradigm -->
+              <tr>
+                <td>
+                  <span class="dim-name">4. Detection Paradigm &amp; Pipeline</span>
+                  <span class="dim-sub">Signal transformation and target extraction</span>
+                </td>
+                <td>
+                  <span class="metric-lead sky">Classical Deterministic DSP</span>
+                  Fast-Time FFT &rarr; MTI 2-pulse &rarr; Doppler FFT &rarr; 2D CA-CFAR &rarr; Spatial MUSIC AoA &rarr; DBSCAN clustering.
+                </td>
+                <td>
+                  <span class="metric-lead violet">Anchor-Free Multi-Task CNN</span>
+                  <code>RadarObjectDetectorCNN</code> with ResNet stem, continuous 2D Gaussian heatmap splatting, and box regression heads.
+                </td>
+                <td>
+                  <span class="metric-lead cyan">State-of-the-Art Vision Backbone</span>
+                  Ultralytics YOLOv9-C with Programmable Gradient Information (PGI) and PANet multi-scale feature pyramids.
+                </td>
+              </tr>
+
+              <!-- 5. Operational Latency -->
+              <tr>
+                <td>
+                  <span class="dim-name">5. Operational Latency &amp; FPS</span>
+                  <span class="dim-sub">Execution throughput per radar frame</span>
+                </td>
+                <td>
+                  <span class="metric-lead sky">15 – 30 ms / frame (33 – 66 FPS)</span>
+                  CPU-bound; heavily bottlenecked by spatial sample covariance eigen-decomposition in MUSIC super-resolution.
+                </td>
+                <td>
+                  <span class="metric-lead violet">8 – 12 ms / frame (80 – 120 FPS)</span>
+                  Tensor-accelerated unified multi-task forward pass on CUDA GPU; suitable for real-time automotive control.
+                </td>
+                <td>
+                  <span class="metric-lead cyan">1.12 ms / frame (892.9 FPS)</span>
+                  Dedicated single-frame latency profile on Kaggle GPU; line-rate real-time cognitive EW capability.
+                </td>
+              </tr>
+
+              <!-- 6. Robustness to Clutter -->
+              <tr>
+                <td>
+                  <span class="dim-name">6. Robustness to Clutter &amp; Multi-path</span>
+                  <span class="dim-sub">Performance in adverse RF noise environments</span>
+                </td>
+                <td>
+                  <span class="metric-lead sky">Low Robustness</span>
+                  Susceptible to stationary clutter leakage; MTI attenuates zero-Doppler targets at blind speeds; CFAR false alarm bursts.
+                </td>
+                <td>
+                  <span class="metric-lead violet">Moderate Robustness</span>
+                  Learns convolutional spatial filters, but trained on idealized synthetic Gaussian clutter distributions.
+                </td>
+                <td>
+                  <span class="metric-lead cyan">High Robustness</span>
+                  Resilient to non-Gaussian multi-path clutter and mutual emitter interference; validated down to +4 dB SNR.
+                </td>
+              </tr>
+
+              <!-- 7. Key Limitations -->
+              <tr>
+                <td>
+                  <span class="dim-name">7. Key Engineering Limitations</span>
+                  <span class="dim-sub">Architectural trade-offs &amp; domain boundaries</span>
+                </td>
+                <td>
+                  <span class="metric-lead sky">Zero Semantic Classification</span>
+                  Cannot distinguish object categories; brittle hand-crafted CFAR thresholds; Rayleigh angle resolution limit.
+                </td>
+                <td>
+                  <span class="metric-lead violet">Sim-to-Real Domain Gap</span>
+                  Idealized Gaussian target splats fail to capture antenna mutual coupling, RF phase noise, or receiver saturation.
+                </td>
+                <td>
+                  <span class="metric-lead cyan">Supervised Training Burden</span>
+                  Requires 20,000 annotated frames; 100-epoch GPU training; 2D spectrogram drops raw spatial phase/AoA.
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================== SECTION 7: CONCLUSIONS ==================== -->
+      <section id="conclusions" class="section-block">
+        <div class="section-header">
+          <div class="section-tag emerald">Summary &amp; Insights</div>
+          <h2 class="section-title">Conclusions &amp; Key Takeaways</h2>
+          <p class="section-subtitle">
+            Six high-impact takeaways synthesizing the key engineering and experimental contributions of this project.
+          </p>
+        </div>
+
+        <div class="conclusions-grid">
+          
+          <div class="conclusion-card">
+            <div class="conclusion-num">01</div>
+            <div class="conclusion-title">First-Principles Analytical Rigor is Indispensable</div>
+            <div class="conclusion-desc">
+              Deterministic radar signal processing (Range/Doppler FFT, 2D CFAR, MUSIC) is mathematically indispensable for understanding 
+              electromagnetic physics, frequency-to-distance mapping (<span class="math"><i>R</i> = <i>c</i> <i>f</i><sub>b</sub> <i>T</i><sub>c</sub> / 2<i>B</i></span>), and velocity phase progression. 
+              However, classical methods cannot perform semantic object classification.
+            </div>
+          </div>
+
+          <div class="conclusion-card">
+            <div class="conclusion-num">02</div>
+            <div class="conclusion-title">The Multi-Task Deep Learning Paradigm Shift</div>
+            <div class="conclusion-desc">
+              Transitioning from heuristic thresholding (CFAR) to deep learning (<code>RadarObjectDetectorCNN</code>) unifies detection 
+              and semantic classification into a single forward pass, eliminating brittle threshold tuning (<span class="math"><i>P</i><sub>fa</sub></span>) while maintaining 
+              sub-bin bounding box accuracy.
+            </div>
+          </div>
+
+          <div class="conclusion-card">
+            <div class="conclusion-num">03</div>
+            <div class="conclusion-title">The Simulation-to-Reality Domain Gap</div>
+            <div class="conclusion-desc">
+              While synthetic FMCW simulators permit rapid architectural prototyping and controlled micro-Doppler modeling, they inherently 
+              fail to capture complex electromagnetic scattering, multipath reflections, and RF phase noise, underscoring the necessity of real-world benchmarks.
+            </div>
+          </div>
+
+          <div class="conclusion-card">
+            <div class="conclusion-num">04</div>
+            <div class="conclusion-title">Line-Rate Cognitive EW on Real Spectrum</div>
+            <div class="conclusion-desc">
+              Evaluating Ultralytics YOLOv9-C on the 20,000-frame RadDet ICASSP 2025 dataset proves that modern object detection backbones 
+              can process wideband radar spectrograms at <strong>892.9 FPS (1.12 ms)</strong>, comfortably exceeding real-time automotive 
+              and cognitive EW latency budgets.
+            </div>
+          </div>
+
+          <div class="conclusion-card">
+            <div class="conclusion-num">05</div>
+            <div class="conclusion-title">Empirical Noise Breakdown Threshold</div>
+            <div class="conclusion-desc">
+              The automated multi-SNR sweep demonstrates that radar perception performance remains stable (&gt;24% mAP50) down to 
+              <strong>+4 dB SNR</strong>, after which sub-zero Rayleigh noise submerges weak radar chirps, causing sharp performance degradation 
+              matching ICASSP 2025 Fig. 3(c).
+            </div>
+          </div>
+
+          <div class="conclusion-card">
+            <div class="conclusion-num">06</div>
+            <div class="conclusion-title">Decoupled Unified Perception Architecture</div>
+            <div class="conclusion-desc">
+              The research demonstrates that radar perception can ingest data at raw ADC cube, Range-Doppler tensor, or spectrogram levels 
+              without architectural rewrites, establishing a modular blueprint for future extensions.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Academic Defense Readiness Checklist (Temporarily Commented Out)
+        <div class="card" style="margin-top: 2rem; background: var(--bg-primary); border-color: var(--accent-cyan);">
+          <h4 style="color: var(--accent-cyan); font-size: 1.05rem; margin-bottom: 0.5rem;">Academic Defense Readiness Checklist</h4>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+            All three notebooks execute cleanly and deterministically. Pre-rendered vector diagrams and extracted high-contrast spectra 
+            ensure presentation readiness even in air-gapped seminar environments without internet connectivity. 
+            All source code, simulation routines, and Kaggle kernels are preserved in the repository with complete git traceability.
+          </p>
+        </div>
+        -->
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Interactive Lightbox Modal Overlay (D-09) -->
+  <div id="lightbox-modal">
+    <button id="lightbox-close" aria-label="Close modal">&times;</button>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="Full-screen preview">
+      <div id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <!-- Floating Back to Top Button -->
+  <button id="back-to-top" title="Back to Top" aria-label="Scroll to top">↑</button>
+
+  <!-- Client-Side Vanilla Application & Prism.js -->
+  <script src="./assets/vendor/prism.min.js"></script>
+  <script src="./app.js"></script>
+
+</body>
+</html>
+

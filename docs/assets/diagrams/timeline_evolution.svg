@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="1200" height="360">
+  <defs>
+    <!-- Dark Cyber-Radar Gradients & Glow Filters -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0e17" />
+      <stop offset="100%" stop-color="#070a10" />
+    </linearGradient>
+
+    <linearGradient id="card-grad-1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#111c30" />
+      <stop offset="100%" stop-color="#0b1220" />
+    </linearGradient>
+
+    <linearGradient id="card-grad-2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#171e38" />
+      <stop offset="100%" stop-color="#0d1224" />
+    </linearGradient>
+
+    <linearGradient id="card-grad-3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#10252b" />
+      <stop offset="100%" stop-color="#0a171c" />
+    </linearGradient>
+
+    <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#00f0ff" />
+    </linearGradient>
+
+    <filter id="cyan-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="pulse-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    .title-text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; fill: #94a3b8; }
+    .stage-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 700; font-size: 16px; fill: #f8fafc; }
+    .stage-sub { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; fill: #94a3b8; }
+    .bullet-text { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; fill: #cbd5e1; }
+    .badge-text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+    .limit-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; fill: #f43f5e; }
+    .culm-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; fill: #10b981; }
+    .limit-text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; fill: #fda4af; }
+    .culm-text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; fill: #6ee7b7; }
+  </style>
+
+  <!-- Background Canvas -->
+  <rect width="1200" height="360" rx="12" fill="url(#bg-grad)" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- Radar Grid Background Pattern -->
+  <g opacity="0.12" stroke="#00f0ff" stroke-width="0.75" stroke-dasharray="3 3">
+    <line x1="50" y1="50" x2="1150" y2="50" />
+    <line x1="50" y1="310" x2="1150" y2="310" />
+    <line x1="220" y1="20" x2="220" y2="340" />
+    <line x1="600" y1="20" x2="600" y2="340" />
+    <line x1="980" y1="20" x2="980" y2="340" />
+  </g>
+
+  <!-- Header Banner -->
+  <text x="600" y="34" text-anchor="middle" class="title-text">End-to-End Radar Perception Architectural Evolution</text>
+
+  <!-- Connecting Backbone Line -->
+  <line x1="220" y1="56" x2="980" y2="56" stroke="url(#line-grad)" stroke-width="3" filter="url(#cyan-glow)" />
+
+  <!-- Node 1 Pulse -->
+  <circle cx="220" cy="56" r="10" fill="#0f172a" stroke="#38bdf8" stroke-width="3" filter="url(#cyan-glow)" />
+  <circle cx="220" cy="56" r="4" fill="#38bdf8" />
+
+  <!-- Node 2 Pulse -->
+  <circle cx="600" cy="56" r="10" fill="#0f172a" stroke="#818cf8" stroke-width="3" filter="url(#cyan-glow)" />
+  <circle cx="600" cy="56" r="4" fill="#818cf8" />
+
+  <!-- Node 3 Pulse -->
+  <circle cx="980" cy="56" r="12" fill="#0f172a" stroke="#00f0ff" stroke-width="3.5" filter="url(#pulse-glow)" />
+  <circle cx="980" cy="56" r="5" fill="#00f0ff" />
+
+  <!-- ==================== STAGE 1 CARD ==================== -->
+  <g transform="translate(40, 80)">
+    <rect width="350" height="252" rx="10" fill="url(#card-grad-1)" stroke="#1e293b" stroke-width="1.5" />
+    
+    <!-- Stage Badge -->
+    <rect x="16" y="14" width="112" height="20" rx="4" fill="#0284c7" fill-opacity="0.25" stroke="#38bdf8" stroke-width="1" />
+    <text x="72" y="28" text-anchor="middle" class="badge-text" fill="#38bdf8">Stage 1 · Zero Data</text>
+
+    <!-- Stage Title -->
+    <text x="16" y="54" class="stage-title">Analytical Point Targets</text>
+    <text x="16" y="70" class="stage-sub">01_radar_classical_dsp · First-Principles Physics</text>
+
+    <!-- Divider -->
+    <line x1="16" y1="80" x2="334" y2="80" stroke="#1e293b" stroke-width="1" />
+
+    <!-- Feature Bullets -->
+    <text x="16" y="100" class="bullet-text"><tspan fill="#38bdf8">▶</tspan> Deterministic 77 GHz FMCW signal physics</text>
+    <text x="16" y="118" class="bullet-text"><tspan fill="#38bdf8">▶</tspan> Fast-Time Range FFT &amp; 2D Slow-Time Doppler</text>
+    <text x="16" y="136" class="bullet-text"><tspan fill="#38bdf8">▶</tspan> MTI 2-pulse stationary clutter suppression</text>
+    <text x="16" y="154" class="bullet-text"><tspan fill="#38bdf8">▶</tspan> 2D CA-CFAR adaptive sliding threshold</text>
+    <text x="16" y="172" class="bullet-text"><tspan fill="#38bdf8">▶</tspan> Spatial MUSIC sub-degree super-resolution</text>
+
+    <!-- Limitation Box -->
+    <rect x="16" y="190" width="318" height="48" rx="6" fill="#881337" fill-opacity="0.2" stroke="#e11d48" stroke-width="1" />
+    <text x="26" y="206" class="limit-title">⚠ Fundamental Bottleneck</text>
+    <text x="26" y="224" class="limit-text">Hand-crafted CFAR thresholds; zero semantic classification.</text>
+  </g>
+
+  <!-- ==================== STAGE 2 CARD ==================== -->
+  <g transform="translate(425, 80)">
+    <rect width="350" height="252" rx="10" fill="url(#card-grad-2)" stroke="#1e293b" stroke-width="1.5" />
+    
+    <!-- Stage Badge -->
+    <rect x="16" y="14" width="138" height="20" rx="4" fill="#4338ca" fill-opacity="0.25" stroke="#818cf8" stroke-width="1" />
+    <text x="85" y="28" text-anchor="middle" class="badge-text" fill="#818cf8">Stage 2 · Synthetic Data</text>
+
+    <!-- Stage Title -->
+    <text x="16" y="54" class="stage-title">Synthetic FMCW Simulation</text>
+    <text x="16" y="70" class="stage-sub">02_radar_deep_learning_detection · Multi-Task CNN</text>
+
+    <!-- Divider -->
+    <line x1="16" y1="80" x2="334" y2="80" stroke="#1e293b" stroke-width="1" />
+
+    <!-- Feature Bullets -->
+    <text x="16" y="100" class="bullet-text"><tspan fill="#818cf8">▶</tspan> High-fidelity 3D radar cube simulation</text>
+    <text x="16" y="118" class="bullet-text"><tspan fill="#818cf8">▶</tspan> Kinematic pedestrian micro-Doppler gait STFT</text>
+    <text x="16" y="136" class="bullet-text"><tspan fill="#818cf8">▶</tspan> Continuous 2D Gaussian heatmap splatting</text>
+    <text x="16" y="154" class="bullet-text"><tspan fill="#818cf8">▶</tspan> RadarObjectDetectorCNN anchor-free multi-task</text>
+    <text x="16" y="172" class="bullet-text"><tspan fill="#818cf8">▶</tspan> Joint focal heatmap &amp; Smooth-L1 box loss</text>
+
+    <!-- Limitation Box -->
+    <rect x="16" y="190" width="318" height="48" rx="6" fill="#881337" fill-opacity="0.2" stroke="#e11d48" stroke-width="1" />
+    <text x="26" y="206" class="limit-title">⚠ Sim-to-Real Domain Gap</text>
+    <text x="26" y="224" class="limit-text">Idealized Gaussian target splats; misses multi-path clutter.</text>
+  </g>
+
+  <!-- ==================== STAGE 3 CARD ==================== -->
+  <g transform="translate(810, 80)">
+    <rect width="350" height="252" rx="10" fill="url(#card-grad-3)" stroke="#00f0ff" stroke-width="1.8" filter="url(#cyan-glow)" />
+    
+    <!-- Stage Badge -->
+    <rect x="16" y="14" width="138" height="20" rx="4" fill="#065f46" fill-opacity="0.3" stroke="#00f0ff" stroke-width="1" />
+    <text x="85" y="28" text-anchor="middle" class="badge-text" fill="#00f0ff">Stage 3 · Real Benchmark</text>
+
+    <!-- Stage Title -->
+    <text x="16" y="54" class="stage-title">RadDet ICASSP 2025</text>
+    <text x="16" y="70" class="stage-sub">03_raddet_spectrum_detection · YOLOv9 Line-Rate</text>
+
+    <!-- Divider -->
+    <line x1="16" y1="80" x2="334" y2="80" stroke="#1e293b" stroke-width="1" />
+
+    <!-- Feature Bullets -->
+    <text x="16" y="100" class="bullet-text"><tspan fill="#00f0ff">▶</tspan> 20,000 real automotive radar spectrograms</text>
+    <text x="16" y="118" class="bullet-text"><tspan fill="#00f0ff">▶</tspan> 11 contested radar waveform modulations</text>
+    <text x="16" y="136" class="bullet-text"><tspan fill="#00f0ff">▶</tspan> Ultralytics YOLOv9-C with PGI backbone</text>
+    <text x="16" y="154" class="bullet-text"><tspan fill="#00f0ff">▶</tspan> Automated multi-SNR sweep (-20 dB to +20 dB)</text>
+    <text x="16" y="172" class="bullet-text"><tspan fill="#00f0ff">▶</tspan> 892.9 FPS (1.12 ms) single-frame latency profile</text>
+
+    <!-- Culmination Box -->
+    <rect x="16" y="190" width="318" height="48" rx="6" fill="#064e3b" fill-opacity="0.3" stroke="#10b981" stroke-width="1" />
+    <text x="26" y="206" class="culm-title">★ Research Culmination</text>
+    <text x="26" y="224" class="culm-text">Line-rate real-time cognitive EW; Table III verified.</text>
+  </g>
+</svg>

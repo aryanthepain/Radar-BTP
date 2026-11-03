@@ -19,15 +19,16 @@
 - [ ] **PRES-03**: Top-level and section-level Mermaid architecture diagrams in `02_radar_deep_learning_detection.ipynb` covering dataset generation, convolutional backbone, multi-task prediction heads (heatmaps & boxes), loss functions, and evaluation.
 - [ ] **PRES-04**: Polished academic markdown documentation in both notebooks explaining physical principles, mathematical formulations, and engineering trade-offs for clear presentation to the thesis advisor.
 
-### Verification & Deterministic Gates (VERIF)
-
-- [ ] **VERIF-01**: Unit test suite (`tests/test_radar_data_adapter.py`) validating decoupled ingestion across Level 1 (raw cube), Level 2 (RDM/RAD tensor), and Level 3 (point cloud DataFrame).
-- [ ] **VERIF-02**: Universal deterministic verification gate (`pwsh -File ./scripts/verify.ps1`) passes cleanly with all unit tests and pipeline testbenches intact.
-
 ### RadDet Full-Scale Benchmark on Kaggle (RADDET-BENCH)
 
-- [ ] **RADDET-BENCH-01**: Execute full 20,000-frame training run of RadDet S (128²) on Kaggle GPU for up to 100 epochs using Ultralytics YOLOv9 with early stopping, periodic checkpoints, and paper RF augmentations.
-- [ ] **RADDET-BENCH-02**: Automated multi-SNR evaluation loop across 6 discrete SNR bins (-20 dB to +20 dB) exporting Table III markdown/CSV benchmark metrics, Fig 3(c) curves, and real-time single-frame latency ($FPS_{avg}$) benchmarking.
+- [x] **RADDET-BENCH-01**: Execute full 20,000-frame training run of RadDet S (128²) on Kaggle GPU for up to 100 epochs using Ultralytics YOLOv9 with early stopping, periodic checkpoints, and paper RF augmentations.
+- [x] **RADDET-BENCH-02**: Automated multi-SNR evaluation loop across 6 discrete SNR bins (-20 dB to +20 dB) exporting Table III markdown/CSV benchmark metrics, Fig 3(c) curves, and real-time single-frame latency ($FPS_{avg}$) benchmarking.
+
+### Interactive Research Showcase & Presentation Website (PRES-WEB)
+
+- [ ] **PRES-WEB-01**: Asset extraction pipeline and vector diagram builder (`scripts/export_showcase_assets.py`) programmatically exporting 17 primary PNG figures from notebooks and benchmark folders, 4 cached architecture SVGs, 3-stage evolution timeline SVG, and offline Prism.js assets into `docs/assets/`.
+- [ ] **PRES-WEB-02**: Zero-build standalone static presentation website (`docs/index.html`, `docs/styles.css`, `docs/app.js`) featuring Dark Cyber-Radar theme, sticky sidebar navigation, standardized 5-part blocks per notebook, 7-metric master comparison table, image lightbox modal, and professor takeaways without external CDN dependencies.
+- [ ] **PRES-WEB-03**: Deterministic smoke test suite (`tests/test_showcase_website.py`) validating HTML DOM structure, local asset integrity, zero external URLs, and universal verification gate sign-off via `scripts/verify.ps1`.
 
 ### High-Coverage Test Suite & Pytest-Cov Integration (TEST-COV)
 
@@ -35,6 +36,11 @@
 - [ ] **TEST-COV-02**: Dedicated unit test suite `tests/test_radar_dataset.py` targeting synthetic `RadarDataset` generation, box coordinate math, multi-task heatmap encoding, and DataLoader collate functions (raising `src/models/radar_dataset.py` to >=90%).
 - [ ] **TEST-COV-03**: Automated integration smoke tests `tests/test_pipeline_scripts.py` covering `scripts/run_radar_pipeline.py`, `scripts/push_kaggle_kernel.py`, and notebook generators.
 - [ ] **TEST-COV-04**: Universal verification gate (`scripts/verify.ps1`) enforces `>=90%` code coverage with `pytest-cov` while maintaining deterministic, sub-30s local execution.
+
+### Verification & Deterministic Gates (VERIF)
+
+- [ ] **VERIF-01**: Unit test suite (`tests/test_radar_data_adapter.py`) validating decoupled ingestion across Level 1 (raw cube), Level 2 (RDM/RAD tensor), and Level 3 (point cloud DataFrame).
+- [ ] **VERIF-02**: Universal deterministic verification gate (`pwsh -File ./scripts/verify.ps1`) passes cleanly with all unit tests and pipeline testbenches intact.
 
 ## v2 Requirements
 
@@ -57,32 +63,35 @@
 
 ## Traceability
 
-| Requirement     | Phase     | Status  |
-| --------------- | --------- | ------- |
-| PRES-01         | Phase 1   | Pending |
-| PRES-02         | Phase 1   | Pending |
-| PRES-03         | Phase 1   | Pending |
-| PRES-04         | Phase 1   | Pending |
-| DATA-01         | Phase 2   | Pending |
-| DATA-02         | Phase 2   | Pending |
-| DATA-03         | Phase 2   | Pending |
-| DATA-04         | Phase 2   | Pending |
-| VERIF-01        | Phase 2   | Pending |
-| VERIF-02        | Phase 3   | Pending |
-| RADDET-BENCH-01 | Phase 1.2 | Complete |
-| RADDET-BENCH-02 | Phase 1.2 | Complete |
-| TEST-COV-01     | Phase 1.3 | Pending |
-| TEST-COV-02     | Phase 1.3 | Pending |
-| TEST-COV-03     | Phase 1.3 | Pending |
-| TEST-COV-04     | Phase 1.3 | Pending |
+| Requirement     | Phase        | Status   |
+| --------------- | ------------ | -------- |
+| PRES-01         | Phase 1      | Complete |
+| PRES-02         | Phase 1      | Complete |
+| PRES-03         | Phase 1      | Complete |
+| PRES-04         | Phase 1      | Complete |
+| RADDET-BENCH-01 | Phase 1.2    | Complete |
+| RADDET-BENCH-02 | Phase 1.2    | Complete |
+| PRES-WEB-01     | Phase 01.2.1 | Complete |
+| PRES-WEB-02     | Phase 01.2.1 | Complete |
+| PRES-WEB-03     | Phase 01.2.1 | Complete |
+| TEST-COV-01     | Phase 1.3    | Pending  |
+| TEST-COV-02     | Phase 1.3    | Pending  |
+| TEST-COV-03     | Phase 1.3    | Pending  |
+| TEST-COV-04     | Phase 1.3    | Pending  |
+| DATA-01         | Phase 2      | Pending  |
+| DATA-02         | Phase 2      | Pending  |
+| DATA-03         | Phase 2      | Pending  |
+| DATA-04         | Phase 2      | Pending  |
+| VERIF-01        | Phase 2      | Pending  |
+| VERIF-02        | Phase 3      | Pending  |
 
 **Coverage:**
 
-- v1 requirements: 16 total
-- Mapped to phases: 16
+- v1 requirements: 19 total
+- Mapped to phases: 19
 - Unmapped: 0 ✓
 
 ---
 
 _Requirements defined: 2026-09-23_
-_Last updated: 2026-09-23 after initial definition_
+_Last updated: 2026-11-03 for Phase 01.2.1 additions_

@@ -14,6 +14,7 @@ A phased journey to prepare an undergraduate thesis exploratory presentation for
 - [x] **Phase 1: Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams** - Structure notebooks with unified Mermaid flowcharts and academic narrative for the professor presentation.
 - [x] **Phase 1.1: RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice)** (INSERTED) - Ingest real-world RadDet ICASSP 2025 dataset with minimal local micro-slice, YOLOv8/v9 spectrum detector, and limited Kaggle run.
 - [x] **Phase 1.2: Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)** (INSERTED) - Execute 20,000-frame full training run on S (128²) resolution across multi-SNR settings on Kaggle GPU for up to 100 epochs.
+- [x] **Phase 01.2.1: Interactive Research Showcase & Thesis Presentation Website** (INSERTED) - Deliver a clean, responsive showcase website for the supervising professor synthesizing all three notebooks, experimental results, comparative radar data progression (toy -> synthetic -> real RadDet), architecture flowcharts, and key code snippets.
 - [ ] **Phase 1.3: High-Coverage Deterministic Unit & Integration Testing** (INSERTED) - Comprehensive test expansion achieving >=90% code coverage across DSP algorithms, PyTorch dataset/models, and pipeline scripts with pytest-cov.
 - [ ] **Phase 2: Multi-Level Decoupled Radar Data Ingestion** - Implement internal data adapter decoupling pipeline from simulator (Raw ADC cubes, RDM/RAD tensors, Point Cloud DataFrames).
 - [ ] **Phase 3: Pipeline Integration & Deterministic Verification Gates** - Integrate decoupled data flow into pipeline testbench and pass all deterministic gates.
@@ -84,6 +85,23 @@ Plans:
 - [x] 01.2-02: Automated 6-bin multi-SNR evaluation loop, Table III exporter, and single-frame latency profiler.
 - [x] 01.2-03: Kaggle CLI artifact pull/status automation and dual-mode CI verification.
 
+### Phase 01.2.1: Interactive Research Showcase & Thesis Presentation Website (INSERTED)
+
+**Goal:** Deliver a lightweight, clean, interactive presentation website for the supervising professor illustrating the end-to-end BTP journey across all three notebooks (`01_radar_classical_dsp`, `02_radar_deep_learning_detection`, `03_raddet_spectrum_detection_kaggle`), showcasing key DSP/DL code snippets, visual flowcharts, benchmark metrics, and clear comparative progression (analytical toy baseline -> synthetic FMCW radar simulation -> real-world RadDet ICASSP 2025 dataset).
+**Requirements**: PRES-WEB-01, PRES-WEB-02, PRES-WEB-03
+**Depends on:** Phase 1.2
+**Plans:** 3 plans
+
+Plans:
+**Wave 1**
+- [x] 01.2.1-01: Asset Pipeline, Automated Notebook Extraction & Vector Diagrams
+
+**Wave 2**
+- [x] 01.2.1-02: Zero-Build Static Website Implementation
+
+**Wave 3**
+- [x] 01.2.1-03: Deterministic Smoke Test Suite & Gate Verification
+
 ### Phase 1.3: High-Coverage Deterministic Unit & Integration Testing (INSERTED)
 
 **Goal**: Expand deterministic test coverage using `pytest-cov` to achieve >=90% total coverage across core radar signal processing (`src/dsp/`), synthetic dataset generation (`src/models/radar_dataset.py`), real-world RadDet parsing (`src/raddet/`), and CLI pipeline execution scripts (`scripts/`).
@@ -152,6 +170,7 @@ Phases execute in numeric order: 1 → 2 → 3
 | 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams                 | 2/2            | Completed   | 2026-09-23 |
 | 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice) | 5/5            | Completed   | 2026-11-02 |
 | 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                   | 3/3            | Completed   | 2026-11-03 |
+| 01.2.1. Interactive Research Showcase & Thesis Presentation Website         | 3/3            | Completed   | 2026-11-03 |
 | 1.3. High-Coverage Deterministic Unit & Integration Testing                  | 0/3            | In Progress | -          |
 | 2. Multi-Level Decoupled Radar Data Ingestion                                | 0/2            | Not started | -          |
 | 3. Pipeline Integration & Deterministic Verification Gates                   | 0/2            | Not started | -          |

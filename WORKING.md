@@ -3,12 +3,12 @@
 ## Current Objective
 
 - **Project**: Radar DSP & AI Detection Testbench (BTP)
-- **Status**: Phase 1 Complete. Phase 1.1 Complete. Phase 1.2 Full-Scale Cloud Benchmark & Comparative Evaluation Complete.
-- **Active Kaggle Kernel**: [`aryanguptaji/raddet-s-128-full-scale-benchmark`](https://www.kaggle.com/code/aryanguptaji/raddet-s-128-full-scale-benchmark) (Version 5)
-- **Kaggle Kernel Status**: `KernelWorkerStatus.COMPLETE` (Full 66 epochs trained on Kaggle GPU across 40,003 frames; 1h 11m training time; all artifacts pulled)
-- **Active Branch**: `gsd/phase-01.2-full-scale-raddet-benchmark-on-kaggle`
-- **Verification Gate**: `pwsh -File ./scripts/verify.ps1`
-- **Active Test Status**: 27/27 tests green in 11.4s.
+- **Status**: Phase 1 Complete. Phase 1.1 Complete. Phase 1.2 Full-Scale Cloud Benchmark Complete. Phase 01.2.1 Interactive Showcase & Thesis Presentation Website Shipped (PR #13).
+- **Active Pull Request**: [#13 (Phase 01.2.1: Interactive Research Showcase & Thesis Presentation Website)](https://github.com/aryanthepain/Radar-BTP/pull/13)
+- **Live Presentation Website**: [https://aryanthepain.github.io/Radar-BTP/](https://aryanthepain.github.io/Radar-BTP/)
+- **Active Branch**: gsd/phase-01.2.1-interactive-research-showcase-thesis-presentation-website
+- **Verification Gate**: pwsh -File ./scripts/verify.ps1
+- **Active Test Status**: 31/31 tests green in 13.4s.
 - **Phase 1.2 Achievements**:
   - Full-scale RadDet S-128 dataset pipeline executed on Kaggle GPU over 40,003 frames (14,001 train / 6,001 val / 20,001 test) across 11 classes.
   - Reproduces ICASSP 2025 Table III: YOLOv9-C achieves grand mean mAP50 = 25.25% (vs paper 25.93%) and mAP50:95 = 19.03% (vs paper 19.47%) across 6 multi-SNR bins (-20 dB to +20 dB).
