@@ -95,12 +95,15 @@ Plans:
 
 Plans:
 **Wave 1**
+
 - [x] 01.2.1-01: Asset Pipeline, Automated Notebook Extraction & Vector Diagrams
 
 **Wave 2**
+
 - [x] 01.2.1-02: Zero-Build Static Website Implementation
 
 **Wave 3**
+
 - [x] 01.2.1-03: Deterministic Smoke Test Suite & Gate Verification
 
 ### Phase 01.2.2: Comprehensive BTP Thesis Report & Academic Publication Showcase Website (INSERTED)
@@ -111,6 +114,7 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
+
 - [ ] 01.2.2-01: Research & Guidelines Finalization — Template analysis, IIT Guwahati BTP formatting standards, chapter blueprint, mathematical formulations, and rubric definition.
 - [ ] 01.2.2-02: Content Grilling & Section Finalization — Interactive grilling sessions across all report sections and professor focus points, generating complete report content with figures and tables.
 - [ ] 01.2.2-03: Academic GitHub Pages Website Rework — Re-architect GitHub Pages into an academic paper reading format with KaTeX formulas, interactive navigation, vector diagrams, and professor review ready state.
@@ -183,7 +187,7 @@ Phases execute in numeric order: 1 → 2 → 3
 | 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams                 | 2/2            | Completed   | 2026-09-23 |
 | 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice) | 5/5            | Completed   | 2026-11-02 |
 | 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                   | 3/3            | Completed   | 2026-11-03 |
-| 01.2.1. Interactive Research Showcase & Thesis Presentation Website         | 3/3            | Completed   | 2026-11-03 |
+| 01.2.1. Interactive Research Showcase & Thesis Presentation Website          | 3/3            | Completed   | 2026-11-03 |
 | 1.3. High-Coverage Deterministic Unit & Integration Testing                  | 0/3            | In Progress | -          |
 | 2. Multi-Level Decoupled Radar Data Ingestion                                | 0/2            | Not started | -          |
 | 3. Pipeline Integration & Deterministic Verification Gates                   | 0/2            | Not started | -          |
