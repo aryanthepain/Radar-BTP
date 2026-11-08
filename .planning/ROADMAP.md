@@ -15,6 +15,7 @@ A phased journey to prepare an undergraduate thesis exploratory presentation for
 - [x] **Phase 1.1: RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice)** (INSERTED) - Ingest real-world RadDet ICASSP 2025 dataset with minimal local micro-slice, YOLOv8/v9 spectrum detector, and limited Kaggle run.
 - [x] **Phase 1.2: Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)** (INSERTED) - Execute 20,000-frame full training run on S (128²) resolution across multi-SNR settings on Kaggle GPU for up to 100 epochs.
 - [x] **Phase 01.2.1: Interactive Research Showcase & Thesis Presentation Website** (INSERTED) - Deliver a clean, responsive showcase website for the supervising professor synthesizing all three notebooks, experimental results, comparative radar data progression (toy -> synthetic -> real RadDet), architecture flowcharts, and key code snippets.
+- [ ] **Phase 01.2.2: Comprehensive BTP Thesis Report & Academic Publication Showcase Website** (INSERTED) - Deliver publication-grade ~20-page IIT Guwahati BTP Report and rework GitHub Pages website into an academic reading experience for professor finalization.
 - [ ] **Phase 1.3: High-Coverage Deterministic Unit & Integration Testing** (INSERTED) - Comprehensive test expansion achieving >=90% code coverage across DSP algorithms, PyTorch dataset/models, and pipeline scripts with pytest-cov.
 - [ ] **Phase 2: Multi-Level Decoupled Radar Data Ingestion** - Implement internal data adapter decoupling pipeline from simulator (Raw ADC cubes, RDM/RAD tensors, Point Cloud DataFrames).
 - [ ] **Phase 3: Pipeline Integration & Deterministic Verification Gates** - Integrate decoupled data flow into pipeline testbench and pass all deterministic gates.
@@ -101,6 +102,18 @@ Plans:
 
 **Wave 3**
 - [x] 01.2.1-03: Deterministic Smoke Test Suite & Gate Verification
+
+### Phase 01.2.2: Comprehensive BTP Thesis Report & Academic Publication Showcase Website (INSERTED)
+
+**Goal:** Deliver a rigorous, publication-grade B.Tech Project (BTP-1) Report (~20 pages) adhering to IIT Guwahati thesis standards (modeled after benchmark templates `230122021@BTP-1 Signed.pdf` and `BTP_2026_27_RajNandiniSaanvi.pdf`), addressing core professor focus areas (AI value-add vs DSP, close-object resolution limits, compute/memory trade-offs, realistic dataset benchmarks, raw data inversion, defense/automotive utilities), and rework the GitHub Pages site into an academic report reading interface for professor finalization.
+**Requirements**: BTP-REP-01, BTP-REP-02, BTP-REP-03
+**Depends on:** Phase 01.2.1
+**Plans:** 3 plans
+
+Plans:
+- [ ] 01.2.2-01: Research & Guidelines Finalization — Template analysis, IIT Guwahati BTP formatting standards, chapter blueprint, mathematical formulations, and rubric definition.
+- [ ] 01.2.2-02: Content Grilling & Section Finalization — Interactive grilling sessions across all report sections and professor focus points, generating complete report content with figures and tables.
+- [ ] 01.2.2-03: Academic GitHub Pages Website Rework — Re-architect GitHub Pages into an academic paper reading format with KaTeX formulas, interactive navigation, vector diagrams, and professor review ready state.
 
 ### Phase 1.3: High-Coverage Deterministic Unit & Integration Testing (INSERTED)
 
