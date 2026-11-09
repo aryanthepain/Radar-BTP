@@ -40,6 +40,6 @@
 - [x] 4. Comprehensive research dossier authored in `.planning/phases/01.2.2-.../01.2.2-RESEARCH.md` and augmented with web SOTA + Karlsson PhD thesis + DRDO survey + ICASSP RadDet paper.
 - [x] 5. Professor focus questions thoroughly investigated and answered with mathematical & empirical rigor.
 - [x] 6. 1-Year timeline and Mermaid Gantt chart created spanning BTP-1 (completed) and BTP-2 (planned).
-- [ ] 7. In new session: Execute interactive discussion grilling on report sections (Plan 01.2.2-02).
-- [ ] 8. Generate complete ~20-24 page BTP report text and figures.
-- [ ] 9. Rework GitHub Pages website into academic manuscript reader (Plan 01.2.2-03).
+- [x] 7. Phase 01.2.2 Plan 01 executed: Comprehensive academic literature synthesis, 7-axis research-gap matrix, mathematical formulation of 5 candidate methodologies (Primary: Methods 1, 2, 3; Exploratory: Methods 4, 5), dual constrained/Pareto optimization framework, and 6 supervisor defense questions authored in `01.2.2-RESEARCH-SYNTHESIS.md` (545 lines).
+- [ ] 8. Execute Phase 01.2.2 Plan 02: Generate complete ~20-24 page BTP thesis report text and figures.
+- [ ] 9. Execute Phase 01.2.2 Plan 03: Rework GitHub Pages website into academic manuscript reader.
