@@ -19,6 +19,7 @@ A phased journey to prepare an undergraduate thesis exploratory presentation for
 - [ ] **Phase 1.3: High-Coverage Deterministic Unit & Integration Testing** (INSERTED) - Comprehensive test expansion achieving >=90% code coverage across DSP algorithms, PyTorch dataset/models, and pipeline scripts with pytest-cov.
 - [ ] **Phase 2: Multi-Level Decoupled Radar Data Ingestion** - Implement internal data adapter decoupling pipeline from simulator (Raw ADC cubes, RDM/RAD tensors, Point Cloud DataFrames).
 - [ ] **Phase 3: Pipeline Integration & Deterministic Verification Gates** - Integrate decoupled data flow into pipeline testbench and pass all deterministic gates.
+- [ ] **Phase 4: Visual & Interactive Design Cherishments** (POST-CORE POLISH) - Add dynamic reading progress bar, interactive IEEE floating citation hover cards, and advanced visual reader embellishments to the documentation portal.
 
 ## Phase Details
 
@@ -180,10 +181,26 @@ Plans:
 - [ ] 03-01: Update `scripts/run_radar_pipeline.py` to demonstrate both simulated and decoupled data paths.
 - [ ] 03-02: Run universal verification gate (`scripts/verify.ps1`), confirm Closes #3 and Closes #4, and trigger completion audio alert.
 
+### Phase 4: Visual & Interactive Design Cherishments
+
+**Goal**: Elevate the academic documentation portal with interactive visual polish, dynamic reading progress bar, floating IEEE citation preview cards, and advanced aesthetic embellishments once all core thesis content and DSP ingestion phases are complete.
+**Mode**: standard
+**Depends on**: Phase 3
+**Success Criteria** (what must be TRUE):
+
+1. Dynamic gradient top reading progress bar reflects exact scroll position.
+2. Interactive IEEE citation badges render floating metadata cards with authors, venue, year, and DOI links on hover.
+3. Interactive UI transitions, code copy feedback, and reading mode controls operate smoothly.
+
+Plans:
+
+- [ ] 04-01: Implement top reading progress indicator and interactive citation hover cards.
+- [ ] 04-02: Fine-tune typography, code frame styling, and mobile drawer transitions.
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3
+Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase                                                                        | Plans Complete | Status      | Completed  |
 | ---------------------------------------------------------------------------- | -------------- | ----------- | ---------- |
@@ -195,3 +212,4 @@ Phases execute in numeric order: 1 → 2 → 3
 | 1.3. High-Coverage Deterministic Unit & Integration Testing                  | 0/3            | In Progress | -          |
 | 2. Multi-Level Decoupled Radar Data Ingestion                                | 0/2            | Not started | -          |
 | 3. Pipeline Integration & Deterministic Verification Gates                   | 0/2            | Not started | -          |
+| 4. Visual & Interactive Design Cherishments                                  | 0/2            | Backlog     | -          |

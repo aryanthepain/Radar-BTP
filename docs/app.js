@@ -355,10 +355,12 @@ function initScrollSpy() {
 }
 
 /**
- * 4. Interactive IEEE Citation Hover Tooltips
- * Displays metadata popups for citation badges [1]–[30] and links to references.
+ * 4. Interactive IEEE Citation Hover Tooltips (Phase 4 Design Cherishment)
+ * Only enabled when window.ENABLE_CITATION_TOOLTIPS is true to keep core reader light.
  */
 function initCitationTooltips() {
+  if (!window.ENABLE_CITATION_TOOLTIPS) return;
+
   const badges = document.querySelectorAll(".citation-badge, [data-citation]");
   if (!badges.length) return;
 
@@ -649,6 +651,9 @@ function initMobileDrawer() {
 document.addEventListener("DOMContentLoaded", () => {
   initReadingProgress();
   initKaTeX();
+  if (typeof hljs !== "undefined") {
+    hljs.highlightAll();
+  }
   initScrollSpy();
   initCitationTooltips();
   initCodeDrawers();

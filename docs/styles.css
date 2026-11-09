@@ -1061,6 +1061,16 @@ body {
   background: #070c14;
 }
 
+.code-block-wrapper pre,
+.code-block-wrapper pre code.hljs {
+  background: #1e1e1e !important;
+  font-family: 'JetBrains Mono', Consolas, 'Fira Code', monospace;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  border-radius: 0 0 6px 6px;
+  padding: 1.25rem 1.5rem;
+}
+
 .code-block-wrapper code {
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
