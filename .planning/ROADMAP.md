@@ -108,16 +108,19 @@ Plans:
 
 ### Phase 01.2.2: Comprehensive BTP Thesis Report & Academic Publication Showcase Website (INSERTED)
 
-**Goal:** Deliver a rigorous, publication-grade B.Tech Project (BTP-1) Report (~20 pages) adhering to IIT Guwahati thesis standards (modeled after benchmark templates `230122021@BTP-1 Signed.pdf` and `BTP_2026_27_RajNandiniSaanvi.pdf`), addressing core professor focus areas (AI value-add vs DSP, close-object resolution limits, compute/memory trade-offs, realistic dataset benchmarks, raw data inversion, defense/automotive utilities), and rework the GitHub Pages site into an academic report reading interface for professor finalization.
+**Goal:** Deliver a rigorous, publication-grade B.Tech Project (BTP-1) Report (~20 pages) adhering to IIT Guwahati thesis standards, addressing core professor focus areas (AI value-add vs DSP, close-object resolution limits, compute/memory trade-offs, realistic dataset benchmarks, raw data inversion, defense/automotive utilities), and rework the GitHub Pages site into an academic report reading interface for professor finalization.
 **Requirements**: BTP-REP-01, BTP-REP-02, BTP-REP-03
 **Depends on:** Phase 01.2.1
-**Plans:** 3 plans
+**Plans:** 4 plans
 
 Plans:
+**Wave 1**
+- [ ] 01.2.2-01: Deep Research & Literature Synthesis with Interactive Clarification (RadDet, RAVEN, AdaRadar, Karlsson KTH/Saab, DRDO Pal).
+- [ ] 01.2.2-02: BTP Experience, Timeline & Technical Journey Grilling (Aug 2026 to May 2027 calendar).
+- [ ] 01.2.2-03: Two-Column Academic Paper Architecture, KaTeX Math & Reader UX in `docs/`.
 
-- [ ] 01.2.2-01: Research & Guidelines Finalization — Template analysis, IIT Guwahati BTP formatting standards, chapter blueprint, mathematical formulations, and rubric definition.
-- [ ] 01.2.2-02: Content Grilling & Section Finalization — Interactive grilling sessions across all report sections and professor focus points, generating complete report content with figures and tables.
-- [ ] 01.2.2-03: Academic GitHub Pages Website Rework — Re-architect GitHub Pages into an academic paper reading format with KaTeX formulas, interactive navigation, vector diagrams, and professor review ready state.
+**Wave 2**
+- [ ] 01.2.2-04: Full Academic Report Content Synthesis & Verification (~20-page comprehensive report covering all 9 deliverables, professor defense, and test gates).
 
 ### Phase 1.3: High-Coverage Deterministic Unit & Integration Testing (INSERTED)
 
@@ -188,6 +191,7 @@ Phases execute in numeric order: 1 → 2 → 3
 | 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice) | 5/5            | Completed   | 2026-11-02 |
 | 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                   | 3/3            | Completed   | 2026-11-03 |
 | 01.2.1. Interactive Research Showcase & Thesis Presentation Website          | 3/3            | Completed   | 2026-11-03 |
+| 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 0/4            | In Progress | -          |
 | 1.3. High-Coverage Deterministic Unit & Integration Testing                  | 0/3            | In Progress | -          |
 | 2. Multi-Level Decoupled Radar Data Ingestion                                | 0/2            | Not started | -          |
 | 3. Pipeline Integration & Deterministic Verification Gates                   | 0/2            | Not started | -          |
