@@ -42,4 +42,4 @@
 - [x] 6. 1-Year timeline and Mermaid Gantt chart created spanning BTP-1 (completed) and BTP-2 (planned).
 - [x] 7. Phase 01.2.2 Plan 01 executed: Comprehensive academic literature synthesis, 7-axis research-gap matrix, mathematical formulation of 5 candidate methodologies (Primary: Methods 1, 2, 3; Exploratory: Methods 4, 5), dual constrained/Pareto optimization framework, and 6 supervisor defense questions authored in `01.2.2-RESEARCH-SYNTHESIS.md` (545 lines).
 - [ ] 8. Execute Phase 01.2.2 Plan 02: Generate complete ~20-24 page BTP thesis report text and figures.
-- [ ] 9. Execute Phase 01.2.2 Plan 03: Rework GitHub Pages website into academic manuscript reader.
+- [x] 9. Execute Phase 01.2.2 Plan 03: Rework GitHub Pages website into academic manuscript reader (two-column CSS layout, offline vendored KaTeX with 20 fonts, 30 IEEE interactive citations in `app.js`, scroll-spy, reading progress bar, Wave 0 test suite in `tests/test_academic_website.py`, all deterministic gates passing).
