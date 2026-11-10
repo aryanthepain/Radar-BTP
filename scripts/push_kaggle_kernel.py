@@ -163,7 +163,8 @@ def build_and_push_kernel(
     return target_dir
 
 
-def main() -> None:
+def build_parser() -> argparse.ArgumentParser:
+    """Construct argument parser for Kaggle kernel staging CLI."""
     parser = argparse.ArgumentParser(description="Kaggle Kernel Staging, Push & Retrieval CLI")
     parser.add_argument(
         "--notebook",
@@ -238,7 +239,11 @@ def main() -> None:
         default=Path("data/benchmark_results/s128"),
         help="Destination directory for pulled outputs",
     )
+    return parser
 
+
+def main() -> None:
+    parser = build_parser()
     args = parser.parse_args()
     kernel_id = f"{args.username}/{args.slug}"
 
