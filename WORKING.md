@@ -3,10 +3,10 @@
 ## Current Objective
 
 - **Project**: Radar DSP & AI Detection Testbench (BTP)
-- **Active Phase**: Phase 01.2.2: Comprehensive BTP Thesis Report & Academic Publication Showcase Website
-- **Active Branch**: `gsd/phase-01.2.2-btp-thesis-report-academic-showcase`
-- **Status**: Phase 01.2.2 UAT complete! All 9 verification checkpoints verified. All 4 plans (01.2.2-01 through 01.2.2-04) executed and verified. Universal testbench passes 100% green (38/38 tests passing).
-- **Next Step**: Phase 01.2.2 ship / merge preparation or advance to Phase 1.3 (High-Coverage Unit & Integration Testing).
+- **Active Phase**: Phase 1.3: High-Coverage Deterministic Unit & Integration Testing
+- **Active Branch**: `feat/phase-1.3-high-coverage-deterministic-testing`
+- **Status**: Phase 01.2.2 merged to `main` (PR #14). Initialized Phase 1.3 targeting $\ge 90\%$ test coverage across `src/` (baseline is 74%).
+- **Next Step**: Author Phase 1.3 Plans (`01.3-01`, `01.3-02`, `01.3-03`) and `01.3-VALIDATION.md`.
 
 ---
 
