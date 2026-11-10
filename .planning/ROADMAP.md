@@ -112,7 +112,7 @@ Plans:
 **Goal:** Deliver a rigorous, publication-grade B.Tech Project (BTP-1) Report (~20 pages) adhering to IIT Guwahati thesis standards, addressing core professor focus areas (AI value-add vs DSP, close-object resolution limits, compute/memory trade-offs, realistic dataset benchmarks, raw data inversion, defense/automotive utilities), and rework the GitHub Pages site into an academic report reading interface for professor finalization.
 **Requirements**: BTP-REP-01, BTP-REP-02, BTP-REP-03
 **Depends on:** Phase 01.2.1
-**Plans:** 4 plans
+**Plans:** 5 plans
 
 Plans:
 **Wave 1**
@@ -122,6 +122,9 @@ Plans:
 
 **Wave 2**
 - [x] 01.2.2-04: Full Academic Report Content Synthesis & Verification (~20-page comprehensive report covering all 9 deliverables, professor defense, and test gates).
+
+**Wave 3**
+- [ ] 01.2.2-05: Thesis Report Refinements, CPU-First Research Formulation, 5-Algorithm Code Suite & UI Polish.
 
 ### Phase 1.3: High-Coverage Deterministic Unit & Integration Testing (INSERTED)
 
@@ -208,7 +211,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice) | 5/5            | Completed   | 2026-11-02 |
 | 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                   | 3/3            | Completed   | 2026-11-03 |
 | 01.2.1. Interactive Research Showcase & Thesis Presentation Website          | 3/3            | Completed   | 2026-11-03 |
-| 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 4/4            | Completed   | 2026-11-10 |
+| 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 5/5            | Completed   | 2026-11-10 |
 | 1.3. High-Coverage Deterministic Unit & Integration Testing                  | 3/3            | Completed   | 2026-11-10 |
 | 2. Multi-Level Decoupled Radar Data Ingestion                                | 0/2            | Not started | -          |
 | 3. Pipeline Integration & Deterministic Verification Gates                   | 0/2            | Not started | -          |
