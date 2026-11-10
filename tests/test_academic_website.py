@@ -172,3 +172,101 @@ def test_chapter_sections():
     ]
     for ch in required_chapters:
         assert f'id="{ch}"' in content or f"id='{ch}'" in content, f"Missing chapter anchor: #{ch}"
+
+
+def test_institutional_metadata():
+    """Verify exact official IIT Guwahati institutional metadata (D-16)."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    assert "AI application in radar signal processing" in html, "Missing official primary title"
+    assert "Computationally Efficient Radar Spectrum Detection via Adaptive Computation for Millimeter-Wave FMCW Radar Perception" in html, "Missing official subtitle"
+    assert "Aryan Sandeep Gupta" in html, "Missing candidate full name"
+    assert "230150003" in html, "Missing student roll number"
+    assert "Mehta Family School of Data Science and Artificial Intelligence" in html, "Missing official school name"
+    assert "DA4098P BTP Project I" in html, "Missing official course code"
+    assert "Prof. Ratnajit Bhattacharjee" in html, "Missing supervisor name"
+    assert "Head, Mehta Family School of Data Science and Artificial Intelligence" in html, "Missing supervisor role 1"
+    assert "Professor, Department of Electronics and Electrical Engineering" in html, "Missing supervisor role 2"
+    assert "Head, Manekshaw Centre of Excellence for National Security Studies and Research" in html, "Missing supervisor role 3"
+
+
+def test_clean_header_and_sidebar():
+    """Verify clean print-like IEEE layout and absence of distracting progress bar and hardware chip badges (D-11, D-16)."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    # Progress bar omitted from index.html for print-like aesthetic
+    assert '<div id="reading-progress-bar"></div>' not in html, "#reading-progress-bar should be omitted from index.html"
+
+    # Hardware chip badges omitted from sidebar
+    assert 'id="academic-sidebar"' in html
+    sidebar_html = html.split('id="academic-sidebar"')[1].split('</aside>')[0]
+    assert "AWR1843" not in sidebar_html, "Sidebar must not contain standalone AWR1843 chip badge"
+    assert "DCA1000" not in sidebar_html, "Sidebar must not contain standalone DCA1000 chip badge"
+
+    # Sidebar footer
+    assert "BTP-1 Thesis Portal · Autumn 2026" in html, "Missing sidebar footer marker"
+
+
+def test_five_code_drawers():
+    """Verify presence of 5 syntax-highlighted collapsible IDE code drawers (D-18)."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    # Must contain code-drawer or collapsible-drawer elements
+    drawer_count = html.count('class="collapsible-drawer"') + html.count('class="code-drawer"')
+    assert drawer_count >= 5, f"Expected at least 5 code drawers, found {drawer_count}"
+
+    # Verify all 5 algorithms are represented
+    assert "fmcw.py" in html or "FMCW Beat Signal" in html, "Missing FMCW beat signal generator code drawer"
+    assert "mti.py" in html or "MTI Clutter" in html, "Missing MTI clutter filter code drawer"
+    assert "cfar.py" in html or "CFAR Detector" in html, "Missing 2D CFAR detector code drawer"
+    assert "music.py" in html or "MUSIC Direction" in html, "Missing MUSIC spatial DoA code drawer"
+    assert "detector.py" in html or "RadarObjectDetectorCNN" in html, "Missing RadarObjectDetectorCNN code drawer"
+
+
+def test_two_part_chapter_structure():
+    """Verify strict two-part problem partition in Chapters 4 and 5 (D-14)."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    assert "Part A: Synthetic 77 GHz FMCW Automotive Spatial Detection" in html, "Missing Part A header/marker"
+    assert ("Part B: Real-World RadDet RF Spectrum & Modulation Classification" in html or
+            "Part B: Real-World RadDet RF Spectrum &amp; Modulation Classification" in html), "Missing Part B header/marker"
+
+    # Explicit disclaimer that RadDet is RF spectrum sensing, not automotive traffic
+    assert "RadDet is strictly" in html or "RadDet is strictly RF" in html or "RadDet is strictly an RF" in html, "Missing RadDet scope disclaimer"
+    assert "does NOT" in html or "does not" in html, "Missing disclaimer that RadDet does not detect vehicles/pedestrians"
+
+
+def test_latency_waterfall_and_cpu_methodology():
+    """Verify multi-stage latency waterfall timing budget and CPU-first research methodology (D-13, D-15)."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    # Latency waterfall timing values
+    assert "0.18" in html, "Missing Range FFT latency (0.18 ms)"
+    assert "0.24" in html, "Missing Doppler FFT latency (0.24 ms)"
+    assert "0.12" in html, "Missing Preprocessing latency (0.12 ms)"
+    assert "1.12" in html, "Missing GPU inference latency (1.12 ms)"
+    assert "0.15" in html, "Missing Postprocessing NMS latency (0.15 ms)"
+    assert "0.10" in html, "Missing Memory I/O latency (0.10 ms)"
+    assert "1.91" in html, "Missing Total end-to-end latency (1.91 ms)"
+
+    # Frame deadline and CPU-first formulation
+    assert any(term in html for term in ["20 ms", "20\\text{ ms}", "50 Hz", "50\\text{ Hz}"]), "Missing 20 ms / 50 Hz frame deadline"
+    assert any(term in html for term in ["CPU-First", "CPU-first", "CPU Baseline", "native CPU"]), "Missing CPU-first research methodology"
+
+
+def test_academic_timeline_and_defense():
+    """Verify academic timeline milestones, curriculum, and oral defense date (D-16, D-17)."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    assert "MATLAB Radar Designer" in html, "Missing MATLAB Radar Designer App documentation"
+    assert "Skolnik" in html and "Richards" in html, "Missing Skolnik and Richards curriculum references"
+    assert "November 23, 2026" in html or "Nov 23, 2026" in html, "Missing BTP-1 final oral defense date"
+    assert "January 2027" in html, "Missing BTP-2 January milestone"
+    assert "May 2027" in html, "Missing BTP-2 May milestone"
+

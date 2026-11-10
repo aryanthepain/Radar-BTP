@@ -116,15 +116,18 @@ Plans:
 
 Plans:
 **Wave 1**
+
 - [x] 01.2.2-01: Deep Research & Literature Synthesis with Interactive Clarification (RadDet, RAVEN, AdaRadar, Karlsson KTH/Saab, DRDO Pal).
 - [x] 01.2.2-02: BTP Experience, Timeline & Technical Journey Grilling (Aug 2026 to May 2027 calendar).
 - [x] 01.2.2-03: Two-Column Academic Paper Architecture, KaTeX Math & Reader UX in `docs/`.
 
 **Wave 2**
+
 - [x] 01.2.2-04: Full Academic Report Content Synthesis & Verification (~20-page comprehensive report covering all 9 deliverables, professor defense, and test gates).
 
 **Wave 3**
-- [ ] 01.2.2-05: Thesis Report Refinements, CPU-First Research Formulation, 5-Algorithm Code Suite & UI Polish.
+
+- [x] 01.2.2-05: Thesis Report Refinements, CPU-First Research Formulation, 5-Algorithm Code Suite & UI Polish.
 
 ### Phase 1.3: High-Coverage Deterministic Unit & Integration Testing (INSERTED)
 
