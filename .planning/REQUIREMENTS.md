@@ -30,6 +30,12 @@
 - [ ] **PRES-WEB-02**: Zero-build standalone static presentation website (`docs/index.html`, `docs/styles.css`, `docs/app.js`) featuring Dark Cyber-Radar theme, sticky sidebar navigation, standardized 5-part blocks per notebook, 7-metric master comparison table, image lightbox modal, and professor takeaways without external CDN dependencies.
 - [ ] **PRES-WEB-03**: Deterministic smoke test suite (`tests/test_showcase_website.py`) validating HTML DOM structure, local asset integrity, zero external URLs, and universal verification gate sign-off via `scripts/verify.ps1`.
 
+### Comprehensive BTP Thesis Report & Academic Publication Showcase Website (BTP-REP)
+
+- [ ] **BTP-REP-01**: Comprehensive ~20-page academic report content synthesizing FMCW radar physics, classical DSP failure analysis, synthetic deep learning, full-scale RadDet benchmarks, candidate adaptive computation formulations, and August 2026 – May 2027 Gantt roadmap.
+- [ ] **BTP-REP-02**: Two-column academic paper reading interface in `docs/` with sticky chapter navigation TOC, reading progress indicator, offline KaTeX equation rendering, collapsible code blocks, and interactive IEEE citation tooltips.
+- [ ] **BTP-REP-03**: Verification test suite `tests/test_academic_website.py` deterministically validating DOM structure, KaTeX math elements, and chapter navigation under `scripts/verify.ps1`.
+
 ### High-Coverage Test Suite & Pytest-Cov Integration (TEST-COV)
 
 - [ ] **TEST-COV-01**: Dedicated unit test suite `tests/test_dsp_edge_cases.py` targeting OS-CFAR, Capon/MUSIC AoA, MTI cancellers, Doppler windowing, and Range FFT scaling.
@@ -74,6 +80,9 @@
 | PRES-WEB-01     | Phase 01.2.1 | Complete |
 | PRES-WEB-02     | Phase 01.2.1 | Complete |
 | PRES-WEB-03     | Phase 01.2.1 | Complete |
+| BTP-REP-01      | Phase 01.2.2 | Pending  |
+| BTP-REP-02      | Phase 01.2.2 | Pending  |
+| BTP-REP-03      | Phase 01.2.2 | Pending  |
 | TEST-COV-01     | Phase 1.3    | Pending  |
 | TEST-COV-02     | Phase 1.3    | Pending  |
 | TEST-COV-03     | Phase 1.3    | Pending  |
@@ -87,8 +96,8 @@
 
 **Coverage:**
 
-- v1 requirements: 19 total
-- Mapped to phases: 19
+- v1 requirements: 22 total
+- Mapped to phases: 22
 - Unmapped: 0 ✓
 
 ---

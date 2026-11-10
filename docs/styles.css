@@ -30,9 +30,26 @@
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
 
-  /* System Font Stacks (100% Offline - Zero CDN) */
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Publication & Academic Typography Stacks (100% Offline - Zero CDN) */
+  --font-serif: "Merriweather", "Latin Modern Roman", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* Academic Paper Palette */
+  --academic-paper-bg: #f8fafc;
+  --academic-paper-card: #ffffff;
+  --academic-text: #0f172a;
+  --academic-heading: #1e293b;
+  --academic-muted: #475569;
+  --academic-accent: #0284c7;
+  --academic-accent-hover: #0369a1;
+  --academic-accent-bg: #e0f2fe;
+  --academic-border: #e2e8f0;
+  --academic-panel-bg: #f1f5f9;
+  --academic-callout-bg: #f0f9ff;
+  --academic-callout-border: #0284c7;
+  --academic-amber-bg: #fffbeb;
+  --academic-amber-border: #d97706;
 
   /* Sizing & Layout */
   --sidebar-width: 280px;
@@ -1044,6 +1061,16 @@ body {
   background: #070c14;
 }
 
+.code-block-wrapper pre,
+.code-block-wrapper pre code.hljs {
+  background: #1e1e1e !important;
+  font-family: 'JetBrains Mono', Consolas, 'Fira Code', monospace;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  border-radius: 0 0 6px 6px;
+  padding: 1.25rem 1.5rem;
+}
+
 .code-block-wrapper code {
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
@@ -1085,4 +1112,365 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   Publication-Grade Academic Reading Portal Overhaul (Phase 01.2.2 Plan 03)
+   - IEEE Transactions Two-Column Layout with Full-Width Breakouts
+   - Serif / Sans-Serif Academic Typography Pairing
+   - Advisor Defense & Physical Invariants Callout Blocks
+   - Sticky Chapter 1-7 Sidebar Navigation & Reading Progress Bar
+   - Interactive IEEE Citation Hover Tooltips & Collapsible Code Drawers
+   - Offline KaTeX Math Container Formatting & Responsive Breakpoints
+   ========================================================================== */
+
+/* Top Reading Progress Bar */
+#reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #0284c7, #38bdf8);
+  z-index: 10000;
+  transition: width 0.08s ease-out;
+  box-shadow: 0 0 8px rgba(2, 132, 199, 0.6);
+}
+
+/* Academic Sidebar Navigation */
+#academic-sidebar {
+  width: var(--sidebar-width, 280px);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  flex-shrink: 0;
+  padding: 1.5rem 1.25rem;
+  background: var(--bg-secondary, #0f172a);
+  border-right: 1px solid var(--border-color, #1e293b);
+  scrollbar-width: thin;
+}
+
+#chapter-toc, .chapter-toc {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 1rem;
+}
+
+#chapter-toc .toc-link, .chapter-toc .toc-link {
+  display: flex;
+  align-items: center;
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-sm, 6px);
+  color: var(--text-secondary, #94a3b8);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all var(--transition-fast, 0.2s);
+}
+
+#chapter-toc .toc-link:hover, .chapter-toc .toc-link:hover {
+  background: rgba(2, 132, 199, 0.12);
+  color: var(--text-primary, #ffffff);
+}
+
+#chapter-toc .toc-link.active, .chapter-toc .toc-link.active {
+  background: rgba(2, 132, 199, 0.2);
+  color: #38bdf8;
+  font-weight: 600;
+  border-left: 3px solid #0284c7;
+}
+
+/* Academic Article Wrapper & Paper Typography */
+.academic-paper-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 6rem;
+  font-family: var(--font-sans);
+  color: var(--text-primary, #f8fafc);
+}
+
+.academic-paper-content h1,
+.academic-paper-content h2,
+.academic-paper-content h3 {
+  font-family: var(--font-serif);
+  color: var(--text-primary, #f8fafc);
+  letter-spacing: -0.015em;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.academic-paper-content h1 {
+  font-size: 2.25rem;
+  line-height: 1.2;
+}
+
+.academic-paper-content h2 {
+  font-size: 1.65rem;
+  border-bottom: 1px solid var(--border-color, #1e293b);
+  padding-bottom: 0.5rem;
+}
+
+.academic-paper-content h3 {
+  font-size: 1.25rem;
+}
+
+/* Two-Column Academic Grid / Columns */
+.academic-two-column {
+  column-count: 2;
+  column-gap: 2.5rem;
+  column-rule: 1px solid var(--border-color, #1e293b);
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  margin-bottom: 2rem;
+  line-height: 1.75;
+  font-size: 0.975rem;
+}
+
+.academic-two-column p {
+  margin-bottom: 1.2rem;
+}
+
+/* Full-Width Breakout for Large Figures, Spectrograms, and Multi-Column Tables */
+.full-width-breakout {
+  column-span: all;
+  width: 100%;
+  margin: 2.5rem 0;
+  clear: both;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Advisor Defense & Physical Invariants Callout Cards */
+.advisor-defense-card {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  background: rgba(2, 132, 199, 0.07);
+  border: 1px solid rgba(2, 132, 199, 0.28);
+  border-left: 4px solid #0284c7;
+  border-radius: var(--radius-sm, 6px);
+  padding: 1.25rem 1.5rem;
+  margin: 1.75rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.advisor-defense-card .defense-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.advisor-defense-card .defense-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #0284c7;
+  color: #ffffff;
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.advisor-defense-card .defense-title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+.advisor-defense-card p {
+  margin-bottom: 0.75rem;
+  color: var(--text-primary, #f8fafc);
+  font-size: 0.935rem;
+  line-height: 1.65;
+}
+
+.advisor-defense-card .formula-highlight {
+  font-family: var(--font-mono);
+  background: rgba(2, 132, 199, 0.15);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: #38bdf8;
+  font-size: 0.9em;
+}
+
+/* Interactive IEEE Citation Tooltips */
+.citation-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2, 132, 199, 0.18);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 0.8em;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  vertical-align: baseline;
+  position: relative;
+}
+
+.citation-badge:hover, .citation-badge:focus {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+  transform: translateY(-1px);
+}
+
+.citation-tooltip {
+  position: fixed;
+  background: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  font-size: 0.825rem;
+  line-height: 1.45;
+  max-width: 380px;
+  z-index: 10001;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-sans);
+  text-align: left;
+}
+
+.citation-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.citation-tooltip .tooltip-ref-num {
+  font-weight: 700;
+  color: #38bdf8;
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.citation-tooltip .tooltip-title {
+  font-weight: 600;
+  color: #f8fafc;
+  margin-bottom: 0.25rem;
+}
+
+.citation-tooltip .tooltip-authors {
+  color: #94a3b8;
+  font-size: 0.775rem;
+  margin-bottom: 0.35rem;
+}
+
+.citation-tooltip .tooltip-venue {
+  font-style: italic;
+  color: #64748b;
+  font-size: 0.75rem;
+}
+
+/* Collapsible Code Drawers */
+.collapsible-drawer, .code-drawer {
+  border: 1px solid var(--border-color, #1e293b);
+  border-radius: var(--radius-md, 10px);
+  margin: 1.5rem 0;
+  overflow: hidden;
+  background: var(--bg-code, #0b1120);
+  break-inside: avoid;
+}
+
+.drawer-header, .code-drawer-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background: rgba(30, 41, 59, 0.6);
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--transition-fast, 0.2s);
+}
+
+.drawer-header:hover, .code-drawer-toggle:hover {
+  background: rgba(30, 41, 59, 0.9);
+}
+
+.drawer-header .drawer-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary, #f8fafc);
+}
+
+.drawer-icon {
+  transition: transform 0.25s ease;
+  font-size: 0.75rem;
+  color: var(--text-muted, #64748b);
+}
+
+.collapsible-drawer.open .drawer-icon, .code-drawer.open .drawer-icon {
+  transform: rotate(180deg);
+}
+
+.drawer-content {
+  display: none;
+  border-top: 1px solid var(--border-color, #1e293b);
+}
+
+.collapsible-drawer.open .drawer-content, .code-drawer.open .drawer-content {
+  display: block;
+}
+
+/* KaTeX Mathematical Formula Styling */
+.katex-display, .math-display-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding: 0.75rem 0;
+  margin: 1rem 0;
+  scrollbar-width: thin;
+}
+
+.katex {
+  font-size: 1.05em;
+}
+
+/* Responsive Two-Column Collapse */
+@media (max-width: 900px) {
+  .academic-two-column {
+    column-count: 1 !important;
+    column-gap: 0 !important;
+    column-rule: none !important;
+    text-align: left !important;
+  }
+
+  .full-width-breakout {
+    margin: 1.5rem 0 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .advisor-defense-card {
+    padding: 1rem !important;
+  }
+
+  .citation-tooltip {
+    max-width: 92vw !important;
+    left: 4vw !important;
+    right: 4vw !important;
+  }
+}
+
 

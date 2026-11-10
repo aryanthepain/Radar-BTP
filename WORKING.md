@@ -3,34 +3,44 @@
 ## Current Objective
 
 - **Project**: Radar DSP & AI Detection Testbench (BTP)
-- **Status**: Phase 1 Complete. Phase 1.1 Complete. Phase 1.2 Full-Scale Cloud Benchmark Complete. Phase 01.2.1 Interactive Showcase & Thesis Presentation Website Shipped (PR #13).
-- **Active Pull Request**: [#13 (Phase 01.2.1: Interactive Research Showcase & Thesis Presentation Website)](https://github.com/aryanthepain/Radar-BTP/pull/13)
-- **Live Presentation Website**: [https://aryanthepain.github.io/Radar-BTP/](https://aryanthepain.github.io/Radar-BTP/)
-- **Active Branch**: gsd/phase-01.2.1-interactive-research-showcase-thesis-presentation-website
-- **Verification Gate**: pwsh -File ./scripts/verify.ps1
-- **Active Test Status**: 31/31 tests green in 13.4s.
-- **Phase 1.2 Achievements**:
-  - Full-scale RadDet S-128 dataset pipeline executed on Kaggle GPU over 40,003 frames (14,001 train / 6,001 val / 20,001 test) across 11 classes.
-  - Reproduces ICASSP 2025 Table III: YOLOv9-C achieves grand mean mAP50 = 25.25% (vs paper 25.93%) and mAP50:95 = 19.03% (vs paper 19.47%) across 6 multi-SNR bins (-20 dB to +20 dB).
-  - Peak validation performance: mAP50 = 32.53% (Epoch 60), mAP50:95 = 23.77% (Epoch 46), Recall = 72.60% (Epoch 25).
-  - Real-time hardware latency benchmark: 1.12 ms mean latency (892.9 FPS on Tesla T4 at batch size 1), matching paper 896.6 FPS within 0.4%.
-  - Comprehensive comparative analysis between small prototype run (40 synthetic frames, collapsed) and full-scale run (40,003 real frames, monotonic convergence).
-  - Full report generated at `data/benchmark_results/s128_full/COMPARATIVE_BENCHMARK_REPORT.md` and user-facing artifact.
+- **Active Phase**: Phase 01.2.2: Comprehensive BTP Thesis Report & Academic Publication Showcase Website
+- **Active Branch**: `gsd/phase-01.2.2-btp-thesis-report-academic-showcase`
+- **Status**: Phase 01.2.2 UAT complete! All 9 verification checkpoints verified. All 4 plans (01.2.2-01 through 01.2.2-04) executed and verified. Universal testbench passes 100% green (38/38 tests passing).
+- **Next Step**: Phase 01.2.2 ship / merge preparation or advance to Phase 1.3 (High-Coverage Unit & Integration Testing).
+
+---
+
+## Grounded Research Assets & Citations
+
+1. **Thesis in Workspace**:
+   - `FULLTEXT01_AI_radar.pdf` (_"Radar Signal Processing using Artificial Neural Networks"_, Alexander Karlsson, PhD Thesis, KTH Royal Institute of Technology & Saab Surveillance, 2023, 253 pages).
+   - Core chapters incorporated: FMCW & Saab SIRS 1600 radar parameters (Ch 2), Stepped-frequency pulse compression CNN (Ch 4), Track-Before-Detect (TBD) with max-channel CNN + polynomial MLP (Ch 5), Drone vs bird/human micro-Doppler classification with synthetic blade modeling & sparse autoencoder QDA (Ch 6), Low-angle naval multipath phase difference estimation & dual Kalman filter tracking (Ch 7).
+2. **DRDO Survey in Workspace**:
+   - `Artificial_Intelligence_based_Radar_Technology_Current_Advancements_Future_Directions_and_Challenges.pdf` (Dr. Tapas Kumar Pal, Scientist, RCI DRDO, IEEE SPACE 2025).
+   - Core concepts incorporated: Complete radar range equation with system losses, GAN-based adaptive clutter suppression, RL adaptive beamforming with DQN, INT8 edge quantization formula, and XAI gradient saliency maps.
+3. **ICASSP 2025 Benchmark in Workspace**:
+   - `RadDet_A_Wideband_Dataset_for_Real-Time_Radar_Spectrum_Detection.pdf` (Zi Huang et al., QUT & Revolution Aerospace, IEEE ICASSP 2025, arXiv:2501.10407).
+   - Core empirical data incorporated: Table I signal parameters, Table II variants, Table III reproduction across 40,003 frames, 11 classes, 6 SNR levels down to -20 dB, YOLOv3/v6/v9/RT-DETR latency and mAP trade-offs.
+4. **Online Literature SOTA (2024–2026)**:
+   - _TransRAD_ (IEEE Trans. Radar Systems, 2025): Retentive Vision Transformer with Manhattan Self-Attention for dense RAD tensors.
+   - _E-RODNet_ (IEEE Sensors Journal, 2024): Embedded lightweight single-stage radar object detector.
+   - _RadarMOTR_ (IEEE RADAR, 2024): Direct Transformer-based tracking on Range-Doppler maps.
+   - _Physics-Informed Super-Resolution_ (L-FISTA, CVPR/IEEE 2024–2025): Deep unrolling deconvolution breaking the physical Rayleigh limit without scaling physical antenna aperture.
+5. **IIT Guwahati Institutional Reference Templates**:
+   - `templates/230122021@BTP-1 Signed.pdf` (24 pages, Jinay Mehta, Nov 2026).
+   - `templates/BTP_2026_27_RajNandiniSaanvi.pdf` (58 pages, Raj Nandani & Saanvi Goel, Nov 2026).
 
 ---
 
 ## Acceptance Criteria
 
-- [x] 1. Universal project structure scaffolded (`AGENTS.md`, `CONSTITUTION.md`, `WORKING.md`, `.githooks/`, `scripts/verify.ps1`, `scripts/agent-alarm.ps1`).
-- [x] 2. Deterministic unit tests passed (27/27 in `tests/test_radar_dsp.py`, `tests/test_walkthrough_notebooks.py`, `tests/test_kaggle_integration.py`, and `tests/test_raddet.py`).
-- [x] 3. Radar mathematical invariants documented in `CONSTITUTION.md`.
-- [x] 4. Two-part academic walkthrough Jupyter notebooks generated with Dark Cyber-Radar Theme in root.
-- [x] 5. Kaggle Operating Rules & Telemetry codified.
-- [x] 6. Phase 1.1 Local Deliverables & Staged Kaggle Walkthrough Notebook complete.
-- [x] 7. Phase 1.1 Cloud Deployment & Prototype Execution on Kaggle GPU complete (`KernelWorkerStatus.COMPLETE`).
-- [x] 8. Phase 1.1 User Acceptance Testing (UAT) Certified.
-- [x] 9. Phase 1.2 S-128 Data Pipeline, Empirical Batch Sizing & YOLOv9 100-Epoch Training complete (01.2-01).
-- [x] 10. Phase 1.2 Multi-SNR Evaluation, Table III Exporter, Latency Profiler & Qualitative Grid complete (01.2-02).
-- [x] 11. Phase 1.2 Kaggle CLI Pull/Status Automation & Extended Test Coverage complete (01.2-03).
-- [x] 12. Phase 1.2 Cloud Benchmark Pushed and Running on Kaggle GPU (`aryanguptaji/raddet-s-128-full-scale-benchmark`).
-- [x] 13. Universal verification gate `scripts/verify.ps1` passes cleanly with 100% green rate.
+- [x] 1. Dedicated phase branch created: `gsd/phase-01.2.2-btp-thesis-report-academic-showcase`.
+- [x] 2. `ROADMAP.md` and `state.json` synchronized with Phase 01.2.2 and 3-plan roadmap.
+- [x] 3. Templates in `templates/` inspected and extracted via `read_file`.
+- [x] 4. Comprehensive research dossier authored in `.planning/phases/01.2.2-.../01.2.2-RESEARCH.md` and augmented with web SOTA + Karlsson PhD thesis + DRDO survey + ICASSP RadDet paper.
+- [x] 5. Professor focus questions thoroughly investigated and answered with mathematical & empirical rigor.
+- [x] 6. 1-Year timeline and Mermaid Gantt chart created spanning BTP-1 (completed) and BTP-2 (planned).
+- [x] 7. Phase 01.2.2 Plan 01 executed: Comprehensive academic literature synthesis, 7-axis research-gap matrix, mathematical formulation of 5 candidate methodologies (Primary: Methods 1, 2, 3; Exploratory: Methods 4, 5), dual constrained/Pareto optimization framework, and 6 supervisor defense questions authored in `01.2.2-RESEARCH-SYNTHESIS.md` (545 lines).
+- [x] 8. Execute Phase 01.2.2 Plan 02: Conduct Socratic grilling with Aryan Sandeep Gupta (230150003), document developer experience, 3 debugging case studies, domain gap analysis, full 1-year Gantt roadmap (Aug 2026 – May 2027), and Phase 01.2.3 figure generation specification in `01.2.2-BTP-EXPERIENCE.md` (268 lines).
+- [x] 9. Execute Phase 01.2.2 Plan 03: Rework GitHub Pages website into academic manuscript reader (two-column CSS layout, offline vendored KaTeX with 20 fonts, 30 IEEE interactive citations in `app.js`, scroll-spy, reading progress bar, Wave 0 test suite in `tests/test_academic_website.py`, all deterministic gates passing).
+- [x] 10. Execute Phase 01.2.2 Plan 04: Author and integrate complete BTP-1 Thesis Portal (~20-page equivalent) into `docs/index.html` with Chapters 1–7, 6 Advisor Defense Callout cards, Table III benchmark reproduction, 7-axis Research-Gap Matrix, 1-year Gantt & Risk Assessment, and 30 IEEE citations. All deterministic gates green (38/38 tests passing).

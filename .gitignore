@@ -61,3 +61,10 @@ desktop.ini
 .vscode/
 .idea/
 .planning/state.json
+
+# Raw email & timeline archives
+timeline/
+timeline/*
+
+temp_study_topics.md
+
