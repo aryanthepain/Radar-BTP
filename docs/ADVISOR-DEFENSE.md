@@ -117,3 +117,4 @@ We enforce strict sim-to-real fidelity across two orthogonal axes:
 1. **Physical Clutter Invariants in Simulation:** Our simulator models ground clutter using non-Rayleigh compound K-distributions and Weibull distributions, incorporating spatial array steering vector phase noise and antenna mutual coupling matrices:
    $$\mathbf{x}_{\text{received}} = \mathbf{C}_{\text{coupling}} \mathbf{A}(\theta) \mathbf{s}(t) + \mathbf{n}_{\text{Weibull}}(t)$$
 2. **Real-World Empirical Validation:** All quantitative benchmark claims in our thesis are evaluated directly on the **ICASSP 2025 RadDet real-world dataset**, recorded with physical 77 GHz FMCW automotive radar sensors in physical traffic environments across diverse weather, lighting, and multi-path scenarios.
+
