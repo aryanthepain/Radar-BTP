@@ -140,9 +140,9 @@ Plans:
 
 Plans:
 
-- [ ] 01.3-01: Author `tests/test_dsp_edge_cases.py` targeting OS-CFAR, Capon/MUSIC AoA, MTI cancellers, Doppler windowing, and Range FFT scaling.
-- [ ] 01.3-02: Author `tests/test_radar_dataset.py` targeting synthetic `RadarDataset` generation, box coordinate math, multi-task heatmap encoding, and DataLoader collate functions.
-- [ ] 01.3-03: Author `tests/test_pipeline_scripts.py` targeting `scripts/run_radar_pipeline.py`, `scripts/push_kaggle_kernel.py`, and update `scripts/verify.ps1` with strict `pytest-cov` enforcement.
+- [x] 01.3-01: Author `tests/test_dsp_edge_cases.py` targeting OS-CFAR, Capon/MUSIC AoA, MTI cancellers, Doppler windowing, and Range FFT scaling.
+- [x] 01.3-02: Author `tests/test_radar_dataset.py` targeting synthetic `RadarDataset` generation, box coordinate math, multi-task heatmap encoding, and DataLoader collate functions.
+- [x] 01.3-03: Author `tests/test_pipeline_scripts.py` targeting `scripts/run_radar_pipeline.py`, `scripts/push_kaggle_kernel.py`, and update `scripts/verify.ps1` with strict `pytest-cov` enforcement.
 
 ### Phase 2: Multi-Level Decoupled Radar Data Ingestion
 
@@ -209,7 +209,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                   | 3/3            | Completed   | 2026-11-03 |
 | 01.2.1. Interactive Research Showcase & Thesis Presentation Website          | 3/3            | Completed   | 2026-11-03 |
 | 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 4/4            | Completed   | 2026-11-10 |
-| 1.3. High-Coverage Deterministic Unit & Integration Testing                  | 0/3            | In Progress | -          |
+| 1.3. High-Coverage Deterministic Unit & Integration Testing                  | 3/3            | Completed   | 2026-11-10 |
 | 2. Multi-Level Decoupled Radar Data Ingestion                                | 0/2            | Not started | -          |
 | 3. Pipeline Integration & Deterministic Verification Gates                   | 0/2            | Not started | -          |
 | 4. Visual & Interactive Design Cherishments                                  | 0/2            | Backlog     | -          |

@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Deterministic Verification Gate (verify.ps1)
     Detects repository type and runs zero-cost static analysis and test suites.
@@ -43,17 +43,17 @@ if ($isPython) {
     if (-not $failed) {
         $hasPytest = Get-Command pytest -ErrorAction SilentlyContinue
         if ($hasPytest) {
-            Write-Host "Running pytest..." -ForegroundColor Gray
+            Write-Host "Running pytest with coverage enforcement (>=90%)..." -ForegroundColor Gray
             if ($TargetTest) {
                 pytest -k $TargetTest -v
             } else {
-                pytest -q
+                pytest --cov=src --cov-fail-under=90 -q
             }
             if ($LASTEXITCODE -ne 0) {
-                Write-Host "❌ pytest tests failed!" -ForegroundColor Red
+                Write-Host "❌ pytest tests or coverage threshold failed!" -ForegroundColor Red
                 $failed = $true
             } else {
-                Write-Host "✅ pytest tests passed." -ForegroundColor Green
+                Write-Host "✅ pytest tests and coverage gate (>=90%) passed." -ForegroundColor Green
             }
         } else {
             Write-Host "Running python unittest suite..." -ForegroundColor Gray
