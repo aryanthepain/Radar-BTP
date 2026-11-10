@@ -2,18 +2,18 @@
 gsd_state_version: "1.0"
 current_phase: 02
 current_phase_name: multi-level-decoupled-radar-data-ingestion
-status: "Phase 1.3 complete — all 3 plans executed and verified"
-stopped_at: Phase 1.3 complete, ready for Phase 2
-last_updated: "2026-11-10T13:49:00.000Z"
+status: "Phase 01.2.2 (Plan 05) and Phase 1.3 complete — all plans executed and verified"
+stopped_at: Phase 01.2.2 and Phase 1.3 complete, ready for Phase 2
+last_updated: "2026-11-10T14:50:00.000Z"
 last_activity: 2026-11-10
-last_activity_desc: Completed Phase 1.3 execution (01.3-01 through 01.3-03 complete). Expanded test suite to 52 tests, lifted total core coverage to 97.35%, and enforced >=90% test coverage threshold in scripts/verify.ps1.
-state_head: 5d30804
+last_activity_desc: 2026-11-10 -- Phase 01.2.2 shipped as PR #16 (BTP-1 Thesis Portal Refinements & Academic Defense Modularization)
+state_head: d38b7b8
 progress:
   total_phases: 8
   completed_phases: 7
-  total_plans: 24
-  completed_plans: 20
-  percent: 83
+  total_plans: 25
+  completed_plans: 21
+  percent: 84
 granularity: fine
 ---
 
@@ -28,20 +28,20 @@ See: .planning/PROJECT.md (updated 2026-11-10)
 
 ## Current Position
 
-Phase: 01.3 (high-coverage-deterministic-unit-integration-testing) — COMPLETED
-Plan: 3 of 3 in phase 01.3
-Status: Phase 1.3 complete — all 3 plans executed and verified
-Last activity: 2026-11-10 — Successfully implemented tests/test_dsp_edge_cases.py, tests/test_radar_dataset.py, and tests/test_pipeline_scripts.py. Total test suite expanded to 52 passing tests at 97.35% coverage.
+Phase: 01.2.2 (comprehensive-btp-thesis-report-academic-publication-showcas) & 01.3 (high-coverage-deterministic-unit-integration-testing) — COMPLETED
+Plan: 5 of 5 in phase 01.2.2 | 3 of 3 in phase 01.3
+Status: Phase 01.2.2 & Phase 1.3 complete — all plans executed and verified
+Last activity: 2026-11-10 — Executed Plan 05 thesis portal refinements (institutional metadata, code drawers, latency waterfall, CPU-first protocol) and modularized advisor defense cards into docs/ADVISOR-DEFENSE.md.
 
-Progress: [████████░░] 83%
+Progress: [████████░░] 84%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 20
+- Total plans completed: 21
 - Average duration: 15 min
-- Total execution time: 5.0 hours
+- Total execution time: 5.25 hours
 
 **By Phase:**
 
@@ -51,7 +51,7 @@ Progress: [████████░░] 83%
 | 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark | 5     | 5     | 15 min   |
 | 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)   | 3     | 3     | 15 min   |
 | 01.2.1. Interactive Research Showcase & Presentation Website | 3     | 3     | 15 min   |
-| 01.2.2. Comprehensive BTP Thesis Report & Academic Website   | 4     | 4     | 15 min   |
+| 01.2.2. Comprehensive BTP Thesis Report & Academic Website   | 5     | 5     | 15 min   |
 | 1.3. High-Coverage Deterministic Unit & Integration Testing  | 3     | 3     | 15 min   |
 | 2. Multi-Level Decoupled Radar Data Ingestion                | 0     | 2     | -        |
 | 3. Pipeline Integration & Deterministic Verification Gates   | 0     | 2     | -        |
