@@ -5,8 +5,8 @@
 - **Project**: Radar DSP & AI Detection Testbench (BTP)
 - **Active Phase**: Phase 01.2.2: Comprehensive BTP Thesis Report & Academic Publication Showcase Website
 - **Active Branch**: `gsd/phase-01.2.2-btp-thesis-report-academic-showcase`
-- **Status**: Research Dossier comprehensively expanded with live IEEE 2024–2026 web research, Alexander Karlsson's Saab/KTH 2023 PhD thesis, Dr. Tapas Kumar Pal's DRDO 2025 survey, and Zi Huang et al. ICASSP 2025 RadDet benchmark (`.planning/phases/01.2.2-comprehensive-btp-thesis-report-academic-publication-showcas/01.2.2-RESEARCH.md`).
-- **Next Step**: Conduct the interactive discussion-based grilling sessions on the report chapters and lock in content decisions with the user (Plan 01.2.2-02), then proceed to draft the formal ~24-page IIT Guwahati BTP-1 report and publication website.
+- **Status**: Phase 01.2.2 UAT complete! All 9 verification checkpoints verified. All 4 plans (01.2.2-01 through 01.2.2-04) executed and verified. Universal testbench passes 100% green (38/38 tests passing).
+- **Next Step**: Phase 01.2.2 ship / merge preparation or advance to Phase 1.3 (High-Coverage Unit & Integration Testing).
 
 ---
 
@@ -43,3 +43,4 @@
 - [x] 7. Phase 01.2.2 Plan 01 executed: Comprehensive academic literature synthesis, 7-axis research-gap matrix, mathematical formulation of 5 candidate methodologies (Primary: Methods 1, 2, 3; Exploratory: Methods 4, 5), dual constrained/Pareto optimization framework, and 6 supervisor defense questions authored in `01.2.2-RESEARCH-SYNTHESIS.md` (545 lines).
 - [x] 8. Execute Phase 01.2.2 Plan 02: Conduct Socratic grilling with Aryan Sandeep Gupta (230150003), document developer experience, 3 debugging case studies, domain gap analysis, full 1-year Gantt roadmap (Aug 2026 – May 2027), and Phase 01.2.3 figure generation specification in `01.2.2-BTP-EXPERIENCE.md` (268 lines).
 - [x] 9. Execute Phase 01.2.2 Plan 03: Rework GitHub Pages website into academic manuscript reader (two-column CSS layout, offline vendored KaTeX with 20 fonts, 30 IEEE interactive citations in `app.js`, scroll-spy, reading progress bar, Wave 0 test suite in `tests/test_academic_website.py`, all deterministic gates passing).
+- [x] 10. Execute Phase 01.2.2 Plan 04: Author and integrate complete BTP-1 Thesis Portal (~20-page equivalent) into `docs/index.html` with Chapters 1–7, 6 Advisor Defense Callout cards, Table III benchmark reproduction, 7-axis Research-Gap Matrix, 1-year Gantt & Risk Assessment, and 30 IEEE citations. All deterministic gates green (38/38 tests passing).

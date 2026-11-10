@@ -15,7 +15,7 @@ A phased journey to prepare an undergraduate thesis exploratory presentation for
 - [x] **Phase 1.1: RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice)** (INSERTED) - Ingest real-world RadDet ICASSP 2025 dataset with minimal local micro-slice, YOLOv8/v9 spectrum detector, and limited Kaggle run.
 - [x] **Phase 1.2: Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)** (INSERTED) - Execute 20,000-frame full training run on S (128²) resolution across multi-SNR settings on Kaggle GPU for up to 100 epochs.
 - [x] **Phase 01.2.1: Interactive Research Showcase & Thesis Presentation Website** (INSERTED) - Deliver a clean, responsive showcase website for the supervising professor synthesizing all three notebooks, experimental results, comparative radar data progression (toy -> synthetic -> real RadDet), architecture flowcharts, and key code snippets.
-- [ ] **Phase 01.2.2: Comprehensive BTP Thesis Report & Academic Publication Showcase Website** (INSERTED) - Deliver publication-grade ~20-page IIT Guwahati BTP Report and rework GitHub Pages website into an academic reading experience for professor finalization.
+- [x] **Phase 01.2.2: Comprehensive BTP Thesis Report & Academic Publication Showcase Website** (INSERTED) - Deliver publication-grade ~20-page IIT Guwahati BTP Report and rework GitHub Pages website into an academic reading experience for professor finalization.
 - [ ] **Phase 1.3: High-Coverage Deterministic Unit & Integration Testing** (INSERTED) - Comprehensive test expansion achieving >=90% code coverage across DSP algorithms, PyTorch dataset/models, and pipeline scripts with pytest-cov.
 - [ ] **Phase 2: Multi-Level Decoupled Radar Data Ingestion** - Implement internal data adapter decoupling pipeline from simulator (Raw ADC cubes, RDM/RAD tensors, Point Cloud DataFrames).
 - [ ] **Phase 3: Pipeline Integration & Deterministic Verification Gates** - Integrate decoupled data flow into pipeline testbench and pass all deterministic gates.
@@ -116,12 +116,12 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 01.2.2-01: Deep Research & Literature Synthesis with Interactive Clarification (RadDet, RAVEN, AdaRadar, Karlsson KTH/Saab, DRDO Pal).
-- [ ] 01.2.2-02: BTP Experience, Timeline & Technical Journey Grilling (Aug 2026 to May 2027 calendar).
-- [ ] 01.2.2-03: Two-Column Academic Paper Architecture, KaTeX Math & Reader UX in `docs/`.
+- [x] 01.2.2-01: Deep Research & Literature Synthesis with Interactive Clarification (RadDet, RAVEN, AdaRadar, Karlsson KTH/Saab, DRDO Pal).
+- [x] 01.2.2-02: BTP Experience, Timeline & Technical Journey Grilling (Aug 2026 to May 2027 calendar).
+- [x] 01.2.2-03: Two-Column Academic Paper Architecture, KaTeX Math & Reader UX in `docs/`.
 
 **Wave 2**
-- [ ] 01.2.2-04: Full Academic Report Content Synthesis & Verification (~20-page comprehensive report covering all 9 deliverables, professor defense, and test gates).
+- [x] 01.2.2-04: Full Academic Report Content Synthesis & Verification (~20-page comprehensive report covering all 9 deliverables, professor defense, and test gates).
 
 ### Phase 1.3: High-Coverage Deterministic Unit & Integration Testing (INSERTED)
 
@@ -208,7 +208,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice) | 5/5            | Completed   | 2026-11-02 |
 | 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                   | 3/3            | Completed   | 2026-11-03 |
 | 01.2.1. Interactive Research Showcase & Thesis Presentation Website          | 3/3            | Completed   | 2026-11-03 |
-| 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 0/4            | In Progress | -          |
+| 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 4/4            | Completed   | 2026-11-10 |
 | 1.3. High-Coverage Deterministic Unit & Integration Testing                  | 0/3            | In Progress | -          |
 | 2. Multi-Level Decoupled Radar Data Ingestion                                | 0/2            | Not started | -          |
 | 3. Pipeline Integration & Deterministic Verification Gates                   | 0/2            | Not started | -          |
