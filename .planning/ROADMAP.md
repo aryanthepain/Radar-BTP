@@ -17,9 +17,6 @@ A phased journey to prepare an undergraduate thesis exploratory presentation for
 - [x] **Phase 01.2.1: Interactive Research Showcase & Thesis Presentation Website** (INSERTED) - Deliver a clean, responsive showcase website for the supervising professor synthesizing all three notebooks, experimental results, comparative radar data progression (toy -> synthetic -> real RadDet), architecture flowcharts, and key code snippets.
 - [x] **Phase 01.2.2: Comprehensive BTP Thesis Report & Academic Publication Showcase Website** (INSERTED) - Deliver publication-grade ~20-page IIT Guwahati BTP Report and rework GitHub Pages website into an academic reading experience for professor finalization.
 - [x] **Phase 1.3: High-Coverage Deterministic Unit & Integration Testing** (INSERTED) - Comprehensive test expansion achieving >=90% code coverage across DSP algorithms, PyTorch dataset/models, and pipeline scripts with pytest-cov.
-- [ ] **Phase 2: Multi-Level Decoupled Radar Data Ingestion** - Implement internal data adapter decoupling pipeline from simulator (Raw ADC cubes, RDM/RAD tensors, Point Cloud DataFrames).
-- [ ] **Phase 3: Pipeline Integration & Deterministic Verification Gates** - Integrate decoupled data flow into pipeline testbench and pass all deterministic gates.
-- [ ] **Phase 4: Visual & Interactive Design Cherishments** (POST-CORE POLISH) - Add dynamic reading progress bar, interactive IEEE floating citation hover cards, and advanced visual reader embellishments to the documentation portal.
 
 ## Phase Details
 
@@ -150,72 +147,33 @@ Plans:
 - [x] 01.3-02: Author `tests/test_radar_dataset.py` targeting synthetic `RadarDataset` generation, box coordinate math, multi-task heatmap encoding, and DataLoader collate functions.
 - [x] 01.3-03: Author `tests/test_pipeline_scripts.py` targeting `scripts/run_radar_pipeline.py`, `scripts/push_kaggle_kernel.py`, and update `scripts/verify.ps1` with strict `pytest-cov` enforcement.
 
-### Phase 2: Multi-Level Decoupled Radar Data Ingestion
-
-**Goal**: Build a universal `RadarDataAdapter` allowing direct data injection at all pipeline levels (Level 1: Raw ADC cubes, Level 2: RDM/RAD tensors, Level 3: Point Cloud DataFrames) independently of the simulator for internal project flexibility.
-**Mode**: mvp
-**Depends on**: Phase 1
-**Requirements**: DATA-01, DATA-02, DATA-03, DATA-04, VERIF-01
-**Success Criteria** (what must be TRUE):
-
-1. Direct ingestion of 3D complex ADC cubes `(num_rx, num_chirps, num_samples)` from NumPy arrays or files without calling `FMCWRadarSimulator`.
-2. Direct ingestion of Range-Doppler matrices or 3D RAD tensors (e.g. RadDet tensor format) into CFAR and CNN detector modules.
-3. Direct ingestion of Pandas DataFrames with detection points into DBSCAN clustering and Cartesian coordinate mapping.
-4. Unit test suite `tests/test_radar_data_adapter.py` passes deterministically covering all three ingestion levels.
-   **Plans**: TBD
-
-Plans:
-
-- [ ] 02-01: Implement `RadarDataAdapter` and validation routines in `src/dsp/data_adapter.py`.
-- [ ] 02-02: Author unit tests in `tests/test_radar_data_adapter.py` validating all ingestion levels.
-
-### Phase 3: Pipeline Integration & Deterministic Verification Gates
-
-**Goal**: Integrate the decoupled data adapters into the main end-to-end testbench (`scripts/run_radar_pipeline.py`) and ensure all deterministic gates and GitHub issue linkages pass cleanly.
-**Mode**: mvp
-**Depends on**: Phase 2
-**Requirements**: VERIF-02
-**Success Criteria** (what must be TRUE):
-
-1. Testbench runs full pipeline with both simulated data and external adapter data.
-2. Deterministic gate `pwsh -File ./scripts/verify.ps1` passes with zero errors.
-3. Audio alert and verification logs confirm completion ready for presentation.
-   **Plans**: TBD
-
-Plans:
-
-- [ ] 03-01: Update `scripts/run_radar_pipeline.py` to demonstrate both simulated and decoupled data paths.
-- [ ] 03-02: Run universal verification gate (`scripts/verify.ps1`), confirm Closes #3 and Closes #4, and trigger completion audio alert.
-
-### Phase 4: Visual & Interactive Design Cherishments
-
-**Goal**: Elevate the academic documentation portal with interactive visual polish, dynamic reading progress bar, floating IEEE citation preview cards, and advanced aesthetic embellishments once all core thesis content and DSP ingestion phases are complete.
-**Mode**: standard
-**Depends on**: Phase 3
-**Success Criteria** (what must be TRUE):
-
-1. Dynamic gradient top reading progress bar reflects exact scroll position.
-2. Interactive IEEE citation badges render floating metadata cards with authors, venue, year, and DOI links on hover.
-3. Interactive UI transitions, code copy feedback, and reading mode controls operate smoothly.
-
-Plans:
-
-- [ ] 04-01: Implement top reading progress indicator and interactive citation hover cards.
-- [ ] 04-02: Fine-tune typography, code frame styling, and mobile drawer transitions.
-
 ## Progress
 
-**Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4
+**Execution Status:**
+All planned thesis preparatory and exploratory phases (Phase 1, 1.1, 1.2, 01.2.1, 01.2.2, 1.3) are 100% complete and verified.
 
-| Phase                                                                           | Plans Complete | Status      | Completed  |
-| ------------------------------------------------------------------------------- | -------------- | ----------- | ---------- |
-| 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams                    | 2/2            | Completed   | 2026-09-23 |
-| 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice)    | 5/5            | Completed   | 2026-11-02 |
-| 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                      | 3/3            | Completed   | 2026-11-03 |
-| 01.2.1. Interactive Research Showcase & Thesis Presentation Website             | 3/3            | Completed   | 2026-11-03 |
-| 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 5/5            | Completed   | 2026-11-10 |
-| 1.3. High-Coverage Deterministic Unit & Integration Testing                     | 3/3            | Completed   | 2026-11-10 |
-| 2. Multi-Level Decoupled Radar Data Ingestion                                   | 0/2            | Not started | -          |
-| 3. Pipeline Integration & Deterministic Verification Gates                      | 0/2            | Not started | -          |
-| 4. Visual & Interactive Design Cherishments                                     | 0/2            | Backlog     | -          |
+| Phase                                                                           | Plans Complete | Status    | Completed  |
+| ------------------------------------------------------------------------------- | -------------- | --------- | ---------- |
+| 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams                    | 2/2            | Completed | 2026-09-23 |
+| 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice)    | 5/5            | Completed | 2026-11-02 |
+| 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                      | 3/3            | Completed | 2026-11-03 |
+| 01.2.1. Interactive Research Showcase & Thesis Presentation Website             | 3/3            | Completed | 2026-11-03 |
+| 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 5/5            | Completed | 2026-11-10 |
+| 1.3. High-Coverage Deterministic Unit & Integration Testing                     | 3/3            | Completed | 2026-11-10 |
+
+## Deferred / GitHub Issue Backlog
+
+Phases 2, 3, and 4 have been removed from the active GSD planning cycle and preserved as discrete, tracked GitHub issues:
+
+### Former Phase 2: Multi-Level Decoupled Radar Data Ingestion
+- [#17](https://github.com/aryanthepain/Radar-BTP/issues/17): `feat(dsp): Universal RadarDataAdapter & Level 1/2 Decoupled Ingestion (Raw ADC Cubes & Range-Doppler Tensors)` (DATA-01, DATA-02, DATA-04)
+- [#3](https://github.com/aryanthepain/Radar-BTP/issues/3): `feat(dsp): Level 3 DataFrame & Point Cloud Ingestion with Unit Test Verification` (DATA-03, VERIF-01)
+
+### Former Phase 3: Pipeline Integration & Deterministic Verification Gates
+- [#18](https://github.com/aryanthepain/Radar-BTP/issues/18): `feat(pipeline): Dual-Path Pipeline Integration for Decoupled Radar Ingestion` (VERIF-02)
+- [#19](https://github.com/aryanthepain/Radar-BTP/issues/19): `ci(verif): Verification Gate Expansion & Sub-30s CI Smoke Tests for Ingestion Adapters` (VERIF-02)
+
+### Former Phase 4: Visual & Interactive Design Cherishments
+- [#20](https://github.com/aryanthepain/Radar-BTP/issues/20): `feat(docs): Dynamic Reading Progress Bar & Scroll Tracking in Thesis Portal`
+- [#21](https://github.com/aryanthepain/Radar-BTP/issues/21): `feat(docs): Interactive Floating IEEE Citation Cards & Bibliography Previews`
+- [#22](https://github.com/aryanthepain/Radar-BTP/issues/22): `feat(docs): Academic Reader Embellishments, Code Drawers & Mobile UX Polish`

@@ -1,25 +1,24 @@
 {
   "mcpServers": {
-    "data-agent-kit": {
-      "command": "node",
+    "notebooks": {
       "args": [
-        "C:\\Users\\Aryan Gupta\\.antigravity-ide\\extensions\\googlecloudtools.datacloud-1.2.0-universal\\mcp_servers\\cli\\mcp_proxy_bundle.js",
+        "c:\\Users\\Aryan Gupta\\.antigravity-ide\\extensions\\googlecloudtools.datacloud-1.2.0-universal\\mcp_servers\\cli\\mcp_proxy_bundle.js",
+        "notebooks-antigravityide"
+      ],
+      "command": "node"
+    },
+    "data-agent-kit": {
+      "args": [
+        "c:\\Users\\Aryan Gupta\\.antigravity-ide\\extensions\\googlecloudtools.datacloud-1.2.0-universal\\mcp_servers\\cli\\mcp_proxy_bundle.js",
         "dataAgentKit-antigravityide"
-      ]
+      ],
+      "command": "node"
     },
     "kaggle": {
       "serverUrl": "https://www.kaggle.com/mcp",
       "headers": {
-        "Authorization": "Bearer KGAT_c9b8409dd4e20154eab104ef9a8244be",
         "User-Agent": "antigravity.kaggle"
       }
-    },
-    "notebooks": {
-      "command": "node",
-      "args": [
-        "C:\\Users\\Aryan Gupta\\.antigravity-ide\\extensions\\googlecloudtools.datacloud-1.2.0-universal\\mcp_servers\\cli\\mcp_proxy_bundle.js",
-        "notebooks-antigravityide"
-      ]
     }
   }
 }

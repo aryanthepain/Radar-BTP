@@ -1,19 +1,19 @@
 ---
 gsd_state_version: "1.0"
-current_phase: 02
-current_phase_name: multi-level-decoupled-radar-data-ingestion
-status: "Phase 01.2.2 (Plan 05) and Phase 1.3 complete — all plans executed and verified"
-stopped_at: Phase 01.2.2 and Phase 1.3 complete, ready for Phase 2
-last_updated: "2026-11-10T14:50:00.000Z"
-last_activity: 2026-11-10
-last_activity_desc: 2026-11-10 -- Phase 01.2.2 shipped as PR #16 (BTP-1 Thesis Portal Refinements & Academic Defense Modularization)
+current_phase: null
+current_phase_name: milestone-exploratory-complete
+status: "All planned exploratory phases (1, 1.1, 1.2, 01.2.1, 01.2.2, 1.3) complete — Phases 2, 3, 4 moved to GitHub Issues #3, #17-#22"
+stopped_at: "Exploratory milestone 100% complete and verified; awaiting professor thesis review or backlog issue pickup"
+last_updated: "2026-11-12T17:35:00.000Z"
+last_activity: 2026-11-12
+last_activity_desc: 2026-11-12 -- Phases 2, 3, 4 moved to GitHub Issues #3, #17-#22 and removed from active planning
 state_head: d38b7b8
 progress:
-  total_phases: 8
-  completed_phases: 7
-  total_plans: 25
+  total_phases: 6
+  completed_phases: 6
+  total_plans: 21
   completed_plans: 21
-  percent: 84
+  percent: 100
 granularity: fine
 ---
 
@@ -21,19 +21,18 @@ granularity: fine
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-11-10)
+See: .planning/PROJECT.md (updated 2026-11-12)
 
 **Core value:** Modular, decoupled radar perception enabling multi-level data ingestion (raw ADC cubes, Range-Doppler tensors, or point cloud dataframes) and transparent academic presentation of radar signal processing.
-**Current focus:** Phase 2: Multi-Level Decoupled Radar Data Ingestion (Next up)
+**Current focus:** Exploratory thesis foundation complete. Former Phases 2, 3, 4 tracked in GitHub Issues (#3, #17-#22).
 
 ## Current Position
 
-Phase: 01.2.2 (comprehensive-btp-thesis-report-academic-publication-showcas) & 01.3 (high-coverage-deterministic-unit-integration-testing) — COMPLETED
-Plan: 5 of 5 in phase 01.2.2 | 3 of 3 in phase 01.3
-Status: Phase 01.2.2 & Phase 1.3 complete — all plans executed and verified
-Last activity: 2026-11-10 — Executed Plan 05 thesis portal refinements (institutional metadata, code drawers, latency waterfall, CPU-first protocol) and modularized advisor defense cards into docs/ADVISOR-DEFENSE.md.
+Phase: 01.2.2 & 01.3 — COMPLETED (All exploratory milestone phases 1, 1.1, 1.2, 01.2.1, 01.2.2, 1.3 complete)
+Status: Exploratory milestone 100% complete — all plans executed and verified
+Last activity: 2026-11-12 — Transferred Phases 2, 3, 4 to GitHub Issues (#3, #17, #18, #19, #20, #21, #22) and updated roadmap.
 
-Progress: [████████░░] 84%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -53,8 +52,6 @@ Progress: [████████░░] 84%
 | 01.2.1. Interactive Research Showcase & Presentation Website | 3     | 3     | 15 min   |
 | 01.2.2. Comprehensive BTP Thesis Report & Academic Website   | 5     | 5     | 15 min   |
 | 1.3. High-Coverage Deterministic Unit & Integration Testing  | 3     | 3     | 15 min   |
-| 2. Multi-Level Decoupled Radar Data Ingestion                | 0     | 2     | -        |
-| 3. Pipeline Integration & Deterministic Verification Gates   | 0     | 2     | -        |
 
 **Recent Trend:**
 

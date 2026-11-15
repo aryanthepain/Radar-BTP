@@ -21,20 +21,19 @@ Modular, decoupled radar perception enabling multi-level data ingestion (raw ADC
 - ✓ DBSCAN spatial clustering of polar detections into Cartesian object tracks (`src/dsp/clustering.py`) — existing
 - ✓ Multi-task convolutional neural network (`RadarObjectDetectorCNN`) for heatmap and bounding box prediction (`src/models/`) — existing
 - ✓ Deterministic test verification suite and end-to-end pipeline testbench (`scripts/run_radar_pipeline.py`, `tests/`) — existing
+- ✓ Compartmentalized Jupyter Walkthroughs & Mermaid System Architecture (Phase 1 / Issue #4 closed)
+- ✓ RadDet ICASSP 2025 Dataset Integration & Prototype (Phase 1.1)
+- ✓ Full-Scale RadDet Benchmark on Kaggle GPU (Phase 1.2)
+- ✓ Interactive Research Showcase & Presentation Website (Phase 01.2.1)
+- ✓ Comprehensive BTP Thesis Report & Academic Publication Showcase Website in `docs/` (Phase 01.2.2)
+- ✓ High-Coverage Deterministic Unit & Integration Testing achieving >=90% coverage with `pytest-cov` (Phase 1.3)
 
 ### Active
 
-- [ ] **Multi-Level Decoupled Radar Data Ingestion (GitHub Issue #3 / Closes #3)**:
-  - Create a universal data adapter interface that allows directly passing data at any stage, independent of the simulator:
-    - **Level 1 (Raw ADC Cube)**: Complex NumPy array / tensor of shape `(num_rx, num_chirps, num_samples)` or file loader (`.npy`, `.npz`, `.mat`).
-    - **Level 2 (Range-Doppler Matrix / RAD Tensor)**: 2D/3D tensor of shape `(num_doppler, num_range)` or RadDet-style RAD tensor `(range, azimuth, doppler)`.
-    - **Level 3 (Tabular DataFrame / Point Cloud)**: Pandas DataFrame or structured array with columns `['range', 'velocity', 'azimuth', 'rcs']` or `['x', 'y', 'z', 'doppler']`.
-  - Ensure pipeline functions accept these data structures directly without requiring an active `FMCWRadarSimulator` instance.
-
-- [ ] **Compartmentalized Professor Presentation & Mermaid System Architecture (GitHub Issue #4 / Closes #4)**:
-  - Update `01_radar_classical_dsp.ipynb` with clear academic markdown summaries, an end-to-end Mermaid pipeline diagram at the top, and modular Mermaid flow diagrams for each DSP section showing data inputs, functions, mathematical transformations, and outputs.
-  - Update `02_radar_deep_learning_detection.ipynb` with clear narrative markdown, an end-to-end deep learning workflow diagram, and section diagrams detailing data preprocessing, neural network architecture, loss calculation, and detection visualization.
-  - Maintain all existing working functionality and verification gates without introducing unnecessary external tools or bloated frameworks.
+All exploratory thesis preparation phases are 100% complete and verified. Follow-up features are tracked as discrete GitHub issues:
+- **Decoupled Data Ingestion**: Tracked in Issues [#17](https://github.com/aryanthepain/Radar-BTP/issues/17) and [#3](https://github.com/aryanthepain/Radar-BTP/issues/3).
+- **Pipeline Integration & Verification**: Tracked in Issues [#18](https://github.com/aryanthepain/Radar-BTP/issues/18) and [#19](https://github.com/aryanthepain/Radar-BTP/issues/19).
+- **Documentation Portal Enhancements**: Tracked in Issues [#20](https://github.com/aryanthepain/Radar-BTP/issues/20), [#21](https://github.com/aryanthepain/Radar-BTP/issues/21), and [#22](https://github.com/aryanthepain/Radar-BTP/issues/22).
 
 ### Out of Scope
 
@@ -60,9 +59,11 @@ Modular, decoupled radar perception enabling multi-level data ingestion (raw ADC
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Multi-level decoupled ingestion adapter | Accommodates raw ADC cubes, Range-Doppler / RadDet tensors, and point cloud DataFrames from any source | — Pending |
-| Mermaid diagrams inside Jupyter notebooks | Maximizes presentation clarity for the professor without adding external UI dependencies | — Pending |
-| Focus strictly on Issues #3 and #4 | Scopes current milestone directly to presentation readiness before receiving formal BTP problem | — Pending |
+| Multi-level decoupled ingestion adapter | Accommodates raw ADC cubes, Range-Doppler / RadDet tensors, and point cloud DataFrames from any source | — Deferred to GitHub Issues #17 & #3 |
+| Mermaid diagrams inside Jupyter notebooks | Maximizes presentation clarity for the professor without adding external UI dependencies | — Complete (Phase 1) |
+| Academic publication showcase & thesis portal | 20-page IIT Guwahati thesis report with KaTeX & interactive reader UX in `docs/` | — Complete (Phase 01.2.2) |
+| High-coverage test suite expansion | >=90% deterministic coverage with pytest-cov across core DSP and DL | — Complete (Phase 1.3) |
+| Defer Phases 2, 3, 4 to GitHub Backlog | Frees active planning for thesis problem statement while preserving full issue tracking | — Complete (Issues #3, #17-#22) |
 
 ## Evolution
 

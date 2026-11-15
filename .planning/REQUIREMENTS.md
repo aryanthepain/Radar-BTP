@@ -5,19 +5,12 @@
 
 ## v1 Requirements
 
-### Multi-Level Decoupled Ingestion (DATA — Closes #3)
-
-- [ ] **DATA-01**: Pipeline can directly ingest raw 3D complex ADC radar cubes `(num_rx, num_chirps, num_samples)` from NumPy arrays, tensors, or `.npy`/`.npz`/`.mat` files without requiring `FMCWRadarSimulator`.
-- [ ] **DATA-02**: Pipeline can directly ingest 2D Range-Doppler matrices (RDM) or 3D RAD tensors (e.g., RadDet tensor structure `(range, azimuth, doppler)`) directly into CFAR detection and deep learning modules, bypassing simulation and 1D/2D FFT processing.
-- [ ] **DATA-03**: Pipeline can directly ingest tabular DataFrames or structured point clouds (`pd.DataFrame` with range, velocity, azimuth, power/rcs) directly into spatial clustering (DBSCAN) and downstream Cartesian tracking.
-- [ ] **DATA-04**: Universal `RadarDataAdapter` abstraction providing schema inspection, shape validation, and automatic routing to the appropriate pipeline stage.
-
 ### Compartmentalized Professor Presentation & Architecture (PRES — Closes #4)
 
-- [ ] **PRES-01**: Top-level Mermaid flow diagram embedded at the beginning of `01_radar_classical_dsp.ipynb` depicting the complete end-to-end signal flow from raw data ingestion to clustered tracks.
-- [ ] **PRES-02**: Compartmentalized section-level Mermaid diagrams in `01_radar_classical_dsp.ipynb` for each discrete stage (Ingestion, Fast-Time FFT, MTI Clutter Filtering, Doppler FFT, 2D CFAR, MUSIC AoA, DBSCAN Clustering), detailing input data, function signatures, operations, and outputs in one diagram per section.
-- [ ] **PRES-03**: Top-level and section-level Mermaid architecture diagrams in `02_radar_deep_learning_detection.ipynb` covering dataset generation, convolutional backbone, multi-task prediction heads (heatmaps & boxes), loss functions, and evaluation.
-- [ ] **PRES-04**: Polished academic markdown documentation in both notebooks explaining physical principles, mathematical formulations, and engineering trade-offs for clear presentation to the thesis advisor.
+- [x] **PRES-01**: Top-level Mermaid flow diagram embedded at the beginning of `01_radar_classical_dsp.ipynb` depicting the complete end-to-end signal flow from raw data ingestion to clustered tracks.
+- [x] **PRES-02**: Compartmentalized section-level Mermaid diagrams in `01_radar_classical_dsp.ipynb` for each discrete stage (Ingestion, Fast-Time FFT, MTI Clutter Filtering, Doppler FFT, 2D CFAR, MUSIC AoA, DBSCAN Clustering), detailing input data, function signatures, operations, and outputs in one diagram per section.
+- [x] **PRES-03**: Top-level and section-level Mermaid architecture diagrams in `02_radar_deep_learning_detection.ipynb` covering dataset generation, convolutional backbone, multi-task prediction heads (heatmaps & boxes), loss functions, and evaluation.
+- [x] **PRES-04**: Polished academic markdown documentation in both notebooks explaining physical principles, mathematical formulations, and engineering trade-offs for clear presentation to the thesis advisor.
 
 ### RadDet Full-Scale Benchmark on Kaggle (RADDET-BENCH)
 
@@ -26,27 +19,38 @@
 
 ### Interactive Research Showcase & Presentation Website (PRES-WEB)
 
-- [ ] **PRES-WEB-01**: Asset extraction pipeline and vector diagram builder (`scripts/export_showcase_assets.py`) programmatically exporting 17 primary PNG figures from notebooks and benchmark folders, 4 cached architecture SVGs, 3-stage evolution timeline SVG, and offline Prism.js assets into `docs/assets/`.
-- [ ] **PRES-WEB-02**: Zero-build standalone static presentation website (`docs/index.html`, `docs/styles.css`, `docs/app.js`) featuring Dark Cyber-Radar theme, sticky sidebar navigation, standardized 5-part blocks per notebook, 7-metric master comparison table, image lightbox modal, and professor takeaways without external CDN dependencies.
-- [ ] **PRES-WEB-03**: Deterministic smoke test suite (`tests/test_showcase_website.py`) validating HTML DOM structure, local asset integrity, zero external URLs, and universal verification gate sign-off via `scripts/verify.ps1`.
+- [x] **PRES-WEB-01**: Asset extraction pipeline and vector diagram builder (`scripts/export_showcase_assets.py`) programmatically exporting 17 primary PNG figures from notebooks and benchmark folders, 4 cached architecture SVGs, 3-stage evolution timeline SVG, and offline Prism.js assets into `docs/assets/`.
+- [x] **PRES-WEB-02**: Zero-build standalone static presentation website (`docs/index.html`, `docs/styles.css`, `docs/app.js`) featuring Dark Cyber-Radar theme, sticky sidebar navigation, standardized 5-part blocks per notebook, 7-metric master comparison table, image lightbox modal, and professor takeaways without external CDN dependencies.
+- [x] **PRES-WEB-03**: Deterministic smoke test suite (`tests/test_showcase_website.py`) validating HTML DOM structure, local asset integrity, zero external URLs, and universal verification gate sign-off via `scripts/verify.ps1`.
 
 ### Comprehensive BTP Thesis Report & Academic Publication Showcase Website (BTP-REP)
 
-- [ ] **BTP-REP-01**: Comprehensive ~20-page academic report content synthesizing FMCW radar physics, classical DSP failure analysis, synthetic deep learning, full-scale RadDet benchmarks, candidate adaptive computation formulations, and August 2026 – May 2027 Gantt roadmap.
-- [ ] **BTP-REP-02**: Two-column academic paper reading interface in `docs/` with sticky chapter navigation TOC, reading progress indicator, offline KaTeX equation rendering, collapsible code blocks, and interactive IEEE citation tooltips.
-- [ ] **BTP-REP-03**: Verification test suite `tests/test_academic_website.py` deterministically validating DOM structure, KaTeX math elements, and chapter navigation under `scripts/verify.ps1`.
+- [x] **BTP-REP-01**: Comprehensive ~20-page academic report content synthesizing FMCW radar physics, classical DSP failure analysis, synthetic deep learning, full-scale RadDet benchmarks, candidate adaptive computation formulations, and August 2026 – May 2027 Gantt roadmap.
+- [x] **BTP-REP-02**: Two-column academic paper reading interface in `docs/` with sticky chapter navigation TOC, reading progress indicator, offline KaTeX equation rendering, collapsible code blocks, and interactive IEEE citation tooltips.
+- [x] **BTP-REP-03**: Verification test suite `tests/test_academic_website.py` deterministically validating DOM structure, KaTeX math elements, and chapter navigation under `scripts/verify.ps1`.
 
 ### High-Coverage Test Suite & Pytest-Cov Integration (TEST-COV)
 
-- [ ] **TEST-COV-01**: Dedicated unit test suite `tests/test_dsp_edge_cases.py` targeting OS-CFAR, Capon/MUSIC AoA, MTI cancellers, Doppler windowing, and Range FFT scaling.
-- [ ] **TEST-COV-02**: Dedicated unit test suite `tests/test_radar_dataset.py` targeting synthetic `RadarDataset` generation, box coordinate math, multi-task heatmap encoding, and DataLoader collate functions (raising `src/models/radar_dataset.py` to >=90%).
-- [ ] **TEST-COV-03**: Automated integration smoke tests `tests/test_pipeline_scripts.py` covering `scripts/run_radar_pipeline.py`, `scripts/push_kaggle_kernel.py`, and notebook generators.
-- [ ] **TEST-COV-04**: Universal verification gate (`scripts/verify.ps1`) enforces `>=90%` code coverage with `pytest-cov` while maintaining deterministic, sub-30s local execution.
+- [x] **TEST-COV-01**: Dedicated unit test suite `tests/test_dsp_edge_cases.py` targeting OS-CFAR, Capon/MUSIC AoA, MTI cancellers, Doppler windowing, and Range FFT scaling.
+- [x] **TEST-COV-02**: Dedicated unit test suite `tests/test_radar_dataset.py` targeting synthetic `RadarDataset` generation, box coordinate math, multi-task heatmap encoding, and DataLoader collate functions (raising `src/models/radar_dataset.py` to >=90%).
+- [x] **TEST-COV-03**: Automated integration smoke tests `tests/test_pipeline_scripts.py` covering `scripts/run_radar_pipeline.py`, `scripts/push_kaggle_kernel.py`, and notebook generators.
+- [x] **TEST-COV-04**: Universal verification gate (`scripts/verify.ps1`) enforces `>=90%` code coverage with `pytest-cov` while maintaining deterministic, sub-30s local execution.
 
-### Verification & Deterministic Gates (VERIF)
+## Deferred to GitHub Issues (Post-Exploratory Backlog)
 
-- [ ] **VERIF-01**: Unit test suite (`tests/test_radar_data_adapter.py`) validating decoupled ingestion across Level 1 (raw cube), Level 2 (RDM/RAD tensor), and Level 3 (point cloud DataFrame).
-- [ ] **VERIF-02**: Universal deterministic verification gate (`pwsh -File ./scripts/verify.ps1`) passes cleanly with all unit tests and pipeline testbenches intact.
+The following ingestion decoupling and verification expansion requirements have been migrated from active planning into dedicated GitHub issues:
+
+### Multi-Level Decoupled Ingestion (DATA — Issues #17, #3)
+
+- **DATA-01**: Pipeline can directly ingest raw 3D complex ADC radar cubes `(num_rx, num_chirps, num_samples)` from NumPy arrays, tensors, or `.npy`/`.npz`/`.mat` files without requiring `FMCWRadarSimulator`. *(Tracked in [#17](https://github.com/aryanthepain/Radar-BTP/issues/17))*
+- **DATA-02**: Pipeline can directly ingest 2D Range-Doppler matrices (RDM) or 3D RAD tensors (e.g., RadDet tensor structure `(range, azimuth, doppler)`) directly into CFAR detection and deep learning modules, bypassing simulation and 1D/2D FFT processing. *(Tracked in [#17](https://github.com/aryanthepain/Radar-BTP/issues/17))*
+- **DATA-03**: Pipeline can directly ingest tabular DataFrames or structured point clouds (`pd.DataFrame` with range, velocity, azimuth, power/rcs) directly into spatial clustering (DBSCAN) and downstream Cartesian tracking. *(Tracked in [#3](https://github.com/aryanthepain/Radar-BTP/issues/3))*
+- **DATA-04**: Universal `RadarDataAdapter` abstraction providing schema inspection, shape validation, and automatic routing to the appropriate pipeline stage. *(Tracked in [#17](https://github.com/aryanthepain/Radar-BTP/issues/17))*
+
+### Verification & Deterministic Gates (VERIF — Issues #3, #18, #19)
+
+- **VERIF-01**: Unit test suite (`tests/test_radar_data_adapter.py`) validating decoupled ingestion across Level 1 (raw cube), Level 2 (RDM/RAD tensor), and Level 3 (point cloud DataFrame). *(Tracked in [#3](https://github.com/aryanthepain/Radar-BTP/issues/3))*
+- **VERIF-02**: Universal deterministic verification gate (`pwsh -File ./scripts/verify.ps1`) passes cleanly with all unit tests, adapter smoke tests, and pipeline testbenches intact. *(Tracked in [#18](https://github.com/aryanthepain/Radar-BTP/issues/18) and [#19](https://github.com/aryanthepain/Radar-BTP/issues/19))*
 
 ## v2 Requirements
 
@@ -69,38 +73,38 @@
 
 ## Traceability
 
-| Requirement     | Phase        | Status   |
-| --------------- | ------------ | -------- |
-| PRES-01         | Phase 1      | Complete |
-| PRES-02         | Phase 1      | Complete |
-| PRES-03         | Phase 1      | Complete |
-| PRES-04         | Phase 1      | Complete |
-| RADDET-BENCH-01 | Phase 1.2    | Complete |
-| RADDET-BENCH-02 | Phase 1.2    | Complete |
-| PRES-WEB-01     | Phase 01.2.1 | Complete |
-| PRES-WEB-02     | Phase 01.2.1 | Complete |
-| PRES-WEB-03     | Phase 01.2.1 | Complete |
-| BTP-REP-01      | Phase 01.2.2 | Pending  |
-| BTP-REP-02      | Phase 01.2.2 | Pending  |
-| BTP-REP-03      | Phase 01.2.2 | Pending  |
-| TEST-COV-01     | Phase 1.3    | Pending  |
-| TEST-COV-02     | Phase 1.3    | Pending  |
-| TEST-COV-03     | Phase 1.3    | Pending  |
-| TEST-COV-04     | Phase 1.3    | Pending  |
-| DATA-01         | Phase 2      | Pending  |
-| DATA-02         | Phase 2      | Pending  |
-| DATA-03         | Phase 2      | Pending  |
-| DATA-04         | Phase 2      | Pending  |
-| VERIF-01        | Phase 2      | Pending  |
-| VERIF-02        | Phase 3      | Pending  |
+| Requirement     | Phase        | Status                             |
+| --------------- | ------------ | ---------------------------------- |
+| PRES-01         | Phase 1      | Complete                           |
+| PRES-02         | Phase 1      | Complete                           |
+| PRES-03         | Phase 1      | Complete                           |
+| PRES-04         | Phase 1      | Complete                           |
+| RADDET-BENCH-01 | Phase 1.2    | Complete                           |
+| RADDET-BENCH-02 | Phase 1.2    | Complete                           |
+| PRES-WEB-01     | Phase 01.2.1 | Complete                           |
+| PRES-WEB-02     | Phase 01.2.1 | Complete                           |
+| PRES-WEB-03     | Phase 01.2.1 | Complete                           |
+| BTP-REP-01      | Phase 01.2.2 | Complete                           |
+| BTP-REP-02      | Phase 01.2.2 | Complete                           |
+| BTP-REP-03      | Phase 01.2.2 | Complete                           |
+| TEST-COV-01     | Phase 1.3    | Complete                           |
+| TEST-COV-02     | Phase 1.3    | Complete                           |
+| TEST-COV-03     | Phase 1.3    | Complete                           |
+| TEST-COV-04     | Phase 1.3    | Complete                           |
+| DATA-01         | Backlog      | Deferred (Issue #17)               |
+| DATA-02         | Backlog      | Deferred (Issue #17)               |
+| DATA-03         | Backlog      | Deferred (Issue #3)                |
+| DATA-04         | Backlog      | Deferred (Issue #17)               |
+| VERIF-01        | Backlog      | Deferred (Issue #3)                |
+| VERIF-02        | Backlog      | Deferred (Issues #18, #19)         |
 
 **Coverage:**
 
-- v1 requirements: 22 total
-- Mapped to phases: 22
+- Completed exploratory requirements: 16 total (100% complete)
+- Deferred to GitHub Issues: 6 total (tracked in #3, #17, #18, #19)
 - Unmapped: 0 ✓
 
 ---
 
 _Requirements defined: 2026-09-23_
-_Last updated: 2026-11-03 for Phase 01.2.1 additions_
+_Last updated: 2026-11-12 (Phases 2, 3, 4 moved to GitHub Issues #3, #17-#22)_
