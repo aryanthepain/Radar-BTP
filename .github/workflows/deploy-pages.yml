@@ -2,17 +2,19 @@ name: Deploy GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["gsd/phase-02-gh-pages-content", "gsd-2"]
     paths:
       - 'docs/**'
       - '.github/workflows/deploy-pages.yml'
       - 'tests/test_showcase_website.py'
+      - 'tests/test_academic_website.py'
   pull_request:
-    branches: ["main"]
+    branches: ["gsd/phase-02-gh-pages-content", "gsd-2"]
     paths:
       - 'docs/**'
       - '.github/workflows/deploy-pages.yml'
       - 'tests/test_showcase_website.py'
+      - 'tests/test_academic_website.py'
   workflow_dispatch:
 
 permissions:
@@ -40,11 +42,12 @@ jobs:
       - name: Run showcase smoke test suite
         run: |
           python -m unittest tests/test_showcase_website.py
+          python -m unittest tests/test_academic_website.py
 
   deploy:
     name: Deploy to GitHub Pages
     needs: test
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    if: (github.ref == 'refs/heads/gsd/phase-02-gh-pages-content' || github.ref == 'refs/heads/gsd-2') && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
