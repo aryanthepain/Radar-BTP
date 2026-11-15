@@ -68,3 +68,15 @@ timeline/*
 
 temp_study_topics.md
 
+# LaTeX Build & Auxiliary Files
+build/
+*.aux
+*.bbl
+*.blg
+*.lof
+*.lot
+*.out
+*.synctex.gz
+*.toc
+
+

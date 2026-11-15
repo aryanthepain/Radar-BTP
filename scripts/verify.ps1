@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     Deterministic Verification Gate (verify.ps1)
     Detects repository type and runs zero-cost static analysis and test suites.
@@ -13,7 +13,8 @@ param(
     [switch]$Quick,
     [string]$TargetTest,
     [switch]$Alarm,
-    [switch]$Voice
+    [switch]$Voice,
+    [switch]$SyncOverleaf
 )
 
 $ErrorActionPreference = "Continue"
@@ -122,7 +123,48 @@ if (Test-Path "docs/app.js") {
     }
 }
 
-# 4. Agent Alarm Resolver
+# 4. Detect LaTeX Document Gate (report.tex)
+if ((Test-Path "report.tex") -and (-not $failed)) {
+    $hasPdflatex = Get-Command pdflatex -ErrorAction SilentlyContinue
+    if ($hasPdflatex) {
+        Write-Host ""
+        Write-Host "--- [LaTeX Compilation Gate] ---" -ForegroundColor Yellow
+        Write-Host "Compiling report.tex with pdflatex (auxiliary folder: build)..." -ForegroundColor Gray
+        if (-not (Test-Path "build")) {
+            New-Item -ItemType Directory -Path "build" | Out-Null
+        }
+        $compileArgs = @(
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "-disable-installer",
+            "-aux-directory=build",
+            "report.tex"
+        )
+        $output = & pdflatex @compileArgs 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "❌ LaTeX compilation failed with exit code $LASTEXITCODE" -ForegroundColor Red
+            $failed = $true
+        } else {
+            Write-Host "✅ LaTeX compilation passed for report.tex." -ForegroundColor Green
+        }
+    }
+}
+
+# 5. Overleaf Live Synchronization (if requested)
+if ($SyncOverleaf -and -not $failed) {
+    Write-Host ""
+    Write-Host "--- [Overleaf Live Sync Gate] ---" -ForegroundColor Yellow
+    $syncScript = Join-Path $PSScriptRoot "overleaf-sync.ps1"
+    if (Test-Path $syncScript) {
+        pwsh -File $syncScript -Push
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "❌ Overleaf synchronization failed." -ForegroundColor Red
+            $failed = $true
+        }
+    }
+}
+
+# 6. Agent Alarm Resolver
 $alarmScript = Join-Path $PSScriptRoot "agent-alarm.ps1"
 if (-not (Test-Path $alarmScript)) {
     $alarmScript = Join-Path $env:USERPROFILE ".gemini\config\skills\agent-alarm\scripts\agent-alarm.ps1"

@@ -11,6 +11,11 @@
 - **Run Targeted Test**: `python -m unittest tests/test_radar_dsp.py`
 - **Run Kaggle Integration Test**: `pytest tests/test_kaggle_integration.py`
 - **Universal Verification Gate**: `pwsh -File ./scripts/verify.ps1`
+- **Universal Verification with Overleaf Sync**: `pwsh -File ./scripts/verify.ps1 -SyncOverleaf`
+- **Overleaf Live Status Check**: `pwsh -File ./scripts/overleaf-sync.ps1 -Status`
+- **Overleaf Push Local to Remote**: `pwsh -File ./scripts/overleaf-sync.ps1 -Push`
+- **Overleaf Pull Remote to Local**: `pwsh -File ./scripts/overleaf-sync.ps1 -Pull`
+- **Continuous LaTeX Auto-Builder**: `pwsh -File ./scripts/watch-latex.ps1`
 - **Stage & Push Kaggle Kernel**: `python scripts/push_kaggle_kernel.py --notebook <notebook.ipynb> --slug <slug> --push`
 - **Check Kaggle Quota**: `kaggle quota`
 - **Audio & Spoken Completion Alert**: `pwsh -File ./scripts/agent-alarm.ps1 -Type Success -Message "Task complete. All verification gates passed."`
@@ -47,6 +52,14 @@
   - Maintain strict adherence to FMCW radar principles (Range resolution $\Delta R = \frac{c}{2B}$, Velocity resolution $\Delta v = \frac{\lambda}{2 N_{chirps} T_c}$, Spatial array steering vectors $a(\theta) = e^{-j 2\pi d \sin(\theta)/\lambda}$).
   - 100% preservation of all existing synthetic radar simulation, DSP, and CNN code (`src/sim/*`, `src/dsp/*`, `src/models/*`, and notebooks `01_*`, `02_*`).
 
-## 4. Ephemeral Memory (`WORKING.md`)
+## 4. Overleaf & Academic Thesis Invariants
+
+- **Remote Project ID**: `6af97ae4e99d9136ba9ad729` (`BTP_Report_Template_Overleaf`).
+- **Overleaf Extension & Script Sync Mandatory Protocol**:
+  - Synchronization between local files and Overleaf is powered by `scripts/overleaf-sync.js` and `scripts/overleaf-sync.ps1`, using Socket.IO Operational Transforms (OT) and credentials from `iamhyc.overleaf-workshop` in `state.vscdb`.
+  - Always verify compilation passes with `pdflatex`/`latexmk` into `build/` before pushing.
+  - When completing academic report edits, ensure `pwsh -File ./scripts/overleaf-sync.ps1 -Push` or `pwsh -File ./scripts/verify.ps1 -SyncOverleaf` is executed to maintain cloud synchrony.
+
+## 5. Ephemeral Memory (`WORKING.md`)
 
 - Maintain active sprint objectives, test failure traces, hypotheses, and blockers in `WORKING.md`.
