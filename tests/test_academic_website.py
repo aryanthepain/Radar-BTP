@@ -179,8 +179,8 @@ def test_institutional_metadata():
     with open(INDEX_HTML, "r", encoding="utf-8") as f:
         html = f.read()
 
-    assert "AI application in radar signal processing" in html, "Missing official primary title"
-    assert "Computationally Efficient Radar Spectrum Detection via Adaptive Computation for Millimeter-Wave FMCW Radar Perception" in html, "Missing official subtitle"
+    assert "AI Applications in Radar Signal Processing" in html, "Missing official primary title"
+    assert "Towards Resource-Efficient AI-Based Radar Detection for Millimetre-Wave FMCW Systems" in html, "Missing official subtitle"
     assert "Aryan Sandeep Gupta" in html, "Missing candidate full name"
     assert "230150003" in html, "Missing student roll number"
     assert "Mehta Family School of Data Science and Artificial Intelligence" in html, "Missing official school name"

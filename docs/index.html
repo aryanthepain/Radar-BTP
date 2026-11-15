@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="BTP-1 Thesis Report: AI application in radar signal processing - Computationally Efficient Radar Spectrum Detection via Adaptive Computation for Millimeter-Wave FMCW Radar Perception. Indian Institute of Technology Guwahati.">
+  <meta name="description" content="BTP-1 Thesis Report: AI Applications in Radar Signal Processing - Towards Resource-Efficient AI-Based Radar Detection for Millimetre-Wave FMCW Systems. Indian Institute of Technology Guwahati.">
   <meta name="author" content="Aryan Sandeep Gupta, IIT Guwahati">
-  <title>AI application in radar signal processing: Computationally Efficient Radar Spectrum Detection via Adaptive Computation for Millimeter-Wave FMCW Radar Perception | BTP-1 Thesis Portal · IIT Guwahati</title>
+  <title>AI Applications in Radar Signal Processing: Towards Resource-Efficient AI-Based Radar Detection for Millimetre-Wave FMCW Systems | BTP-1 Thesis Portal · IIT Guwahati</title>
 
   <!-- Offline Vendored KaTeX Mathematical Typesetting Engine -->
   <link rel="stylesheet" href="./assets/vendor/katex/katex.min.css">
@@ -73,7 +73,7 @@
           <span>Front Matter &amp; Abstract</span>
         </a>
         <a href="#ch1-intro" class="toc-link">
-          <span>1. Introduction &amp; Motivation</span>
+          <span>1. Introduction</span>
         </a>
         <a href="#ch2-physics" class="toc-link">
           <span>2. FMCW Physics &amp; Limits</span>
@@ -116,10 +116,10 @@
           Indian Institute of Technology Guwahati · Mehta Family School of Data Science and Artificial Intelligence
         </div>
         <h1 style="font-size: 2.15rem; line-height: 1.28; margin-bottom: 0.6rem; font-family: var(--font-serif); color: #f8fafc;">
-          AI application in radar signal processing
+          AI Applications in Radar Signal Processing
         </h1>
         <div style="font-size: 1.25rem; line-height: 1.4; color: #38bdf8; font-weight: 600; margin-bottom: 1.25rem; max-width: 960px; margin-left: auto; margin-right: auto;">
-          Computationally Efficient Radar Spectrum Detection via Adaptive Computation for Millimeter-Wave FMCW Radar Perception
+          Towards Resource-Efficient AI-Based Radar Detection for Millimetre-Wave FMCW Systems
         </div>
         <div style="font-size: 1.05rem; color: #f1f5f9; margin-bottom: 0.35rem; font-weight: 600;">
           Aryan Sandeep Gupta <span style="font-weight: 400; color: #94a3b8;">(Roll No. 230150003)</span>
@@ -148,45 +148,146 @@
             Abstract &amp; Problem Formulation
           </strong>
           <p style="font-size: 0.935rem; line-height: 1.72; color: #cbd5e1; margin: 0;">
-            Millimeter-wave (77–81 GHz) Frequency-Modulated Continuous-Wave (FMCW) radar is an indispensable sensor tier for autonomous vehicle perception, tactical air-ground surveillance, and all-weather perimeter monitoring. Unlike optical cameras and LiDAR systems, millimeter-wave radio frequency signals penetrate dense fog, torrential rain, dust, and optical glare with negligible attenuation. However, conventional radar perception architectures rely on a rigid, heuristic two-stage processing cascade: discrete Fourier transforms followed by Cell-Averaging or Ordered-Statistic Constant False Alarm Rate (CA/OS-CFAR) thresholding, subspace Direction-of-Arrival (MUSIC/Capon) estimation, and Euclidean point cloud clustering (DBSCAN). In this thesis, we mathematically prove that these heuristic stages discard more than $90\%$ of raw signal phase coherence, suffer catastrophic threshold inflation (target masking) in dense target clusters, exhibit covariance rank collapse below $0\text{ dB}$ SNR, and enforce classical Rayleigh resolution limits. Grounded by our supervising professor’s explicit pedagogical mandate—<em>"Do one thing in a very detailed way instead of doing multiple things"</em>—we formulate the paradigm of <strong>Computationally Efficient Radar Spectrum Detection via Adaptive Computation</strong>. Rather than coercing radar echoes into sparse point clouds or executing uniform static deep neural networks on high-resolution radar tensors ($>26\text{ GFLOPs}$, $>15\text{ ms}$ latency), we formulate a dynamic constrained optimization framework. We systematically investigate five candidate adaptive methodologies, demonstrating how cascaded multi-resolution inference ($128^2 \to 256^2 \to 512^2$) with entropy-gated routing achieves sub-Rayleigh target separation while reducing edge energy consumption by up to $65\%$, verified on real-world ICASSP 2025 RadDet benchmarks.
+            Millimetre-wave (77–81 GHz) Frequency-Modulated Continuous-Wave (FMCW) radar is an indispensable sensor tier for autonomous vehicle perception, tactical surveillance, and all-weather perimeter monitoring. Unlike optical cameras and LiDAR systems, millimetre-wave radio frequency signals penetrate dense fog, heavy rain, dust, and optical glare with negligible attenuation. However, conventional radar perception architectures rely on a two-stage processing cascade: discrete Fourier transforms followed by Constant False Alarm Rate (CFAR) thresholding, subspace Direction-of-Arrival estimation, and spatial clustering. While mathematically interpretable, their performance can degrade under complex operating conditions with closely spaced targets, non-uniform clutter, and low signal-to-noise ratios. Deep learning architectures offer significant potential to learn rich spatial and temporal representations directly from radar tensors, but their practical deployment is constrained by substantial computational operations, memory footprint, and heavy dependence on dedicated GPU hardware. This project adopts <strong>resource-efficient AI for radar signal processing and detection</strong> as its overarching research direction. We systematically investigate two complementary candidate approaches: (A) reducing overall computational requirements through techniques such as lightweight architectures, model pruning, quantisation, knowledge distillation, and adaptive computation; and (B) developing CPU-oriented models and inference implementations to reduce reliance on dedicated accelerator hardware. Rather than prematurely committing to either approach, this work establishes a common experimental evaluation framework on 77 GHz FMCW radar data and the ICASSP 2025 RadDet benchmark to systematically balance detection performance against computational feasibility.
           </p>
           <div style="margin-top: 1rem; font-size: 0.84rem; color: #94a3b8; text-align: left; border-top: 1px solid rgba(148, 163, 184, 0.15); padding-top: 0.65rem;">
-            <strong>Index Terms:</strong> 77 GHz FMCW Radar, Adaptive Computation, Deep Spectrum Detection, Constant False Alarm Rate (CFAR), Sub-Rayleigh Super-Resolution, Edge Computing, Shannon Entropy Gating.
+            <strong>Index Terms:</strong> 77 GHz FMCW Radar, Resource-Efficient AI, Radar Signal Processing, Deep Spectrum Detection, CPU Inference, Model Compression, Constant False Alarm Rate (CFAR), Edge Computing.
           </div>
         </div>
       </header>
 
-      <!-- ==================== CHAPTER 1: INTRODUCTION & MOTIVATION ==================== -->
+      <!-- ==================== CHAPTER 1: INTRODUCTION ==================== -->
       <section id="ch1-intro" class="section-block" style="margin-bottom: 3.5rem;">
-        <h2>Chapter 1: Introduction &amp; Research Motivation</h2>
+        <h2>Chapter 1: Introduction</h2>
+
+        <h3 style="margin-top: 1.75rem; margin-bottom: 1rem; color: #38bdf8;">1.1 Background and Motivation</h3>
 
         <div class="academic-two-column">
           <p>
-            Automotive and tactical radar operating in the $77\text{--}81\text{ GHz}$ millimeter-wave band occupies an indispensable tier in multi-modal environmental perception. Unlike optical cameras and LiDAR systems whose photon propagation degrades catastrophically in dense fog, heavy rain, dust storms, and extreme sun-glare, millimeter-wave radio frequency signals propagate through atmospheric obscurants with negligible attenuation <a href="#ref-4" class="citation-badge" data-citation="4">[4]</a>. Despite these fundamental physical virtues, industrial perception pipelines have historically discarded more than $90\%$ of raw radar sensor data prior to semantic object detection.
+            Radar is an important sensing technology used in automotive systems, surveillance, aviation, industrial monitoring, and other applications that require reliable detection and estimation of objects in the surrounding environment. Unlike optical sensing systems, radar operates by transmitting electromagnetic signals and analysing the reflected signals received from objects. This enables radar systems to estimate properties such as target range, radial velocity, and direction of arrival. Radar sensing is also valuable in situations where lighting conditions or environmental factors may limit the effectiveness of optical sensors.
           </p>
           <p>
-            The root cause of this information bottleneck lies in the classical two-stage perception paradigm. In stage one, raw analog-to-digital converter (ADC) samples are processed via discrete Fourier transforms to form Range-Doppler Matrices (RDMs), followed by Cell-Averaging or Ordered-Statistic Constant False Alarm Rate (CA/OS-CFAR) detection <a href="#ref-6" class="citation-badge" data-citation="6">[6]</a>. By coercing continuous analog backscatter into binary threshold crossings, CFAR discards the rich phase coherence, micro-Doppler kinematic signatures, and point-spread function (PSF) tails essential for identifying small or occluded targets.
+            Recent developments in millimetre-wave Frequency-Modulated Continuous-Wave (FMCW) radar have enabled compact sensing systems with increasingly sophisticated perception capabilities. FMCW radar estimates target range by analysing the frequency difference between transmitted and received signals, while Doppler processing provides information about the relative motion of targets. Measurements obtained using multiple receiving antennas can additionally provide spatial information, including the direction of arrival. These processing operations produce structured representations such as Range-Doppler maps and Range-Azimuth-Doppler tensors, which can be used for subsequent detection and perception tasks.
           </p>
           <p>
-            <strong>Academic Inception &amp; Study Curriculum:</strong> Initiated in Late July 2026 under the direct supervision of Prof. Ratnajit Bhattacharjee (Head, Mehta Family School of Data Science and Artificial Intelligence; Professor, Department of Electronics and Electrical Engineering; Head, Manekshaw Centre of Excellence for National Security Studies and Research, IIT Guwahati), this research trajectory began with structured study of foundational radar treatises: M. Skolnik (<em>Introduction to Radar Systems</em>) <a href="#ref-4" class="citation-badge" data-citation="4">[4]</a> and M. Richards (<em>Fundamentals of Radar Signal Processing</em>) <a href="#ref-5" class="citation-badge" data-citation="5">[5]</a>, alongside recent doctoral contributions by Alexander Karlsson (KTH / Saab Surveillance 2023) <a href="#ref-1" class="citation-badge" data-citation="1">[1]</a>. In August 2026, exploratory prototyping with the <strong>MATLAB Radar Designer App</strong> enabled baseline FMCW chirp parameterization ($77\text{ GHz}$ carrier, $1\text{ GHz}$ sweep bandwidth), link-budget calculations, and synthetic echo verification against theoretical range-Doppler resolutions.
+            Conventional radar systems rely on established Digital Signal Processing (DSP) techniques to extract useful information from received signals. Operations such as Fast Fourier Transforms (FFT), Moving Target Indication (MTI), Constant False Alarm Rate (CFAR) detection, angle-of-arrival estimation, and spatial clustering form important stages of a conventional radar processing pipeline. These methods are mathematically interpretable and are based on well-established signal-processing principles. However, their performance can be affected by complex operating conditions involving multiple closely spaced targets, non-uniform clutter, low signal-to-noise ratios, and overlapping target reflections. Their performance may also depend on assumptions about the statistical properties of noise and clutter, as well as the selection of suitable processing parameters.
           </p>
           <p>
-            Grounded by our supervising professor’s explicit pedagogical mandate—<em>"Do one thing in a very detailed way instead of doing multiple things"</em>—this thesis rejects superficial multi-task breadth. Instead, we formulate a single, deep research investigation into <strong>Computationally Efficient Radar Spectrum Detection via Adaptive Computation</strong>. Culminating on <strong>November 23, 2026</strong> for the formal BTP-1 final oral defense before the IIT Guwahati examination committee, this work systematically benchmarks the physical boundaries of classical DSP against modern deep detectors across S-128, M-256, and L-512 tensor resolutions <a href="#ref-2" class="citation-badge" data-citation="2">[2]</a>, demonstrating how intelligent computation allocation can resolve previously inseparable targets while meeting strict automotive edge timing deadlines.
+            Artificial Intelligence (AI), particularly machine learning and deep learning, offers additional approaches for extracting information from radar data. Neural networks can learn representations directly from radar measurements and identify patterns that may be difficult to capture using manually designed detection rules and thresholds. Convolutional Neural Networks (CNNs), for example, can process radar maps as structured spatial representations and learn features useful for target detection and classification. More advanced architectures and learning techniques also provide opportunities to improve detection performance under challenging conditions. Consequently, AI-based methods are increasingly relevant to the development of radar perception systems.
           </p>
           <p>
-            <strong>Deliverable Section A (Repository Architecture &amp; Modular Audit):</strong> The engineering testbench supporting this thesis is partitioned into five strictly verified modules:
+            However, the adoption of deep learning introduces an important engineering consideration: computational efficiency. Modern neural networks can require substantial processing operations, memory, and hardware resources, particularly when operating on high-resolution radar tensors or processing successive radar frames at high rates. Graphics Processing Units (GPUs) provide parallel computing capabilities that can accelerate such workloads. Nevertheless, access to dedicated GPU resources may be constrained by hardware availability, acquisition and operating costs, and deployment requirements. In particular, solutions that depend on powerful accelerators may be difficult to reproduce or deploy in resource-constrained environments.
           </p>
-          <ul style="padding-left: 1.25rem; font-size: 0.92rem; line-height: 1.65; color: #cbd5e1;">
-            <li><code>src/sim/</code>: High-fidelity 77 GHz FMCW radar simulation synthesizing multi-target beat signals, Swerling target radar cross-sections (RCS), micro-Doppler pedestrian kinematic modulations, non-Gaussian Weibull ground clutter, and thermal noise.</li>
-            <li><code>src/dsp/</code>: Deterministic DSP pipeline featuring fast-time Range FFT with Hann windowing, 2-pulse MTI clutter suppression, slow-time Doppler FFT, 2D CA/OS-CFAR adaptive thresholding, spatial MUSIC/Capon angle estimator, and DBSCAN point cloud clustering.</li>
-            <li><code>src/models/</code>: PyTorch deep radar object detector (<code>RadarObjectDetectorCNN</code>) and multi-task heatmap/bounding-box loss engine.</li>
-            <li><code>src/raddet/</code>: Real-world ICASSP 2025 RadDet wideband RF spectrum ingestion and 100-epoch GPU benchmark harness.</li>
-            <li><code>src/adaptive/</code>: Forward-looking BTP-2 cascaded multi-resolution triage, cross-resolution distillation, and CPU-first quantization modules.</li>
-          </ul>
           <p>
-            The remainder of this report is organized as follows: Chapter 2 derives the governing FMCW wave physics and fundamental resolution boundaries. Chapter 3 audits the failure modes of classical CFAR and MUSIC. Chapter 4 introduces our deep detection architecture, 7-axis research-gap matrix, and candidate adaptive computation formulations. Chapter 5 presents empirical benchmark metrics, Multi-SNR stress tests, and Table III reproductions. Chapter 6 details the 1-year academic Gantt schedule and technical risk audit, and Chapter 7 outlines conclusions and future work for BTP-2.
+            This creates a need to investigate AI-based radar processing not only in terms of detection performance but also in terms of the computational resources required to achieve that performance. A model that provides good detection accuracy but requires substantial computing resources may not be the most practical solution for deployment. Conversely, a highly compact model or a CPU-oriented implementation may reduce hardware requirements but could introduce trade-offs in accuracy, latency, or throughput. Identifying a suitable balance between these factors is therefore an important research problem.
+          </p>
+          <p>
+            The present project builds upon an existing radar processing and deep learning framework. The current foundation includes a simulated 77 GHz FMCW radar environment, conventional radar DSP modules, a CNN-based radar detection pipeline, and experiments involving the RadDet wideband radar spectrum detection dataset. These components provide a basis for understanding the radar processing workflow, establishing reference implementations, and investigating the computational characteristics of AI-based detection.
+          </p>
+          <p>
+            Within this foundation, the project adopts a broader research direction centred on <strong>resource-efficient AI for radar signal processing and detection</strong>. Two complementary possibilities will be investigated. The first is to reduce the overall computational requirements of AI-based radar detection while retaining acceptable detection performance. The second is to investigate CPU-oriented models and inference implementations that can operate efficiently without requiring dedicated GPU hardware. Techniques such as lightweight neural architectures, model compression, quantisation, knowledge distillation, pruning, and adaptive computation may be relevant to these investigations.
+          </p>
+          <p>
+            The objective is not to assume that one particular technique or hardware configuration is necessarily optimal. Instead, the project seeks to establish an experimental basis for comparing alternative approaches and understanding their respective advantages and limitations. The resulting findings will guide the selection of a practical implementation pathway for the subsequent project phase, taking into consideration both computational efficiency and the hardware resources available for demonstration.
           </p>
         </div>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">1.2 Problem Statement</h3>
+
+        <div class="academic-two-column">
+          <p>
+            AI-based radar detection offers the possibility of extracting useful target information from complex radar representations. However, the practical adoption of such approaches is influenced by their computational requirements, memory consumption, inference latency, and dependence on specialised hardware.
+          </p>
+          <p>
+            A radar detection model that achieves high detection performance but requires substantial GPU resources may be difficult to deploy in environments with limited accelerator availability or computational budgets. Similarly, reducing the model size or moving inference to a CPU does not automatically guarantee that the resulting system will be sufficiently accurate or responsive for the intended application. A systematic evaluation is therefore required to understand the relationship between detection performance, computational cost, and hardware requirements.
+          </p>
+          <p>
+            The central problem addressed in this project is:
+          </p>
+        </div>
+
+        <!-- Central Problem Statement Callout Box -->
+        <div style="margin: 1.25rem 0 1.75rem 0; padding: 1.25rem 1.65rem; background: rgba(30, 41, 59, 0.6); border-left: 4px solid #38bdf8; border-radius: var(--radius-sm); font-size: 1.05rem; line-height: 1.6; color: #f8fafc; font-weight: 600;">
+          How can AI-based radar signal processing and detection be made computationally efficient and practically deployable while maintaining acceptable detection performance under realistic hardware constraints?
+        </div>
+
+        <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin-bottom: 1.25rem;">
+          The investigation will consider two candidate approaches:
+        </p>
+
+        <!-- Candidate Approaches Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin: 1.25rem 0 2rem 0;">
+          <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem;">
+            <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #38bdf8; font-weight: 700; margin-bottom: 0.4rem;">Candidate Approach 1</div>
+            <div style="font-size: 1.05rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.75rem;">Reduction of Overall Computational Requirements</div>
+            <p style="font-size: 0.925rem; line-height: 1.68; color: #cbd5e1; margin: 0;">
+              Investigating techniques that reduce the computation and memory required by AI-based radar detection. Potential methods include lightweight neural network architectures, model pruning, quantisation, knowledge distillation, and adaptive computation. The objective is to reduce the resources required for inference while maintaining an acceptable level of detection performance.
+            </p>
+          </div>
+
+          <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem;">
+            <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #38bdf8; font-weight: 700; margin-bottom: 0.4rem;">Candidate Approach 2</div>
+            <div style="font-size: 1.05rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.75rem;">CPU-Oriented Model Development and Deployment</div>
+            <p style="font-size: 0.925rem; line-height: 1.68; color: #cbd5e1; margin: 0;">
+              Investigating whether suitable radar detection models can be designed or adapted to operate efficiently on commodity Central Processing Units (CPUs). This includes evaluating CPU-friendly architectures, numerical representations, and inference implementations to reduce dependence on dedicated GPU hardware. Where appropriate, the performance of CPU-based execution will be compared with GPU-accelerated execution under controlled conditions.
+            </p>
+          </div>
+        </div>
+
+        <div class="academic-two-column">
+          <p>
+            These approaches address related but distinct aspects of computational efficiency. Reducing the number of operations or model parameters does not necessarily guarantee efficient execution on every hardware architecture. Likewise, a model that performs efficiently on a CPU may not achieve the lowest overall computational cost. The two approaches will therefore be examined using a common evaluation framework.
+          </p>
+          <p>
+            The comparison will consider detection performance, computational complexity, model size, memory consumption, inference latency, throughput, and hardware accessibility. Appropriate detection metrics, such as precision, recall, and mean Average Precision (mAP), will be selected according to the detection task and dataset. Computational measurements will include parameters, Floating-Point Operations (FLOPs) or Multiply-Accumulate Operations (MACs), peak memory usage, and inference time. CPU and GPU comparisons will be conducted using documented hardware and software configurations to ensure that the results are reproducible and interpretable.
+          </p>
+          <p>
+            The final research pathway will be selected after evaluating the feasibility and performance of the candidate approaches. It may involve a computationally reduced model, a CPU-oriented implementation, or a combination of both, depending on the experimental findings and the computational resources available. The intended outcome is a practical and reproducible AI-based radar detection system that provides a meaningful balance between detection effectiveness and computational feasibility.
+          </p>
+        </div>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">1.3 Objectives</h3>
+
+        <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin-bottom: 1.25rem;">
+          The primary objective of this project is to investigate resource-efficient AI techniques for radar signal processing and detection, building upon an existing FMCW radar simulation, conventional DSP, and deep learning framework.
+        </p>
+
+        <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin-bottom: 1rem;">
+          The specific objectives are as follows:
+        </p>
+
+        <div style="background: rgba(15, 23, 42, 0.65); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.4rem 1.65rem; margin-bottom: 1.5rem;">
+          <ol style="padding-left: 1.35rem; font-size: 0.935rem; line-height: 1.72; color: #cbd5e1; margin: 0;">
+            <li style="margin-bottom: 0.75rem;">
+              <strong>Establish a radar processing foundation:</strong> Develop and maintain a modular FMCW radar processing pipeline incorporating conventional signal-processing operations such as range and Doppler estimation, clutter suppression, CFAR detection, angle estimation, and target clustering.
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <strong>Study AI-based radar detection:</strong> Investigate neural-network-based approaches for extracting target information from radar representations and establish suitable reference implementations and detection-performance benchmarks.
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <strong>Characterise computational requirements:</strong> Analyse the computational and memory requirements of existing AI-based radar detection approaches using metrics such as model parameters, FLOPs or MACs, peak memory consumption, inference latency, and throughput.
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <strong>Investigate computational reduction techniques:</strong> Explore approaches for reducing the inference cost of radar detection models, including lightweight architectures, quantisation, pruning, knowledge distillation, and adaptive computation, wherever suitable for the selected detection task.
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <strong>Investigate CPU-oriented inference:</strong> Evaluate the feasibility of executing selected radar detection models on CPU hardware. Study suitable architectural and implementation choices and compare their execution performance with GPU-based inference under controlled experimental conditions.
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <strong>Establish a comparative evaluation framework:</strong> Compare the candidate approaches using consistent datasets, evaluation procedures, and performance criteria, considering detection quality, computational complexity, memory requirements, inference latency, throughput, and hardware accessibility.
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <strong>Define a practical demonstration for the subsequent project phase:</strong> Identify the software dependencies, datasets, model requirements, and hardware configurations needed to demonstrate the selected radar detection approach. Document the CPU-only and GPU-accelerated execution possibilities, including their respective computational and memory requirements.
+            </li>
+            <li style="margin-bottom: 0.25rem;">
+              <strong>Select a feasible research pathway:</strong> Use the experimental results and available computational resources to determine whether the subsequent implementation should primarily focus on reducing overall computation, enabling efficient CPU-based execution, or combining both approaches.
+            </li>
+          </ol>
+        </div>
+
+        <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin-top: 1.25rem;">
+          The work undertaken during the first project phase establishes the radar processing and experimental foundation required for this investigation. The subsequent phase will focus on developing and evaluating the selected resource-efficient approach and demonstrating its practical feasibility.
+        </p>
       </section>
 
       <!-- ==================== CHAPTER 2: FMCW RADAR MATHEMATICAL PHYSICS ==================== -->
