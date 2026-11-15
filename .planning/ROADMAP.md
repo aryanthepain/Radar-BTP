@@ -17,6 +17,7 @@ A phased journey to prepare an undergraduate thesis exploratory presentation for
 - [x] **Phase 01.2.1: Interactive Research Showcase & Thesis Presentation Website** (INSERTED) - Deliver a clean, responsive showcase website for the supervising professor synthesizing all three notebooks, experimental results, comparative radar data progression (toy -> synthetic -> real RadDet), architecture flowcharts, and key code snippets.
 - [x] **Phase 01.2.2: Comprehensive BTP Thesis Report & Academic Publication Showcase Website** (INSERTED) - Deliver publication-grade ~20-page IIT Guwahati BTP Report and rework GitHub Pages website into an academic reading experience for professor finalization.
 - [x] **Phase 1.3: High-Coverage Deterministic Unit & Integration Testing** (INSERTED) - Comprehensive test expansion achieving >=90% code coverage across DSP algorithms, PyTorch dataset/models, and pipeline scripts with pytest-cov.
+- [ ] **Phase 2: GitHub Pages Chapter-by-Chapter Content Finalization**
 
 ## Phase Details
 
@@ -147,23 +148,35 @@ Plans:
 - [x] 01.3-02: Author `tests/test_radar_dataset.py` targeting synthetic `RadarDataset` generation, box coordinate math, multi-task heatmap encoding, and DataLoader collate functions.
 - [x] 01.3-03: Author `tests/test_pipeline_scripts.py` targeting `scripts/run_radar_pipeline.py`, `scripts/push_kaggle_kernel.py`, and update `scripts/verify.ps1` with strict `pytest-cov` enforcement.
 
+### Phase 2: GitHub Pages Chapter-by-Chapter Content Finalization
+
+**Goal:** Progressively refine, update, and finalize the academic BTP thesis report content on the GitHub Pages website (`docs/`) chapter-by-chapter based on iterative user-supplied content and guidance, accommodating multiple sequential planning and execution waves within this single phase.
+**Mode:** standard
+**Depends on:** Phase 01.2.2, Phase 1.3
+**Requirements:** GH-PAGES-CONTENT
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (iteratively planned and executed chapter-by-chapter)
+
 ## Progress
 
 **Execution Status:**
-All planned thesis preparatory and exploratory phases (Phase 1, 1.1, 1.2, 01.2.1, 01.2.2, 1.3) are 100% complete and verified.
+Milestone 1 completed. Phase 2 (GitHub Pages Chapter-by-Chapter Content Finalization) in progress.
 
-| Phase                                                                           | Plans Complete | Status    | Completed  |
-| ------------------------------------------------------------------------------- | -------------- | --------- | ---------- |
-| 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams                    | 2/2            | Completed | 2026-09-23 |
-| 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice)    | 5/5            | Completed | 2026-11-02 |
-| 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                      | 3/3            | Completed | 2026-11-03 |
-| 01.2.1. Interactive Research Showcase & Thesis Presentation Website             | 3/3            | Completed | 2026-11-03 |
-| 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 5/5            | Completed | 2026-11-10 |
-| 1.3. High-Coverage Deterministic Unit & Integration Testing                     | 3/3            | Completed | 2026-11-10 |
+| Phase                                                                           | Plans Complete | Status      | Completed  |
+| ------------------------------------------------------------------------------- | -------------- | ----------- | ---------- |
+| 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams                    | 2/2            | Completed   | 2026-09-23 |
+| 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice)    | 5/5            | Completed   | 2026-11-02 |
+| 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                      | 3/3            | Completed   | 2026-11-03 |
+| 01.2.1. Interactive Research Showcase & Thesis Presentation Website             | 3/3            | Completed   | 2026-11-03 |
+| 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 5/5            | Completed   | 2026-11-10 |
+| 1.3. High-Coverage Deterministic Unit & Integration Testing                     | 3/3            | Completed   | 2026-11-10 |
+| 2. GitHub Pages Chapter-by-Chapter Content Finalization                         | 0/TBD          | In Progress | -          |
 
 ## Deferred / GitHub Issue Backlog
 
-Phases 2, 3, and 4 have been removed from the active GSD planning cycle and preserved as discrete, tracked GitHub issues:
+Phases 2, 3, and 4 (from original exploratory scope) have been removed from the active GSD planning cycle and preserved as discrete, tracked GitHub issues:
 
 ### Former Phase 2: Multi-Level Decoupled Radar Data Ingestion
 - [#17](https://github.com/aryanthepain/Radar-BTP/issues/17): `feat(dsp): Universal RadarDataAdapter & Level 1/2 Decoupled Ingestion (Raw ADC Cubes & Range-Doppler Tensors)` (DATA-01, DATA-02, DATA-04)

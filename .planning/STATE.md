@@ -1,19 +1,19 @@
 ---
 gsd_state_version: "1.0"
-current_phase: null
-current_phase_name: milestone-exploratory-complete
-status: "All planned exploratory phases (1, 1.1, 1.2, 01.2.1, 01.2.2, 1.3) complete — Phases 2, 3, 4 moved to GitHub Issues #3, #17-#22"
-stopped_at: "Exploratory milestone 100% complete and verified; awaiting professor thesis review or backlog issue pickup"
-last_updated: "2026-11-12T17:35:00.000Z"
-last_activity: 2026-11-12
-last_activity_desc: 2026-11-12 -- Phases 2, 3, 4 moved to GitHub Issues #3, #17-#22 and removed from active planning
-state_head: d38b7b8
+current_phase: 2
+current_phase_name: "02-github-pages-chapter-by-chapter-content-finalization"
+status: "Phase 2 in progress: Discussion and chapter-by-chapter content finalization for GitHub Pages"
+stopped_at: "Phase 2 discussion started"
+last_updated: "2026-11-15T15:55:00.000Z"
+last_activity: 2026-11-15
+last_activity_desc: 2026-11-15 -- Created Phase 2 for iterative chapter-by-chapter GitHub Pages content edits
+state_head: 93a70aa
 progress:
-  total_phases: 6
+  total_phases: 7
   completed_phases: 6
   total_plans: 21
   completed_plans: 21
-  percent: 100
+  percent: 86
 granularity: fine
 ---
 
@@ -21,18 +21,18 @@ granularity: fine
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-11-12)
+See: .planning/PROJECT.md (updated 2026-11-15)
 
 **Core value:** Modular, decoupled radar perception enabling multi-level data ingestion (raw ADC cubes, Range-Doppler tensors, or point cloud dataframes) and transparent academic presentation of radar signal processing.
-**Current focus:** Exploratory thesis foundation complete. Former Phases 2, 3, 4 tracked in GitHub Issues (#3, #17-#22).
+**Current focus:** Phase 2 — Chapter-by-chapter content updates and polish for GitHub Pages publication.
 
 ## Current Position
 
-Phase: 01.2.2 & 01.3 — COMPLETED (All exploratory milestone phases 1, 1.1, 1.2, 01.2.1, 01.2.2, 1.3 complete)
-Status: Exploratory milestone 100% complete — all plans executed and verified
-Last activity: 2026-11-12 — Transferred Phases 2, 3, 4 to GitHub Issues (#3, #17, #18, #19, #20, #21, #22) and updated roadmap.
+Phase: 02 — IN PROGRESS (Phase 2: GitHub Pages Chapter-by-Chapter Content Finalization)
+Status: Discuss phase in progress
+Last activity: 2026-11-15 — Created Phase 2 on branch gsd/phase-02-gh-pages-content.
 
-Progress: [██████████] 100%
+Progress: [████████░░] 86%
 
 ## Performance Metrics
 
@@ -68,6 +68,10 @@ Decisions are logged in PROJECT.md Key Decisions table and Phase Context documen
 - Phase 1.2: Full-scale RadDet S-128 variant benchmark with YOLOv9c (25.3M params), empirical batch testing under AMP FP16, 6-bin SNR evaluation ([-20 dB to +20 dB]), Table III export, and single-frame CUDA event latency profiler.
 - Phase 01.2.1: Zero-build static presentation website in `docs/` with fixed Dark Cyber-Radar theme, single-page longform scroll, 3-stage evolution timeline (Toy -> Sim -> Real), standardized 5-part notebook blocks, static SVG diagrams, Prism.js code snippets, interactive image lightboxes, automated asset extraction script, 7-metric master table, and concise conclusion bullets.
 - Phase 1.3: Target >=90% deterministic coverage on src/ and scripts/ using modular test suites.
+- Phase 2: GitHub Pages Chapter-by-Chapter Content Finalization created for iterative content updates.
+
+### Roadmap Evolution
+- Phase 2 added: GitHub Pages Chapter-by-Chapter Content Finalization
 
 ## Session
 
