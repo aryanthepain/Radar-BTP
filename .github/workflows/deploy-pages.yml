@@ -4,17 +4,17 @@ on:
   push:
     branches: ["gsd/phase-02-gh-pages-content", "gsd-2"]
     paths:
-      - 'docs/**'
-      - '.github/workflows/deploy-pages.yml'
-      - 'tests/test_showcase_website.py'
-      - 'tests/test_academic_website.py'
+      - "docs/**"
+      - ".github/workflows/deploy-pages.yml"
+      - "tests/test_showcase_website.py"
+      - "tests/test_academic_website.py"
   pull_request:
     branches: ["gsd/phase-02-gh-pages-content", "gsd-2"]
     paths:
-      - 'docs/**'
-      - '.github/workflows/deploy-pages.yml'
-      - 'tests/test_showcase_website.py'
-      - 'tests/test_academic_website.py'
+      - "docs/**"
+      - ".github/workflows/deploy-pages.yml"
+      - "tests/test_showcase_website.py"
+      - "tests/test_academic_website.py"
   workflow_dispatch:
 
 permissions:
@@ -37,11 +37,12 @@ jobs:
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Run showcase smoke test suite
         run: |
           python -m unittest tests/test_showcase_website.py
+          python -m unittest tests/test_academic_website.py
 
   deploy:
     name: Deploy to GitHub Pages
@@ -61,9 +62,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './docs'
+          path: "./docs"
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-

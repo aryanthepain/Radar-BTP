@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Deterministic Verification Gate (verify.ps1)
     Detects repository type and runs zero-cost static analysis and test suites.
@@ -22,6 +22,28 @@ $failed = $false
 
 Write-Host ""
 Write-Host "🔍 [FLEET LOOP] Running Deterministic Verification..." -ForegroundColor Cyan
+
+# 0. Secret Leak Prevention Gate
+Write-Host ""
+Write-Host "--- [Secret Leak Prevention Gate] ---" -ForegroundColor Yellow
+$secretPatterns = @(
+    "KGAT_[a-zA-Z0-9_\-]+",
+    "ghp_[a-zA-Z0-9]{36}",
+    "github_pat_[a-zA-Z0-9_]{50,}",
+    "AIzaSy[a-zA-Z0-9_\-]{33}",
+    "sk-[a-zA-Z0-9]{20,}",
+    "-----BEGIN\s+.*PRIVATE\s+KEY-----",
+    "Bearer\s+(?!\$\{)(?!process\.env)[A-Za-z0-9_\-\.]{25,}"
+)
+$regex = ($secretPatterns -join "|")
+$secretMatches = git grep -P -n "$regex" -- ":!.git" 2>$null
+if ($secretMatches) {
+    Write-Host "❌ [SECURITY ALERT] Exposed secret or token pattern detected in codebase!" -ForegroundColor Red
+    $secretMatches | ForEach-Object { Write-Host "   $_" -ForegroundColor Red }
+    $failed = $true
+} else {
+    Write-Host "✅ Zero exposed secrets detected across codebase." -ForegroundColor Green
+}
 
 # 1. Detect Python Project
 $isPython = (Test-Path "pyproject.toml") -or (Test-Path "requirements.txt") -or (Test-Path "setup.py") -or (Test-Path "tests") -or (Test-Path "src")
