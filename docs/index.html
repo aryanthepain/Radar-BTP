@@ -765,12 +765,12 @@
         </p>
 
         <div style="text-align: center; margin: 1.25rem 0;">
-          $$\mathbf{X}\in\mathbb{C}^{N_{\mathrm{rx}}	imes N_{\mathrm{chirp}}	imes N_{\mathrm{sample}}}$$
+          $$\mathbf{X}\in\mathbb{C}^{N_{\mathrm{rx}}\times N_{\mathrm{chirp}}\times N_{\mathrm{sample}}}$$
         </div>
 
         <div class="academic-two-column">
           <p>
-            where the three dimensions correspond to receive antennas, slow-time chirps, and fast-time ADC samples, respectively. With the default configuration, the generated data cube has dimensions ($4	imes128	imes256$).
+            where the three dimensions correspond to receive antennas, slow-time chirps, and fast-time ADC samples, respectively. With the default configuration, the generated data cube has dimensions ($4\times128\times256$).
           </p>
           <p>
             A target scene is represented by a collection of objects with attributes such as range, radial velocity, azimuth, radar cross-section, and target category. The scene generator produces between one and three targets, selected from four categories: car, pedestrian, cyclist, and drone. Pedestrian and drone targets can additionally include micro-Doppler modulation to represent periodic motion.
@@ -807,19 +807,19 @@
             Algorithm 3.1: Conventional FMCW Radar Signal Processing and Detection
           </div>
           <div style="font-size: 0.88rem; color: #94a3b8; margin-bottom: 0.75rem;">
-            <strong>Input:</strong> Complex radar data cube $\mathbf{X} \in \mathbb{C}^{N_{\mathrm{rx}} 	imes N_{\mathrm{chirp}} 	imes N_{\mathrm{sample}}}$.<br>
+            <strong>Input:</strong> Complex radar data cube $\mathbf{X} \in \mathbb{C}^{N_{\mathrm{rx}} \times N_{\mathrm{chirp}} \times N_{\mathrm{sample}}}$.<br>
             <strong>Output:</strong> Clustered target detections with Cartesian positions $(x,y)$, radial velocities, azimuths, and power levels.
           </div>
           <ol style="padding-left: 1.35rem; font-size: 0.9rem; line-height: 1.65; color: #cbd5e1; margin: 0;">
-            <li style="margin-bottom: 0.4rem;"><strong>Radar Configuration:</strong> Initialise 77 GHz radar system parameters ($B = 1	ext{ GHz}$, $T_c = 50	ext{ μs}$, $N_{\mathrm{rx}} = 4$, $d = \lambda/2$).</li>
+            <li style="margin-bottom: 0.4rem;"><strong>Radar Configuration:</strong> Initialise 77 GHz radar system parameters ($B = 1\text{ GHz}$, $T_c = 50\,\mu\text{s}$, $N_{\mathrm{rx}} = 4$, $d = \lambda/2$).</li>
             <li style="margin-bottom: 0.4rem;"><strong>Cube Generation:</strong> Synthesise multi-target complex baseband data cube with Rayleigh clutter and AWGN.</li>
             <li style="margin-bottom: 0.4rem;"><strong>Range Processing:</strong> Apply Hann window along fast-time dimension and compute 1D FFT: $\mathbf{X}_r = \mathrm{FFT}_n\{w_r(n)\mathbf{X}\}$.</li>
-            <li style="margin-bottom: 0.4rem;"><strong>Clutter Suppression:</strong> Subtract slow-time chirp mean to eliminate stationary zero-Doppler reflections: $\widetilde{\mathbf{X}}_r = \mathbf{X}_r - rac{1}{N_c}\sum_m \mathbf{X}_r$.</li>
+            <li style="margin-bottom: 0.4rem;"><strong>Clutter Suppression:</strong> Subtract slow-time chirp mean to eliminate stationary zero-Doppler reflections: $\widetilde{\mathbf{X}}_r = \mathbf{X}_r - \frac{1}{N_c}\sum_m \mathbf{X}_r$.</li>
             <li style="margin-bottom: 0.4rem;"><strong>Doppler Processing:</strong> Apply Hann window across chirps, compute 1D FFT along slow-time, and apply FFT shift: $\mathbf{X}_{rd} = \mathrm{FFTshift}(\mathrm{FFT}_m\{w_d(m)\widetilde{\mathbf{X}}_r\})$.</li>
-            <li style="margin-bottom: 0.4rem;"><strong>Power RDM Integration:</strong> Form 2D Range-Doppler power representation: $P_{rd}(m,n) = rac{1}{N_{\mathrm{rx}}}\sum_r |\mathbf{X}_{rd}(r,m,n)|^2$.</li>
+            <li style="margin-bottom: 0.4rem;"><strong>Power RDM Integration:</strong> Form 2D Range-Doppler power representation: $P_{rd}(m,n) = \frac{1}{N_{\mathrm{rx}}}\sum_r |\mathbf{X}_{rd}(r,m,n)|^2$.</li>
             <li style="margin-bottom: 0.4rem;"><strong>CFAR Target Detection:</strong> Apply 2D CA-CFAR detector with guard and training cells to extract candidate target peaks exceeding adaptive threshold.</li>
-            <li style="margin-bottom: 0.4rem;"><strong>Direction-of-Arrival (AoA):</strong> For each detected range-Doppler peak, extract spatial steering vector across antennas and compute MUSIC pseudo-spectrum or Capon spectrum to estimate azimuth $	heta$.</li>
-            <li style="margin-bottom: 0.4rem;"><strong>Cartesian Conversion &amp; Clustering:</strong> Transform detections $(R, 	heta)$ to Cartesian coordinates $(x = R\sin	heta, y = R\cos	heta)$ and group spatial returns via DBSCAN clustering.</li>
+            <li style="margin-bottom: 0.4rem;"><strong>Direction-of-Arrival (AoA):</strong> For each detected range-Doppler peak, extract spatial steering vector across antennas and compute MUSIC pseudo-spectrum or Capon spectrum to estimate azimuth $\theta$.</li>
+            <li style="margin-bottom: 0.4rem;"><strong>Cartesian Conversion &amp; Clustering:</strong> Transform detections $(R, \theta)$ to Cartesian coordinates $(x = R\sin\theta, y = R\cos\theta)$ and group spatial returns via DBSCAN clustering.</li>
             <li><strong>Track Extraction:</strong> Compute cluster centroids, mean radial velocities, total energy, and spatial extents.</li>
           </ol>
         </div>
@@ -833,8 +833,7 @@
           </p>
         </div>
         <div style="text-align: center; margin: 1rem 0;">
-          $$X_r(r,m,n) = \mathrm{FFT}_{n}\left\{ w_r(n) X(r,m,n) 
-ight\}$$
+          $$X_r(r,m,n) = \mathrm{FFT}_{n}\left\{ w_r(n) X(r,m,n) \right\}$$
         </div>
         <div class="academic-two-column">
           <p>
@@ -874,7 +873,7 @@ ight\}$$
           </p>
         </div>
         <div style="text-align: center; margin: 1rem 0;">
-          $$\widetilde{X}_r(r,m,n) = X_r(r,m,n) - rac{1}{N_c} \sum_{m=0}^{N_c-1} X_r(r,m,n)$$
+          $$\widetilde{X}_r(r,m,n) = X_r(r,m,n) - \frac{1}{N_c} \sum_{m=0}^{N_c-1} X_r(r,m,n)$$
         </div>
         <div class="academic-two-column">
           <p>
@@ -891,8 +890,7 @@ ight\}$$
           </p>
         </div>
         <div style="text-align: center; margin: 1rem 0;">
-          $$X_{rd}(r,m,n) = \mathrm{FFT}_{m}\left\{ w_d(m) \widetilde{X}_r(r,m,n) 
-ight\}$$
+          $$X_{rd}(r,m,n) = \mathrm{FFT}_{m}\left\{ w_d(m) \widetilde{X}_r(r,m,n) \right\}$$
         </div>
         <div class="academic-two-column">
           <p>
@@ -933,11 +931,11 @@ ight\}$$
           </p>
         </div>
         <div style="text-align: center; margin: 1rem 0;">
-          $$x = R\sin	heta, \qquad y = R\cos	heta$$
+          $$x = R\sin\theta, \qquad y = R\cos\theta$$
         </div>
         <div class="academic-two-column">
           <p>
-            where $R$ denotes range and $	heta$ denotes azimuth. DBSCAN clustering is then applied to group spatially related detections. The implementation constructs clustering features using Cartesian position and a scaled velocity component. For each resulting cluster, the processing pipeline computes quantities such as the centroid, mean velocity, azimuth, total detection power, and spatial bounds. This produces an object-level representation from the lower-level CFAR detections <a href="#ref-21" class="citation-badge" data-citation="21">[21]</a>.
+            where $R$ denotes range and $\theta$ denotes azimuth. DBSCAN clustering is then applied to group spatially related detections. The implementation constructs clustering features using Cartesian position and a scaled velocity component. For each resulting cluster, the processing pipeline computes quantities such as the centroid, mean velocity, azimuth, total detection power, and spatial bounds. This produces an object-level representation from the lower-level CFAR detections <a href="#ref-21" class="citation-badge" data-citation="21">[21]</a>.
           </p>
         </div>
 
@@ -1030,7 +1028,7 @@ ight\}$$
           </div>
           <ol style="padding-left: 1.35rem; font-size: 0.9rem; line-height: 1.65; color: #cbd5e1; margin: 0;">
             <li style="margin-bottom: 0.4rem;">Generate deterministic target scenes using sample indices and seeds (target kinematics, categories, RCS).</li>
-            <li style="margin-bottom: 0.4rem;">Simulate complex radar data cubes $\mathbf{X}(t)$ with target returns, stationary Rayleigh clutter, and AWGN ($10	ext{--}25	ext{ dB}$ SNR).</li>
+            <li style="margin-bottom: 0.4rem;">Simulate complex radar data cubes $\mathbf{X}(t)$ with target returns, stationary Rayleigh clutter, and AWGN ($10\text{--}25\text{ dB}$ SNR).</li>
             <li style="margin-bottom: 0.4rem;">Apply Range FFT, mean-subtraction clutter filtering, and Doppler FFT.</li>
             <li style="margin-bottom: 0.4rem;">Average power across receive antennas, convert to decibels, and normalise power Range-Doppler maps to $[0,1]$.</li>
             <li style="margin-bottom: 0.4rem;">Construct supervision targets: multi-channel Gaussian class heatmaps and masked bounding-box coordinates $(r_{\mathrm{norm}}, v_{\mathrm{norm}}, w_r, w_v)$.</li>
@@ -1070,7 +1068,7 @@ ight\}$$
 
         <div class="academic-two-column">
           <p>
-            The full-scale benchmark uses the S-128 input resolution, corresponding to a ($128	imes128$) spectrogram. This resolution provides the lower-resolution setting for the initial detector benchmark.
+            The full-scale benchmark uses the S-128 input resolution, corresponding to a ($128\times128$) spectrogram. This resolution provides the lower-resolution setting for the initial detector benchmark.
           </p>
           <p>
             The dataset is organised into training, validation, and test splits. The full-scale benchmark record contains approximately 40,000 frames distributed across these splits.
@@ -1135,8 +1133,8 @@ img_tensor = torch.from_numpy(img_arr).unsqueeze(0)</code></pre>
             Algorithm 3.3: RadDet Spectrogram and Annotation Preparation
           </div>
           <div style="font-size: 0.88rem; color: #94a3b8; margin-bottom: 0.75rem;">
-            <strong>Input:</strong> RadDet raw directory, split name (train/val/test), target resolution ($128 	imes 128$).<br>
-            <strong>Output:</strong> Normalised image tensors $\mathbf{X} \in [0, 1]^{1 	imes H 	imes W}$ and YOLO annotation tensors $(c, x_c, y_c, w, h)$.
+            <strong>Input:</strong> RadDet raw directory, split name (train/val/test), target resolution ($128 \times 128$).<br>
+            <strong>Output:</strong> Normalised image tensors $\mathbf{X} \in [0, 1]^{1 \times H \times W}$ and YOLO annotation tensors $(c, x_c, y_c, w, h)$.
           </div>
           <ol style="padding-left: 1.35rem; font-size: 0.9rem; line-height: 1.65; color: #cbd5e1; margin: 0;">
             <li style="margin-bottom: 0.4rem;">Load the selected dataset split directory structure.</li>
@@ -1278,7 +1276,7 @@ img_tensor = torch.from_numpy(img_arr).unsqueeze(0)</code></pre>
         </div>
 
         <div style="text-align: center; margin: 1.25rem 0;">
-          $$\mathrm{FPS}_{\mathrm{avg}} = rac{1000}{\mathrm{Latency}_{\mathrm{mean}}(\mathrm{ms})}$$
+          $$\mathrm{FPS}_{\mathrm{avg}} = \frac{1000}{\mathrm{Latency}_{\mathrm{mean}}(\mathrm{ms})}$$
         </div>
 
         <div class="academic-two-column">
@@ -1300,7 +1298,7 @@ img_tensor = torch.from_numpy(img_arr).unsqueeze(0)</code></pre>
           <ol style="padding-left: 1.35rem; font-size: 0.9rem; line-height: 1.6; color: #cbd5e1; margin: 0 0 0.75rem 0;">
             <li>Load selected trained model checkpoint onto CUDA device.</li>
             <li>Load held-out test dataset split.</li>
-            <li>For each SNR level $\mathrm{SNR} \in \{-20, -12, -4, +4, +12, +20\}	ext{ dB}$, isolate corresponding test frames.</li>
+            <li>For each SNR level $\mathrm{SNR} \in \{-20, -12, -4, +4, +12, +20\}\text{ dB}$, isolate corresponding test frames.</li>
             <li>Execute evaluation pass and compute precision, recall, $\mathrm{mAP}_{50}$, and $\mathrm{mAP}_{50:95}$.</li>
             <li>Aggregate metrics across all test frames to compute overall benchmark scores.</li>
             <li>Export performance comparison table and SNR accuracy curves.</li>
@@ -1378,7 +1376,7 @@ img_tensor = torch.from_numpy(img_arr).unsqueeze(0)</code></pre>
         <h4 style="margin-top: 1.75rem; margin-bottom: 0.75rem; color: #7dd3fc;">3.4.3 Computational Objective and Evaluation Criteria</h4>
         <div class="academic-two-column">
           <p>
-            The broader resource-efficiency problem can be formulated as a constrained optimisation objective. Let $f_	heta$ represent a detector parameterised by $	heta$, and let $\pi$ represent a possible computation-allocation or inference policy.
+            The broader resource-efficiency problem can be formulated as a constrained optimisation objective. Let $f_\theta$ represent a detector parameterised by $\theta$, and let $\pi$ represent a possible computation-allocation or inference policy.
           </p>
           <p>
             A candidate formulation is:
@@ -1386,8 +1384,7 @@ img_tensor = torch.from_numpy(img_arr).unsqueeze(0)</code></pre>
         </div>
 
         <div style="text-align: center; margin: 1.25rem 0;">
-          $$\min_{	heta,\pi} \mathbb{E}_{x \sim \mathcal{D}} \left[ C(x, \pi(x)) 
-ight]$$
+          $$\min_{\theta,\pi} \mathbb{E}_{x \sim \mathcal{D}} \left[ C(x, \pi(x)) \right]$$
         </div>
 
         <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin: 0.75rem 0; text-align: center;">
@@ -1395,7 +1392,7 @@ ight]$$
         </p>
 
         <div style="text-align: center; margin: 1rem 0;">
-          $$\mathrm{mAP}(f_	heta, \pi) \ge \mathrm{mAP}_{\mathrm{baseline}} - \epsilon$$
+          $$\mathrm{mAP}(f_\theta, \pi) \ge \mathrm{mAP}_{\mathrm{baseline}} - \epsilon$$
         </div>
 
         <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin: 0.75rem 0; text-align: center;">
@@ -1403,7 +1400,7 @@ ight]$$
         </p>
 
         <div style="text-align: center; margin: 1rem 0;">
-          $$\mathrm{Latency}_{P95}(f_	heta, \pi) \le 	au_{\max}$$
+          $$\mathrm{Latency}_{P95}(f_\theta, \pi) \le \tau_{\max}$$
         </div>
 
         <div class="academic-two-column">
@@ -1415,7 +1412,7 @@ ight]$$
             <li>$\mathcal{D}$ denotes the evaluation data distribution.</li>
             <li>$\epsilon$ specifies the acceptable loss in detection performance relative to a baseline.</li>
             <li>$\mathrm{Latency}_{P95}$ denotes the 95th-percentile inference latency.</li>
-            <li>$	au_{\max}$ represents the application-specific latency constraint.</li>
+            <li>$\tau_{\max}$ represents the application-specific latency constraint.</li>
           </ul>
           <p>
             The formulation captures the central trade-off between detection quality and computational requirements. It also allows static model compression and input-dependent computation allocation to be considered within a common framework.
@@ -2099,8 +2096,8 @@ class AngleEstimator:
             <strong>4.4 The 5 Candidate Adaptive Computation Methodologies:</strong>
           </p>
           <ol style="padding-left: 1.25rem; margin-bottom: 1.25rem; font-size: 0.92rem; line-height: 1.7; color: #cbd5e1;">
-            <li><strong>Method 1: Cascaded Multi-Resolution Triage (Primary):</strong> All incoming frames first pass through an ultra-fast $128\times 128$ screening backbone ($1.12\text{ ms}$). If prediction Shannon entropy $\mathcal{H}(p) &lt; \tau_{\text{entropy}}$, detection is finalized immediately ($80\%\text{ of highway frames}$). Ambiguous or dense frames escalate dynamically to the $256\times 256$ intermediate or $512\times 512$ expert branch.</li>
-            <li><strong>Method 2: Cross-Resolution Knowledge Distillation (Primary):</strong> Feature-level imitation loss forcing the $128\times 128$ student network to replicate the intermediate feature representations of a frozen $512\times 512$ teacher network ($\\mathcal{L}_{\text{distill}} = \|\phi_{\text{student}}(x) - \mathcal{P}(\phi_{\text{teacher}}(x))\|_2^2$), recovering sub-Rayleigh resolving capability without increasing student FLOPs.</li>
+            <li><strong>Method 1: Cascaded Multi-Resolution Triage (Primary):</strong> All incoming frames first pass through an ultra-fast $128\times 128$ screening backbone ($1.12\text{ ms}$). If prediction Shannon entropy $\mathcal{H}(p) < \tau_{\text{entropy}}$, detection is finalized immediately ($80\%\text{ of highway frames}$). Ambiguous or dense frames escalate dynamically to the $256\times 256$ intermediate or $512\times 512$ expert branch.</li>
+            <li><strong>Method 2: Cross-Resolution Knowledge Distillation (Primary):</strong> Feature-level imitation loss forcing the $128\times 128$ student network to replicate the intermediate feature representations of a frozen $512\times 512$ teacher network ($\mathcal{L}_{\text{distill}} = \|\phi_{\text{student}}(x) - \mathcal{P}(\phi_{\text{teacher}}(x))\|_2^2$), recovering sub-Rayleigh resolving capability without increasing student FLOPs.</li>
             <li><strong>Method 3: Dynamic Layer Early-Exit &amp; Conditional Computation (Primary):</strong> Injecting auxiliary early-exit heads into the RepNCSPELAN backbone. Easy, unobstructed vehicle returns exit at Stage 2, skipping deep stages and saving $40\%$ latency.</li>
             <li><strong>Method 4: Self-Supervised RF Pretraining (Exploratory):</strong> Masked Spectrogram Modeling (MSM) masking $50\%$ of time-frequency bins and reconstructing them with a lightweight autoencoder, teaching the network universal clutter and RF propagation priors.</li>
             <li><strong>Method 5: Reinforcement Learning Allocation (Exploratory):</strong> Modeling compute allocation as a Markov Decision Process (MDP) where a policy agent balances vehicle velocity, target range, and battery budget.</li>
@@ -2504,13 +2501,13 @@ class RadarObjectDetectorCNN(nn.Module):
 
         <div class="academic-two-column">
           <p>
-            <strong>5.3 Multi-SNR Robustness Stress Test Curves:</strong> Subjecting models to synthetic Gaussian and Weibull noise injection ranging from $-20\text{ dB}$ to $+20\text{ dB}$ reveals that classical CFAR detection crashes below $0\text{ dB}$ ($&lt;15\%$ detection rate). In contrast, the deep model maintains $>45\%\text{ mAP}$ even at $-10\text{ dB}$, confirming that the network learns phase coherence and spatial sinc structures rather than naive amplitude thresholding.
+            <strong>5.3 Multi-SNR Robustness Stress Test Curves:</strong> Subjecting models to synthetic Gaussian and Weibull noise injection ranging from $-20\text{ dB}$ to $+20\text{ dB}$ reveals that classical CFAR detection crashes below $0\text{ dB}$ ($<15\%$ detection rate). In contrast, the deep model maintains $>45\%\text{ mAP}$ even at $-10\text{ dB}$, confirming that the network learns phase coherence and spatial sinc structures rather than naive amplitude thresholding.
           </p>
           <p>
             <strong>5.4 Real-Time Embedded Latency &amp; Edge Profile:</strong> At $1.12\text{ ms}$ ($892.9\text{ FPS}$), the S-128 baseline consumes only $11.2\%$ of a standard $100\text{ Hz}$ ($10\text{ ms}$) radar cycle. Our dynamic triage engine preserves this ultra-fast execution on $80\%$ of frames while recovering $97.4\%$ of the L-512 oracle accuracy.
           </p>
           <p>
-            <strong>5.5 Close-Target Resolution &amp; Learned PSF Deconvolution:</strong> In synthetic twin-scatterer experiments separated by $10\text{ cm}$ ($&lt; \Delta R = 15\text{ cm}$), classical FFT produces a single merged peak. Deep spectrum regression successfully bifurcates the return into two discrete bounding boxes with $94.2\%$ localization accuracy.
+            <strong>5.5 Close-Target Resolution &amp; Learned PSF Deconvolution:</strong> In synthetic twin-scatterer experiments separated by $10\text{ cm}$ ($< \Delta R = 15\text{ cm}$), classical FFT produces a single merged peak. Deep spectrum regression successfully bifurcates the return into two discrete bounding boxes with $94.2\%$ localization accuracy.
           </p>
           <p>
             <strong>5.6 Micro-Doppler Pedestrian Kinematic Classification:</strong> Figure 5.6 illustrates how walking pedestrian swinging limbs modulate the carrier frequency. Unlike CFAR which clips limb returns, the CNN extracts torso velocity ($1.2\text{ m/s}$) and gait cycle period ($0.65\text{ s}$) directly.
