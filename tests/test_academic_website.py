@@ -271,6 +271,31 @@ def test_academic_timeline_and_defense():
     assert "May 2027" in html, "Missing BTP-2 May milestone"
 
 
+def test_official_abstract():
+    """Verify presence and empirical accuracy of the finalized official thesis abstract."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    assert '<div class="paper-abstract"' in html, "Missing .paper-abstract container"
+    abstract_block = html.split('<div class="paper-abstract"')[1].split('</div>')[0]
+
+    # Key narrative statements
+    assert "Radar sensing is increasingly used in intelligent perception" in abstract_block
+    assert "two complementary experimental tracks" in abstract_block
+    assert "synthetic 77 GHz frequency-modulated continuous-wave (FMCW) radar environment" in abstract_block
+    assert "wideband radar-spectrum detection using the RadDet dataset" in abstract_block
+
+    # Empirical metrics
+    assert "25.25%" in abstract_block and "19.03%" in abstract_block, "Missing Table III reproduction metrics in abstract"
+    assert "1.12 ms" in abstract_block, "Missing GPU inference latency in abstract"
+    assert "-20 dB" in abstract_block and "+20 dB" in abstract_block, "Missing multi-SNR range in abstract"
+    assert "3.90%" in abstract_block and "40.28%" in abstract_block, "Missing low and high SNR mAP values in abstract"
+
+    # Research direction synthesis
+    assert "Reducing computational requirements and investigating CPU-oriented inference" in abstract_block
+    assert "Index Terms:" in html
+
+
 def test_chapter_finalization_phase2():
     """Verify Phase 2 finalized Chapters 1, 2, 3, 4, and 5 above the transition boundary."""
     with open(INDEX_HTML, "r", encoding="utf-8") as f:
