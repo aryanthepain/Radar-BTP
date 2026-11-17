@@ -311,6 +311,7 @@ function initScrollSpy() {
     "#ch2-lit-review",
     "#ch3-methodology",
     "#ch4-results",
+    "#ch5-conclusion",
     "#ch2-physics",
     "#ch3-dsp-audit",
     "#ch4-methodology",

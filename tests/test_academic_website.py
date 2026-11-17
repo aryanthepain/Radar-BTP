@@ -272,7 +272,7 @@ def test_academic_timeline_and_defense():
 
 
 def test_chapter_finalization_phase2():
-    """Verify Phase 2 finalized Chapters 1, 2, 3, and 4 above the transition boundary."""
+    """Verify Phase 2 finalized Chapters 1, 2, 3, 4, and 5 above the transition boundary."""
     with open(INDEX_HTML, "r", encoding="utf-8") as f:
         html = f.read()
 
@@ -336,8 +336,29 @@ def test_chapter_finalization_phase2():
     assert "25.25%" in above_divider, "Missing Table III reproduction grand mean"
     assert "892.9 FPS" in above_divider or "1.12 ms" in above_divider, "Missing inference speed metric"
 
-    # Sidebar TOC contains Chapter 3 and Chapter 4
+    # Chapter 5 Conclusion and Future Work present above divider
+    assert '<section id="ch5-conclusion"' in above_divider
+    assert "Chapter 5: Conclusion and Future Work" in above_divider
+    assert "5.1 Summary of the Study" in above_divider
+    assert "5.2 Conclusions and Achievement of Objectives" in above_divider
+    assert "5.3 Key Findings and Research Implications" in above_divider
+    assert "5.4 Limitations of the Study" in above_divider
+    assert "5.5 Future Work" in above_divider
+    assert "5.6 Requirements for the Next-Stage Demonstration" in above_divider
+    assert "5.7 Final Conclusion" in above_divider
+
+    # Chapter 5 Tables
+    assert "Table 5.1: Objective achievement summary" in above_divider
+    assert "Table 5.2: Proposed roadmap for the subsequent phase" in above_divider
+
+    # Chapter 5 Key Framework Declarations
+    assert "Approach A: Computational Reduction" in above_divider
+    assert "Approach B: CPU-Oriented Inference" in above_divider
+    assert "Laboratory & Hardware Confirmation Protocol" in above_divider
+
+    # Sidebar TOC contains Chapters 3, 4, and 5
     assert '<a href="#ch3-methodology" class="toc-link">' in html
     assert '<a href="#ch4-results" class="toc-link">' in html
+    assert '<a href="#ch5-conclusion" class="toc-link">' in html
 
 

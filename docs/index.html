@@ -84,6 +84,9 @@
         <a href="#ch4-results" class="toc-link">
           <span>4. Experimental Results</span>
         </a>
+        <a href="#ch5-conclusion" class="toc-link">
+          <span>5. Conclusion & Future Work</span>
+        </a>
         <a href="#ch1-intro-original" class="toc-link" style="font-size: 0.72rem; opacity: 0.75; padding-left: 1.5rem;">
           <span>↳ Original Chapter 1 Draft</span>
         </a>
@@ -2416,6 +2419,314 @@ ightarrow$ 1.34</td>
           </div>
           <p style="margin: 0; font-size: 0.88rem; line-height: 1.6; color: #cbd5e1;">
             The present experiments establish two complementary foundations for AI applications in radar signal processing. The synthetic FMCW track demonstrates the operation of a conventional radar processing pipeline (12.94 dB clutter suppression, 0.0125 m range MAE, 0.105 m/s velocity MAE) and initial training of a compact CNN (136,041 parameters). The RadDet track establishes a wideband spectrum-detection framework and successfully reproduces the ICASSP 2025 Table III benchmark with YOLOv9-C ($25.25\%\ 	ext{mAP}_{50}$, 892.9 FPS on Tesla T4). The evidence confirms the necessity of evaluating detection quality together with computational requirements, setting the stage for comparative resource-efficiency evaluations.
+          </p>
+        </div>
+      </section>
+
+
+      
+      <!-- ==================== CHAPTER 5: CONCLUSION AND FUTURE WORK ==================== -->
+      <section id="ch5-conclusion" class="section-block" style="margin-bottom: 3.5rem;">
+        <h2>Chapter 5: Conclusion and Future Work</h2>
+
+        <h3 style="margin-top: 1.75rem; margin-bottom: 1rem; color: #38bdf8;">5.1 Summary of the Study</h3>
+        <div class="academic-two-column">
+          <p>
+            This study investigated resource-efficient AI for radar signal processing and detection. The work was motivated by the need to balance detection performance with computational cost, memory requirements, and practical deployment constraints on edge platforms.
+          </p>
+          <p>
+            Two distinct experimental tracks were considered. The first focused on synthetic 77 GHz FMCW automotive radar perception, using conventional digital signal processing (fast-time range FFT, slow-time MTI filtering, 2D Doppler FFT, 2D CA-CFAR detection, super-resolution MUSIC/Capon AoA estimation, and DBSCAN clustering) alongside a compact multi-task convolutional neural network (<code>RadarObjectDetectorCNN</code>). The second track investigated wideband radar spectrum detection using the RadDet dataset and a YOLO-based detection workflow for localising radar emissions and identifying their modulation categories.
+          </p>
+          <p>
+            Together, these experiments established an empirical foundation for studying learning-based radar detection and its computational requirements. The investigation explicitly retained two complementary directions for further work: reducing the computation required by AI models (through lightweight architectures, structured pruning, INT8 quantization, distillation, and adaptive computation) and enabling efficient inference on CPU-oriented platforms (reducing dependence on dedicated GPU hardware). Neither direction was selected as the final research pathway because rigorous comparative experiments are required.
+          </p>
+        </div>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">5.2 Conclusions and Achievement of Objectives</h3>
+        <div class="academic-two-column">
+          <p>
+            The project objectives formulated in Chapter 1 were evaluated against the experimental outcomes achieved during the initial phase. A comprehensive summary of objective achievement is presented in Table 5.1.
+          </p>
+        </div>
+
+        <!-- Table 5.1: Objective achievement summary -->
+        <div style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem; overflow-x: auto;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
+            Table 5.1: Objective achievement summary
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
+                <th style="padding: 0.6rem 0.8rem;">Objective</th>
+                <th style="padding: 0.6rem 0.8rem;">Status</th>
+                <th style="padding: 0.6rem 0.8rem;">Experimental Evidence & Achievement Summary</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">1. Establish a radar processing foundation</td>
+                <td style="padding: 0.55rem 0.8rem; color: #4ade80; font-weight: 600;">Substantially achieved</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">The 77 GHz FMCW simulator, signal-synthesis routines, and conventional DSP pipeline (Range FFT, MTI clutter filtering, Doppler FFT, CA-CFAR, AoA, DBSCAN) were fully implemented and experimentally examined.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">2. Study AI-based radar detection</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">Partially achieved</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">The multi-task FMCW CNN and wideband RadDet YOLO pipelines were established; full-scale YOLOv9-C benchmark reproduced Table III on GPU, while edge deployment evaluation remains ongoing.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">3. Characterise computational requirements</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">Partially achieved</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">FMCW CNN parameters (136,041) and training duration (26.89 s) were recorded; YOLOv9-C GPU latency (1.12 ms / 892.9 FPS) was profiled. Comprehensive CPU inference and memory profiling remain pending.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">4. Investigate computational reduction</td>
+                <td style="padding: 0.55rem 0.8rem; color: #eab308; font-weight: 600;">Pending</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Lightweight architectures, structured pruning, INT8 quantisation, knowledge distillation, and adaptive computation were formulated as candidate methods for the subsequent experimental phase.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">5. Investigate CPU-oriented inference</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">Partially achieved</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">CPU-based model training was demonstrated for the synthetic CNN; controlled CPU single-frame inference latency and runtime evaluation (ONNX Runtime / OpenVINO) have not yet been completed.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">6. Establish a comparative evaluation framework</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">Partially achieved</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Evaluation dimensions (accuracy, latency, memory, parameters) and multi-SNR metrics were defined; consistent side-by-side benchmark measurements across CPU and GPU hardware are still required.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">7. Define a practical demonstration</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">Partially achieved</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">The engineering requirements and performance targets have been identified; specific laboratory hardware availability and operational constraints must be confirmed with the supervisor.</td>
+              </tr>
+              <tr>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">8. Select a feasible research pathway</td>
+                <td style="padding: 0.55rem 0.8rem; color: #eab308; font-weight: 600;">Deferred</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Selection between computational reduction (Approach A) and CPU-oriented inference (Approach B) is intentionally deferred until comparative empirical evidence is gathered.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="academic-two-column">
+          <p>
+            The study has achieved its primary foundation-building objectives, establishing working simulation engines, signal-processing chains, and machine-learning workflows across both FMCW automotive and RadDet wideband spectrum domains.
+          </p>
+          <p>
+            However, the central resource-efficiency questions remain open. In particular, the current findings do not establish whether model compression, CPU-oriented inference, or their combination provides the optimal trade-off between detection accuracy and hardware resource consumption. Resolving this trade-off forms the primary focus of the subsequent project phase.
+          </p>
+        </div>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">5.3 Key Findings and Research Implications</h3>
+
+        <h4 style="margin-top: 1.25rem; margin-bottom: 0.75rem; color: #93c5fd;">5.3.1 Synthetic FMCW Radar Perception</h4>
+        <div class="academic-two-column">
+          <p>
+            The conventional FMCW processing experiment successfully recovered the range and radial velocity of four simulated targets (two cars, a cyclist, and a pedestrian with micro-Doppler modulation). Mean-subtraction clutter suppression achieved 12.94 dB attenuation, while the four associated detections produced a range MAE of 0.0125 m and a velocity MAE of 0.105 m/s.
+          </p>
+          <p>
+            These findings demonstrate that the conventional processing pipeline provides a reliable baseline under controlled simulation conditions. However, the presence of an unassociated zero-Doppler CFAR candidate highlights the challenge of false-alarm discrimination in clutter residual. Furthermore, the angle-estimation experiment revealed a range-only target association limitation, demonstrating that CFAR detections must be associated using both range and Doppler before extracting spatial antenna snapshots.
+          </p>
+          <p>
+            The synthetic CNN experiment established an initial learning-based baseline with 136,041 trainable parameters, completing five training epochs on CPU in 26.89 seconds. Although the network successfully optimized its weights and reached a minimum validation loss of 0.4933 at epoch 3, the small dataset size (32 samples) and absence of bounding-box detection metrics preclude conclusions regarding generalization or competitive performance against CA-CFAR.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">5.3.2 Wideband RadDet Spectrum Detection</h4>
+        <div class="academic-two-column">
+          <p>
+            The RadDet investigation established a spectrogram-based detection framework for multi-class radar emission localization. The initial small prototype run (40 synthetic frames) collapsed to 0.00% mAP due to severe sample scarcity, demonstrating that deep architectures cannot converge on minimal synthetic micro-slices.
+          </p>
+          <p>
+            Conversely, the full-scale benchmark on 40,003 real RadDet frames converged monotonically over 66 epochs on an NVIDIA Tesla T4 GPU, achieving a peak validation $	ext{mAP}_{50} = 32.53\%$ and peak recall of $72.60\%$. Under multi-SNR evaluation across 20,001 test frames ($-20	ext{ dB}$ to $+20	ext{ dB}$), the model attained a grand mean of $25.25\%\ 	ext{mAP}_{50}$ and $19.03\%\ 	ext{mAP}_{50:95}$, reproducing the published ICASSP 2025 Table III SOTA within $-0.68\%$ and $-0.44\%$ absolute margins.
+          </p>
+          <p>
+            Hardware profiling clocked single-frame inference latency at 1.12 ms (892.9 FPS), consuming only 2.24% of the 50 ms automotive frame interval. However, because this benchmark was executed on a cloud-hosted datacenter GPU, independent replication on local laboratory hardware and controlled CPU deployment remain required before establishing practical edge feasibility.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">5.3.3 Implications for Resource Efficiency</h4>
+        <div class="academic-two-column">
+          <p>
+            The experiments provide initial reference baselines for studying computational efficiency, but they underscore that model parameter count and training duration cannot serve as proxies for inference latency, throughput, or memory bandwidth.
+          </p>
+          <p>
+            The principal implication is that resource efficiency must be measured empirically on the target deployment processor alongside task-specific detection accuracy. A theoretical reduction in parameter count or floating-point operations does not guarantee faster execution on hardware architectures with memory bandwidth or cache constraints. Controlled CPU and GPU measurements will therefore be essential before selecting an operational deployment strategy.
+          </p>
+        </div>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">5.4 Limitations of the Study</h3>
+        <div class="academic-two-column">
+          <p>
+            The experiments reveal several distinct technical limitations that define the current boundary of the investigation:
+          </p>
+          <ol style="margin: 0.5rem 0 1rem 1.25rem; line-height: 1.6; color: #cbd5e1;">
+            <li><strong>Synthetic FMCW data:</strong> The automotive perception experiments relied entirely on simulated baseband measurements. Validation against real-world radar RF data (such as Texas Instruments AWR1843 captures) is necessary before concluding practical detection efficacy.</li>
+            <li><strong>Limited CNN evaluation:</strong> The small synthetic training dataset (32 samples) and absence of independent test-set detection metrics (mAP, IoU) restrict conclusions regarding generalisation and detection robustness.</li>
+            <li><strong>Angle-estimation association:</strong> The range-only target selection in the AoA experiment selected a zero-velocity candidate, preventing reported angular spectra from serving as validated error measurements.</li>
+            <li><strong>Hardware-constrained RadDet replication:</strong> While full-scale GPU results successfully reproduced Table III, local workstation and CPU-only execution have not yet been evaluated for deep radar detectors.</li>
+            <li><strong>Incomplete resource profiling:</strong> Verified single-frame CPU inference latency, CPU-versus-GPU throughput curves, peak RAM/VRAM consumption, and energy consumption measurements remain pending.</li>
+            <li><strong>Absence of physical radar deployment:</strong> The study has not yet demonstrated the complete real-time processing chain on an embedded physical radar hardware platform.</li>
+          </ol>
+          <p>
+            These limitations define the precise experimental requirements to be addressed in the subsequent project phase.
+          </p>
+        </div>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">5.5 Future Work</h3>
+        <div class="academic-two-column">
+          <p>
+            Future work will proceed across three complementary, interconnected thrusts designed to resolve the accuracy–resource trade-off.
+          </p>
+          <p>
+            <strong>A. Reducing Computational Requirements.</strong> The first direction investigates algorithmic and architectural methods to reduce model complexity and memory bandwidth while maintaining target detection quality:
+          </p>
+          <ul style="margin: 0.5rem 0 1rem 1.25rem; line-height: 1.6; color: #cbd5e1;">
+            <li><em>Lightweight architectures:</em> Exploring compact convolutional backbones (MobileNetV4, ShuffleNetV2, GhostNet) tailored for radar tensor inputs.</li>
+            <li><em>Pruning:</em> Evaluating structured channel pruning and unstructured weight pruning to eliminate redundant parameters.</li>
+            <li><em>Quantisation:</em> Implementing Post-Training Quantization (PTQ) and Quantization-Aware Training (QAT) to convert FP32 weights to uniform INT8 precision.</li>
+            <li><em>Knowledge distillation:</em> Transferring feature representations from a high-capacity teacher network to a lightweight edge student model.</li>
+            <li><em>Adaptive computation:</em> Investigating dynamic inference paths, early-exit classifiers, and conditional multi-resolution spectrogram scaling.</li>
+          </ul>
+          <p>
+            <strong>B. CPU-Oriented Model Development and Inference.</strong> The second direction investigates whether radar detection models can achieve real-time operation on general-purpose commodity CPUs, reducing dependence on dedicated GPU accelerators:
+          </p>
+          <ul style="margin: 0.5rem 0 1rem 1.25rem; line-height: 1.6; color: #cbd5e1;">
+            <li>Establishing native CPU PyTorch inference baselines using thread-parallel matrix kernels.</li>
+            <li>Deploying models via high-performance execution runtimes, including ONNX Runtime CPU and Intel OpenVINO.</li>
+            <li>Profiling batch-size-one latency, tail latency (P95/P99), CPU utilization, cache locality, and memory bandwidth.</li>
+          </ul>
+          <p>
+            <strong>C. Further Experimental Validation.</strong> The experimental foundation will be expanded to include diverse FMCW multi-target traffic scenes, corrected 2D Range-Doppler AoA target association, real-world RF data captures, and systematic ablation studies combining model reduction with CPU-optimized runtimes.
+          </p>
+        </div>
+
+        <!-- Table 5.2: Proposed roadmap for the subsequent phase -->
+        <div style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem; overflow-x: auto;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
+            Table 5.2: Proposed roadmap for the subsequent phase
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
+                <th style="padding: 0.6rem 0.8rem;">Stage</th>
+                <th style="padding: 0.6rem 0.8rem;">Main Activity</th>
+                <th style="padding: 0.6rem 0.8rem;">Target Methodology & Milestones</th>
+                <th style="padding: 0.6rem 0.8rem;">Expected Outcome</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 700;">Stage 1</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">Consolidate Experimental Baselines</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Correct AoA Range-Doppler association; expand FMCW synthetic dataset to 1,000+ frames; verify reproducible checkpoint splits.</td>
+                <td style="padding: 0.55rem 0.8rem; color: #4ade80;">Reliable task-specific baseline metrics</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 700;">Stage 2</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">Resource & Latency Profiling</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Instrument pipeline with high-resolution timers; measure FLOPs, parameters, cache utilization, and batch-size-1 latency.</td>
+                <td style="padding: 0.55rem 0.8rem; color: #4ade80;">Standardized computational benchmark profiles</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 700;">Stage 3</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">Model-Efficiency Implementations</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Apply INT8 quantization, structured pruning, and lightweight backbones to both FMCW and RadDet detectors.</td>
+                <td style="padding: 0.55rem 0.8rem; color: #4ade80;">Accuracy–complexity Pareto frontiers</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 700;">Stage 4</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">CPU vs. GPU Comparative Benchmarking</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Benchmark identical models across commodity CPUs (ONNX Runtime, OpenVINO) and edge GPUs under identical inputs.</td>
+                <td style="padding: 0.55rem 0.8rem; color: #4ade80;">Hardware-specific execution characterisation</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 700;">Stage 5</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">Combined Optimisation & Selection</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Evaluate combined quantization and CPU runtime acceleration; select the most feasible deployment configuration.</td>
+                <td style="padding: 0.55rem 0.8rem; color: #4ade80;">Selection of optimal model and runtime</td>
+              </tr>
+              <tr>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 700;">Stage 6</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">System Integration & Demonstration</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Package end-to-end inference pipeline for practical demonstration on confirmed laboratory hardware.</td>
+                <td style="padding: 0.55rem 0.8rem; color: #4ade80;">Validated real-time prototype demonstration</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">5.6 Requirements for the Next-Stage Demonstration</h3>
+        <div class="academic-two-column">
+          <p>
+            The next-stage demonstration must strictly distinguish between offline model training and online real-time inference. While training larger radar detectors and conducting hyperparameter searches may benefit from GPU acceleration, the final deployment demonstration aims to execute inference within acceptable latency budgets on a commodity CPU platform.
+          </p>
+          <p>
+            The primary requirement is establishing a batch-size-one inference benchmark. Latency must be measured separately across preprocessing (ADC framing and FFT windowing), neural forward pass, postprocessing (NMS and thresholding), and end-to-end pipeline execution. Metrics must include mean latency, median latency, P95/P99 tail latency, sustained throughput (FPS), and peak RAM/VRAM consumption.
+          </p>
+          <p>
+            An application-specific latency budget must be formally established based on operational radar frame rates (typically 20–50 Hz, or 20–50 ms per frame) rather than an ungrounded real-time assumption.
+          </p>
+        </div>
+
+        <!-- Laboratory Hardware Confirmation Card -->
+        <div style="margin: 1.75rem 0; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span>📋 Laboratory & Hardware Confirmation Protocol</span>
+          </div>
+          <p style="font-size: 0.86rem; color: #cbd5e1; margin-bottom: 0.75rem; line-height: 1.55;">
+            Prior to finalizing the deployment implementation, the following six operational parameters must be confirmed with the supervisor and laboratory facilities:
+          </p>
+          <ul style="margin: 0 0 0.5rem 1.25rem; line-height: 1.6; font-size: 0.86rem; color: #cbd5e1;">
+            <li><strong>CPU Specification:</strong> Processor model, physical/logical core count, AVX-512 / AVX2 / ARM NEON vector extensions, and available host RAM.</li>
+            <li><strong>GPU Availability:</strong> Model designation, CUDA compute capability, and dedicated VRAM capacity.</li>
+            <li><strong>Target Deployment Environment:</strong> Standalone workstation, edge embedded board (e.g., Raspberry Pi / Jetson), or virtualized Linux/Windows environment.</li>
+            <li><strong>Input Data Modality:</strong> Synthesized radar stream, prerecorded binary raw ADC captures, or live physical sensor interface (e.g., TI AWR1843 + DCA1000 EVM).</li>
+            <li><strong>Throughput & Latency Target:</strong> Minimum refresh rate (e.g., 20 Hz / 50 ms budget) and maximum allowable end-to-end latency.</li>
+            <li><strong>Runtime Constraints:</strong> Storage allocation, dependency packaging, and authorization to deploy optimized execution engines (ONNX Runtime, OpenVINO, TensorRT).</li>
+          </ul>
+        </div>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">5.7 Final Conclusion</h3>
+        <div class="academic-two-column">
+          <p>
+            This study established an experimental and analytical foundation for investigating resource-efficient artificial intelligence in radar signal processing and target detection. The synthetic FMCW track demonstrated the operation of a complete classical radar processing pipeline and verified initial neural network training, while the RadDet track established a wideband RF spectrum-detection framework and reproduced published state-of-the-art benchmarks on GPU hardware.
+          </p>
+          <p>
+            These results provide a solid starting point but do not yet establish a demonstrated superiority of either model compression or CPU-oriented inference. Rigorous CPU inference measurements, systematic ablation experiments, and deployment testing on confirmed laboratory hardware remain essential.
+          </p>
+          <p>
+            The overarching research question—whether AI-based radar detection can achieve high accuracy while drastically reducing computational overhead and specialized hardware dependency—remains open. The subsequent phase of this project will directly address this challenge through controlled optimization experiments, comparative CPU-versus-GPU profiling, and a validated real-time demonstration on confirmed target hardware.
+          </p>
+        </div>
+
+        <!-- Overarching Research Direction Card -->
+        <div style="margin: 2rem 0; background: linear-gradient(135deg, rgba(2, 132, 199, 0.12) 0%, rgba(15, 23, 42, 0.8) 100%); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: var(--radius-sm); padding: 1.5rem 1.75rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 1.05rem; margin-bottom: 0.6rem;">
+            Overarching Research Direction & Dual-Path Synthesis
+          </div>
+          <p style="margin: 0 0 0.85rem 0; font-size: 0.9rem; line-height: 1.65; color: #f1f5f9;">
+            The project preserves both candidate approaches for resource-efficient radar AI:
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem; margin-top: 0.75rem;">
+            <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-sm); padding: 1rem;">
+              <div style="font-weight: 600; color: #7dd3fc; font-size: 0.9rem; margin-bottom: 0.35rem;">
+                Approach A: Computational Reduction
+              </div>
+              <p style="font-size: 0.84rem; color: #cbd5e1; line-height: 1.55; margin: 0;">
+                Minimizing arithmetic operations and memory footprint through lightweight architectures, structured pruning, INT8 quantization, knowledge distillation, and dynamic adaptive computation.
+              </p>
+            </div>
+            <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-sm); padding: 1rem;">
+              <div style="font-weight: 600; color: #7dd3fc; font-size: 0.9rem; margin-bottom: 0.35rem;">
+                Approach B: CPU-Oriented Inference
+              </div>
+              <p style="font-size: 0.84rem; color: #cbd5e1; line-height: 1.55; margin: 0;">
+                Tailoring architectures, memory layouts, and execution runtimes (ONNX Runtime, OpenVINO) for efficient real-time execution on general-purpose commodity CPUs, eliminating mandatory GPU dependency.
+              </p>
+            </div>
+          </div>
+          <p style="margin: 1rem 0 0 0; font-size: 0.86rem; line-height: 1.6; color: #94a3b8; font-style: italic;">
+            Final selection between Approach A, Approach B, or their complementary combination is strictly deferred until comparative experiments and hardware profiling are conducted in Phase 2.
           </p>
         </div>
       </section>
