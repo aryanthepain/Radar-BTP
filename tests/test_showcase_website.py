@@ -115,22 +115,26 @@ class TestShowcaseWebsite(unittest.TestCase):
         self.assertTrue(csv_path.exists(), "Missing Table III CSV in docs/assets/nb3/")
         self.assertGreater(csv_path.stat().st_size, 200, "Table III CSV suspiciously small")
 
-        # 4. Architecture and timeline diagrams (5 SVGs)
+        # 4. Architecture and timeline diagrams (6 SVGs)
         diagram_files = [
             "nb1_top.svg",
             "nb2_top.svg",
             "nb3_top.svg",
             "nb2_comparison.svg",
             "timeline_evolution.svg",
+            "timeline_gantt.svg",
         ]
+        import xml.etree.ElementTree as ET
         for fname in diagram_files:
             fpath = ASSETS_DIR / "diagrams" / fname
             self.assertTrue(fpath.exists(), f"Missing diagram SVG: {fpath}")
             self.assertGreater(fpath.stat().st_size, 500, f"Diagram SVG too small: {fname}")
-            with open(fpath, "r", encoding="utf-8") as f:
-                content = f.read()
-                self.assertIn("<svg", content, f"SVG root missing in {fname}")
-                self.assertIn("</svg>", content, f"Closing SVG tag missing in {fname}")
+            try:
+                tree = ET.parse(fpath)
+                root = tree.getroot()
+                self.assertIn("svg", root.tag.lower(), f"Root tag of {fname} is not svg: {root.tag}")
+            except Exception as e:
+                self.fail(f"SVG {fname} contains XML parse errors and cannot be rendered in browser: {e}")
 
         # 5. Offline Prism.js vendor assets (2 files)
         prism_js = ASSETS_DIR / "vendor" / "prism.min.js"

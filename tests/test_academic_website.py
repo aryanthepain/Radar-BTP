@@ -10,6 +10,7 @@ Validates publication-grade academic portal infrastructure:
 
 import os
 import re
+import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 import pytest
 
@@ -113,7 +114,7 @@ def test_app_js_features():
 
 
 def test_image_paths_resolve():
-    """Verify that all non-empty img src paths in docs/index.html resolve to actual files."""
+    """Verify that all non-empty img src paths in docs/index.html resolve to actual files and valid media."""
     class ImgSrcParser(HTMLParser):
         def __init__(self):
             super().__init__()
@@ -139,6 +140,41 @@ def test_image_paths_resolve():
         rel_path = src.replace("./", "").replace("/", os.sep)
         full_path = os.path.join(DOCS_DIR, rel_path)
         assert os.path.exists(full_path), f"Broken image path in docs/index.html: {src} -> {full_path}"
+        assert os.path.getsize(full_path) > 0, f"Empty image file in docs/index.html: {src}"
+
+        # If SVG, strictly verify well-formed XML to prevent browser rendering drops
+        if src.lower().endswith(".svg"):
+            try:
+                tree = ET.parse(full_path)
+                root = tree.getroot()
+                assert "svg" in root.tag.lower(), f"Root tag of {src} is not <svg>: {root.tag}"
+            except Exception as e:
+                pytest.fail(f"Embedded SVG in docs/index.html has XML syntax error and will not render in browser: {src} -> {e}")
+        elif src.lower().endswith(".png"):
+            with open(full_path, "rb") as pf:
+                magic = pf.read(8)
+                assert magic == b"\x89PNG\r\n\x1a\n", f"Invalid PNG magic bytes in {src}"
+
+
+def test_all_svg_diagrams_valid_xml():
+    """Verify all SVG files in docs/assets/diagrams are well-formed XML that browsers can render without breaking."""
+    diagrams_dir = os.path.join(DOCS_DIR, "assets", "diagrams")
+    assert os.path.exists(diagrams_dir), f"Missing diagrams directory {diagrams_dir}"
+
+    svg_files = [f for f in os.listdir(diagrams_dir) if f.endswith(".svg")]
+    assert len(svg_files) >= 5, f"Expected at least 5 diagram SVGs, found {len(svg_files)}"
+
+    for svg_name in svg_files:
+        svg_path = os.path.join(diagrams_dir, svg_name)
+        assert os.path.getsize(svg_path) > 500, f"SVG {svg_name} suspiciously small: {os.path.getsize(svg_path)} bytes"
+        try:
+            tree = ET.parse(svg_path)
+            root = tree.getroot()
+            assert "svg" in root.tag.lower(), f"Root tag of {svg_name} is not <svg>: {root.tag}"
+            assert "viewBox" in root.attrib or ("width" in root.attrib and "height" in root.attrib), \
+                f"SVG {svg_name} missing viewBox or width/height attributes"
+        except Exception as e:
+            pytest.fail(f"SVG {svg_name} contains XML parse errors and cannot be displayed in browser: {e}")
 
 
 def test_html_syntax_and_basics():

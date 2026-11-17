@@ -17,6 +17,8 @@ Adheres strictly to report_content/gantt_chart.md:
 
 import os
 import sys
+import html
+import xml.etree.ElementTree as ET
 import subprocess
 import tempfile
 import shutil
@@ -24,6 +26,11 @@ import shutil
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DOCS_ASSETS_DIR = os.path.join(REPO_ROOT, "docs", "assets", "diagrams")
 OVERLEAF_FIG_DIR = os.path.join(REPO_ROOT, "templates", "BTP_Report_Template_Overleaf", "figures")
+
+
+def xml_escape(text):
+    """Escape text for valid XML embedding."""
+    return html.escape(str(text), quote=True)
 
 MONTHS = [
     {"label": "Aug 2026", "short": "Aug '26", "phase": "BTP-1", "is_break": False},
@@ -289,10 +296,10 @@ def generate_svg():
         txt_color = "#f8fafc" if not is_break else "#94a3b8"
         
         svg_lines.append(f'  <rect x="{cx}" y="{hdr_y}" width="{col_w}" height="{hdr_h}" fill="{bg}" stroke="{border}" stroke-width="1"/>')
-        svg_lines.append(f'  <text x="{cx + col_w/2}" y="{hdr_y + 20}" font-size="11.5" font-weight="700" fill="{txt_color}" text-anchor="middle">{m["short"]}</text>')
+        svg_lines.append(f'  <text x="{cx + col_w/2}" y="{hdr_y + 20}" font-size="11.5" font-weight="700" fill="{txt_color}" text-anchor="middle">{xml_escape(m["short"])}</text>')
         sub_text = m["phase"] if not is_break else "Unassigned"
         sub_col = "#38bdf8" if m["phase"] == "BTP-1" else ("#a5b4fc" if m["phase"] == "BTP-2" else "#64748b")
-        svg_lines.append(f'  <text x="{cx + col_w/2}" y="{hdr_y + 34}" font-size="9.5" font-weight="600" fill="{sub_col}" text-anchor="middle">{sub_text}</text>')
+        svg_lines.append(f'  <text x="{cx + col_w/2}" y="{hdr_y + 34}" font-size="9.5" font-weight="600" fill="{sub_col}" text-anchor="middle">{xml_escape(sub_text)}</text>')
 
     # Vertical Grid Columns Background in timeline area (across all rows)
     grid_top_y = hdr_y + hdr_h
@@ -342,15 +349,15 @@ def generate_svg():
         
         # Month & Phase Tag on the right of card
         tag_col = "#38bdf8" if is_btp1 else ("#fbbf24" if is_cond else "#a5b4fc")
-        svg_lines.append(f'  <text x="{left_x + table_w - 12}" y="{row_y + 23}" font-size="10.5" font-weight="700" fill="{tag_col}" text-anchor="end">{act["month_name"]}</text>')
+        svg_lines.append(f'  <text x="{left_x + table_w - 12}" y="{row_y + 23}" font-size="10.5" font-weight="700" fill="{tag_col}" text-anchor="end">{xml_escape(act["month_name"])}</text>')
         
         # Title of activity
-        svg_lines.append(f'  <text x="{left_x + 46}" y="{row_y + 24}" font-size="12" font-weight="700" fill="#f8fafc">{act["title"]}</text>')
+        svg_lines.append(f'  <text x="{left_x + 46}" y="{row_y + 24}" font-size="12" font-weight="700" fill="#f8fafc">{xml_escape(act["title"])}</text>')
         
         # Multiline description
         for l_idx, line in enumerate(lines):
             line_y = row_y + 40 + l_idx * 14
-            svg_lines.append(f'  <text x="{left_x + 12}" y="{line_y}" font-size="10.5" fill="#cbd5e1" line-height="1.4">{line}</text>')
+            svg_lines.append(f'  <text x="{left_x + 12}" y="{line_y}" font-size="10.5" fill="#cbd5e1" line-height="1.4">{xml_escape(line)}</text>')
             
         # Timeline Gantt Bar on the right
         m_idx = act["month_idx"]
@@ -371,7 +378,7 @@ def generate_svg():
         label_text = act["id"]
         if is_cond:
             label_text = f'{act["id"]}: Cond.'
-        svg_lines.append(f'    <text x="{bar_x + bar_w/2}" y="{bar_y + 20}" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">{label_text}</text>')
+        svg_lines.append(f'    <text x="{bar_x + bar_w/2}" y="{bar_y + 20}" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">{xml_escape(label_text)}</text>')
         svg_lines.append(f'  </g>')
         
         # Special Milestone / Markers
@@ -413,11 +420,19 @@ def generate_svg():
     
     svg_lines.append('</svg>')
     
+    svg_content = "\n".join(svg_lines)
+
+    # Validate XML well-formedness strictly before saving
+    try:
+        ET.fromstring(svg_content)
+    except ET.ParseError as e:
+        raise ValueError(f"Generated SVG is not well-formed XML: {e}")
+
     os.makedirs(DOCS_ASSETS_DIR, exist_ok=True)
     svg_path = os.path.join(DOCS_ASSETS_DIR, "timeline_gantt.svg")
     with open(svg_path, "w", encoding="utf-8") as f:
-        f.write("\n".join(svg_lines))
-    print(f"[SVG] Generated {svg_path} ({os.path.getsize(svg_path)} bytes)")
+        f.write(svg_content)
+    print(f"[SVG] Generated & verified valid XML: {svg_path} ({os.path.getsize(svg_path)} bytes)")
     return svg_path
 
 
