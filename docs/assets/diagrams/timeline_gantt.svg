@@ -1,0 +1,233 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1420 910" width="100%" height="auto" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #090d16; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+  <defs>
+    <!-- Background subtle gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+
+    <!-- BTP-1 Completed Bar Gradient -->
+    <linearGradient id="btp1BarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+
+    <!-- BTP-2 Proposed Bar Gradient -->
+    <linearGradient id="btp2BarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+
+    <!-- Conditional Bar Gradient -->
+    <linearGradient id="condBarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+
+    <!-- Dec Break Hatch Pattern -->
+    <pattern id="hatchBreak" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#334155" stroke-width="2" stroke-opacity="0.35"/>
+    </pattern>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="pinGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="1420" height="910" fill="url(#bgGrad)" rx="8" stroke="#1e293b" stroke-width="1.5"/>
+  <text x="32" y="44" font-size="21" font-weight="700" fill="#f8fafc" letter-spacing="-0.01em">BTP Academic Timeline &amp; One-Year Gantt Schedule</text>
+  <text x="32" y="68" font-size="12.5" fill="#94a3b8">BTP-1 Completed Engineering Milestones (Aug–Nov 2026) vs. BTP-2 Proposed Research Thrusts (Jan–May 2027)</text>
+  <g transform="translate(760, 28)">
+    <rect width="630" height="48" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <rect x="14" y="16" width="16" height="16" rx="3" fill="url(#btp1BarGrad)" stroke="#38bdf8" stroke-width="1"/>
+    <text x="36" y="29" font-size="11.5" font-weight="600" fill="#cbd5e1">BTP-1 Completed</text>
+    <rect x="150" y="16" width="16" height="16" rx="3" fill="url(#btp2BarGrad)" stroke="#a5b4fc" stroke-width="1" stroke-dasharray="2,2"/>
+    <text x="172" y="29" font-size="11.5" font-weight="600" fill="#cbd5e1">BTP-2 Proposed</text>
+    <rect x="282" y="16" width="16" height="16" rx="3" fill="url(#condBarGrad)" stroke="#fbbf24" stroke-width="1"/>
+    <text x="304" y="29" font-size="11.5" font-weight="600" fill="#fbbf24">[Conditional] SDR</text>
+    <polygon points="426,16 433,24 426,32 419,24" fill="#f59e0b" stroke="#ffffff" stroke-width="1.2"/>
+    <text x="440" y="29" font-size="11.5" font-weight="600" fill="#f59e0b">Milestone Marker</text>
+    <rect x="548" y="16" width="16" height="16" rx="3" fill="url(#hatchBreak)" stroke="#64748b" stroke-width="1"/>
+    <text x="570" y="29" font-size="11.5" font-weight="600" fill="#94a3b8">Recess</text>
+  </g>
+  <rect x="550" y="94" width="338.4" height="22" rx="4" fill="rgba(2, 132, 199, 0.18)" stroke="#0284c7" stroke-width="1"/>
+  <text x="719.2" y="109" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle" letter-spacing="0.04em">PHASE I: BTP-1 COMPLETED FOUNDATION</text>
+  <rect x="888.4" y="94" width="84.6" height="22" rx="4" fill="rgba(100, 116, 139, 0.15)" stroke="#475569" stroke-width="1"/>
+  <text x="930.6999999999999" y="109" font-size="10.5" font-weight="600" fill="#94a3b8" text-anchor="middle">RECESS</text>
+  <rect x="973.0" y="94" width="423.0" height="22" rx="4" fill="rgba(99, 102, 241, 0.18)" stroke="#6366f1" stroke-width="1"/>
+  <text x="1184.5" y="109" font-size="11" font-weight="700" fill="#a5b4fc" text-anchor="middle" letter-spacing="0.04em">PHASE II: BTP-2 PROPOSED RESEARCH ROADMAP</text>
+  <rect x="24" y="120" width="510" height="42" rx="5" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="40" y="146" font-size="12" font-weight="700" fill="#f1f5f9" letter-spacing="0.03em">SCHEDULED RESEARCH &amp; IMPLEMENTATION ACTIVITIES</text>
+  <text x="518" y="146" font-size="11" font-weight="600" fill="#94a3b8" text-anchor="end">MONTH &amp; PHASE</text>
+  <rect x="550.0" y="120" width="84.6" height="42" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="592.3" y="140" font-size="11.5" font-weight="700" fill="#f8fafc" text-anchor="middle">Aug '26</text>
+  <text x="592.3" y="154" font-size="9.5" font-weight="600" fill="#38bdf8" text-anchor="middle">BTP-1</text>
+  <rect x="634.6" y="120" width="84.6" height="42" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="676.9" y="140" font-size="11.5" font-weight="700" fill="#f8fafc" text-anchor="middle">Sep '26</text>
+  <text x="676.9" y="154" font-size="9.5" font-weight="600" fill="#38bdf8" text-anchor="middle">BTP-1</text>
+  <rect x="719.2" y="120" width="84.6" height="42" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="761.5" y="140" font-size="11.5" font-weight="700" fill="#f8fafc" text-anchor="middle">Oct '26</text>
+  <text x="761.5" y="154" font-size="9.5" font-weight="600" fill="#38bdf8" text-anchor="middle">BTP-1</text>
+  <rect x="803.8" y="120" width="84.6" height="42" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="846.0999999999999" y="140" font-size="11.5" font-weight="700" fill="#f8fafc" text-anchor="middle">Nov '26</text>
+  <text x="846.0999999999999" y="154" font-size="9.5" font-weight="600" fill="#38bdf8" text-anchor="middle">BTP-1</text>
+  <rect x="888.4" y="120" width="84.6" height="42" fill="#172033" stroke="#334155" stroke-width="1"/>
+  <text x="930.6999999999999" y="140" font-size="11.5" font-weight="700" fill="#94a3b8" text-anchor="middle">Dec '26</text>
+  <text x="930.6999999999999" y="154" font-size="9.5" font-weight="600" fill="#64748b" text-anchor="middle">Unassigned</text>
+  <rect x="973.0" y="120" width="84.6" height="42" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="1015.3" y="140" font-size="11.5" font-weight="700" fill="#f8fafc" text-anchor="middle">Jan '27</text>
+  <text x="1015.3" y="154" font-size="9.5" font-weight="600" fill="#a5b4fc" text-anchor="middle">BTP-2</text>
+  <rect x="1057.6" y="120" width="84.6" height="42" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="1099.8999999999999" y="140" font-size="11.5" font-weight="700" fill="#f8fafc" text-anchor="middle">Feb '27</text>
+  <text x="1099.8999999999999" y="154" font-size="9.5" font-weight="600" fill="#a5b4fc" text-anchor="middle">BTP-2</text>
+  <rect x="1142.1999999999998" y="120" width="84.6" height="42" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="1184.4999999999998" y="140" font-size="11.5" font-weight="700" fill="#f8fafc" text-anchor="middle">Mar '27</text>
+  <text x="1184.4999999999998" y="154" font-size="9.5" font-weight="600" fill="#a5b4fc" text-anchor="middle">BTP-2</text>
+  <rect x="1226.8" y="120" width="84.6" height="42" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="1269.1" y="140" font-size="11.5" font-weight="700" fill="#f8fafc" text-anchor="middle">Apr '27</text>
+  <text x="1269.1" y="154" font-size="9.5" font-weight="600" fill="#a5b4fc" text-anchor="middle">BTP-2</text>
+  <rect x="1311.4" y="120" width="84.6" height="42" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="1353.7" y="140" font-size="11.5" font-weight="700" fill="#f8fafc" text-anchor="middle">May '27</text>
+  <text x="1353.7" y="154" font-size="9.5" font-weight="600" fill="#a5b4fc" text-anchor="middle">BTP-2</text>
+  <line x1="550.0" y1="162" x2="550.0" y2="840" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="634.6" y1="162" x2="634.6" y2="840" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="719.2" y1="162" x2="719.2" y2="840" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="803.8" y1="162" x2="803.8" y2="840" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="888.4" y="162" width="84.6" height="678" fill="url(#hatchBreak)" stroke="#334155" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="973.0" y1="162" x2="973.0" y2="840" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="1057.6" y1="162" x2="1057.6" y2="840" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="1142.1999999999998" y1="162" x2="1142.1999999999998" y2="840" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="1226.8" y1="162" x2="1226.8" y2="840" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="1311.4" y1="162" x2="1311.4" y2="840" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="1396.0" y1="162" x2="1396.0" y2="840" stroke="#334155" stroke-width="1"/>
+  <rect x="24" y="168" width="510" height="66" rx="5" fill="rgba(2, 132, 199, 0.05)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1"/>
+  <rect x="34" y="178" width="28" height="20" rx="4" fill="#0284c7"/>
+  <text x="48" y="192" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A1</text>
+  <text x="522" y="191" font-size="10.5" font-weight="700" fill="#38bdf8" text-anchor="end">August 2026</text>
+  <text x="70" y="192" font-size="12" font-weight="700" fill="#f8fafc">Academic Inception & FMCW Chirp Synthesis</text>
+  <text x="36" y="208" font-size="10.5" fill="#cbd5e1" line-height="1.4">Academic inception, radar literature study, MATLAB</text>
+  <text x="36" y="222" font-size="10.5" fill="#cbd5e1" line-height="1.4">Radar Designer prototyping, FMCW chirp synthesis and</text>
+  <text x="36" y="236" font-size="10.5" fill="#cbd5e1" line-height="1.4">link-budget analysis</text>
+  <g filter="url(#cardShadow)">
+    <rect x="554.0" y="185.0" width="76.6" height="32" rx="5" fill="url(#btp1BarGrad)" stroke="#38bdf8" stroke-width="1.2" />
+    <text x="592.3" y="205.0" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A1</text>
+  </g>
+  <rect x="24" y="240" width="510" height="58" rx="5" fill="rgba(2, 132, 199, 0.05)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1"/>
+  <rect x="34" y="250" width="28" height="20" rx="4" fill="#0284c7"/>
+  <text x="48" y="264" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A2</text>
+  <text x="522" y="263" font-size="10.5" font-weight="700" fill="#38bdf8" text-anchor="end">September 2026</text>
+  <text x="70" y="264" font-size="12" font-weight="700" fill="#f8fafc">77 GHz Simulation & Classical Radar DSP Chain</text>
+  <text x="36" y="280" font-size="10.5" fill="#cbd5e1" line-height="1.4">77 GHz FMCW simulation and classical DSP pipeline:</text>
+  <text x="36" y="294" font-size="10.5" fill="#cbd5e1" line-height="1.4">Range FFT, MTI, Doppler FFT, CFAR, MUSIC and DBSCAN</text>
+  <g filter="url(#cardShadow)">
+    <rect x="638.6" y="253.0" width="76.6" height="32" rx="5" fill="url(#btp1BarGrad)" stroke="#38bdf8" stroke-width="1.2" />
+    <text x="676.9" y="273.0" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A2</text>
+  </g>
+  <rect x="24" y="304" width="510" height="58" rx="5" fill="rgba(2, 132, 199, 0.05)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1"/>
+  <rect x="34" y="314" width="28" height="20" rx="4" fill="#0284c7"/>
+  <text x="48" y="328" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A3</text>
+  <text x="522" y="327" font-size="10.5" font-weight="700" fill="#38bdf8" text-anchor="end">October 2026</text>
+  <text x="70" y="328" font-size="12" font-weight="700" fill="#f8fafc">PyTorch Radar CNN & Multi-Task Convergence</text>
+  <text x="36" y="344" font-size="10.5" fill="#cbd5e1" line-height="1.4">PyTorch radar CNN, synthetic dataset generation and</text>
+  <text x="36" y="358" font-size="10.5" fill="#cbd5e1" line-height="1.4">multi-task loss convergence experiments</text>
+  <g filter="url(#cardShadow)">
+    <rect x="723.2" y="317.0" width="76.6" height="32" rx="5" fill="url(#btp1BarGrad)" stroke="#38bdf8" stroke-width="1.2" />
+    <text x="761.5" y="337.0" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A3</text>
+  </g>
+  <rect x="24" y="368" width="510" height="80" rx="5" fill="rgba(2, 132, 199, 0.05)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1"/>
+  <rect x="34" y="378" width="28" height="20" rx="4" fill="#0284c7"/>
+  <text x="48" y="392" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A4</text>
+  <text x="522" y="391" font-size="10.5" font-weight="700" fill="#38bdf8" text-anchor="end">November 2026</text>
+  <text x="70" y="392" font-size="12" font-weight="700" fill="#f8fafc">RadDet Benchmark Evaluation & BTP-1 Oral Defense</text>
+  <text x="36" y="408" font-size="10.5" fill="#cbd5e1" line-height="1.4">RadDet benchmark ingestion and full-scale GPU</text>
+  <text x="36" y="422" font-size="10.5" fill="#cbd5e1" line-height="1.4">evaluation across approximately 40,000 frames and six</text>
+  <text x="36" y="436" font-size="10.5" fill="#cbd5e1" line-height="1.4">SNR tiers; BTP-1 final presentation and oral defense</text>
+  <text x="36" y="450" font-size="10.5" fill="#cbd5e1" line-height="1.4">on 23 November 2026</text>
+  <g filter="url(#cardShadow)">
+    <rect x="807.8" y="392.0" width="76.6" height="32" rx="5" fill="url(#btp1BarGrad)" stroke="#38bdf8" stroke-width="1.2" />
+    <text x="846.0999999999999" y="412.0" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A4</text>
+  </g>
+  <g filter="url(#pinGlow)">
+    <polygon points="872.4,384.0 880.4,394.0 872.4,404.0 864.4,394.0" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5"/>
+  </g>
+  <rect x="762.4" y="362.0" width="128" height="20" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1.2"/>
+  <text x="826.4" y="376.0" font-size="10" font-weight="700" fill="#fbbf24" text-anchor="middle">★ 23 Nov: Oral Defense</text>
+  <line x1="864.4" y1="382.0" x2="872.4" y2="384.0" stroke="#f59e0b" stroke-width="1.2"/>
+  <!-- Inter-Semester Recess Demarcation -->
+  <rect x="24" y="454" width="1372" height="32" rx="4" fill="rgba(15, 23, 42, 0.9)" stroke="#475569" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="710.0" y="474" font-size="11.5" font-weight="600" fill="#94a3b8" text-anchor="middle">❄ December 2026: Academic Recess &amp; Inter-Semester Break (Zero Scheduled Milestone)</text>
+  <rect x="24" y="494" width="510" height="80" rx="5" fill="rgba(99, 102, 241, 0.05)" stroke="rgba(165, 180, 252, 0.25)" stroke-width="1"/>
+  <rect x="34" y="504" width="28" height="20" rx="4" fill="#6366f1"/>
+  <text x="48" y="518" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A5</text>
+  <text x="522" y="517" font-size="10.5" font-weight="700" fill="#a5b4fc" text-anchor="end">January 2027</text>
+  <text x="70" y="518" font-size="12" font-weight="700" fill="#f8fafc">Non-Gaussian Clutter Simulation & Multi-Resolution Triage</text>
+  <text x="36" y="534" font-size="10.5" fill="#cbd5e1" line-height="1.4">Automated MATLAB synthetic data-cube generation under</text>
+  <text x="36" y="548" font-size="10.5" fill="#cbd5e1" line-height="1.4">non-Gaussian clutter; prototype cascaded</text>
+  <text x="36" y="562" font-size="10.5" fill="#cbd5e1" line-height="1.4">multi-resolution triage (128² → 256² → 512²) with</text>
+  <text x="36" y="576" font-size="10.5" fill="#cbd5e1" line-height="1.4">entropy-gated routing</text>
+  <g filter="url(#cardShadow)">
+    <rect x="977.0" y="518.0" width="76.6" height="32" rx="5" fill="url(#btp2BarGrad)" stroke="#a5b4fc" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <text x="1015.3" y="538.0" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A5</text>
+  </g>
+  <rect x="24" y="580" width="510" height="66" rx="5" fill="rgba(99, 102, 241, 0.05)" stroke="rgba(165, 180, 252, 0.25)" stroke-width="1"/>
+  <rect x="34" y="590" width="28" height="20" rx="4" fill="#6366f1"/>
+  <text x="48" y="604" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A6</text>
+  <text x="522" y="603" font-size="10.5" font-weight="700" fill="#a5b4fc" text-anchor="end">February 2027</text>
+  <text x="70" y="604" font-size="12" font-weight="700" fill="#f8fafc">Cross-Resolution Distillation & Layer Early-Exits</text>
+  <text x="36" y="620" font-size="10.5" fill="#cbd5e1" line-height="1.4">Cross-resolution knowledge distillation from a 512²</text>
+  <text x="36" y="634" font-size="10.5" fill="#cbd5e1" line-height="1.4">teacher to a compact 128² student and dynamic layer</text>
+  <text x="36" y="648" font-size="10.5" fill="#cbd5e1" line-height="1.4">early-exit mechanisms</text>
+  <g filter="url(#cardShadow)">
+    <rect x="1061.6" y="597.0" width="76.6" height="32" rx="5" fill="url(#btp2BarGrad)" stroke="#a5b4fc" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <text x="1099.8999999999999" y="617.0" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A6</text>
+  </g>
+  <rect x="24" y="652" width="510" height="66" rx="5" fill="rgba(99, 102, 241, 0.05)" stroke="rgba(165, 180, 252, 0.25)" stroke-width="1"/>
+  <rect x="34" y="662" width="28" height="20" rx="4" fill="#6366f1"/>
+  <text x="48" y="676" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A7</text>
+  <text x="522" y="675" font-size="10.5" font-weight="700" fill="#a5b4fc" text-anchor="end">March 2027</text>
+  <text x="70" y="676" font-size="12" font-weight="700" fill="#f8fafc">CPU-First INT8 Quantisation & Pareto Profiling</text>
+  <text x="36" y="692" font-size="10.5" fill="#cbd5e1" line-height="1.4">CPU-first INT8 quantisation, OpenVINO / ONNX Runtime</text>
+  <text x="36" y="706" font-size="10.5" fill="#cbd5e1" line-height="1.4">CPU profiling, and accuracy–latency–memory Pareto</text>
+  <text x="36" y="720" font-size="10.5" fill="#cbd5e1" line-height="1.4">analysis</text>
+  <g filter="url(#cardShadow)">
+    <rect x="1146.1999999999998" y="669.0" width="76.6" height="32" rx="5" fill="url(#btp2BarGrad)" stroke="#a5b4fc" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <text x="1184.4999999999998" y="689.0" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A7</text>
+  </g>
+  <rect x="24" y="724" width="510" height="66" rx="5" fill="rgba(99, 102, 241, 0.05)" stroke="rgba(165, 180, 252, 0.25)" stroke-width="1"/>
+  <rect x="34" y="734" width="28" height="20" rx="4" fill="#d97706"/>
+  <text x="48" y="748" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A8</text>
+  <text x="522" y="747" font-size="10.5" font-weight="700" fill="#fbbf24" text-anchor="end">April 2027</text>
+  <text x="70" y="748" font-size="12" font-weight="700" fill="#f8fafc">Paper Submission & SDR Hardware Exploration</text>
+  <text x="36" y="764" font-size="10.5" fill="#cbd5e1" line-height="1.4">IEEE conference/journal paper submission and</text>
+  <text x="36" y="778" font-size="10.5" fill="#cbd5e1" line-height="1.4">conditional laboratory software-defined radar (SDR)</text>
+  <text x="36" y="792" font-size="10.5" fill="#cbd5e1" line-height="1.4">hardware exploration</text>
+  <g filter="url(#cardShadow)">
+    <rect x="1230.8" y="741.0" width="76.6" height="32" rx="5" fill="url(#condBarGrad)" stroke="#fbbf24" stroke-width="1.2" />
+    <text x="1269.1" y="761.0" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A8: Cond.</text>
+  </g>
+  <rect x="1218.8" y="723.0" width="100" height="17" rx="3" fill="#0f172a" stroke="#d97706" stroke-width="1"/>
+  <text x="1268.8" y="735.0" font-size="9.5" font-weight="700" fill="#fbbf24" text-anchor="middle">⚠ [Conditional SDR]</text>
+  <rect x="24" y="796" width="510" height="58" rx="5" fill="rgba(99, 102, 241, 0.05)" stroke="rgba(165, 180, 252, 0.25)" stroke-width="1"/>
+  <rect x="34" y="806" width="28" height="20" rx="4" fill="#6366f1"/>
+  <text x="48" y="820" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A9</text>
+  <text x="522" y="819" font-size="10.5" font-weight="700" fill="#a5b4fc" text-anchor="end">May 2027</text>
+  <text x="70" y="820" font-size="12" font-weight="700" fill="#f8fafc">B.Tech Thesis Manuscript & Oral Viva Voce</text>
+  <text x="36" y="836" font-size="10.5" fill="#cbd5e1" line-height="1.4">Comprehensive B.Tech thesis manuscript submission and</text>
+  <text x="36" y="850" font-size="10.5" fill="#cbd5e1" line-height="1.4">oral viva voce defense</text>
+  <g filter="url(#cardShadow)">
+    <rect x="1315.4" y="809.0" width="76.6" height="32" rx="5" fill="url(#btp2BarGrad)" stroke="#a5b4fc" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <text x="1353.7" y="829.0" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">A9</text>
+  </g>
+  <g filter="url(#pinGlow)">
+    <polygon points="1380.0,801.0 1388.0,811.0 1380.0,821.0 1372.0,811.0" fill="#10b981" stroke="#ffffff" stroke-width="1.5"/>
+  </g>
+  <rect x="1260.0" y="779.0" width="138" height="20" rx="4" fill="#0f172a" stroke="#10b981" stroke-width="1.2"/>
+  <text x="1329.0" y="793.0" font-size="10" font-weight="700" fill="#34d399" text-anchor="middle">★ May '27: Final Viva Voce</text>
+  <line x1="1372.0" y1="799.0" x2="1380.0" y2="801.0" stroke="#10b981" stroke-width="1.2"/>
+  <line x1="24" y1="868" x2="1396" y2="868" stroke="#1e293b" stroke-width="1"/>
+  <text x="24" y="884" font-size="11" fill="#64748b" font-style="italic">Note: Strict month-level academic schedule. Intra-month task start/end interpolation omitted. December 2026 is intentionally unassigned (semester break). BTP-1 final presentation and oral defense milestone passed on 23 November 2026.</text>
+</svg>

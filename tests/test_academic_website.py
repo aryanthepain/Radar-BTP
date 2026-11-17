@@ -376,6 +376,19 @@ def test_chapter_finalization_phase2():
     assert "Table 5.1: Objective achievement summary" in above_divider
     assert "Table 5.2: Proposed roadmap for the subsequent phase" in above_divider
 
+    # Chapter 5 Figure 5.1 Gantt Schedule
+    assert "Figure 5.1: One-Year Academic Gantt Schedule for BTP-1 and Proposed BTP-2 Activities (August 2026 – May 2027)" in above_divider
+    assert "timeline_gantt.svg" in above_divider
+    assert above_divider.find("Table 5.2") < above_divider.find("Figure 5.1") < above_divider.find("5.6 Requirements for the Next-Stage Demonstration")
+
+    # Verify Gantt chart artifacts on disk
+    gantt_svg = os.path.join(DOCS_DIR, "assets", "diagrams", "timeline_gantt.svg")
+    gantt_pdf = os.path.join(REPO_ROOT, "templates", "BTP_Report_Template_Overleaf", "figures", "timeline_gantt.pdf")
+    assert os.path.exists(gantt_svg), f"Missing {gantt_svg}"
+    assert os.path.exists(gantt_pdf), f"Missing {gantt_pdf}"
+    assert os.path.getsize(gantt_svg) > 1000, "timeline_gantt.svg is too small"
+    assert os.path.getsize(gantt_pdf) > 1000, "timeline_gantt.pdf is too small"
+
     # Chapter 5 Key Framework Declarations
     assert "Approach A: Computational Reduction" in above_divider
     assert "Approach B: CPU-Oriented Inference" in above_divider

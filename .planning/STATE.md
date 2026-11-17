@@ -2,18 +2,18 @@
 gsd_state_version: "1.0"
 current_phase: 2
 current_phase_name: "02-github-pages-chapter-by-chapter-content-finalization"
-status: "Phase 2 in progress: Plan 02-06 complete (Official Abstract finalized in front matter container, empirical dual-track summary & index terms)"
-stopped_at: "Plan 02-06 complete"
-last_updated: "2026-11-17T16:38:00.000Z"
+status: "Phase 2 in progress: Plan 02-07 complete (1-Year Academic Gantt Schedule generated and integrated into Chapter 5 Section 5.5)"
+stopped_at: "Plan 02-07 complete"
+last_updated: "2026-11-17T16:56:00.000Z"
 last_activity: 2026-11-17
-last_activity_desc: 2026-11-17 -- Plan 02-06 completed: Injected finalized official abstract from report_content/abstract.md into docs/index.html with empirical metrics (25.25% mAP50, 19.03% mAP50:95, 1.12 ms latency, -20 dB to +20 dB SNR range), dual-track summary, and index terms.
-state_head: 9162c88
+last_activity_desc: 2026-11-17 -- Plan 02-07 completed: Authored scripts/generate_timeline_gantt.py, generated docs/assets/diagrams/timeline_gantt.svg, templates/BTP_Report_Template_Overleaf/figures/timeline_gantt.pdf, preview PNG, embedded Figure 5.1 in Section 5.5 of docs/index.html and General_Report_Template.tex, and verified via pytest.
+state_head: bb0e858
 progress:
   total_phases: 7
   completed_phases: 6
-  total_plans: 27
-  completed_plans: 27
-  percent: 94
+  total_plans: 28
+  completed_plans: 28
+  percent: 96
 granularity: fine
 ---
 
@@ -29,8 +29,8 @@ See: .planning/PROJECT.md (updated 2026-11-15)
 ## Current Position
 
 Phase: 02 — IN PROGRESS (Phase 2: GitHub Pages Chapter-by-Chapter Content Finalization)
-Status: Plan 02-06 complete (Official Abstract finalized in front matter container, empirical dual-track summary & index terms)
-Last activity: 2026-11-17 — Executed Plan 02-06; injected finalized official abstract into front matter abstract container in docs/index.html, added test assertions, and passed all deterministic test gates.
+Status: Plan 02-07 complete (1-Year Academic Gantt Schedule generated and integrated into Chapter 5 Section 5.5)
+Last activity: 2026-11-17 — Executed Plan 02-07; generated 1-Year Gantt Chart SVG/PDF/PNG assets, embedded Figure 5.1 in Chapter 5 Section 5.5 before Section 5.6, and passed all deterministic verification gates.
 
 Progress: [██████████] 94%
 
