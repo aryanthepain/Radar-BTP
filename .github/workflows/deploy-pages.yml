@@ -39,10 +39,14 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+
       - name: Run showcase smoke test suite
         run: |
-          python -m unittest tests/test_showcase_website.py
-          python -m unittest tests/test_academic_website.py
+          pytest tests/test_showcase_website.py tests/test_academic_website.py
 
   deploy:
     name: Deploy to GitHub Pages
