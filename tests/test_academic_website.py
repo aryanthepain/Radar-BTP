@@ -270,3 +270,44 @@ def test_academic_timeline_and_defense():
     assert "January 2027" in html, "Missing BTP-2 January milestone"
     assert "May 2027" in html, "Missing BTP-2 May milestone"
 
+
+def test_chapter_finalization_phase2():
+    """Verify Phase 2 finalized Chapters 1, 2, and 3 above the transition boundary."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    # Split by transition boundary
+    assert '<div id="manuscript-transition-divider"' in html
+    above_divider, below_divider = html.split('<div id="manuscript-transition-divider"', 1)
+
+    # Chapter 1 Section 1.4 present above divider
+    assert "1.4 Scope of the Study and Organisation of the Report" in above_divider
+
+    # No duplicate Section 1.2 or 1.3 above divider
+    assert above_divider.count("1.2 Problem Statement") == 1
+    assert above_divider.count("1.3 Objectives") == 1
+
+    # Chapter 2 Table 2.1 present above divider
+    assert "Table 2.1: Comparison of the two radar application settings" in above_divider
+
+    # Chapter 3 Methodology present above divider
+    assert '<section id="ch3-methodology"' in above_divider
+    assert "Chapter 3: Methodology" in above_divider
+    assert "3.1 Overall Methodological Framework" in above_divider
+    assert "3.2 Experimental Track I: Synthetic FMCW Radar Perception" in above_divider
+    assert "3.3 Experimental Track II: Wideband Radar Spectrum Detection" in above_divider
+    assert "3.4 Methodology for Resource-Efficiency Investigation" in above_divider
+    assert "3.5 Summary of the Methodology" in above_divider
+
+    # Chapter 3 Algorithms and Code Listings
+    for algo in ["Algorithm 3.1", "Algorithm 3.2", "Algorithm 3.3", "Algorithm 3.4", "Algorithm 3.5"]:
+        assert algo in above_divider, f"Missing {algo} in Chapter 3"
+    for code in ["Code Listing 3.1", "Code Listing 3.2", "Code Listing 3.3"]:
+        assert code in above_divider, f"Missing {code} in Chapter 3"
+    for table in ["Table 3.1", "Table 3.2", "Table 3.3"]:
+        assert table in above_divider, f"Missing {table} in Chapter 3"
+
+    # Sidebar TOC contains Chapter 3
+    assert '<a href="#ch3-methodology" class="toc-link">' in html
+
+

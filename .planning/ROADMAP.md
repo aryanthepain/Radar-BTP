@@ -159,7 +159,8 @@ Plans:
 Plans:
 - [x] 02-01: Update report title, subtitle, overarching research framing, and inject verbatim Chapter 1 content into GitHub Pages.
 - [x] 02-02: Chapter 2 content finalization (Literature Review verbatim injection, citation mapping, and bibliography update).
-- [ ] 02-03: Chapter 3 content finalization (Methodology)
+- [x] 02-03: Chapter 3 content finalization (Methodology verbatim injection, duplicate cleanup, Section 1.4, Table 2.1, Algorithms 3.1-3.5, Figures 3.1-3.4, Code Listings 3.1-3.3, and TOC link).
+- [ ] 02-04: Chapter 4 content finalization (Experimental Results & Analysis)
 
 ## Progress
 
@@ -175,7 +176,7 @@ Milestone 1 completed. Phase 2 (GitHub Pages Chapter-by-Chapter Content Finaliza
 | 01.2.1. Interactive Research Showcase & Thesis Presentation Website             | 3/3            | Completed | 2026-11-03 |
 | 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 5/5            | Completed | 2026-11-10 |
 | 1.3. High-Coverage Deterministic Unit & Integration Testing                     | 3/3            | Completed | 2026-11-10 |
-| 2. GitHub Pages Chapter-by-Chapter Content Finalization                         | 2/TBD          | In Progress | -          |
+| 2. GitHub Pages Chapter-by-Chapter Content Finalization                         | 3/TBD          | In Progress | -          |
 
 ## Deferred / GitHub Issue Backlog
 

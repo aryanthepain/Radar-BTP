@@ -16,7 +16,7 @@
 
 ## Executive Summary
 
-This document serves as the formal mathematical and physical defense dossier addressing the six critical focus questions posed by IIT Guwahati supervising faculty. These rigorous mathematical proofs and physical boundary derivations justify why deep neural networks provide decisive value over classical heuristic radar DSP, why 2.5D Range-Azimuth-Doppler spectrum detection resolves sub-Rayleigh targets, and how real-time edge constraints are satisfied without ungrounded heuristics.
+This document serves as the formal mathematical and physical defense dossier addressing the eight critical focus questions posed by IIT Guwahati supervising faculty. These rigorous mathematical proofs and physical boundary derivations justify why deep neural networks provide decisive value over classical heuristic radar DSP, why 2.5D Range-Azimuth-Doppler spectrum detection resolves sub-Rayleigh targets, and how real-time edge constraints are satisfied without ungrounded heuristics.
 
 ---
 
@@ -117,4 +117,53 @@ We enforce strict sim-to-real fidelity across two orthogonal axes:
 1. **Physical Clutter Invariants in Simulation:** Our simulator models ground clutter using non-Rayleigh compound K-distributions and Weibull distributions, incorporating spatial array steering vector phase noise and antenna mutual coupling matrices:
    $$\mathbf{x}_{\text{received}} = \mathbf{C}_{\text{coupling}} \mathbf{A}(\theta) \mathbf{s}(t) + \mathbf{n}_{\text{Weibull}}(t)$$
 2. **Real-World Empirical Validation:** All quantitative benchmark claims in our thesis are evaluated directly on the **ICASSP 2025 RadDet real-world dataset**, recorded with physical 77 GHz FMCW automotive radar sensors in physical traffic environments across diverse weather, lighting, and multi-path scenarios.
+
+---
+
+## Focus Question 7: Why 77 GHz for the FMCW Radar Perception Track?
+
+### Professor's Challenge
+> *"Why did you choose 77 GHz for the automotive FMCW simulation track instead of lower frequencies like 24 GHz or higher ones like 140 GHz?"*
+
+### Direct Defense (Spoken-Ready)
+**Core Takeaway:**  
+We chose $77\text{ GHz}$ ($76\text{--}81\text{ GHz}$ band) because it is the global industry standard for automotive radar, offering the optimal balance between high range resolution, compact antenna size, and low atmospheric attenuation.
+
+**Key Points:**
+- **Much Higher Range Resolution ($\Delta R = \frac{c}{2B}$):**  
+  At $77\text{ GHz}$, international regulations allocate up to $4\text{ GHz}$ of continuous bandwidth ($76\text{--}81\text{ GHz}$), allowing our $1\text{ GHz}$ sweep to achieve $\mathbf{15\text{ cm}}$ range resolution (down to $4\text{ cm}$ at full bandwidth). In contrast, older $24\text{ GHz}$ systems are limited to a narrow $250\text{ MHz}$ band, giving a coarse $\mathbf{60\text{ cm}}$ resolution that cannot separate a pedestrian standing beside a car.
+- **Compact Antenna & MIMO Array:**  
+  At $77\text{ GHz}$, the wavelength is only $\mathbf{\lambda \approx 3.9\text{ mm}}$ (compared to $12.5\text{ mm}$ at $24\text{ GHz}$). Since antenna spacing is $\frac{\lambda}{2} \approx 2\text{ mm}$, an entire multi-channel virtual MIMO array fits onto a chip of just a few square centimeters, making it easy to package behind a vehicle bumper.
+- **Higher Doppler Sensitivity:**  
+  Because Doppler shift scales with frequency ($f_d = \frac{2v}{\lambda}$), $77\text{ GHz}$ produces $3.2\times$ higher frequency shifts than $24\text{ GHz}$ for the same velocity, helping the model detect slow pedestrian motion and limb gait signatures.
+- **Atmospheric Window & Global Standards:**  
+  Unlike $60\text{ GHz}$ (which suffers severe oxygen absorption of $\sim 15\text{ dB/km}$), $77\text{ GHz}$ sits in a low-attenuation transmission window ($<0.5\text{ dB/km}$) capable of $200\text{ m}+$ long-range sensing in rain and fog. Additionally, ITU and FCC phased out $24\text{ GHz}$ ultra-wideband to protect radio astronomy, making $77\text{ GHz}$ the universally mandated band with mature commercial hardware (e.g., TI AWR1843).
+
+**Summary:**  
+$77\text{ GHz}$ provides the necessary bandwidth for sub-meter resolution and a compact form factor while remaining within regulatory and atmospheric transmission limits.
+
+---
+
+## Focus Question 8: Synthetic Radar Data Generation & Hardware Modeling Provenance
+
+### Professor's Challenge
+> *"Where does the synthetic data for Track I come from? What physical radar system is it based on, and how do you justify generating data mathematically rather than capturing it directly from hardware?"*
+
+### Direct Defense (Spoken-Ready)
+**Core Takeaway:**  
+Our Track I simulation architecture is **inspired by MATLAB's Radar Toolbox / Radar Creator module** workflows, built from first-principles FMCW dechirp mixer physics and parameterized after commercial 77 GHz automotive transceivers (such as the Texas Instruments AWR1843). We implemented this natively in Python to eliminate proprietary software dependencies, allow on-the-fly PyTorch training generation, and provide exact mathematical ground truth across every intermediate DSP stage.
+
+**Key Points:**
+- **Inspiration from MATLAB's Radar Creator Workflow:**  
+  The mathematical architecture replicates the modular pipeline found in MATLAB's Radar Toolbox / Creator modules: synthesizing linear chirp frequency ramps, modeling two-way propagation delays, computing mixer dechirping, and constructing the 3D complex baseband radar cube ($N_{\text{rx}} \times N_{\text{chirp}} \times N_{\text{sample}}$). Implementing this in native NumPy/PyTorch enables high-throughput batch generation and seamless integration with deep learning detectors.
+- **Physical Hardware Specification (77 GHz Automotive Baseline):**  
+  The configuration mirrors standard 76–81 GHz automotive mmWave sensors: carrier frequency $f_c = 77\text{ GHz}$ ($\lambda \approx 3.896\text{ mm}$), sweep bandwidth $B = 1.0\text{ GHz}$ (yielding theoretical range resolution $\Delta R = \frac{c}{2B} = 0.15\text{ m}$), chirp duration $T_c = 50\ \mu\text{s}$, 256 fast-time ADC samples, 128 slow-time chirps, and a 4-channel Uniform Linear Array (ULA) with $\lambda/2$ receiver spacing.
+- **Analytical Scatterer & Clutter Modeling:**  
+  Target reflections follow classical radar equations (Skolnik [4], Richards [5], Mahafza [19]), incorporating two-way $1/R^2$ field path loss, spatial steering phases, and realistic radar cross-sections ($\sigma_{\text{car}} \approx 10\text{ dBsm}$, $\sigma_{\text{pedestrian}} \approx -5\text{ dBsm}$). Micro-Doppler limb oscillations follow Chen [18], while environmental ground returns are injected as Rayleigh-distributed stationary clutter.
+- **Why Simulation for Track I:**  
+  Physical hardware recordings do not provide isolated ground-truth labels for intermediate DSP stages without complex, synchronized external LiDAR/camera tracking rigs. The simulator provides exact, unambiguous ground truth to verify every discrete DSP stage (Range FFT, MTI, Doppler FFT, 2D CFAR, MUSIC/Capon AoA, DBSCAN) and supervise the `RadarObjectDetectorCNN`, establishing a controlled analytical baseline before we evaluate the separate real-world RadDet RF spectrum dataset in Track II.
+
+**Summary:**  
+By adapting the proven architecture of MATLAB's radar creator workflow into an open-source Python engine, we obtain complete mathematical control and transparent ground truth over automotive radar physics before tackling empirical wideband datasets.
+
 

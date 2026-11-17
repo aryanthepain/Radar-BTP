@@ -78,6 +78,9 @@
         <a href="#ch2-lit-review" class="toc-link">
           <span>2. Literature Review</span>
         </a>
+        <a href="#ch3-methodology" class="toc-link">
+          <span>3. Methodology</span>
+        </a>
         <a href="#ch1-intro-original" class="toc-link" style="font-size: 0.72rem; opacity: 0.75; padding-left: 1.5rem;">
           <span>↳ Original Chapter 1 Draft</span>
         </a>
@@ -294,6 +297,26 @@
         <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin-top: 1.25rem;">
           The work undertaken during the first project phase establishes the radar processing and experimental foundation required for this investigation. The subsequent phase will focus on developing and evaluating the selected resource-efficient approach and demonstrating its practical feasibility.
         </p>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">1.4 Scope of the Study and Organisation of the Report</h3>
+
+        <div class="academic-two-column">
+          <p>
+            The scope of this study covers the development and evaluation of a foundation for AI-based radar signal processing and detection, with particular emphasis on computational requirements and practical deployment considerations.
+          </p>
+          <p>
+            The completed experimental work covers two distinct radar applications. The first involves the simulation of 77 GHz FMCW radar measurements, the implementation of conventional signal processing techniques, and the development of a convolutional neural network for synthetic automotive target detection. The second involves wideband radar spectrum detection using the RadDet dataset, including dataset preparation, YOLO-based detection, and GPU-based benchmark evaluation.
+          </p>
+          <p>
+            The resource-efficiency aspect of the study is addressed through the examination of model complexity, computational requirements, inference latency, and potential deployment constraints. More advanced approaches, including model quantisation, pruning, knowledge distillation, adaptive computation, and CPU-oriented inference, are considered as directions for further investigation. Their effectiveness is not assumed in advance.
+          </p>
+          <p>
+            The scope does not include the deployment of a complete radar system on physical radar hardware or the claim that all proposed computational optimisation techniques have already been experimentally validated.
+          </p>
+          <p>
+            The remainder of this report is organised as follows. Chapter 2 reviews the relevant literature on radar signal processing, learning-based radar detection, available datasets, and computationally efficient AI methods. Chapter 3 describes the methodology adopted in the two experimental tracks and the proposed framework for evaluating resource efficiency. Chapter 4 presents and discusses the experimental results, including the synthetic FMCW experiments and the RadDet benchmark. Finally, Chapter 5 summarises the findings, discusses the limitations of the study, and identifies directions for future work.
+          </p>
+        </div>
       </section>
 
       <!-- ==================== CHAPTER 2: LITERATURE REVIEW ==================== -->
@@ -400,6 +423,67 @@
           </p>
         </div>
 
+        <!-- Table 2.1: Comparison of the Two Radar Application Settings -->
+        <div style="margin: 2rem 0; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.5rem; overflow-x: auto;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 1rem; margin-bottom: 0.75rem; text-align: center;">
+            Table 2.1: Comparison of the two radar application settings considered in this study
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1;">
+            <thead>
+              <tr style="border-bottom: 2px solid #38bdf8; background: rgba(30, 41, 59, 0.6); text-align: left;">
+                <th style="padding: 10px 14px; color: #f8fafc; font-weight: 700;">Aspect</th>
+                <th style="padding: 10px 14px; color: #f8fafc; font-weight: 700;">Automotive FMCW Radar Perception</th>
+                <th style="padding: 10px 14px; color: #f8fafc; font-weight: 700;">Wideband Radar Spectrum Detection</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 9px 14px; font-weight: 600; color: #38bdf8;">Primary objective</td>
+                <td style="padding: 9px 14px;">Detect and localise spatial targets</td>
+                <td style="padding: 9px 14px;">Detect and classify radar emissions</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 9px 14px; font-weight: 600; color: #38bdf8;">Typical input</td>
+                <td style="padding: 9px 14px;">Complex ADC data cube or Range-Doppler representation</td>
+                <td style="padding: 9px 14px;">Time-frequency spectrogram</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 9px 14px; font-weight: 600; color: #38bdf8;">Main information</td>
+                <td style="padding: 9px 14px;">Range, velocity, azimuth and target characteristics</td>
+                <td style="padding: 9px 14px;">Signal dwell time, frequency occupancy and modulation</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 9px 14px; font-weight: 600; color: #38bdf8;">Output</td>
+                <td style="padding: 9px 14px;">Target detections, coordinates and semantic classes</td>
+                <td style="padding: 9px 14px;">Signal bounding boxes and modulation classes</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 9px 14px; font-weight: 600; color: #38bdf8;">Data considered</td>
+                <td style="padding: 9px 14px;">Synthetic 77 GHz FMCW measurements</td>
+                <td style="padding: 9px 14px;">RadDet wideband radar dataset</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 9px 14px; font-weight: 600; color: #38bdf8;">Learning-based approach</td>
+                <td style="padding: 9px 14px;">Convolutional neural network</td>
+                <td style="padding: 9px 14px;">YOLO-based object detector</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 9px 14px; font-weight: 600; color: #38bdf8;">Conventional processing</td>
+                <td style="padding: 9px 14px;">FFT, MTI, CFAR, MUSIC and DBSCAN</td>
+                <td style="padding: 9px 14px;">Spectrum analysis and signal detection</td>
+              </tr>
+              <tr>
+                <td style="padding: 9px 14px; font-weight: 600; color: #38bdf8;">Evaluation focus</td>
+                <td style="padding: 9px 14px;">Target localisation and classification</td>
+                <td style="padding: 9px 14px;">Detection precision, recall and mAP across SNR conditions</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.88rem; color: #94a3b8; margin: 1rem 0 0 0; line-height: 1.6; text-align: justify;">
+            The two settings provide complementary perspectives on AI-based radar processing. However, their outputs and evaluation metrics are task-dependent, and their experimental results are not directly interchangeable.
+          </p>
+        </div>
+
         <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">2.5 Computationally Efficient and Edge-Oriented Radar AI</h3>
         <div class="academic-two-column">
           <p>
@@ -501,102 +585,900 @@
         </div>
       </section>
 
-        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">1.2 Problem Statement</h3>
 
+      <!-- ==================== CHAPTER 3: METHODOLOGY ==================== -->
+      <section id="ch3-methodology" class="section-block" style="margin-bottom: 3.5rem;">
+        <h2>Chapter 3: Methodology</h2>
+
+        <h3 style="margin-top: 1.75rem; margin-bottom: 1rem; color: #38bdf8;">3.1 Overall Methodological Framework</h3>
         <div class="academic-two-column">
           <p>
-            AI-based radar detection offers the possibility of extracting useful target information from complex radar representations. However, the practical adoption of such approaches is influenced by their computational requirements, memory consumption, inference latency, and dependence on specialised hardware.
+            The methodology adopted in this study combines conventional radar signal processing, deep learning-based detection, and computational performance evaluation. The investigation is organised around two complementary experimental tracks.
           </p>
           <p>
-            A radar detection model that achieves high detection performance but requires substantial GPU resources may be difficult to deploy in environments with limited accelerator availability or computational budgets. Similarly, reducing the model size or moving inference to a CPU does not automatically guarantee that the resulting system will be sufficiently accurate or responsive for the intended application. A systematic evaluation is therefore required to understand the relationship between detection performance, computational cost, and hardware requirements.
+            The first track focuses on <strong>synthetic 77 GHz FMCW automotive radar perception</strong>. A radar simulation framework is used to generate complex baseband radar measurements from controlled target scenes. These measurements are processed using conventional digital signal processing techniques to obtain range, velocity, and angular information. A learning-based detector is also developed to perform target classification and coordinate regression on generated Range-Doppler representations.
           </p>
           <p>
-            The central problem addressed in this project is:
+            The second track focuses on <strong>wideband radar spectrum detection using the RadDet dataset</strong>. This task treats radar signal detection as an object detection problem over time-frequency spectrograms. A YOLO-based detector is trained and evaluated to localise radar emissions and identify their modulation categories.
+          </p>
+          <p>
+            Although both tracks involve radar data and learning-based detection, they address different problems. The FMCW track considers the perception of spatial targets from simulated automotive radar measurements, whereas the RadDet track considers the detection and classification of radar emissions in a wideband spectrum. Their data representations, model outputs, and evaluation metrics are therefore treated separately.
+          </p>
+          <p>
+            The two tracks provide a foundation for investigating the broader question of resource-efficient AI for radar signal processing and detection. The computational evaluation considers both algorithm-level efficiency and hardware-oriented inference. Techniques such as lightweight architectures, quantisation, knowledge distillation, and adaptive computation are treated as candidate approaches for further investigation rather than completed contributions.
           </p>
         </div>
 
-        <!-- Central Problem Statement Callout Box -->
-        <div style="margin: 1.25rem 0 1.75rem 0; padding: 1.25rem 1.65rem; background: rgba(30, 41, 59, 0.6); border-left: 4px solid #38bdf8; border-radius: var(--radius-sm); font-size: 1.05rem; line-height: 1.6; color: #f8fafc; font-weight: 600;">
-          How can AI-based radar signal processing and detection be made computationally efficient and practically deployable while maintaining acceptable detection performance under realistic hardware constraints?
+        <!-- Figure 3.1: Overall Methodological Framework -->
+        <div style="text-align: center; margin: 2.25rem 0;">
+          <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.5rem; display: inline-block; max-width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
+            <svg viewBox="0 0 880 435" style="width: 100%; max-width: 860px; height: auto; font-family: var(--font-sans, system-ui, sans-serif);">
+              <defs>
+                <linearGradient id="grad-fmcw-31" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0284c7" stop-opacity="0.3"/>
+                  <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9"/>
+                </linearGradient>
+                <linearGradient id="grad-raddet-31" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0d9488" stop-opacity="0.3"/>
+                  <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9"/>
+                </linearGradient>
+                <linearGradient id="grad-eval-31" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9"/>
+                </linearGradient>
+                <filter id="shadow-f31" x="-10%" y="-10%" width="120%" height="120%">
+                  <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.5"/>
+                </filter>
+              </defs>
+
+              <!-- Branch 1: Synthetic FMCW Radar Perception -->
+              <rect x="20" y="20" width="400" height="235" rx="8" fill="url(#grad-fmcw-31)" stroke="#38bdf8" stroke-width="1.5" filter="url(#shadow-f31)"/>
+              <text x="220" y="45" fill="#38bdf8" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.05em">BRANCH 1: SYNTHETIC FMCW RADAR PERCEPTION</text>
+              
+              <rect x="40" y="65" width="360" height="32" rx="4" fill="#1e293b" stroke="#0284c7" stroke-width="1"/>
+              <text x="220" y="86" fill="#f8fafc" font-size="11.5" font-weight="600" text-anchor="middle">Synthetic 77 GHz FMCW Radar Simulation</text>
+              
+              <line x1="220" y1="97" x2="220" y2="112" stroke="#38bdf8" stroke-width="1.5"/>
+              <rect x="40" y="112" width="360" height="32" rx="4" fill="#1e293b" stroke="#0284c7" stroke-width="1"/>
+              <text x="220" y="133" fill="#cbd5e1" font-size="11.5" text-anchor="middle">Complex Baseband Radar Cube (4 × 128 × 256)</text>
+              
+              <line x1="130" y1="144" x2="130" y2="160" stroke="#38bdf8" stroke-width="1.5"/>
+              <line x1="310" y1="144" x2="310" y2="160" stroke="#38bdf8" stroke-width="1.5"/>
+              
+              <rect x="40" y="160" width="170" height="42" rx="4" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+              <text x="125" y="178" fill="#e2e8f0" font-size="11" font-weight="600" text-anchor="middle">Conventional Radar DSP</text>
+              <text x="125" y="193" fill="#94a3b8" font-size="9.5" text-anchor="middle">FFT · MTI · CFAR · MUSIC · DBSCAN</text>
+              
+              <rect x="230" y="160" width="170" height="42" rx="4" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+              <text x="315" y="178" fill="#e2e8f0" font-size="11" font-weight="600" text-anchor="middle">Multi-Task Radar CNN</text>
+              <text x="315" y="193" fill="#94a3b8" font-size="9.5" text-anchor="middle">Class Heatmaps &amp; Coordinate Regr.</text>
+              
+              <rect x="40" y="212" width="360" height="30" rx="4" fill="#1e293b" stroke="#0284c7" stroke-width="1"/>
+              <text x="220" y="232" fill="#38bdf8" font-size="11" font-weight="600" text-anchor="middle">Spatial Target Detections, Extents &amp; Kinematics</text>
+
+              <!-- Branch 2: Wideband Radar Spectrum Detection -->
+              <rect x="460" y="20" width="400" height="235" rx="8" fill="url(#grad-raddet-31)" stroke="#2dd4bf" stroke-width="1.5" filter="url(#shadow-f31)"/>
+              <text x="660" y="45" fill="#2dd4bf" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.05em">BRANCH 2: WIDEBAND RADAR SPECTRUM DETECTION</text>
+              
+              <rect x="480" y="65" width="360" height="32" rx="4" fill="#1e293b" stroke="#0d9488" stroke-width="1"/>
+              <text x="660" y="86" fill="#f8fafc" font-size="11.5" font-weight="600" text-anchor="middle">RadDet Benchmark Dataset (ICASSP 2025)</text>
+              
+              <line x1="660" y1="97" x2="660" y2="112" stroke="#2dd4bf" stroke-width="1.5"/>
+              <rect x="480" y="112" width="360" height="32" rx="4" fill="#1e293b" stroke="#0d9488" stroke-width="1"/>
+              <text x="660" y="133" fill="#cbd5e1" font-size="11.5" text-anchor="middle">Time-Frequency Spectrograms (S-128: 128 × 128)</text>
+              
+              <line x1="660" y1="144" x2="660" y2="160" stroke="#2dd4bf" stroke-width="1.5"/>
+              <rect x="480" y="160" width="360" height="42" rx="4" fill="#0f172a" stroke="#0d9488" stroke-width="1"/>
+              <text x="660" y="178" fill="#e2e8f0" font-size="11" font-weight="600" text-anchor="middle">YOLOv9-C Deep Spectrum Detector</text>
+              <text x="660" y="193" fill="#94a3b8" font-size="9.5" text-anchor="middle">11 Modulation Classes · GELAN-C Backbone · AdamW</text>
+              
+              <rect x="480" y="212" width="360" height="30" rx="4" fill="#1e293b" stroke="#0d9488" stroke-width="1"/>
+              <text x="660" y="232" fill="#2dd4bf" font-size="11" font-weight="600" text-anchor="middle">Multi-SNR (-20 to +20 dB) &amp; Latency Evaluation</text>
+
+              <!-- Convergence arrows to stage 3 -->
+              <path d="M 220 255 L 220 285 L 420 285 L 420 295" fill="none" stroke="#38bdf8" stroke-width="2"/>
+              <path d="M 660 255 L 660 285 L 460 285 L 460 295" fill="none" stroke="#2dd4bf" stroke-width="2"/>
+
+              <!-- Common Stage: Computational and Resource-Efficiency Evaluation -->
+              <rect x="120" y="295" width="640" height="115" rx="8" fill="url(#grad-eval-31)" stroke="#818cf8" stroke-width="1.5" filter="url(#shadow-f31)"/>
+              <text x="440" y="322" fill="#c7d2fe" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.06em">COMPUTATIONAL &amp; RESOURCE-EFFICIENCY INVESTIGATION</text>
+              
+              <rect x="140" y="335" width="285" height="60" rx="5" fill="#1e293b" stroke="#4f46e5" stroke-width="1"/>
+              <text x="282" y="355" fill="#818cf8" font-size="11" font-weight="700" text-anchor="middle">Algorithm-Level Efficiency</text>
+              <text x="282" y="372" fill="#94a3b8" font-size="10" text-anchor="middle">Lightweight Architectures · Pruning &amp; INT8 Quant</text>
+              <text x="282" y="386" fill="#94a3b8" font-size="10" text-anchor="middle">Distillation · Adaptive Computation Allocation</text>
+              
+              <rect x="455" y="335" width="285" height="60" rx="5" fill="#1e293b" stroke="#4f46e5" stroke-width="1"/>
+              <text x="597" y="355" fill="#818cf8" font-size="11" font-weight="700" text-anchor="middle">Hardware-Oriented Deployment</text>
+              <text x="597" y="372" fill="#94a3b8" font-size="10" text-anchor="middle">Native CPU vs. GPU Inference Benchmarks</text>
+              <text x="597" y="386" fill="#94a3b8" font-size="10" text-anchor="middle">ONNX Runtime · OpenVINO · Constrained Optimization</text>
+            </svg>
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.75rem; line-height: 1.5; max-width: 900px; margin-left: auto; margin-right: auto;">
+            <em>Figure 3.1: Overall methodological framework illustrating the two experimental tracks and their role in the investigation of resource-efficient AI for radar processing and detection.</em>
+          </p>
         </div>
 
-        <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin-bottom: 1.25rem;">
-          The investigation will consider two candidate approaches:
-        </p>
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">3.2 Experimental Track I: Synthetic FMCW Radar Perception</h3>
 
-        <!-- Candidate Approaches Grid -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin: 1.25rem 0 2rem 0;">
-          <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem;">
-            <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #38bdf8; font-weight: 700; margin-bottom: 0.4rem;">Candidate Approach 1</div>
-            <div style="font-size: 1.05rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.75rem;">Reduction of Overall Computational Requirements</div>
-            <p style="font-size: 0.925rem; line-height: 1.68; color: #cbd5e1; margin: 0;">
-              Investigating techniques that reduce the computation and memory required by AI-based radar detection. Potential methods include lightweight neural network architectures, model pruning, quantisation, knowledge distillation, and adaptive computation. The objective is to reduce the resources required for inference while maintaining an acceptable level of detection performance.
-            </p>
-          </div>
-
-          <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem;">
-            <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #38bdf8; font-weight: 700; margin-bottom: 0.4rem;">Candidate Approach 2</div>
-            <div style="font-size: 1.05rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.75rem;">CPU-Oriented Model Development and Deployment</div>
-            <p style="font-size: 0.925rem; line-height: 1.68; color: #cbd5e1; margin: 0;">
-              Investigating whether suitable radar detection models can be designed or adapted to operate efficiently on commodity Central Processing Units (CPUs). This includes evaluating CPU-friendly architectures, numerical representations, and inference implementations to reduce dependence on dedicated GPU hardware. Where appropriate, the performance of CPU-based execution will be compared with GPU-accelerated execution under controlled conditions.
-            </p>
-          </div>
-        </div>
-
+        <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: #7dd3fc;">3.2.1 Radar Simulation and Data Generation</h4>
         <div class="academic-two-column">
           <p>
-            These approaches address related but distinct aspects of computational efficiency. Reducing the number of operations or model parameters does not necessarily guarantee efficient execution on every hardware architecture. Likewise, a model that performs efficiently on a CPU may not achieve the lowest overall computational cost. The two approaches will therefore be examined using a common evaluation framework.
+            The first experimental track uses a software-based FMCW radar simulator to generate complex baseband measurements. This enables controlled experiments in which target positions, velocities, reflection strengths, and signal-to-noise ratios can be varied.
           </p>
           <p>
-            The comparison will consider detection performance, computational complexity, model size, memory consumption, inference latency, throughput, and hardware accessibility. Appropriate detection metrics, such as precision, recall, and mean Average Precision (mAP), will be selected according to the detection task and dataset. Computational measurements will include parameters, Floating-Point Operations (FLOPs) or Multiply-Accumulate Operations (MACs), peak memory usage, and inference time. CPU and GPU comparisons will be conducted using documented hardware and software configurations to ensure that the results are reproducible and interpretable.
-          </p>
-          <p>
-            The final research pathway will be selected after evaluating the feasibility and performance of the candidate approaches. It may involve a computationally reduced model, a CPU-oriented implementation, or a combination of both, depending on the experimental findings and the computational resources available. The intended outcome is a practical and reproducible AI-based radar detection system that provides a meaningful balance between detection effectiveness and computational feasibility.
+            The default radar configuration represents a 77 GHz millimetre-wave radar system. Its principal simulation parameters are summarised in Table 3.1.
           </p>
         </div>
 
-        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">1.3 Objectives</h3>
-
-        <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin-bottom: 1.25rem;">
-          The primary objective of this project is to investigate resource-efficient AI techniques for radar signal processing and detection, building upon an existing FMCW radar simulation, conventional DSP, and deep learning framework.
-        </p>
+        <!-- Table 3.1: Principal Radar Simulation Parameters -->
+        <div style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem; overflow-x: auto;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
+            Table 3.1: Principal Radar Simulation Parameters
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1; max-width: 600px; margin: 0 auto;">
+            <thead>
+              <tr style="border-bottom: 2px solid #38bdf8; background: rgba(30, 41, 59, 0.6); text-align: left;">
+                <th style="padding: 8px 14px; color: #f8fafc; font-weight: 700;">Parameter</th>
+                <th style="padding: 8px 14px; color: #f8fafc; font-weight: 700;">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Carrier frequency</td>
+                <td style="padding: 7px 14px;">77 GHz</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Chirp bandwidth</td>
+                <td style="padding: 7px 14px;">1 GHz</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Chirp duration</td>
+                <td style="padding: 7px 14px;">50 μs</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Fast-time ADC samples per chirp</td>
+                <td style="padding: 7px 14px;">256</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Number of chirps per frame</td>
+                <td style="padding: 7px 14px;">128</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Number of receive antennas</td>
+                <td style="padding: 7px 14px;">4</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Receiver antenna spacing</td>
+                <td style="padding: 7px 14px;">Half-wavelength (λ/2)</td>
+              </tr>
+              <tr>
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">ADC sampling frequency</td>
+                <td style="padding: 7px 14px;">5.12 MHz</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin-bottom: 1rem;">
-          The specific objectives are as follows:
+          The simulated radar produces a complex-valued data cube of dimensions
         </p>
 
-        <div style="background: rgba(15, 23, 42, 0.65); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.4rem 1.65rem; margin-bottom: 1.5rem;">
-          <ol style="padding-left: 1.35rem; font-size: 0.935rem; line-height: 1.72; color: #cbd5e1; margin: 0;">
-            <li style="margin-bottom: 0.75rem;">
-              <strong>Establish a radar processing foundation:</strong> Develop and maintain a modular FMCW radar processing pipeline incorporating conventional signal-processing operations such as range and Doppler estimation, clutter suppression, CFAR detection, angle estimation, and target clustering.
-            </li>
-            <li style="margin-bottom: 0.75rem;">
-              <strong>Study AI-based radar detection:</strong> Investigate neural-network-based approaches for extracting target information from radar representations and establish suitable reference implementations and detection-performance benchmarks.
-            </li>
-            <li style="margin-bottom: 0.75rem;">
-              <strong>Characterise computational requirements:</strong> Analyse the computational and memory requirements of existing AI-based radar detection approaches using metrics such as model parameters, FLOPs or MACs, peak memory consumption, inference latency, and throughput.
-            </li>
-            <li style="margin-bottom: 0.75rem;">
-              <strong>Investigate computational reduction techniques:</strong> Explore approaches for reducing the inference cost of radar detection models, including lightweight architectures, quantisation, pruning, knowledge distillation, and adaptive computation, wherever suitable for the selected detection task.
-            </li>
-            <li style="margin-bottom: 0.75rem;">
-              <strong>Investigate CPU-oriented inference:</strong> Evaluate the feasibility of executing selected radar detection models on CPU hardware. Study suitable architectural and implementation choices and compare their execution performance with GPU-based inference under controlled experimental conditions.
-            </li>
-            <li style="margin-bottom: 0.75rem;">
-              <strong>Establish a comparative evaluation framework:</strong> Compare the candidate approaches using consistent datasets, evaluation procedures, and performance criteria, considering detection quality, computational complexity, memory requirements, inference latency, throughput, and hardware accessibility.
-            </li>
-            <li style="margin-bottom: 0.75rem;">
-              <strong>Define a practical demonstration for the subsequent project phase:</strong> Identify the software dependencies, datasets, model requirements, and hardware configurations needed to demonstrate the selected radar detection approach. Document the CPU-only and GPU-accelerated execution possibilities, including their respective computational and memory requirements.
-            </li>
-            <li style="margin-bottom: 0.25rem;">
-              <strong>Select a feasible research pathway:</strong> Use the experimental results and available computational resources to determine whether the subsequent implementation should primarily focus on reducing overall computation, enabling efficient CPU-based execution, or combining both approaches.
-            </li>
+        <div style="text-align: center; margin: 1.25rem 0;">
+          $$\mathbf{X}\in\mathbb{C}^{N_{\mathrm{rx}}	imes N_{\mathrm{chirp}}	imes N_{\mathrm{sample}}}$$
+        </div>
+
+        <div class="academic-two-column">
+          <p>
+            where the three dimensions correspond to receive antennas, slow-time chirps, and fast-time ADC samples, respectively. With the default configuration, the generated data cube has dimensions ($4	imes128	imes256$).
+          </p>
+          <p>
+            A target scene is represented by a collection of objects with attributes such as range, radial velocity, azimuth, radar cross-section, and target category. The scene generator produces between one and three targets, selected from four categories: car, pedestrian, cyclist, and drone. Pedestrian and drone targets can additionally include micro-Doppler modulation to represent periodic motion.
+          </p>
+          <p>
+            For every target, the received complex signal is constructed using contributions from its beat frequency, Doppler phase, spatial phase across the receiving antennas, and carrier-related phase. The signals from individual targets are superimposed to form the simulated radar cube.
+          </p>
+          <p>
+            Environmental effects are introduced through stationary clutter and additive complex Gaussian noise. The implemented simulator generates stationary clutter reflectors with Rayleigh-distributed amplitudes and adds complex additive white Gaussian noise at a configurable SNR. In the synthetic dataset generator, the SNR is sampled between 10 dB and 25 dB, and the clutter-to-noise ratio is configured as 8 dB.
+          </p>
+          <p>
+            This simulation-based approach provides labelled examples in which the underlying target locations and properties are known. It is therefore suitable for controlled evaluation of signal processing operations and the construction of learning-based detection targets.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #7dd3fc;">3.2.2 Conventional Radar Signal Processing Pipeline</h4>
+        <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin-bottom: 1.25rem;">
+          The simulated radar cube is processed using a sequence of conventional signal processing operations. The main stages are range processing, clutter suppression, Doppler processing, target detection, angle estimation, and spatial clustering. The processing structure follows established FMCW radar signal processing principles <a href="#ref-4" class="citation-badge" data-citation="4">[4]</a>, <a href="#ref-5" class="citation-badge" data-citation="5">[5]</a>.
+        </p>
+
+        <!-- Figure 3.2: FMCW Radar Signal Processing Pipeline -->
+        <div style="text-align: center; margin: 2rem 0;">
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; display: inline-block; max-width: 100%;">
+            <img src="./assets/diagrams/nb1_top.svg" alt="Conventional FMCW Radar Signal Processing Pipeline" class="zoomable" style="width: 100%; max-width: 740px; border-radius: var(--radius-sm);">
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.75rem; line-height: 1.5; max-width: 900px; margin-left: auto; margin-right: auto;">
+            <em>Figure 3.2: Conventional FMCW radar signal processing pipeline from complex baseband data acquisition to spatial target detection and clustering.</em>
+          </p>
+        </div>
+
+        <!-- Algorithm 3.1: Conventional FMCW Radar Signal Processing and Detection -->
+        <div class="algorithm-card" style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.75); border: 1px solid var(--border-color); border-left: 4px solid #38bdf8; border-radius: var(--radius-sm); padding: 1.4rem 1.65rem;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.65rem;">
+            Algorithm 3.1: Conventional FMCW Radar Signal Processing and Detection
+          </div>
+          <div style="font-size: 0.88rem; color: #94a3b8; margin-bottom: 0.75rem;">
+            <strong>Input:</strong> Complex radar data cube $\mathbf{X} \in \mathbb{C}^{N_{\mathrm{rx}} 	imes N_{\mathrm{chirp}} 	imes N_{\mathrm{sample}}}$.<br>
+            <strong>Output:</strong> Clustered target detections with Cartesian positions $(x,y)$, radial velocities, azimuths, and power levels.
+          </div>
+          <ol style="padding-left: 1.35rem; font-size: 0.9rem; line-height: 1.65; color: #cbd5e1; margin: 0;">
+            <li style="margin-bottom: 0.4rem;"><strong>Radar Configuration:</strong> Initialise 77 GHz radar system parameters ($B = 1	ext{ GHz}$, $T_c = 50	ext{ μs}$, $N_{\mathrm{rx}} = 4$, $d = \lambda/2$).</li>
+            <li style="margin-bottom: 0.4rem;"><strong>Cube Generation:</strong> Synthesise multi-target complex baseband data cube with Rayleigh clutter and AWGN.</li>
+            <li style="margin-bottom: 0.4rem;"><strong>Range Processing:</strong> Apply Hann window along fast-time dimension and compute 1D FFT: $\mathbf{X}_r = \mathrm{FFT}_n\{w_r(n)\mathbf{X}\}$.</li>
+            <li style="margin-bottom: 0.4rem;"><strong>Clutter Suppression:</strong> Subtract slow-time chirp mean to eliminate stationary zero-Doppler reflections: $\widetilde{\mathbf{X}}_r = \mathbf{X}_r - rac{1}{N_c}\sum_m \mathbf{X}_r$.</li>
+            <li style="margin-bottom: 0.4rem;"><strong>Doppler Processing:</strong> Apply Hann window across chirps, compute 1D FFT along slow-time, and apply FFT shift: $\mathbf{X}_{rd} = \mathrm{FFTshift}(\mathrm{FFT}_m\{w_d(m)\widetilde{\mathbf{X}}_r\})$.</li>
+            <li style="margin-bottom: 0.4rem;"><strong>Power RDM Integration:</strong> Form 2D Range-Doppler power representation: $P_{rd}(m,n) = rac{1}{N_{\mathrm{rx}}}\sum_r |\mathbf{X}_{rd}(r,m,n)|^2$.</li>
+            <li style="margin-bottom: 0.4rem;"><strong>CFAR Target Detection:</strong> Apply 2D CA-CFAR detector with guard and training cells to extract candidate target peaks exceeding adaptive threshold.</li>
+            <li style="margin-bottom: 0.4rem;"><strong>Direction-of-Arrival (AoA):</strong> For each detected range-Doppler peak, extract spatial steering vector across antennas and compute MUSIC pseudo-spectrum or Capon spectrum to estimate azimuth $	heta$.</li>
+            <li style="margin-bottom: 0.4rem;"><strong>Cartesian Conversion &amp; Clustering:</strong> Transform detections $(R, 	heta)$ to Cartesian coordinates $(x = R\sin	heta, y = R\cos	heta)$ and group spatial returns via DBSCAN clustering.</li>
+            <li><strong>Track Extraction:</strong> Compute cluster centroids, mean radial velocities, total energy, and spatial extents.</li>
           </ol>
         </div>
 
-        <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin-top: 1.25rem;">
-          The work undertaken during the first project phase establishes the radar processing and experimental foundation required for this investigation. The subsequent phase will focus on developing and evaluating the selected resource-efficient approach and demonstrating its practical feasibility.
+        <p style="font-size: 0.95rem; font-weight: 700; color: #f8fafc; margin-top: 1.5rem; margin-bottom: 0.5rem;">
+          a) Range Processing
         </p>
+        <div class="academic-two-column">
+          <p>
+            Range processing is performed along the fast-time dimension of the radar cube. A Hann window is applied to reduce spectral leakage, followed by a one-dimensional Fast Fourier Transform (FFT):
+          </p>
+        </div>
+        <div style="text-align: center; margin: 1rem 0;">
+          $$X_r(r,m,n) = \mathrm{FFT}_{n}\left\{ w_r(n) X(r,m,n) 
+ight\}$$
+        </div>
+        <div class="academic-two-column">
+          <p>
+            where $w_r(n)$ is the range window and the FFT is applied over ADC samples. The resulting range profile provides frequency-domain information associated with target distances. The range axis is obtained from the beat-frequency relationship and the configured chirp slope.
+          </p>
+        </div>
+
+        <!-- Code Listing 3.1: Fast-Time Range FFT -->
+        <div style="margin: 1.25rem 0 1.75rem 0; background: rgba(15, 23, 42, 0.85); border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden;">
+          <div style="padding: 0.5rem 1rem; background: rgba(30, 41, 59, 0.7); font-size: 0.78rem; font-weight: 700; color: #38bdf8; display: flex; justify-content: space-between;">
+            <span>Code Listing 3.1: Fast-Time Range FFT</span>
+            <span style="color: #64748b;">src/dsp/range_processing.py</span>
+          </div>
+          <pre style="margin: 0; padding: 1rem 1.25rem; font-size: 0.84rem; line-height: 1.55; overflow-x: auto; background: transparent;"><code class="language-python">def process(self, radar_cube):
+    # Apply windowing along fast-time dimension (axis=-1)
+    windowed = radar_cube * self.window[np.newaxis, np.newaxis, :]
+
+    # Compute FFT along ADC fast-time samples
+    range_profile = np.fft.fft(
+        windowed,
+        n=self.n_fft,
+        axis=-1
+    )
+
+    return range_profile, self.range_axis</code></pre>
+          <div style="padding: 0.5rem 1rem; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid rgba(148, 163, 184, 0.1);">
+            <em>Code Listing 3.1: Hann-windowed fast-time FFT implementation for FMCW range processing. The FFT operates along the final dimension, corresponding to fast-time ADC samples, while preserving receive-antenna and chirp dimensions.</em>
+          </div>
+        </div>
+
+        <p style="font-size: 0.95rem; font-weight: 700; color: #f8fafc; margin-top: 1.5rem; margin-bottom: 0.5rem;">
+          b) Clutter Suppression
+        </p>
+        <div class="academic-two-column">
+          <p>
+            Stationary reflections from the surrounding environment can produce strong components near zero Doppler. A clutter suppression stage is therefore applied along the slow-time dimension. The default synthetic dataset pipeline uses mean subtraction:
+          </p>
+        </div>
+        <div style="text-align: center; margin: 1rem 0;">
+          $$\widetilde{X}_r(r,m,n) = X_r(r,m,n) - rac{1}{N_c} \sum_{m=0}^{N_c-1} X_r(r,m,n)$$
+        </div>
+        <div class="academic-two-column">
+          <p>
+            where $N_c$ denotes the number of chirps. The implementation also provides alternative clutter suppression methods, including two-pulse MTI, three-pulse MTI, and high-pass filtering. These methods offer different ways of suppressing slowly varying or stationary components while retaining the returns associated with moving targets.
+          </p>
+        </div>
+
+        <p style="font-size: 0.95rem; font-weight: 700; color: #f8fafc; margin-top: 1.5rem; margin-bottom: 0.5rem;">
+          c) Doppler Processing
+        </p>
+        <div class="academic-two-column">
+          <p>
+            Doppler processing is performed over the slow-time chirp dimension. After applying a Hann window, an FFT is computed along the chirp axis:
+          </p>
+        </div>
+        <div style="text-align: center; margin: 1rem 0;">
+          $$X_{rd}(r,m,n) = \mathrm{FFT}_{m}\left\{ w_d(m) \widetilde{X}_r(r,m,n) 
+ight\}$$
+        </div>
+        <div class="academic-two-column">
+          <p>
+            The zero-Doppler component is shifted to the centre of the spectrum using an FFT shift operation. The resulting Range-Doppler representation maps target energy according to range and radial velocity. The magnitude or power of the Range-Doppler representation can then be expressed in decibels for visualisation and subsequent detection.
+          </p>
+        </div>
+
+        <p style="font-size: 0.95rem; font-weight: 700; color: #f8fafc; margin-top: 1.5rem; margin-bottom: 0.5rem;">
+          d) CFAR-Based Target Detection
+        </p>
+        <div class="academic-two-column">
+          <p>
+            The processed Range-Doppler representation is supplied to a Constant False Alarm Rate (CFAR) detector. CFAR estimates the local background level around a Cell Under Test (CUT) and derives an adaptive detection threshold.
+          </p>
+          <p>
+            The implemented detector supports multiple CFAR variants: Cell-Averaging CFAR (CA-CFAR), Ordered-Statistic CFAR (OS-CFAR), Greatest-Of CFAR (GOCA-CFAR), and Smallest-Of CFAR (SOCA-CFAR). The detector identifies candidate target peaks whose signal levels exceed the estimated threshold. These detections provide range and Doppler-bin information for subsequent processing <a href="#ref-6" class="citation-badge" data-citation="6">[6]</a>.
+          </p>
+        </div>
+
+        <p style="font-size: 0.95rem; font-weight: 700; color: #f8fafc; margin-top: 1.5rem; margin-bottom: 0.5rem;">
+          e) Direction-of-Arrival Estimation
+        </p>
+        <div class="academic-two-column">
+          <p>
+            Spatial angle estimation uses the phase information available across the multiple receiving antennas. The implemented module supports subspace-based MUSIC and Capon minimum-variance distortionless-response estimation.
+          </p>
+          <p>
+            These techniques use the spatial structure of the received signals to estimate the direction of arrival of detected targets. MUSIC estimates angular peaks using the signal and noise subspaces obtained from the spatial covariance matrix, while Capon estimates the spatial spectrum using an adaptive beamforming formulation <a href="#ref-7" class="citation-badge" data-citation="7">[7]</a>, <a href="#ref-20" class="citation-badge" data-citation="20">[20]</a>.
+          </p>
+        </div>
+
+        <p style="font-size: 0.95rem; font-weight: 700; color: #f8fafc; margin-top: 1.5rem; margin-bottom: 0.5rem;">
+          f) Spatial Clustering
+        </p>
+        <div class="academic-two-column">
+          <p>
+            The candidate detections are converted from polar coordinates into Cartesian coordinates:
+          </p>
+        </div>
+        <div style="text-align: center; margin: 1rem 0;">
+          $$x = R\sin	heta, \qquad y = R\cos	heta$$
+        </div>
+        <div class="academic-two-column">
+          <p>
+            where $R$ denotes range and $	heta$ denotes azimuth. DBSCAN clustering is then applied to group spatially related detections. The implementation constructs clustering features using Cartesian position and a scaled velocity component. For each resulting cluster, the processing pipeline computes quantities such as the centroid, mean velocity, azimuth, total detection power, and spatial bounds. This produces an object-level representation from the lower-level CFAR detections <a href="#ref-21" class="citation-badge" data-citation="21">[21]</a>.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #7dd3fc;">3.2.3 Deep Learning-Based FMCW Target Detection</h4>
+        <div class="academic-two-column">
+          <p>
+            Alongside the conventional processing pipeline, a convolutional neural network is implemented for learning-based target detection from synthetic Range-Doppler representations.
+          </p>
+          <p>
+            The synthetic dataset generator constructs radar scenes and processes them through the range FFT, mean-subtraction clutter filter, and Doppler FFT stages. The power across receiving antennas is averaged to obtain a two-dimensional Range-Doppler representation. The resulting power map is converted to a decibel scale and normalised to the range $[0,1]$.
+          </p>
+          <p>
+            Each generated sample is paired with two types of supervision:
+          </p>
+          <ol style="padding-left: 1.25rem; font-size: 0.925rem; line-height: 1.65; color: #cbd5e1; margin: 0 0 1rem 0;">
+            <li><strong>Class heatmaps:</strong> A multi-channel target map representing the background and the four target categories (car, pedestrian, cyclist, drone).</li>
+            <li><strong>Bounding-box regression targets:</strong> Normalised range and velocity coordinates, together with target extent information.</li>
+          </ol>
+          <p>
+            For each simulated target, the nearest range and Doppler bins are identified. A local Gaussian response is placed around the target location in the corresponding class heatmap. The associated regression channels encode the normalised range centre, velocity centre, and target widths.
+          </p>
+          <p>
+            The implemented <code>RadarObjectDetectorCNN</code> uses a fully convolutional architecture with an initial feature extraction layer, residual convolutional blocks, a feature expansion stage, and two prediction heads. The classification head generates class heatmaps, while the regression head predicts four coordinate-related values for each spatial location.
+          </p>
+        </div>
+
+        <!-- Figure 3.3: CNN Architecture for Synthetic FMCW Target Detection -->
+        <div style="text-align: center; margin: 2rem 0;">
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; display: inline-block; max-width: 100%;">
+            <img src="./assets/diagrams/nb2_top.svg" alt="CNN Architecture for Synthetic FMCW Target Detection" class="zoomable" style="width: 100%; max-width: 580px; border-radius: var(--radius-sm);">
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.75rem; line-height: 1.5; max-width: 900px; margin-left: auto; margin-right: auto;">
+            <em>Figure 3.3: Architecture of the convolutional neural network used for synthetic FMCW radar target classification and coordinate regression.</em>
+          </p>
+        </div>
+
+        <!-- Code Listing 3.2: Forward-Pass Implementation -->
+        <div style="margin: 1.25rem 0 1.75rem 0; background: rgba(15, 23, 42, 0.85); border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden;">
+          <div style="padding: 0.5rem 1rem; background: rgba(30, 41, 59, 0.7); font-size: 0.78rem; font-weight: 700; color: #38bdf8; display: flex; justify-content: space-between;">
+            <span>Code Listing 3.2: Forward-Pass Implementation of the Synthetic FMCW Radar CNN</span>
+            <span style="color: #64748b;">src/models/radar_detector_cnn.py</span>
+          </div>
+          <pre style="margin: 0; padding: 1rem 1.25rem; font-size: 0.84rem; line-height: 1.55; overflow-x: auto; background: transparent;"><code class="language-python">def forward(self, x):
+    # Shared convolutional feature backbone
+    feat = self.stem(x)       # Conv2d -> BatchNorm2d -> LeakyReLU
+    feat = self.res1(feat)     # Residual Block 1 (32 channels)
+    feat = self.res2(feat)     # Residual Block 2 (32 channels)
+    feat = self.expand(feat)   # Conv2d channel expansion (32 -> 64)
+    feat = self.res3(feat)     # Residual Block 3 (64 channels)
+    feat = self.res4(feat)     # Residual Block 4 (64 channels)
+
+    # Dual prediction heads receiving shared backbone features
+    cls_logits = self.cls_head(feat)   # 5-channel class heatmaps
+    box_preds = self.box_head(feat)     # 4-channel coordinate regression
+
+    return cls_logits, box_preds</code></pre>
+          <div style="padding: 0.5rem 1rem; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid rgba(148, 163, 184, 0.1);">
+            <em>Code Listing 3.2: Forward-pass implementation of the synthetic FMCW radar CNN, illustrating the shared convolutional feature extraction and the two independent prediction heads.</em>
+          </div>
+        </div>
+
+        <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin-bottom: 0.75rem;">
+          The model uses a multi-task objective combining classification and bounding-box regression:
+        </p>
+
+        <div style="text-align: center; margin: 1.25rem 0;">
+          $$\mathcal{L} = \mathcal{L}_{\mathrm{cls}} + 2\mathcal{L}_{\mathrm{box}}$$
+        </div>
+
+        <div class="academic-two-column">
+          <p>
+            where the classification term is binary cross-entropy with logits and the regression term is a masked Smooth L1 loss. The mask restricts coordinate regression to locations associated with foreground targets.
+          </p>
+          <p>
+            The training utility uses an 80:20 training-validation split. Its default configuration uses 150 generated samples, a batch size of 8, five training epochs, and the AdamW optimiser with a learning rate of $10^{-3}$ and weight decay of $10^{-4}$. A cosine annealing learning-rate scheduler is used during training.
+          </p>
+          <p>
+            This CNN provides a learning-based approach to target localisation and classification on the synthetic FMCW data. Its results are interpreted within the synthetic experimental setting and are not treated as equivalent to results obtained on the separate RadDet spectrum-detection task.
+          </p>
+        </div>
+
+        <!-- Algorithm 3.2: Synthetic FMCW Dataset Generation and CNN Training -->
+        <div class="algorithm-card" style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.75); border: 1px solid var(--border-color); border-left: 4px solid #38bdf8; border-radius: var(--radius-sm); padding: 1.4rem 1.65rem;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.65rem;">
+            Algorithm 3.2: Synthetic FMCW Dataset Generation and CNN Training
+          </div>
+          <div style="font-size: 0.88rem; color: #94a3b8; margin-bottom: 0.75rem;">
+            <strong>Input:</strong> Target scene configurations, simulation parameters ($N = 150$), random seed.<br>
+            <strong>Output:</strong> Trained <code>RadarObjectDetectorCNN</code> weights and validation convergence history.
+          </div>
+          <ol style="padding-left: 1.35rem; font-size: 0.9rem; line-height: 1.65; color: #cbd5e1; margin: 0;">
+            <li style="margin-bottom: 0.4rem;">Generate deterministic target scenes using sample indices and seeds (target kinematics, categories, RCS).</li>
+            <li style="margin-bottom: 0.4rem;">Simulate complex radar data cubes $\mathbf{X}(t)$ with target returns, stationary Rayleigh clutter, and AWGN ($10	ext{--}25	ext{ dB}$ SNR).</li>
+            <li style="margin-bottom: 0.4rem;">Apply Range FFT, mean-subtraction clutter filtering, and Doppler FFT.</li>
+            <li style="margin-bottom: 0.4rem;">Average power across receive antennas, convert to decibels, and normalise power Range-Doppler maps to $[0,1]$.</li>
+            <li style="margin-bottom: 0.4rem;">Construct supervision targets: multi-channel Gaussian class heatmaps and masked bounding-box coordinates $(r_{\mathrm{norm}}, v_{\mathrm{norm}}, w_r, w_v)$.</li>
+            <li style="margin-bottom: 0.4rem;">Partition dataset into 80% training (120 samples) and 20% validation (30 samples) subsets.</li>
+            <li style="margin-bottom: 0.4rem;">Initialise <code>RadarObjectDetectorCNN</code>, AdamW optimiser ($\eta = 10^{-3}, \lambda = 10^{-4}$), and cosine annealing scheduler.</li>
+            <li style="margin-bottom: 0.4rem;">For each epoch, execute forward pass, compute multi-task loss $\mathcal{L} = \mathcal{L}_{\mathrm{cls}} + 2\mathcal{L}_{\mathrm{box}}$, backpropagate gradients, and update parameters.</li>
+            <li style="margin-bottom: 0.4rem;">Evaluate validation loss on held-out samples after each epoch to monitor convergence.</li>
+            <li>Return trained model checkpoint and training loss history curves.</li>
+          </ol>
+        </div>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">3.3 Experimental Track II: Wideband Radar Spectrum Detection</h3>
+
+        <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: #7dd3fc;">3.3.1 Dataset and Input Representation</h4>
+        <div class="academic-two-column">
+          <p>
+            The second experimental track uses the RadDet wideband radar spectrum detection dataset introduced in <a href="#ref-2" class="citation-badge" data-citation="2">[2]</a>. Unlike the synthetic FMCW perception track, this dataset is concerned with the detection and classification of radar emissions in a wideband frequency spectrum.
+          </p>
+          <p>
+            The input representation consists of two-dimensional max-hold time-frequency spectrograms. The spectrogram represents radar activity over a time horizon of approximately 2 ms and a frequency bandwidth of 500 MHz.
+          </p>
+          <p>
+            The two axes have the following interpretation:
+          </p>
+          <ul style="padding-left: 1.25rem; font-size: 0.925rem; line-height: 1.65; color: #cbd5e1; margin: 0 0 1rem 0;">
+            <li>The horizontal axis represents time dwell, indicating the duration and temporal position of a signal emission.</li>
+            <li>The vertical axis represents frequency, indicating the location and bandwidth occupied by the emission.</li>
+          </ul>
+          <p>
+            The dataset contains eleven radar modulation categories:
+          </p>
+        </div>
+
+        <div style="text-align: center; margin: 1.25rem 0;">
+          $$\mathcal{C} = \{\mathrm{Rect},\ \mathrm{Barker},\ \mathrm{Frank},\ \mathrm{P1},\ \mathrm{P2},\ \mathrm{P3},\ \mathrm{P4},\ \mathrm{Px},\ \mathrm{ZadoffChu},\ \mathrm{LFM},\ \mathrm{FMCW}\}$$
+        </div>
+
+        <div class="academic-two-column">
+          <p>
+            The full-scale benchmark uses the S-128 input resolution, corresponding to a ($128	imes128$) spectrogram. This resolution provides the lower-resolution setting for the initial detector benchmark.
+          </p>
+          <p>
+            The dataset is organised into training, validation, and test splits. The full-scale benchmark record contains approximately 40,000 frames distributed across these splits.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #7dd3fc;">3.3.2 Annotation Processing and Dataset Preparation</h4>
+        <div class="academic-two-column">
+          <p>
+            Each spectrogram is associated with object-level annotations in the YOLO bounding-box format:
+          </p>
+        </div>
+        <div style="text-align: center; margin: 1rem 0;">
+          $$(c, x_c, y_c, w, h)$$
+        </div>
+        <div class="academic-two-column">
+          <p>
+            where $c$ denotes the modulation class, $x_c$ and $y_c$ represent the normalised box centre, and $w$ and $h$ represent the normalised box width and height.
+          </p>
+          <p>
+            The dataset preparation stage organises images and annotations into separate training, validation, and test directories. The corresponding dataset configuration file specifies the paths to these splits and the mapping between class indices and modulation categories.
+          </p>
+          <p>
+            The RadDet data loader reads the spectrogram images, converts them to grayscale, and normalises the pixel intensities to the interval $[0,1]$. It also parses the annotation files and returns bounding boxes and class labels in tensor form.
+          </p>
+          <p>
+            The resulting data can be supplied to an object detection model to jointly localise radar emissions in the time-frequency representation and classify their modulation types.
+          </p>
+        </div>
+
+        <!-- Figure 3.4: Representative RadDet Spectrogram & Detection Workflow -->
+        <div style="text-align: center; margin: 2rem 0;">
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; display: inline-block; max-width: 100%;">
+            <img src="./assets/nb3/eda_raddet_samples.png" alt="RadDet Time-Frequency Spectrogram and Detection Annotations" class="zoomable" style="width: 100%; max-width: 780px; border-radius: var(--radius-sm);">
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.75rem; line-height: 1.5; max-width: 900px; margin-left: auto; margin-right: auto;">
+            <em>Figure 3.4: Representative RadDet time-frequency spectrogram illustrating radar signal emissions and their ground-truth detection annotations across diverse modulation categories and noise levels.</em>
+          </p>
+        </div>
+
+        <!-- Code Listing 3.3: Grayscale Spectrogram Loading -->
+        <div style="margin: 1.25rem 0 1.75rem 0; background: rgba(15, 23, 42, 0.85); border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden;">
+          <div style="padding: 0.5rem 1rem; background: rgba(30, 41, 59, 0.7); font-size: 0.78rem; font-weight: 700; color: #38bdf8; display: flex; justify-content: space-between;">
+            <span>Code Listing 3.3: Grayscale Spectrogram Loading and Normalisation</span>
+            <span style="color: #64748b;">src/raddet/dataset.py</span>
+          </div>
+          <pre style="margin: 0; padding: 1rem 1.25rem; font-size: 0.84rem; line-height: 1.55; overflow-x: auto; background: transparent;"><code class="language-python">with Image.open(img_path) as pil_img:
+    # Convert image to single-channel grayscale (time-frequency power)
+    pil_img = pil_img.convert("L")
+    img_arr = np.array(pil_img, dtype=np.float32) / 255.0
+
+# Shape: (1, H, W) normalized to [0, 1]
+img_tensor = torch.from_numpy(img_arr).unsqueeze(0)</code></pre>
+          <div style="padding: 0.5rem 1rem; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid rgba(148, 163, 184, 0.1);">
+            <em>Code Listing 3.3: Grayscale spectrogram loading and normalisation. Coordinates are normalised relative to image dimensions.</em>
+          </div>
+        </div>
+
+        <!-- Algorithm 3.3: RadDet Spectrogram and Annotation Preparation -->
+        <div class="algorithm-card" style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.75); border: 1px solid var(--border-color); border-left: 4px solid #38bdf8; border-radius: var(--radius-sm); padding: 1.4rem 1.65rem;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.65rem;">
+            Algorithm 3.3: RadDet Spectrogram and Annotation Preparation
+          </div>
+          <div style="font-size: 0.88rem; color: #94a3b8; margin-bottom: 0.75rem;">
+            <strong>Input:</strong> RadDet raw directory, split name (train/val/test), target resolution ($128 	imes 128$).<br>
+            <strong>Output:</strong> Normalised image tensors $\mathbf{X} \in [0, 1]^{1 	imes H 	imes W}$ and YOLO annotation tensors $(c, x_c, y_c, w, h)$.
+          </div>
+          <ol style="padding-left: 1.35rem; font-size: 0.9rem; line-height: 1.65; color: #cbd5e1; margin: 0;">
+            <li style="margin-bottom: 0.4rem;">Load the selected dataset split directory structure.</li>
+            <li style="margin-bottom: 0.4rem;">Read the spectrogram image file using PIL.</li>
+            <li style="margin-bottom: 0.4rem;">Convert the image to single-channel grayscale (L mode).</li>
+            <li style="margin-bottom: 0.4rem;">Convert pixel values to 32-bit floating point and normalise to $[0, 1]$ via division by 255.0.</li>
+            <li style="margin-bottom: 0.4rem;">Read the corresponding YOLO <code>.txt</code> annotation file.</li>
+            <li style="margin-bottom: 0.4rem;">Extract integer class index $c \in [0, 10]$ and normalised box coordinates $(x_c, y_c, w, h)$.</li>
+            <li style="margin-bottom: 0.4rem;">Convert bounding box coordinates and class labels into PyTorch tensors.</li>
+            <li>Return normalised image tensor and paired ground-truth targets.</li>
+          </ol>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #7dd3fc;">3.3.3 YOLO-Based Detection Architecture and Training</h4>
+        <div class="academic-two-column">
+          <p>
+            The wideband spectrum detection task is implemented using the Ultralytics YOLO framework. The full-scale benchmark uses a YOLOv9-C detector initialised from pretrained <code>yolov9c.pt</code> weights. The architecture uses the GELAN-C backbone and detection components to predict bounding boxes, object confidence, and modulation classes.
+          </p>
+          <p>
+            The primary full-scale experiment is configured for the S-128 input resolution. The training schedule allows up to 100 epochs, with early stopping configured using a patience value of 20 epochs. Periodic model checkpoints are saved during training.
+          </p>
+          <p>
+            The training configuration uses the AdamW optimiser with the settings summarised in Table 3.2.
+          </p>
+        </div>
+
+        <!-- Table 3.2: YOLOv9-C Training Hyperparameters -->
+        <div style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem; overflow-x: auto;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
+            Table 3.2: YOLOv9-C Training Hyperparameters
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1; max-width: 600px; margin: 0 auto;">
+            <thead>
+              <tr style="border-bottom: 2px solid #38bdf8; background: rgba(30, 41, 59, 0.6); text-align: left;">
+                <th style="padding: 8px 14px; color: #f8fafc; font-weight: 700;">Training Parameter</th>
+                <th style="padding: 8px 14px; color: #f8fafc; font-weight: 700;">Configuration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Initial learning rate ($\eta_0$)</td>
+                <td style="padding: 7px 14px;">0.01</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Final learning-rate factor</td>
+                <td style="padding: 7px 14px;">0.001</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Weight decay</td>
+                <td style="padding: 7px 14px;">0.0005</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Warm-up epochs</td>
+                <td style="padding: 7px 14px;">3</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Maximum epochs</td>
+                <td style="padding: 7px 14px;">100</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Early-stopping patience</td>
+                <td style="padding: 7px 14px;">20 epochs</td>
+              </tr>
+              <tr>
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Input resolution</td>
+                <td style="padding: 7px 14px;">128 × 128 (S-128)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="academic-two-column">
+          <p>
+            Data augmentation is used to improve training diversity. The configured transformations include Mosaic, Mixup, Copy-Paste, Random Erasing, translation, and scaling. HSV-based colour augmentation and horizontal and vertical image flips are disabled to avoid introducing transformations that may not preserve the intended radar representation.
+          </p>
+          <p>
+            Before full-scale training, candidate GPU batch sizes are tested to estimate throughput and memory usage. This pre-flight procedure helps select a batch size compatible with the available GPU memory.
+          </p>
+          <p>
+            The training process uses the training split for parameter optimisation and the validation split for monitoring model performance and training progression. The held-out test split is used for the final benchmark evaluation.
+          </p>
+          <p>
+            It is important to distinguish the implemented YOLOv9-C detector from the YOLOv9-M model reported in the original RadDet benchmark. The former is the model used in the present full-scale training run, while the latter is retained as a published reference baseline for comparison. The two configurations are therefore not identical model variants.
+          </p>
+        </div>
+
+        <!-- Algorithm 3.4: RadDet YOLO-Based Model Training -->
+        <div class="algorithm-card" style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.75); border: 1px solid var(--border-color); border-left: 4px solid #38bdf8; border-radius: var(--radius-sm); padding: 1.4rem 1.65rem;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.65rem;">
+            Algorithm 3.4: RadDet YOLO-Based Model Training
+          </div>
+          <div style="font-size: 0.88rem; color: #94a3b8; margin-bottom: 0.75rem;">
+            <strong>Input:</strong> Pretrained <code>yolov9c.pt</code> weights, prepared RadDet S-128 dataset splits, training configuration.<br>
+            <strong>Output:</strong> Best-performing checkpoint <code>best.pt</code> and training validation trajectories.
+          </div>
+          <ol style="padding-left: 1.35rem; font-size: 0.9rem; line-height: 1.65; color: #cbd5e1; margin: 0;">
+            <li style="margin-bottom: 0.4rem;">Initialise YOLOv9-C architecture with GELAN-C backbone using pretrained weights.</li>
+            <li style="margin-bottom: 0.4rem;">Load prepared training and validation datasets via <code>data.yaml</code>.</li>
+            <li style="margin-bottom: 0.4rem;">Configure input image resolution (128 × 128) and AdamW optimiser parameters.</li>
+            <li style="margin-bottom: 0.4rem;">Perform an empirical pre-flight GPU batch-size test to ensure execution within available VRAM.</li>
+            <li style="margin-bottom: 0.4rem;">Train across epochs with Mosaic, Mixup, and translation augmentations (HSV and flips disabled).</li>
+            <li style="margin-bottom: 0.4rem;">Evaluate validation metrics (precision, recall, $\mathrm{mAP}_{50}$, $\mathrm{mAP}_{50:95}$) after each epoch.</li>
+            <li style="margin-bottom: 0.4rem;">Save periodic and best validation checkpoints.</li>
+            <li style="margin-bottom: 0.4rem;">Apply early stopping when validation metric shows no improvement over 20 consecutive epochs.</li>
+            <li>Retain and export <code>best.pt</code> checkpoint for held-out test evaluation.</li>
+          </ol>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #7dd3fc;">3.3.4 Multi-SNR Evaluation and Performance Measurement</h4>
+        <div class="academic-two-column">
+          <p>
+            Radar spectrum detection performance is evaluated using object detection metrics. The principal accuracy measures are:
+          </p>
+          <ul style="padding-left: 1.25rem; font-size: 0.925rem; line-height: 1.65; color: #cbd5e1; margin: 0 0 1rem 0;">
+            <li><strong>Precision:</strong> The fraction of predicted detections that correspond to valid ground-truth detections.</li>
+            <li><strong>Recall:</strong> The fraction of ground-truth objects successfully detected by the model.</li>
+            <li><strong>mAP<sub>50</sub>:</strong> Mean Average Precision computed at an Intersection over Union threshold of 0.50.</li>
+            <li><strong>mAP<sub>50:95</sub>:</strong> Mean Average Precision averaged over multiple IoU thresholds from 0.50 to 0.95.</li>
+          </ul>
+          <p>
+            To examine the effect of signal quality, the evaluation procedure considers six SNR levels:
+          </p>
+        </div>
+
+        <div style="text-align: center; margin: 1.25rem 0;">
+          $$\mathrm{SNR} \in \{-20, -12, -4, +4, +12, +20\}\ \mathrm{dB}$$
+        </div>
+
+        <div class="academic-two-column">
+          <p>
+            The detection metrics are computed separately across these SNR conditions, allowing the change in detection performance to be studied as signal quality varies. Aggregate metrics are also calculated over the evaluated test frames.
+          </p>
+          <p>
+            Inference latency is measured separately from training performance. The benchmark uses batch-size-one inference to represent single-frame processing. After warm-up iterations, CUDA events are used to measure repeated inference executions, with device synchronisation applied to ensure that the recorded time reflects completed GPU operations.
+          </p>
+          <p>
+            Mean, median, and high-percentile latency are considered when characterising inference behaviour. Average throughput is derived from mean latency:
+          </p>
+        </div>
+
+        <div style="text-align: center; margin: 1.25rem 0;">
+          $$\mathrm{FPS}_{\mathrm{avg}} = rac{1000}{\mathrm{Latency}_{\mathrm{mean}}(\mathrm{ms})}$$
+        </div>
+
+        <div class="academic-two-column">
+          <p>
+            The benchmark also records model complexity measures such as parameter count and floating-point operations (FLOPs), enabling detection performance to be considered alongside computational cost.
+          </p>
+        </div>
+
+        <!-- Algorithm 3.5: Multi-SNR Evaluation and GPU Inference Benchmarking -->
+        <div class="algorithm-card" style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.75); border: 1px solid var(--border-color); border-left: 4px solid #38bdf8; border-radius: var(--radius-sm); padding: 1.4rem 1.65rem;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.65rem;">
+            Algorithm 3.5: Multi-SNR Evaluation and GPU Inference Benchmarking
+          </div>
+          <div style="font-size: 0.88rem; color: #94a3b8; margin-bottom: 0.75rem;">
+            <strong>Input:</strong> Trained YOLOv9-C checkpoint (<code>best.pt</code>), test dataset partitioned into 6 calibrated SNR tiers.<br>
+            <strong>Output:</strong> SNR-stratified mAP trajectories, Table III reproduction metrics, single-frame latency distribution, and average FPS.
+          </div>
+          <p style="font-size: 0.88rem; font-weight: 700; color: #f8fafc; margin: 0.5rem 0 0.25rem 0;">Part A: Multi-SNR Stratified Accuracy Evaluation</p>
+          <ol style="padding-left: 1.35rem; font-size: 0.9rem; line-height: 1.6; color: #cbd5e1; margin: 0 0 0.75rem 0;">
+            <li>Load selected trained model checkpoint onto CUDA device.</li>
+            <li>Load held-out test dataset split.</li>
+            <li>For each SNR level $\mathrm{SNR} \in \{-20, -12, -4, +4, +12, +20\}	ext{ dB}$, isolate corresponding test frames.</li>
+            <li>Execute evaluation pass and compute precision, recall, $\mathrm{mAP}_{50}$, and $\mathrm{mAP}_{50:95}$.</li>
+            <li>Aggregate metrics across all test frames to compute overall benchmark scores.</li>
+            <li>Export performance comparison table and SNR accuracy curves.</li>
+          </ol>
+          <p style="font-size: 0.88rem; font-weight: 700; color: #f8fafc; margin: 0.5rem 0 0.25rem 0;">Part B: Single-Frame Inference Latency Profiling</p>
+          <ol style="padding-left: 1.35rem; font-size: 0.9rem; line-height: 1.6; color: #cbd5e1; margin: 0;">
+            <li>Initialise model in evaluation mode (<code>model.eval()</code>) and fix batch size to 1.</li>
+            <li>Execute 50 warm-up forward passes to prime GPU clocks, kernels, and memory caches.</li>
+            <li>Synchronise CUDA device (<code>torch.cuda.synchronize()</code>).</li>
+            <li>For $N = 300$ trials, record start CUDA event, execute single-frame forward pass, record end event.</li>
+            <li>Synchronise CUDA device and compute elapsed milliseconds per trial.</li>
+            <li>Compute statistical latency distribution: mean, median, 95th-percentile ($P_{95}$), and 99th-percentile ($P_{99}$).</li>
+            <li>Compute operational throughput: $\mathrm{FPS}_{\mathrm{avg}} = 1000 / \mathrm{Latency}_{\mathrm{mean}}(\mathrm{ms})$.</li>
+          </ol>
+        </div>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">3.4 Methodology for Resource-Efficiency Investigation</h3>
+        <div class="academic-two-column">
+          <p>
+            The two experimental tracks provide different settings in which computational efficiency can be studied. The resource-efficiency investigation is therefore designed to examine both the cost of the model and the hardware on which inference is executed.
+          </p>
+          <p>
+            Two complementary dimensions are considered:
+          </p>
+          <ol style="padding-left: 1.25rem; font-size: 0.925rem; line-height: 1.65; color: #cbd5e1; margin: 0 0 1rem 0;">
+            <li><strong>Algorithm-level efficiency:</strong> Reducing the computation or model capacity required to perform a radar detection task while retaining acceptable detection performance.</li>
+            <li><strong>Hardware-oriented efficiency:</strong> Understanding how the same model or alternative model architectures behave when executed on different processing platforms, particularly CPUs and GPUs.</li>
+          </ol>
+        </div>
+
+        <h4 style="margin-top: 1.75rem; margin-bottom: 0.75rem; color: #7dd3fc;">3.4.1 Candidate Algorithm-Level Approaches</h4>
+        <div class="academic-two-column">
+          <p>
+            The following methods are considered as candidate approaches for further investigation:
+          </p>
+          <ul style="padding-left: 1.25rem; font-size: 0.925rem; line-height: 1.68; color: #cbd5e1; margin: 0 0 1rem 0;">
+            <li style="margin-bottom: 0.5rem;"><strong>Lightweight architectures:</strong> Investigate smaller convolutional backbones and reduced channel configurations to decrease model parameters, operations, and memory requirements.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Pruning and quantisation:</strong> Explore the removal of redundant model weights and the use of lower-precision numerical representations (e.g., INT8 or FP16) to reduce model size and inference cost.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Knowledge distillation:</strong> Investigate whether a compact student model can learn useful representations from a higher-capacity teacher model, potentially reducing inference complexity.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Adaptive multi-resolution processing:</strong> Explore a cascaded approach in which a lower-resolution detector processes routine inputs, while more computationally expensive processing is used for uncertain or complex cases.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Conditional computation and early exit:</strong> Investigate whether inference can terminate at an intermediate network stage when the model has already produced a sufficiently confident prediction.</li>
+            <li><strong>Alternative learning strategies:</strong> Self-supervised representation learning and policy-based computation allocation may also be considered as exploratory extensions, depending on the outcomes and available computational resources.</li>
+          </ul>
+          <p>
+            These methods are not assumed to provide improvements in advance. Their suitability must be established experimentally for the selected radar task.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 1.75rem; margin-bottom: 0.75rem; color: #7dd3fc;">3.4.2 CPU and GPU Inference Comparison</h4>
+        <div class="academic-two-column">
+          <p>
+            A hardware-oriented evaluation is intended to examine whether radar detection models can execute effectively without relying exclusively on dedicated GPUs.
+          </p>
+          <p>
+            The comparison should use identical model weights and input samples wherever possible. Batch size, input resolution, numerical precision, preprocessing, and post-processing must also be recorded so that hardware comparisons are meaningful.
+          </p>
+          <p>
+            The proposed procedure consists of:
+          </p>
+          <ol style="padding-left: 1.25rem; font-size: 0.925rem; line-height: 1.65; color: #cbd5e1; margin: 0 0 1rem 0;">
+            <li>Establishing a native CPU inference baseline.</li>
+            <li>Measuring GPU inference for the same model and inputs.</li>
+            <li>Recording mean, median, and tail latency, together with throughput and memory consumption.</li>
+            <li>Investigating CPU optimisation approaches such as post-training quantisation and optimised inference runtimes.</li>
+            <li>Comparing the resulting accuracy, latency, and memory trade-offs.</li>
+          </ol>
+          <p>
+            Potential CPU execution routes include native PyTorch, ONNX Runtime, and OpenVINO. Quantised inference may also be investigated, with detection performance compared against the corresponding full-precision baseline.
+          </p>
+          <p>
+            At this stage, CPU-oriented deployment is treated as a proposed evaluation direction. The existing GPU benchmark does not establish CPU performance, and no CPU latency or memory improvement is assumed.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 1.75rem; margin-bottom: 0.75rem; color: #7dd3fc;">3.4.3 Computational Objective and Evaluation Criteria</h4>
+        <div class="academic-two-column">
+          <p>
+            The broader resource-efficiency problem can be formulated as a constrained optimisation objective. Let $f_	heta$ represent a detector parameterised by $	heta$, and let $\pi$ represent a possible computation-allocation or inference policy.
+          </p>
+          <p>
+            A candidate formulation is:
+          </p>
+        </div>
+
+        <div style="text-align: center; margin: 1.25rem 0;">
+          $$\min_{	heta,\pi} \mathbb{E}_{x \sim \mathcal{D}} \left[ C(x, \pi(x)) 
+ight]$$
+        </div>
+
+        <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin: 0.75rem 0; text-align: center;">
+          subject to
+        </p>
+
+        <div style="text-align: center; margin: 1rem 0;">
+          $$\mathrm{mAP}(f_	heta, \pi) \ge \mathrm{mAP}_{\mathrm{baseline}} - \epsilon$$
+        </div>
+
+        <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin: 0.75rem 0; text-align: center;">
+          and
+        </p>
+
+        <div style="text-align: center; margin: 1rem 0;">
+          $$\mathrm{Latency}_{P95}(f_	heta, \pi) \le 	au_{\max}$$
+        </div>
+
+        <div class="academic-two-column">
+          <p>
+            where:
+          </p>
+          <ul style="padding-left: 1.25rem; font-size: 0.925rem; line-height: 1.65; color: #cbd5e1; margin: 0 0 1rem 0;">
+            <li>$C(x,\pi(x))$ represents the computational cost associated with processing input $x$.</li>
+            <li>$\mathcal{D}$ denotes the evaluation data distribution.</li>
+            <li>$\epsilon$ specifies the acceptable loss in detection performance relative to a baseline.</li>
+            <li>$\mathrm{Latency}_{P95}$ denotes the 95th-percentile inference latency.</li>
+            <li>$	au_{\max}$ represents the application-specific latency constraint.</li>
+          </ul>
+          <p>
+            The formulation captures the central trade-off between detection quality and computational requirements. It also allows static model compression and input-dependent computation allocation to be considered within a common framework.
+          </p>
+          <p>
+            The evaluation is intended to report the dimensions summarised in Table 3.3.
+          </p>
+        </div>
+
+        <!-- Table 3.3: Evaluation Dimensions and Metrics -->
+        <div style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem; overflow-x: auto;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
+            Table 3.3: Evaluation Dimensions and Quantitative Measures
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1; max-width: 700px; margin: 0 auto;">
+            <thead>
+              <tr style="border-bottom: 2px solid #38bdf8; background: rgba(30, 41, 59, 0.6); text-align: left;">
+                <th style="padding: 8px 14px; color: #f8fafc; font-weight: 700;">Evaluation Dimension</th>
+                <th style="padding: 8px 14px; color: #f8fafc; font-weight: 700;">Measures</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Detection performance</td>
+                <td style="padding: 7px 14px;">Precision, recall, mAP<sub>50</sub>, mAP<sub>50:95</sub>, where applicable</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Model complexity</td>
+                <td style="padding: 7px 14px;">Number of parameters and FLOPs / MACs</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Runtime performance</td>
+                <td style="padding: 7px 14px;">Mean, median, P95/P99 latency and throughput (FPS)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Memory requirements</td>
+                <td style="padding: 7px 14px;">GPU memory (VRAM) or CPU RAM usage</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.1);">
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Robustness</td>
+                <td style="padding: 7px 14px;">Performance across different SNR conditions (-20 dB to +20 dB)</td>
+              </tr>
+              <tr>
+                <td style="padding: 7px 14px; font-weight: 600; color: #38bdf8;">Deployment feasibility</td>
+                <td style="padding: 7px 14px;">CPU/GPU compatibility and execution runtime requirements</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="font-size: 0.95rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 1.5rem;">
+          Metrics are selected according to the task. In particular, the detection measures obtained from the FMCW perception track are not combined with the RadDet spectrum-detection metrics.
+        </p>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">3.5 Summary of the Methodology</h3>
+        <div class="academic-two-column">
+          <p>
+            The methodology establishes two complementary experimental foundations for the study of AI in radar signal processing and detection. The synthetic FMCW track provides a controlled environment for examining conventional signal processing and learning-based spatial target detection. The RadDet track provides a wideband spectrum-detection setting in which a YOLO-based detector is trained and evaluated using modulation-labelled spectrograms.
+          </p>
+          <p>
+            The resource-efficiency investigation builds on these foundations by considering model-level computation reduction and hardware-oriented inference evaluation. The distinction between implemented experimental methods and proposed future investigations is maintained throughout. This provides a basis for selecting a technically feasible direction for subsequent work using measured detection performance and computational requirements.
+          </p>
+        </div>
       </section>
 
       <!-- ==================== DISTINGUISHING BOUNDARY DIVIDER ==================== -->
