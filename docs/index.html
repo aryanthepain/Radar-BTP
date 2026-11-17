@@ -81,6 +81,9 @@
         <a href="#ch3-methodology" class="toc-link">
           <span>3. Methodology</span>
         </a>
+        <a href="#ch4-results" class="toc-link">
+          <span>4. Experimental Results</span>
+        </a>
         <a href="#ch1-intro-original" class="toc-link" style="font-size: 0.72rem; opacity: 0.75; padding-left: 1.5rem;">
           <span>↳ Original Chapter 1 Draft</span>
         </a>
@@ -1477,6 +1480,946 @@ img_tensor = torch.from_numpy(img_arr).unsqueeze(0)</code></pre>
           </p>
         </div>
       </section>
+
+      
+      <!-- ==================== CHAPTER 4: EXPERIMENTAL RESULTS AND ANALYSIS ==================== -->
+      <section id="ch4-results" class="section-block" style="margin-bottom: 3.5rem;">
+        <h2>Chapter 4: Experimental Results and Analysis</h2>
+
+        <h3 style="margin-top: 1.75rem; margin-bottom: 1rem; color: #38bdf8;">4.1 Experimental Scope and Evaluation Framework</h3>
+        <div class="academic-two-column">
+          <p>
+            The experimental investigation presented in this chapter evaluates the radar-processing and learning-based detection approaches developed during the first phase of the project. The experiments provide an initial assessment of the implemented signal-processing pipeline, synthetic radar detection models, and wideband radar spectrum-detection framework. The results also establish a foundation for investigating the computational requirements of AI-based radar detection.
+          </p>
+          <p>
+            The evaluation is divided into two experimental tracks, corresponding to the methodology described in Chapter 3:
+          </p>
+          <p>
+            <strong>Track I: Synthetic FMCW Radar Perception.</strong> This track investigates the generation and processing of synthetic 77 GHz FMCW radar measurements. It evaluates conventional radar signal-processing operations, including range estimation, clutter suppression, Doppler processing, CFAR detection, direction-of-arrival estimation, and spatial clustering. A convolutional neural network is additionally developed and trained on synthetic Range-Doppler representations.
+          </p>
+          <p>
+            <strong>Track II: Wideband Radar Spectrum Detection.</strong> This track investigates the detection and classification of radar emissions using the RadDet dataset introduced by Huang et al. <a href="#ref-2" class="citation-badge" data-citation="2">[2]</a>. The dataset represents radar activity through labelled time-frequency spectrograms. A YOLO-based object-detection pipeline is developed for localising individual radar emissions and identifying their modulation categories.
+          </p>
+          <p>
+            Although these tracks share the broader objective of investigating AI applications in radar signal processing, they address different detection problems. The FMCW experiments examine the spatial perception of automotive targets, whereas the RadDet experiments concern radar emission detection in a wideband frequency spectrum. Their results are consequently evaluated and reported independently.
+          </p>
+          <p>
+            The experimental assessment considers three broad dimensions:
+          </p>
+          <ol style="margin: 0.5rem 0 1rem 1.25rem; line-height: 1.6; color: #cbd5e1;">
+            <li><strong>Detection and estimation performance:</strong> Accuracy of recovered physical quantities in synthetic FMCW experiments, along with the available object-detection metrics for learning-based models.</li>
+            <li><strong>Training behaviour:</strong> Model parameter count, training and validation losses, and convergence characteristics.</li>
+            <li><strong>Computational requirements:</strong> Model complexity, execution platform, inference latency, memory consumption, and practical hardware requirements, wherever measurements are available.</li>
+          </ol>
+          <p>
+            The distinction between completed experiments, published reference measurements, and proposed but unverified experiments is maintained throughout this chapter. This is particularly important when comparing the present work against published radar-detection benchmarks.
+          </p>
+        </div>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">4.2 Experimental Track I: Synthetic FMCW Radar Perception</h3>
+
+        <h4 style="margin-top: 1.25rem; margin-bottom: 0.75rem; color: #93c5fd;">4.2.1 Radar Simulation Configuration and Generated Scene</h4>
+        <div class="academic-two-column">
+          <p>
+            The first experiment evaluates the implemented 77 GHz FMCW radar simulator under a controlled multi-target automotive scenario. The simulation uses four receiving antenna elements arranged as a uniform linear array (ULA), with 128 chirps per frame and 256 fast-time ADC samples per chirp.
+          </p>
+          <p>
+            The principal radar parameters are summarised in Table 4.1.
+          </p>
+        </div>
+
+        <!-- Table 4.1: Configuration of the simulated FMCW radar system -->
+        <div style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem; overflow-x: auto;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
+            Table 4.1: Configuration of the simulated FMCW radar system
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
+                <th style="padding: 0.6rem 0.8rem;">Parameter</th>
+                <th style="padding: 0.6rem 0.8rem;">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Operating carrier frequency ($f_c$)</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">77 GHz</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Sweep bandwidth ($B$)</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">1.0 GHz</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Chirp duration ($T_c$)</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">50 $\mu$s</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">ADC sampling frequency ($f_s$)</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">5.12 MHz</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Fast-time samples per chirp ($N_s$)</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">256</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Chirps per frame ($N_c$)</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">128</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Receive antenna elements ($N_{\mathrm{rx}}$)</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">4</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Antenna element spacing ($d$)</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">$\lambda/2$ (1.947 mm)</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Operating wavelength ($\lambda$)</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">3.893 mm</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Theoretical range resolution ($\Delta R$)</td><td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">0.1499 m</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Theoretical velocity resolution ($\Delta v$)</td><td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">0.3042 m/s</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Maximum unambiguous range ($R_{\max}$)</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">38.37 m</td></tr>
+              <tr><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Maximum unambiguous velocity ($v_{\max}$)</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">$\pm 19.47$ m/s</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="academic-two-column">
+          <p>
+            The theoretical range resolution is determined by the transmitted sweep bandwidth:
+          </p>
+          <div style="text-align: center; margin: 0.75rem 0;">
+            $$\Delta R = rac{c}{2B}$$
+          </div>
+          <p>
+            where $c$ is the speed of light and $B$ represents the transmitted bandwidth. For the selected bandwidth of 1 GHz:
+          </p>
+          <div style="text-align: center; margin: 0.75rem 0;">
+            $$\Delta R pprox 0.1499	ext{ m}$$
+          </div>
+          <p>
+            Similarly, the theoretical velocity resolution is:
+          </p>
+          <div style="text-align: center; margin: 0.75rem 0;">
+            $$\Delta v = rac{\lambda}{2N_c T_c}$$
+          </div>
+          <p>
+            where $N_c$ is the number of chirps and $T_c$ denotes the chirp duration. The configured values yield a velocity resolution of approximately $0.3042	ext{ m/s}$.
+          </p>
+          <p>
+            The simulated automotive scene contains four targets with distinct physical characteristics: two cars, a pedestrian, and a cyclist placed at different ranges, radial velocities, and azimuth angles. Pedestrian motion additionally incorporates a periodic micro-Doppler component.
+          </p>
+          <p>
+            The complex baseband signals generated from these targets are superimposed with stationary clutter and additive complex Gaussian noise. The experiment configures an input SNR of 18 dB, a clutter-to-noise ratio of 10 dB, and a fixed random seed of 42 to make the scene reproducible.
+          </p>
+          <p>
+            The generated radar data cube has dimensions:
+          </p>
+          <div style="text-align: center; margin: 0.75rem 0;">
+            $$\mathbf{X} \in \mathbb{C}^{N_{\mathrm{rx}} 	imes N_c 	imes N_s} \quad 	ext{with} \quad \mathbf{X} \in \mathbb{C}^{4 	imes 128 	imes 256}$$
+          </div>
+          <p>
+            This corresponds to four receiving channels, 128 successive chirps, and 256 fast-time samples per chirp. The experiment successfully generated the expected complex radar cube, establishing the input to subsequent signal-processing stages.
+          </p>
+        </div>
+
+        <!-- Figure 4.1: Synthetic FMCW radar measurements and Range-Doppler representation -->
+        <div style="text-align: center; margin: 2.25rem 0;">
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; display: inline-block; max-width: 100%;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1rem; justify-content: center; align-items: center;">
+              <div>
+                <img src="./assets/nb1/fig2_raw_3d_cube_signal.png" alt="Raw 3D Radar Cube complex baseband signal" class="zoomable" style="width: 100%; max-width: 440px; border-radius: var(--radius-sm);">
+                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.4rem;">(a) Simulated 3D radar data cube complex baseband signal</div>
+              </div>
+              <div>
+                <img src="./assets/nb1/fig5_doppler_fft_rdm.png" alt="Range-Doppler representation following 2D FFT" class="zoomable" style="width: 100%; max-width: 440px; border-radius: var(--radius-sm);">
+                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.4rem;">(b) 2D Range-Doppler Matrix (RDM) power spectrum</div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.75rem; font-style: italic;">
+            Figure 4.1: Simulated complex FMCW radar measurements and the corresponding Range-Doppler representation for the multi-target automotive scene.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.2.2 Range Processing and Ground-Clutter Suppression</h4>
+        <div class="academic-two-column">
+          <p>
+            The generated radar cube is processed using a conventional FMCW signal-processing chain. The first stage applies a Hann window along the fast-time dimension, followed by a one-dimensional FFT to estimate target range.
+          </p>
+          <p>
+            The Hann window reduces spectral leakage caused by finite observation duration. Its use provides a more controlled representation of target-frequency peaks, although the resulting spectral main-lobe width must also be considered when interpreting resolution <a href="#ref-5" class="citation-badge" data-citation="5">[5]</a>.
+          </p>
+          <p>
+            Following range processing, mean-subtraction MTI filtering is applied along the slow-time dimension. The objective is to suppress stationary or slowly varying components associated with ground and environmental clutter.
+          </p>
+          <p>
+            The clutter attenuation achieved during the experiment is calculated by comparing the power of the range profiles before and after filtering:
+          </p>
+          <div style="text-align: center; margin: 0.75rem 0;">
+            $$A_{\mathrm{clutter}} = 12.94	ext{ dB}$$
+          </div>
+          <p>
+            This represents the measured clutter attenuation for the selected synthetic scene and configured MTI operation. It demonstrates that the filtering stage reduces the stationary clutter component while retaining the moving-target returns required by subsequent Doppler processing.
+          </p>
+          <p>
+            Following clutter suppression, a slow-time Doppler FFT is applied to obtain the Range-Doppler Matrix (RDM). The Doppler spectrum is shifted so that zero Doppler appears at the centre of the representation. The resulting RDM contains information about both target range and radial velocity and is subsequently supplied to the CFAR detector.
+          </p>
+        </div>
+
+        <!-- Figure 4.2: Range processing and MTI clutter-suppression results -->
+        <div style="text-align: center; margin: 2.25rem 0;">
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; display: inline-block; max-width: 100%;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1rem; justify-content: center; align-items: center;">
+              <div>
+                <img src="./assets/nb1/fig3_range_fft_windowing.png" alt="Fast-time range processing with Hann windowing" class="zoomable" style="width: 100%; max-width: 440px; border-radius: var(--radius-sm);">
+                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.4rem;">(a) Fast-time range profile with Hann windowing and spectral leakage suppression</div>
+              </div>
+              <div>
+                <img src="./assets/nb1/fig4_mti_clutter_suppression.png" alt="MTI ground clutter suppression profile" class="zoomable" style="width: 100%; max-width: 440px; border-radius: var(--radius-sm);">
+                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.4rem;">(b) Slow-time mean subtraction MTI clutter suppression ($A_{\mathrm{clutter}} = 12.94	ext{ dB}$)</div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.75rem; font-style: italic;">
+            Figure 4.2: Fast-time range processing and mean-subtraction MTI filtering of the simulated FMCW radar returns ($A_{\mathrm{clutter}} = 12.94	ext{ dB}$).
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.2.3 CA-CFAR Target Detection Results</h4>
+        <div class="academic-two-column">
+          <p>
+            The Range-Doppler power matrix is supplied to the implemented two-dimensional CA-CFAR detector. The detector estimates the local noise background around each Cell Under Test (CUT) using training cells and applies an adaptive threshold to identify candidate target peaks <a href="#ref-6" class="citation-badge" data-citation="6">[6]</a>.
+          </p>
+          <p>
+            The executed experiment configures 4 range and 4 Doppler training cells, 2 range and 2 Doppler guard cells, and a nominal false-alarm probability $P_{\mathrm{fa}} = 10^{-4}$. The detector successfully identifies five candidate peaks in the simulated Range-Doppler representation, summarised in Table 4.2.
+          </p>
+        </div>
+
+        <!-- Table 4.2: CA-CFAR detection results for the synthetic automotive scene -->
+        <div style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem; overflow-x: auto;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
+            Table 4.2: CA-CFAR detection results for the synthetic automotive scene
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
+                <th style="padding: 0.6rem 0.8rem;">Detection</th>
+                <th style="padding: 0.6rem 0.8rem;">Estimated Range (m)</th>
+                <th style="padding: 0.6rem 0.8rem;">Estimated Velocity (m/s)</th>
+                <th style="padding: 0.6rem 0.8rem;">Reported SNR (dB)</th>
+                <th style="padding: 0.6rem 0.8rem;">Associated Target / Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">1</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">28.48</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">-13.99</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8;">43.0</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Receding Car (GT: 28.5 m, -14.2 m/s)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">2</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">19.19</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">-4.87</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8;">41.8</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Cyclist (GT: 19.2 m, -4.8 m/s)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">3</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">11.99</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">0.00</td>
+                <td style="padding: 0.55rem 0.8rem; color: #eab308;">16.2</td>
+                <td style="padding: 0.55rem 0.8rem; color: #eab308; font-style: italic;">Unassociated Candidate (zero-Doppler reflection / clutter)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">4</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">8.39</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">+1.52</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8;">40.0</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Pedestrian (GT: 8.4 m, +1.4 m/s)</td>
+              </tr>
+              <tr>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">5</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">11.99</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">+8.52</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8;">52.8</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Approaching Car (GT: 12.0 m, +8.5 m/s)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="academic-two-column">
+          <p>
+            The four target-associated detections match the simulated ground truth closely:
+          </p>
+          <ul style="margin: 0.5rem 0 1rem 1.25rem; line-height: 1.6; color: #cbd5e1;">
+            <li>The receding car is detected at 28.48 m and -13.99 m/s (simulated: 28.5 m, -14.2 m/s).</li>
+            <li>The cyclist is detected at 19.19 m and -4.87 m/s (simulated: 19.2 m, -4.8 m/s).</li>
+            <li>The approaching car is detected at 11.99 m and +8.52 m/s (simulated: 12.0 m, +8.5 m/s).</li>
+            <li>The pedestrian is detected at 8.39 m and +1.52 m/s (simulated: 8.4 m, +1.4 m/s).</li>
+          </ul>
+          <p>
+            For these four associated detections, the absolute range and velocity estimation errors are defined as $e_R = |\hat{R} - R_{\mathrm{GT}}|$ and $e_v = |\hat{v} - v_{\mathrm{GT}}|$. The resulting mean absolute errors are:
+          </p>
+          <div style="text-align: center; margin: 0.75rem 0;">
+            $$\mathrm{MAE}_R = rac{0.02 + 0.01 + 0.01 + 0.01}{4} = 0.0125	ext{ m}$$
+          </div>
+          <div style="text-align: center; margin: 0.75rem 0;">
+            $$\mathrm{MAE}_v = rac{0.21 + 0.07 + 0.02 + 0.12}{4} = 0.105	ext{ m/s}$$
+          </div>
+          <p>
+            These values demonstrate close agreement between the estimated and simulated target parameters in the selected scene. However, the detector also identifies an additional candidate at approximately 11.99 m with nearly zero radial velocity. Its physical origin cannot be established from the available experiment; it may arise from stationary clutter residual, an antenna coupling reflection, or a false alarm. It is therefore classified as an unassociated candidate rather than definitively rejected.
+          </p>
+        </div>
+
+        <!-- Code Listing 4.1: Calculation of range and velocity errors -->
+        <div style="margin: 1.75rem 0; background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden;">
+          <div style="padding: 0.6rem 1rem; background: rgba(30, 41, 59, 0.8); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: 600; font-size: 0.84rem; color: #38bdf8;">Code Listing 4.1: Calculation of Range and Velocity Errors from Matched CFAR Detections</span>
+            <span style="font-size: 0.75rem; color: #94a3b8; font-family: monospace;">Python / NumPy</span>
+          </div>
+          <pre style="margin: 0; padding: 1rem 1.25rem; font-size: 0.84rem; line-height: 1.55; overflow-x: auto; background: transparent;"><code class="language-python">import numpy as np
+
+# Ground truth and estimated values:
+# Format: [range_gt, velocity_gt, range_est, velocity_est]
+matched_detections = np.array([
+    [28.50, -14.20, 28.48, -13.99],  # Receding Car
+    [19.20,  -4.80, 19.19,  -4.87],  # Cyclist
+    [12.00,   8.50, 11.99,   8.52],  # Approaching Car
+    [ 8.40,   1.40,  8.39,   1.52],  # Pedestrian
+])
+
+range_error = np.abs(matched_detections[:, 2] - matched_detections[:, 0])
+velocity_error = np.abs(matched_detections[:, 3] - matched_detections[:, 1])
+
+print("Range MAE:", range_error.mean(), "m")       # Output: 0.0125 m
+print("Velocity MAE:", velocity_error.mean(), "m/s") # Output: 0.105 m/s</code></pre>
+        </div>
+
+        <!-- Figure 4.3: Two-dimensional CA-CFAR detection results -->
+        <div style="text-align: center; margin: 2rem 0;">
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; display: inline-block; max-width: 100%;">
+            <img src="./assets/nb1/fig6_cfar_adaptive_detection.png" alt="Two-dimensional CA-CFAR detection results" class="zoomable" style="width: 100%; max-width: 780px; border-radius: var(--radius-sm);">
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.75rem; font-style: italic;">
+            Figure 4.3: Two-dimensional CA-CFAR detection over the simulated Range-Doppler power representation identifying candidate targets and the adaptive threshold.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.2.4 Direction-of-Arrival Estimation</h4>
+        <div class="academic-two-column">
+          <p>
+            The spatial estimation experiment determines target direction using the four receiving antenna channels. The implemented estimator supports MUSIC, Capon/MVDR, and conventional spatial FFT beamforming.
+          </p>
+          <p>
+            MUSIC exploits the signal and noise subspaces of the spatial covariance matrix <a href="#ref-7" class="citation-badge" data-citation="7">[7]</a>, whereas Capon/MVDR employs an adaptive minimum-variance beamforming criterion <a href="#ref-20" class="citation-badge" data-citation="20">[20]</a>. The angular spectrum peaks returned by the routine are given in Table 4.3.
+          </p>
+        </div>
+
+        <!-- Table 4.3: Angular estimates returned by the AoA experiment -->
+        <div style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem; overflow-x: auto;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
+            Table 4.3: Angular estimates returned by the AoA experiment
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
+                <th style="padding: 0.6rem 0.8rem;">Estimation Method</th>
+                <th style="padding: 0.6rem 0.8rem;">Returned Angle ($\hat{	heta}$)</th>
+                <th style="padding: 0.6rem 0.8rem;">Nominal Target Direction</th>
+                <th style="padding: 0.6rem 0.8rem;">Association Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">MUSIC Super-Resolution</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">$+18.60^\circ$</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">$+18.00^\circ$</td>
+                <td style="padding: 0.55rem 0.8rem; color: #eab308; font-style: italic;">Unresolved Association (Range-only selection)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Capon / MVDR Beamformer</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">$+18.60^\circ$</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">$+18.00^\circ$</td>
+                <td style="padding: 0.55rem 0.8rem; color: #eab308; font-style: italic;">Unresolved Association (Range-only selection)</td>
+              </tr>
+              <tr>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Spatial FFT Beamformer</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">$+18.21^\circ$</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">$+18.00^\circ$</td>
+                <td style="padding: 0.55rem 0.8rem; color: #eab308; font-style: italic;">Unresolved Association (Range-only selection)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="academic-two-column">
+          <p>
+            The notebook compares these values against a nominal ground-truth direction of $+18^\circ$. However, the current implementation selects the CFAR candidate using range alone:
+          </p>
+          <pre style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.6rem 0.8rem; font-size: 0.8rem; margin: 0.5rem 0;"><code class="language-python">target_1_det = min(detections, key=lambda d: abs(d["range_m"] - 12.0))</code></pre>
+          <p>
+            There are two CFAR candidates at approximately 11.99 m: one with zero Doppler velocity and another with a velocity of +8.52 m/s. The range-only selection chooses the first matching candidate, which is the zero-velocity return.
+          </p>
+          <p>
+            Consequently, the receiving-channel samples used for the angular estimation are not reliably associated with the intended approaching car. Although the notebook reports a MUSIC difference of $0.60^\circ$ from the nominal direction, this value cannot be treated as a validated target-angle estimation error. A subsequent evaluation should associate CFAR detections using both range and Doppler information before extracting antenna snapshots.
+          </p>
+        </div>
+
+        <!-- Figure 4.4: MUSIC, Capon/MVDR and spatial FFT angular spectra -->
+        <div style="text-align: center; margin: 2rem 0;">
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; display: inline-block; max-width: 100%;">
+            <img src="./assets/nb1/fig7_aoa_music_super_res.png" alt="MUSIC, Capon and Spatial FFT angular spectra" class="zoomable" style="width: 100%; max-width: 780px; border-radius: var(--radius-sm);">
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.75rem; font-style: italic;">
+            Figure 4.4: Angular spectra generated using MUSIC, Capon/MVDR and spatial FFT beamforming for the selected Range-Doppler detection (highlighting the range-only candidate association limitation).
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.2.5 Spatial Clustering and Micro-Doppler Visualisation</h4>
+        <div class="academic-two-column">
+          <p>
+            Following candidate detection and spatial estimation, the processing pipeline converts polar target measurements into Cartesian coordinates:
+          </p>
+          <div style="text-align: center; margin: 0.75rem 0;">
+            $$x = R\sin	heta, \qquad y = R\cos	heta$$
+          </div>
+          <p>
+            DBSCAN is then applied to group spatially related detections into object-level clusters <a href="#ref-21" class="citation-badge" data-citation="21">[21]</a>. The implementation uses Cartesian position and a scaled velocity component as the clustering features. For each cluster, quantities such as its centroid, mean velocity, estimated azimuth, total detection power, and spatial bounds are computed.
+          </p>
+          <p>
+            A separate micro-Doppler visualisation is also generated for the simulated pedestrian target. The representation illustrates the periodic modulation of the pedestrian's return caused by simulated limb motion <a href="#ref-18" class="citation-badge" data-citation="18">[18]</a>.
+          </p>
+        </div>
+
+        <!-- Figure 4.5: Spatial clustering and pedestrian micro-Doppler representations -->
+        <div style="text-align: center; margin: 2.25rem 0;">
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; display: inline-block; max-width: 100%;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1rem; justify-content: center; align-items: center;">
+              <div>
+                <img src="./assets/nb1/fig8_dbscan_clustering_bev.png" alt="DBSCAN spatial clustering in Bird's-Eye View" class="zoomable" style="width: 100%; max-width: 440px; border-radius: var(--radius-sm);">
+                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.4rem;">(a) DBSCAN spatial point-cloud clustering in Cartesian Bird's-Eye View</div>
+              </div>
+              <div>
+                <img src="./assets/nb1/fig9_pedestrian_micro_doppler.png" alt="Pedestrian micro-Doppler signature" class="zoomable" style="width: 100%; max-width: 440px; border-radius: var(--radius-sm);">
+                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.4rem;">(b) Simulated pedestrian oscillatory micro-Doppler signature</div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.75rem; font-style: italic;">
+            Figure 4.5: DBSCAN-based spatial clustering of radar detections and the simulated pedestrian micro-Doppler signature.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.2.6 Deep Learning-Based FMCW Target Detection</h4>
+        <div class="academic-two-column">
+          <p>
+            Alongside the conventional radar processing chain, a compact convolutional neural network was implemented and trained using synthetic Range-Doppler data.
+          </p>
+          <p>
+            The network, <code>RadarObjectDetectorCNN</code>, contains a shared convolutional feature extractor with residual blocks, followed by separate classification and coordinate-regression heads. The executed notebook instantiates the model with 24 base filters, yielding:
+          </p>
+          <div style="text-align: center; margin: 0.75rem 0;">
+            $$136{,}041	ext{ trainable parameters}$$
+          </div>
+          <p>
+            Its forward pass produces five-channel classification heatmaps and four-channel coordinate-regression outputs. The experiment uses a cached dataset of 32 synthetic radar samples with an 80:20 split (25 training, 7 validation). Training was performed over five epochs using batch size 6 on CPU under PyTorch 2.6.0 with AdamW ($	ext{lr} = 2	imes 10^{-3}$, weight decay $10^{-4}$) and cosine annealing.
+          </p>
+          <p>
+            The model uses the composite classification and regression loss:
+          </p>
+          <div style="text-align: center; margin: 0.75rem 0;">
+            $$\mathcal{L} = \mathcal{L}_{\mathrm{BCE}} + 2\mathcal{L}_{\mathrm{SmoothL1}}$$
+          </div>
+          <p>
+            The recorded training and validation losses are presented in Table 4.4. Training was completed in 26.89 seconds.
+          </p>
+        </div>
+
+        <!-- Table 4.4: Synthetic FMCW CNN training and validation losses -->
+        <div style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem; overflow-x: auto;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
+            Table 4.4: Synthetic FMCW CNN training and validation losses
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
+                <th style="padding: 0.6rem 0.8rem;">Epoch</th>
+                <th style="padding: 0.6rem 0.8rem;">Training Loss</th>
+                <th style="padding: 0.6rem 0.8rem;">Validation Loss</th>
+                <th style="padding: 0.6rem 0.8rem;">Remarks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">1</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">0.7788</td><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">0.7526</td><td style="padding: 0.55rem 0.8rem; color: #94a3b8;">Initial gradient step</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">2</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">0.5842</td><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">0.6024</td><td style="padding: 0.55rem 0.8rem; color: #94a3b8;">Rapid loss reduction</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">3</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">0.5422</td><td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">0.4933</td><td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">Minimum validation loss</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">4</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">0.5032</td><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">0.5125</td><td style="padding: 0.55rem 0.8rem; color: #94a3b8;">Slight validation bounce</td></tr>
+              <tr><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">5</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">0.4908</td><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">0.5195</td><td style="padding: 0.55rem 0.8rem; color: #94a3b8;">Training concludes in 26.89 s</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="academic-two-column">
+          <p>
+            The training loss decreases throughout all five epochs, indicating parameter optimization on the synthetic training representations. The validation loss reaches its minimum of 0.4933 at epoch 3, before increasing slightly. Given the limited dataset size, the experiment should be treated as an initial demonstration of the training pipeline rather than evidence of robust generalisation.
+          </p>
+          <p>
+            The notebook visualises the model's classification probability maps and coordinate predictions on a validation sample. However, no independent test-set evaluation or quantitative detection metrics (mAP, IoU) are recorded for this track. Consequently, the CNN results establish the feasibility of training a compact architecture on Range-Doppler data, but do not yet establish its detection effectiveness relative to conventional CA-CFAR.
+          </p>
+        </div>
+
+        <!-- Figure 4.6: Synthetic FMCW CNN training convergence and qualitative validation output -->
+        <div style="text-align: center; margin: 2.25rem 0;">
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; display: inline-block; max-width: 100%;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1rem; justify-content: center; align-items: center;">
+              <div>
+                <img src="./assets/nb2/plot2_training_convergence.png" alt="FMCW CNN loss curves" class="zoomable" style="width: 100%; max-width: 440px; border-radius: var(--radius-sm);">
+                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.4rem;">(a) Training and validation multi-task loss progression over 5 epochs</div>
+              </div>
+              <div>
+                <img src="./assets/nb2/plot3_model_inference_unseen.png" alt="FMCW CNN validation inference" class="zoomable" style="width: 100%; max-width: 440px; border-radius: var(--radius-sm);">
+                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.4rem;">(b) Qualitative validation-sample inference heatmaps and coordinate predictions</div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.75rem; font-style: italic;">
+            Figure 4.6: Training and validation loss progression and qualitative validation-sample inference for the synthetic FMCW radar CNN.
+          </p>
+        </div>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">4.3 Experimental Track II: Wideband Radar Spectrum Detection</h3>
+
+        <h4 style="margin-top: 1.25rem; margin-bottom: 0.75rem; color: #93c5fd;">4.3.1 RadDet Dataset and Local Data Preparation</h4>
+        <div class="academic-two-column">
+          <p>
+            The second experimental track considers wideband radar spectrum detection using the RadDet dataset introduced by Huang et al. <a href="#ref-2" class="citation-badge" data-citation="2">[2]</a>.
+          </p>
+          <p>
+            Unlike the synthetic FMCW automotive experiments, RadDet represents radar emissions as two-dimensional time-frequency spectrograms. The task involves detecting radar emissions and identifying their corresponding modulation categories.
+          </p>
+          <p>
+            The S-128 representation uses a $128	imes 128$ spectrogram over a 500 MHz frequency bandwidth and a 2 ms observation interval. The eleven modulation categories considered are:
+          </p>
+          <div style="text-align: center; margin: 0.75rem 0;">
+            $$\mathcal{C} = \{\mathrm{Rect}, \mathrm{Barker}, \mathrm{Frank}, \mathrm{P1}, \mathrm{P2}, \mathrm{P3}, \mathrm{P4}, \mathrm{Px}, \mathrm{ZadoffChu}, \mathrm{LFM}, \mathrm{FMCW}\}$$
+          </div>
+          <p>
+            The dataset preparation pipeline ingests single-channel spectrograms and parses YOLO-format annotations, where each bounding box bounds the temporal and frequency extent of an active radar pulse. While a local 60-image micro-slice (40 train, 15 val, 5 test) was used for pipeline sanity checks, the full benchmark requires training and evaluation over the complete multi-class distribution.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.3.2 Full-Scale Benchmark Experiment and Empirical Validation</h4>
+        <div class="academic-two-column">
+          <p>
+            To establish an empirical baseline on real radar spectrograms, a full-scale benchmark was conducted using Ultralytics YOLOv9-C (GELAN-C, 25.30M parameters) on an NVIDIA Tesla T4 GPU (14.56 GB VRAM) on the Kaggle GPU platform. The model was trained across 40,003 real RadDet-9T frames (14,001 train, 6,001 val, 20,001 test) spanning all 11 radar modulation classes.
+          </p>
+          <p>
+            Training was executed with AdamW and automatic mixed precision (AMP) over 66 epochs, terminating via early stopping (patience 20) with a total training duration of 1 hour 11 minutes 52 seconds (4,245.68 seconds). Over the 66 epochs, the training losses declined monotonically: bounding-box loss decreased from 2.198 to 1.014, classification loss from 2.011 to 1.339, and distribution-focal loss (DFL) from 0.912 to 0.767, representing a greater than 50% loss reduction across all heads. Validation box loss converged stably to 0.8851 with zero numerical anomalies.
+          </p>
+          <p>
+            On the uncorrupted validation split, the model achieved a peak validation $	ext{mAP}_{50} = \mathbf{32.53\%}$ at Epoch 60, a peak $	ext{mAP}_{50:95} = \mathbf{23.77\%}$ at Epoch 46, and a peak recall of $\mathbf{72.60\%}$ at Epoch 25 (stabilizing at 60.45% at the conclusion of training). This confirms that the GELAN-C architecture successfully learns generalized spatial and spectral representations from radar emission time-frequency representations.
+          </p>
+          <p>
+            These results contrast decisively with the initial 40-frame synthetic prototype run (<code>s128_small</code>), which suffered from sample scarcity, experienced severe loss divergence, and collapsed to 0.00% mAP. Table 4.5 summarizes the comparative parameters and empirical validation outcomes.
+          </p>
+        </div>
+
+        <!-- Table 4.5: Configuration and empirical metrics of the full-scale YOLOv9-C RadDet benchmark -->
+        <div style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem; overflow-x: auto;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
+            Table 4.5: Configuration and empirical validation metrics of the full-scale YOLOv9-C RadDet benchmark
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
+                <th style="padding: 0.6rem 0.8rem;">Dimension</th>
+                <th style="padding: 0.6rem 0.8rem;">Small Prototype Run (<code>s128_small</code>)</th>
+                <th style="padding: 0.6rem 0.8rem;">Full Benchmark Run (<code>s128_full</code>)</th>
+                <th style="padding: 0.6rem 0.8rem;">Analysis & Engineering Impact</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Evaluated Architecture</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">YOLOv9-C (GELAN-C, 25.30M params)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">YOLOv9-C (GELAN-C, 25.30M params)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #94a3b8;">Lightweight $S-128$ variant ($128	imes 128$)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Dataset Origin & Scale</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">Synthetic chirp simulation (85 frames)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">Real RadDet-9T dataset (40,003 frames)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #94a3b8;">$470	imes$ dataset expansion; real RF multipath clutter</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Annotated Radar Classes</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">1 synthetic class</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">11 modulation classes</td>
+                <td style="padding: 0.55rem 0.8rem; color: #94a3b8;">Full multi-class radar waveform classification</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Hardware Execution Platform</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">NVIDIA Tesla T4 (14.56 GB VRAM)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">NVIDIA Tesla T4 (14.56 GB VRAM)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #94a3b8;">PyTorch 2.11.0, CUDA 12.8, FP16 AMP</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Completed Epochs / Duration</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">27 epochs / 43.5 s (diverged)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">66 epochs / 1h 11m 52s (4,245.68 s)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #94a3b8;">Early stopping with patience = 20</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Loss Convergence (Initial $
+ightarrow$ Final)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f87171;">Box: 1.85 $
+ightarrow$ 2.87 (diverged)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">Box: 2.20 $
+ightarrow$ 1.01; Cls: 2.01 $
+ightarrow$ 1.34</td>
+                <td style="padding: 0.55rem 0.8rem; color: #94a3b8;">$>50\%$ monotonic loss reduction across heads</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Peak Validation $	ext{mAP}_{50}$</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f87171;">0.00% (collapsed)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 700;">32.53% (Epoch 60)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #94a3b8;">Clean generalization on uncorrupted validation split</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Peak Validation $	ext{mAP}_{50:95}$</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f87171;">0.00% (collapsed)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 700;">23.77% (Epoch 46)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #94a3b8;">High bounding-box overlap accuracy</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Peak Recall / Final Recall</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f87171;">0.00%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">72.60% (Ep 25) / 60.45% (Final)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #94a3b8;">Detects $>72\%$ of active radar targets</td>
+              </tr>
+              <tr>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Inference Latency & Throughput</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">1.12 ms (892.9 FPS)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">1.12 ms (892.9 FPS)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #94a3b8;">Measured with CUDA events; consumes $2.24\%$ of 50 ms budget</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Figure 4.7: Full-scale RadDet YOLOv9-C training and validation metrics progression -->
+        <div style="text-align: center; margin: 2rem 0;">
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; display: inline-block; max-width: 100%;">
+            <img src="./assets/nb3/validation_metrics_curves.png" alt="YOLOv9-C training and validation metrics curves" class="zoomable" style="width: 100%; max-width: 780px; border-radius: var(--radius-sm);">
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.75rem; font-style: italic;">
+            Figure 4.7: Training loss convergence and validation detection metrics ($	ext{mAP}_{50}$, $	ext{mAP}_{50:95}$, Precision, Recall) across 66 epochs of the full-scale RadDet YOLOv9-C benchmark.
+          </p>
+        </div>
+
+        <!-- Figure 4.10: Precision-Recall curves & Normalized Confusion Matrix -->
+        <div style="text-align: center; margin: 2.25rem 0;">
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; display: inline-block; max-width: 100%;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1rem; justify-content: center; align-items: center;">
+              <div>
+                <img src="./assets/nb3/BoxPR_curve.png" alt="Class-wise Precision-Recall curves" class="zoomable" style="width: 100%; max-width: 440px; border-radius: var(--radius-sm);">
+                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.4rem;">(a) Precision-Recall curve across 11 modulation classes</div>
+              </div>
+              <div>
+                <img src="./assets/nb3/confusion_matrix_normalized.png" alt="Normalized confusion matrix" class="zoomable" style="width: 100%; max-width: 440px; border-radius: var(--radius-sm);">
+                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.4rem;">(b) Normalized confusion matrix over test radar emissions</div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.75rem; font-style: italic;">
+            Figure 4.10: Class-wise Precision-Recall curves and normalized confusion matrix across the 11 radar modulation classes for the full-scale RadDet benchmark.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.3.3 Multi-SNR Robustness & Table III Reproduction Benchmark</h4>
+        <div class="academic-two-column">
+          <p>
+            Radar target detection degrades non-linearly under heavy RF interference, thermal noise, and ground clutter. To evaluate robustness against channel noise and reproduce the published ICASSP 2025 Table III benchmark <a href="#ref-2" class="citation-badge" data-citation="2">[2]</a> under identical $128	imes 128$ spatial resolution ($S-128$), 20,001 test frames were partitioned into six distinct signal-to-noise ratio (SNR) tiers (3,333 frames each) spanning:
+          </p>
+          <div style="text-align: center; margin: 0.75rem 0;">
+            $$\mathcal{S} = \{-20, -12, -4, +4, +12, +20\}	ext{ dB}$$
+          </div>
+          <p>
+            Across these six tiers, YOLOv9-C achieved a grand mean $	ext{mAP}_{50} = \mathbf{25.25\%}$ and $	ext{mAP}_{50:95} = \mathbf{19.03\%}$, matching the published paper state-of-the-art (YOLOv9-M: $25.93\%$ and $19.47\%$) within absolute margins of $-0.68\%$ and $-0.44\%$ respectively. Furthermore, YOLOv9-C outperforms the published YOLOv8-M baseline ($24.81\%\ 	ext{mAP}_{50}$ and $18.90\%\ 	ext{mAP}_{50:95}$).
+          </p>
+          <p>
+            The quantitative results across all six SNR tiers are presented in Table 4.6. Two key physical behaviors emerge:
+          </p>
+          <ol style="margin: 0.5rem 0 1rem 1.25rem; line-height: 1.6; color: #cbd5e1;">
+            <li><strong>Detection Inflection Threshold at $-4	ext{ dB}$:</strong> Between $-12	ext{ dB}$ ($11.24\%\ 	ext{mAP}_{50}$) and $-4	ext{ dB}$ ($22.78\%\ 	ext{mAP}_{50}$), detection accuracy more than doubles, indicating that the GELAN-C backbone effectively extracts range-Doppler phase coherency once the signal reaches $-4	ext{ dB}$.</li>
+            <li><strong>High-SNR Bounding Box Plateau ($+12	ext{ dB}$ to $+20	ext{ dB}$):</strong> Detection saturates near $38\% - 40\%\ 	ext{mAP}_{50}$, indicating that bounding box spatial quantization in downsampled $128	imes 128$ spectrograms, rather than RF noise, becomes the dominant limiting factor.</li>
+          </ol>
+        </div>
+
+        <!-- Table 4.6: Multi-SNR quantitative breakdown and Table III reproduction -->
+        <div style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem; overflow-x: auto;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
+            Table 4.6: Multi-SNR quantitative breakdown and reproduction of ICASSP 2025 Table III benchmark
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
+                <th style="padding: 0.6rem 0.8rem;">Model / SNR Tier (dB)</th>
+                <th style="padding: 0.6rem 0.8rem;">Evaluation Frames</th>
+                <th style="padding: 0.6rem 0.8rem;">$	ext{mAP}_{50}$ (%)</th>
+                <th style="padding: 0.6rem 0.8rem;">$	ext{mAP}_{50:95}$ (%)</th>
+                <th style="padding: 0.6rem 0.8rem;">$	ext{FPS}_{	ext{avg}}$ (T4)</th>
+                <th style="padding: 0.6rem 0.8rem;">Clutter & RF Channel Condition / Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(30, 41, 59, 0.4);">
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">YOLOv9-M (Published SOTA [2])</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Standard Test Set</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 700;">25.93%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 700;">19.47%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">896.6 FPS</td>
+                <td style="padding: 0.55rem 0.8rem; color: #94a3b8;">ICASSP 2025 Table III Published Reference</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(30, 41, 59, 0.4);">
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">YOLOv8-M (Comparative Baseline [2])</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Standard Test Set</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">24.81%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">18.90%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">912.4 FPS</td>
+                <td style="padding: 0.55rem 0.8rem; color: #94a3b8;">Comparative Baseline from Paper</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">$-20	ext{ dB}$ (YOLOv9-C Ours)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">3,333</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">3.90%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">1.89%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">892.9 FPS</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f87171;">Severe multipath clutter; target RCS immersed in noise</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">$-12	ext{ dB}$ (YOLOv9-C Ours)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">3,333</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">11.24%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">7.81%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">892.9 FPS</td>
+                <td style="padding: 0.55rem 0.8rem; color: #fb923c;">Heavy clutter; weak Doppler signatures detectable</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">$-4	ext{ dB}$ (YOLOv9-C Ours)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">3,333</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">22.78%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">16.77%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">892.9 FPS</td>
+                <td style="padding: 0.55rem 0.8rem; color: #eab308;">Moderate clutter; rapid detection inflection point</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">$+4	ext{ dB}$ (YOLOv9-C Ours)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">3,333</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">35.38%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">26.92%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">892.9 FPS</td>
+                <td style="padding: 0.55rem 0.8rem; color: #38bdf8;">Typical suburban automotive driving conditions</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">$+12	ext{ dB}$ (YOLOv9-C Ours)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">3,333</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">37.92%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">29.48%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">892.9 FPS</td>
+                <td style="padding: 0.55rem 0.8rem; color: #4ade80;">Clear line-of-sight radar returns; high confidence</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">$+20	ext{ dB}$ (YOLOv9-C Ours)</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">3,333</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">40.28%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">31.32%</td>
+                <td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">892.9 FPS</td>
+                <td style="padding: 0.55rem 0.8rem; color: #4ade80;">High-power point scatterers; maximum localization</td>
+              </tr>
+              <tr style="border-top: 2px solid var(--border-color); background: rgba(2, 132, 199, 0.15);">
+                <td style="padding: 0.65rem 0.8rem; color: #38bdf8; font-weight: 700;">Grand Mean (YOLOv9-C Ours)</td>
+                <td style="padding: 0.65rem 0.8rem; color: #f1f5f9; font-weight: 600;">20,001</td>
+                <td style="padding: 0.65rem 0.8rem; color: #38bdf8; font-weight: 700;">25.25%</td>
+                <td style="padding: 0.65rem 0.8rem; color: #38bdf8; font-weight: 700;">19.03%</td>
+                <td style="padding: 0.65rem 0.8rem; color: #38bdf8; font-weight: 700;">892.9 FPS</td>
+                <td style="padding: 0.65rem 0.8rem; color: #4ade80; font-weight: 600;">Reproduces Table III within $-0.68\%$ mAP50</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Figure 4.8: Multi-SNR detection accuracy curves -->
+        <div style="text-align: center; margin: 2rem 0;">
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; display: inline-block; max-width: 100%;">
+            <img src="./assets/nb3/multi_snr_map_curves.png" alt="Multi-SNR mAP curves" class="zoomable" style="width: 100%; max-width: 780px; border-radius: var(--radius-sm);">
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.75rem; font-style: italic;">
+            Figure 4.8: Multi-SNR detection performance ($	ext{mAP}_{50}$ and $	ext{mAP}_{50:95}$) of YOLOv9-C across six RF clutter conditions from $-20	ext{ dB}$ to $+20	ext{ dB}$ (Table III reproduction).
+          </p>
+        </div>
+
+        <!-- Figure 4.9: Qualitative Multi-SNR detection grid -->
+        <div style="text-align: center; margin: 2rem 0;">
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; display: inline-block; max-width: 100%;">
+            <img src="./assets/nb3/multi_snr_qualitative_grid.png" alt="Qualitative Multi-SNR detection grid" class="zoomable" style="width: 100%; max-width: 780px; border-radius: var(--radius-sm);">
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.75rem; font-style: italic;">
+            Figure 4.9: Qualitative multi-SNR detection grid showing ground-truth vs. YOLOv9-C predicted bounding boxes and class labels under varying RF interference levels.
+          </p>
+        </div>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">4.4 Computational Performance and Resource Analysis</h3>
+
+        <h4 style="margin-top: 1.25rem; margin-bottom: 0.75rem; color: #93c5fd;">4.4.1 Synthetic CNN Model Complexity</h4>
+        <div class="academic-two-column">
+          <p>
+            The synthetic FMCW CNN contains 136,041 trainable parameters. Its five-epoch training experiment was completed in 26.89 seconds using CPU-based PyTorch execution.
+          </p>
+          <p>
+            These measurements demonstrate that the implemented CNN can be trained in the available CPU environment using a relatively small synthetic dataset. However, training duration and inference latency are different quantities. The recorded 26.89 seconds describe the execution of the complete five-epoch training procedure; they do not represent the time required to process an individual radar frame.
+          </p>
+          <p>
+            The FMCW experiment also does not record FLOPs, MACs, peak memory consumption or energy usage. Consequently, the parameter count alone is insufficient to establish the model's suitability for an edge deployment platform.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.4.2 Classical Signal-Processing Requirements</h4>
+        <div class="academic-two-column">
+          <p>
+            The classical FMCW processing pipeline involves a sequence of FFT operations, MTI filtering, CFAR detection, spatial angle estimation and clustering.
+          </p>
+          <p>
+            Although the pipeline has been executed successfully on the synthetic scene, its individual processing stages have not been systematically profiled for execution time or memory consumption. A complete computational comparison would require separate measurements for range processing, Doppler processing, CFAR, angle estimation and DBSCAN clustering, followed by an end-to-end measurement of the complete pipeline.
+          </p>
+          <p>
+            The existing clutter-attenuation result of 12.94 dB is a signal-processing performance measurement. It should not be interpreted as a measure of computational efficiency.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.4.3 RadDet GPU Inference Latency & Real-Time Operational Budget</h4>
+        <div class="academic-two-column">
+          <p>
+            Automotive FMCW radar systems operate on strict cyclic deadlines. A standard 77 GHz radar frame consists of $N_c = 128 - 256$ chirps with a frame repetition interval of $20 - 50	ext{ ms}$ (corresponding to a 20–50 Hz refresh rate).
+          </p>
+          <p>
+            Hardware profiling of the full-scale YOLOv9-C detector on an NVIDIA Tesla T4 GPU (FP16 automatic mixed precision, batch size 1) using synchronized CUDA events over 1,000 iterations yielded:
+          </p>
+          <ul style="margin: 0.5rem 0 1rem 1.25rem; line-height: 1.6; color: #cbd5e1;">
+            <li><strong>Mean Neural Inference Latency:</strong> $\mathbf{1.12	ext{ ms}}$ ($\mathbf{892.9	ext{ FPS}}$).</li>
+            <li><strong>Median Latency:</strong> $1.10	ext{ ms}$ ($909.1	ext{ FPS}$).</li>
+            <li><strong>P95 Tail Latency:</strong> $1.25	ext{ ms}$ ($800.0	ext{ FPS}$).</li>
+            <li><strong>Non-Maximum Suppression (NMS, $	ext{IoU}=0.7$):</strong> $0.80	ext{ ms}$.</li>
+            <li><strong>Total End-to-End Latency:</strong> $\mathbf{1.92	ext{ ms}}$ ($\mathbf{520.8	ext{ FPS}}$).</li>
+          </ul>
+          <p>
+            Against a standard 50 ms (20 Hz) automotive frame deadline, single-frame YOLOv9-C inference consumes only $\mathbf{2.24\%}$ of the available time budget ($\mathbf{3.84\%}$ end-to-end including post-processing). This provides $>17	imes$ real-time headroom, matching the published paper speed of 896.6 FPS within $0.41\%$.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.4.4 Summary of Available Computational Measurements</h4>
+        <div class="academic-two-column">
+          <p>
+            The current measurements and outstanding evaluation requirements are summarised in Table 4.7.
+          </p>
+        </div>
+
+        <!-- Table 4.7: Summary of measured computational quantities and outstanding evaluations -->
+        <div style="margin: 1.5rem 0 2rem 0; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem; overflow-x: auto;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
+            Table 4.7: Summary of measured computational quantities and outstanding evaluations
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
+                <th style="padding: 0.6rem 0.8rem;">Quantity</th>
+                <th style="padding: 0.6rem 0.8rem;">Available Result</th>
+                <th style="padding: 0.6rem 0.8rem;">Evidence Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Synthetic CNN parameters</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">136,041</td><td style="padding: 0.55rem 0.8rem; color: #4ade80;">Measured from model architecture</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Synthetic CNN training duration</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">26.89 seconds for five epochs</td><td style="padding: 0.55rem 0.8rem; color: #4ade80;">Measured in executed notebook</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">CNN training environment</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9;">CPU, PyTorch 2.6.0+cpu</td><td style="padding: 0.55rem 0.8rem; color: #4ade80;">Recorded execution environment</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">CNN single-frame inference latency</td><td style="padding: 0.55rem 0.8rem; color: #f87171;">Not available</td><td style="padding: 0.55rem 0.8rem; color: #f87171;">Not yet benchmarked on hardware</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Classical DSP stage-wise latency</td><td style="padding: 0.55rem 0.8rem; color: #f87171;">Not available</td><td style="padding: 0.55rem 0.8rem; color: #f87171;">Requires systematic micro-benchmarking</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Classical DSP memory consumption</td><td style="padding: 0.55rem 0.8rem; color: #f87171;">Not available</td><td style="padding: 0.55rem 0.8rem; color: #f87171;">Not yet profiled</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">YOLOv9-C model parameters</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">25.30M (GELAN-C)</td><td style="padding: 0.55rem 0.8rem; color: #4ade80;">Measured from model checkpoint</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">YOLOv9-C training duration</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">1h 11m 52s (66 epochs)</td><td style="padding: 0.55rem 0.8rem; color: #4ade80;">Recorded on NVIDIA Tesla T4</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">YOLOv9-C GPU inference latency</td><td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">1.12 ms (892.9 FPS)</td><td style="padding: 0.55rem 0.8rem; color: #4ade80;">Measured with synchronized CUDA events</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">YOLOv9-C Table III reproduction</td><td style="padding: 0.55rem 0.8rem; color: #38bdf8; font-weight: 600;">25.25% mAP50 / 19.03% mAP50:95</td><td style="padding: 0.55rem 0.8rem; color: #4ade80;">Empirically evaluated on 20,001 test frames</td></tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);"><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">CPU-versus-GPU inference comparison</td><td style="padding: 0.55rem 0.8rem; color: #eab308;">In progress</td><td style="padding: 0.55rem 0.8rem; color: #eab308;">Deferred to comparative evaluation phase</td></tr>
+              <tr><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Quantisation and pruning performance</td><td style="padding: 0.55rem 0.8rem; color: #eab308;">In progress</td><td style="padding: 0.55rem 0.8rem; color: #eab308;">Deferred to comparative evaluation phase</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.4.5 Implications for Resource-Efficient AI</h4>
+        <div class="academic-two-column">
+          <p>
+            The project direction preserves two complementary candidate possibilities for improving the practical efficiency of AI-based radar detection:
+          </p>
+          <p>
+            <strong>Approach A: Reduction of Overall Computational Requirements.</strong> This direction investigates reducing the arithmetic complexity, parameter footprint, and memory bandwidth of radar detection models while maintaining target detection fidelity. Candidate techniques include lightweight neural backbones, structured pruning, uniform 8-bit integer quantization (INT8), knowledge distillation, and adaptive inference paths. Any efficiency gain must be demonstrated through empirical benchmarks rather than assumed from model size alone.
+          </p>
+          <p>
+            <strong>Approach B: CPU-Oriented Model Development and Inference.</strong> This direction investigates designing and tuning radar models to achieve reliable real-time operation on general-purpose commodity CPUs, reducing reliance on power-hungry edge GPUs. This examines operator selection, memory layout cache locality, SIMD vectorization (AVX-512 / ARM NEON), and lightweight execution runtimes (ONNX Runtime, OpenVINO).
+          </p>
+          <p>
+            The two approaches are complementary rather than mutually exclusive: a lightweight model may facilitate CPU deployment, while a CPU-oriented model benefits directly from quantization and pruning. As established in Chapter 1, the selection between these approaches is deferred until comparative experiments are conducted.
+          </p>
+        </div>
+
+        <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">4.5 Discussion and Limitations</h3>
+
+        <h4 style="margin-top: 1.25rem; margin-bottom: 0.75rem; color: #93c5fd;">4.5.1 Interpretation of the Synthetic FMCW Results</h4>
+        <div class="academic-two-column">
+          <p>
+            The synthetic FMCW experiments demonstrate the successful execution of a multi-stage radar signal-processing pipeline. The simulator generated the expected four-channel complex radar cube, and the subsequent processing stages produced range and Doppler representations suitable for target detection. MTI filtering achieved 12.94 dB clutter attenuation under the selected conditions.
+          </p>
+          <p>
+            The CA-CFAR detector identified five candidate peaks. Four were successfully associated with simulated objects through their range and velocity estimates, yielding a mean absolute range error of 0.0125 m and velocity error of 0.105 m/s. However, the additional zero-Doppler candidate and the limited scene diversity highlight the need for more comprehensive evaluation.
+          </p>
+          <p>
+            Furthermore, the AoA experiment demonstrates the execution of multiple spatial estimation routines (MUSIC, Capon, FFT). Nevertheless, the range-only target-selection procedure prevents the returned angular estimates from being confidently associated with the intended moving car. Correct target association must be established before drawing conclusions about angular estimation accuracy.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.5.2 Interpretation of the Synthetic CNN Results</h4>
+        <div class="academic-two-column">
+          <p>
+            The synthetic CNN experiment demonstrates the implementation and training of a compact, multi-task radar detection architecture with 136,041 parameters. The observed reduction in training loss indicates that the network learns from the generated training data.
+          </p>
+          <p>
+            However, the small dataset (32 samples) and the slight increase in validation loss after epoch 3 indicate that additional experiments are required to assess generalisation. The absence of quantitative detection metrics (mAP, IoU) also prevents a direct comparison between the CNN and the classical CA-CFAR pipeline.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.5.3 Interpretation of the RadDet Results</h4>
+        <div class="academic-two-column">
+          <p>
+            The RadDet investigation establishes an empirical foundation for AI-based radar spectrum detection. Its wideband spectrogram representation and modulation-specific annotations enable the formulation of a multi-class object-detection task.
+          </p>
+          <p>
+            The full-scale YOLOv9-C benchmark achieved a grand mean of $25.25\%\ 	ext{mAP}_{50}$ and $19.03\%\ 	ext{mAP}_{50:95}$ across six SNR tiers, reproducing the published ICASSP 2025 Table III benchmark ($25.93\%$ and $19.47\%$) within $-0.68\%$ absolute margin. Hardware latency profiling demonstrated an inference time of 1.12 ms (892.9 FPS), confirming substantial headroom within the automotive frame budget.
+          </p>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.5.4 Overall Limitations</h4>
+        <div class="academic-two-column">
+          <p>
+            The experiments reveal several limitations that define the current scope of the investigation:
+          </p>
+          <ol style="margin: 0.5rem 0 1rem 1.25rem; line-height: 1.6; color: #cbd5e1;">
+            <li><strong>Limited synthetic scene coverage:</strong> The classical FMCW evaluation uses a controlled four-target scene and does not represent dense multi-path traffic environments.</li>
+            <li><strong>Target-association limitation in AoA evaluation:</strong> The range-only selection procedure does not distinguish between overlapping range candidates at 12 m.</li>
+            <li><strong>Limited CNN training dataset:</strong> The synthetic FMCW CNN is trained on 32 samples; scaling to thousands of frames is required for robust generalization.</li>
+            <li><strong>Incomplete CPU profiling:</strong> While CPU training was measured for the synthetic CNN, single-frame CPU inference latency for deep models remains to be evaluated.</li>
+            <li><strong>Lack of stage-wise DSP profiling:</strong> Execution time of individual FFT, MTI, CFAR, and MUSIC stages has not been clocked with microsecond precision.</li>
+            <li><strong>No completed hardware optimization:</strong> Pruning, quantization, and knowledge distillation remain planned investigations rather than measured improvements.</li>
+            <li><strong>Separate problem domains:</strong> Spatial FMCW perception and time-frequency RF spectrum sensing remain decoupled problem settings.</li>
+          </ol>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.5.5 Implications for the Subsequent Project Phase</h4>
+        <div class="academic-two-column">
+          <p>
+            The results provide the technical foundation for investigating resource-efficient AI-based radar signal processing. The subsequent experimental investigation will compare Approach A (model reduction via pruning and quantization) and Approach B (CPU-oriented inference) across standardized hardware environments.
+          </p>
+          <p>
+            Detection performance will be evaluated alongside parameters, FLOPs, memory footprint, and latency. The findings will determine whether model reduction, CPU inference, or their combination provides the most practical deployment pathway.
+          </p>
+        </div>
+
+        <!-- Chapter Summary Card -->
+        <div style="margin: 2rem 0; background: rgba(2, 132, 199, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: var(--radius-sm); padding: 1.35rem 1.5rem;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; margin-bottom: 0.5rem;">
+            Chapter Summary
+          </div>
+          <p style="margin: 0; font-size: 0.88rem; line-height: 1.6; color: #cbd5e1;">
+            The present experiments establish two complementary foundations for AI applications in radar signal processing. The synthetic FMCW track demonstrates the operation of a conventional radar processing pipeline (12.94 dB clutter suppression, 0.0125 m range MAE, 0.105 m/s velocity MAE) and initial training of a compact CNN (136,041 parameters). The RadDet track establishes a wideband spectrum-detection framework and successfully reproduces the ICASSP 2025 Table III benchmark with YOLOv9-C ($25.25\%\ 	ext{mAP}_{50}$, 892.9 FPS on Tesla T4). The evidence confirms the necessity of evaluating detection quality together with computational requirements, setting the stage for comparative resource-efficiency evaluations.
+          </p>
+        </div>
+      </section>
+
 
       <!-- ==================== DISTINGUISHING BOUNDARY DIVIDER ==================== -->
       <div id="manuscript-transition-divider" style="margin: 4.5rem 0 3.5rem 0; padding: 1.6rem 2rem; border-top: 2px dashed #38bdf8; border-bottom: 2px dashed #38bdf8; background: rgba(15, 23, 42, 0.75); text-align: center; border-radius: var(--radius-sm);">

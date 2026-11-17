@@ -308,6 +308,9 @@ function initReadingProgress() {
 function initScrollSpy() {
   const academicTargets = [
     "#ch1-intro",
+    "#ch2-lit-review",
+    "#ch3-methodology",
+    "#ch4-results",
     "#ch2-physics",
     "#ch3-dsp-audit",
     "#ch4-methodology",

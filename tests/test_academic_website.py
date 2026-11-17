@@ -272,7 +272,7 @@ def test_academic_timeline_and_defense():
 
 
 def test_chapter_finalization_phase2():
-    """Verify Phase 2 finalized Chapters 1, 2, and 3 above the transition boundary."""
+    """Verify Phase 2 finalized Chapters 1, 2, 3, and 4 above the transition boundary."""
     with open(INDEX_HTML, "r", encoding="utf-8") as f:
         html = f.read()
 
@@ -307,7 +307,37 @@ def test_chapter_finalization_phase2():
     for table in ["Table 3.1", "Table 3.2", "Table 3.3"]:
         assert table in above_divider, f"Missing {table} in Chapter 3"
 
-    # Sidebar TOC contains Chapter 3
+    # Chapter 4 Experimental Results and Analysis present above divider
+    assert '<section id="ch4-results"' in above_divider
+    assert "Chapter 4: Experimental Results and Analysis" in above_divider
+    assert "4.1 Experimental Scope and Evaluation Framework" in above_divider
+    assert "4.2 Experimental Track I: Synthetic FMCW Radar Perception" in above_divider
+    assert "4.3 Experimental Track II: Wideband Radar Spectrum Detection" in above_divider
+    assert "4.4 Computational Performance and Resource Analysis" in above_divider
+    assert "4.5 Discussion and Limitations" in above_divider
+
+    # Chapter 4 Tables
+    for table in ["Table 4.1", "Table 4.2", "Table 4.3", "Table 4.4", "Table 4.5", "Table 4.6", "Table 4.7"]:
+        assert table in above_divider, f"Missing {table} in Chapter 4"
+
+    # Chapter 4 Figures
+    for fig in ["Figure 4.1", "Figure 4.2", "Figure 4.3", "Figure 4.4", "Figure 4.5", "Figure 4.6", "Figure 4.7", "Figure 4.8", "Figure 4.9", "Figure 4.10"]:
+        assert fig in above_divider, f"Missing {fig} in Chapter 4"
+
+    # Chapter 4 Code Listing
+    assert "Code Listing 4.1" in above_divider
+
+    # Chapter 4 Key Empirical Metrics
+    assert "12.94 dB" in above_divider or "12.94\\text{ dB}" in above_divider, "Missing clutter attenuation metric"
+    assert "0.0125" in above_divider, "Missing range MAE metric"
+    assert "0.105" in above_divider, "Missing velocity MAE metric"
+    assert "136,041" in above_divider or "136{,}041" in above_divider, "Missing synthetic CNN parameter metric"
+    assert "32.53%" in above_divider, "Missing peak validation mAP50"
+    assert "25.25%" in above_divider, "Missing Table III reproduction grand mean"
+    assert "892.9 FPS" in above_divider or "1.12 ms" in above_divider, "Missing inference speed metric"
+
+    # Sidebar TOC contains Chapter 3 and Chapter 4
     assert '<a href="#ch3-methodology" class="toc-link">' in html
+    assert '<a href="#ch4-results" class="toc-link">' in html
 
 
