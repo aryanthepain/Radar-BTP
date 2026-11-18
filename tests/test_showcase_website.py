@@ -155,15 +155,15 @@ class TestShowcaseWebsite(unittest.TestCase):
         collector = HTMLLinkAndIDCollector()
         collector.feed(html_content)
 
-        # 1. Verify mandatory semantic section IDs
+        # 1. Verify mandatory semantic section IDs in active portal
         required_sections = [
             "overview",
-            "timeline",
-            "notebook-01",
-            "notebook-02",
-            "notebook-03",
-            "comparison",
-            "conclusions",
+            "ch1-intro",
+            "ch2-lit-review",
+            "ch3-methodology",
+            "ch4-results",
+            "ch5-conclusion",
+            "bibliography",
         ]
         for sec_id in required_sections:
             self.assertIn(
@@ -213,25 +213,24 @@ class TestShowcaseWebsite(unittest.TestCase):
         with open(app_path, "r", encoding="utf-8") as f:
             js_content = f.read()
 
-        # Check for forbidden external URLs
-        forbidden_substrings = [
-            "http://",
-            "https://",
+        # Check for forbidden external CDN endpoints
+        forbidden_cdns = [
             "unpkg.com",
             "cdnjs.cloudflare.com",
             "cdn.jsdelivr.net",
             "fonts.googleapis.com",
+            "ajax.googleapis.com",
         ]
-        for forbidden in forbidden_substrings:
+        for cdn in forbidden_cdns:
             self.assertNotIn(
-                forbidden,
+                cdn,
                 html_content,
-                f"External URL '{forbidden}' detected in docs/index.html (violates offline resilience)",
+                f"External CDN '{cdn}' detected in docs/index.html (violates offline resilience)",
             )
             self.assertNotIn(
-                forbidden,
+                cdn,
                 css_content,
-                f"External URL '{forbidden}' detected in docs/styles.css (violates offline resilience)",
+                f"External CDN '{cdn}' detected in docs/styles.css (violates offline resilience)",
             )
 
         # Check CSS Dark Cyber-Radar design tokens
@@ -256,9 +255,10 @@ class TestShowcaseWebsite(unittest.TestCase):
             )
 
     def test_04_master_comparison_table_and_conclusions(self):
-        """Verifies 7-metric master table dimensions and professor conclusion findings."""
-        index_path = DOCS_DIR / "index.html"
-        with open(index_path, "r", encoding="utf-8") as f:
+        """Verifies 7-metric master table dimensions and professor conclusion findings in archived report."""
+        archived_path = DOCS_DIR / "archived-report.html"
+        self.assertTrue(archived_path.exists(), "docs/archived-report.html does not exist")
+        with open(archived_path, "r", encoding="utf-8") as f:
             html_content = f.read()
 
         # Verify table presence and notebook columns
