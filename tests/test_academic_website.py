@@ -309,13 +309,34 @@ def test_mobile_drawer_and_touch_targets():
 
 def test_overflow_containment_and_scroll_wrappers():
     """Verify two-tier horizontal momentum scroll containers for tables and KaTeX formulas."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
     with open(STYLES_CSS, "r", encoding="utf-8") as f:
         css = f.read()
     with open(APP_JS, "r", encoding="utf-8") as f:
         js = f.read()
 
-    # Scaffold stub for Task 3 expansion
-    assert os.path.exists(STYLES_CSS)
-    assert os.path.exists(APP_JS)
+    # CSS classes for momentum scroll wrappers
+    assert ".table-scroll-wrapper" in css, "CSS must define .table-scroll-wrapper"
+    assert ".formula-scroll-wrapper" in css, "CSS must define .formula-scroll-wrapper"
+    assert "-webkit-overflow-scrolling: touch" in css, "Must enable -webkit-overflow-scrolling: touch for iOS momentum"
+    assert "clamp(" in css, "Must define clamp() font scaling to guarantee minimum readability floor"
+
+    # Single-column reflow rule below 900px
+    assert "column-count: 1" in css, "Two-column layout must collapse to single column below 900px"
+
+    # Image and SVG responsiveness
+    assert "max-width: 100%" in css, "Must constrain images and SVGs to 100% width"
+
+    # HTML semantic scroll wrappers for major tables
+    assert '<div class="table-scroll-wrapper">' in html, "index.html must enclose wide tables in .table-scroll-wrapper"
+    assert html.count('class="table-scroll-wrapper"') >= 4, "All 4 benchmark tables must have .table-scroll-wrapper"
+    assert '<div class="formula-scroll-wrapper">' in html, "index.html must contain .formula-scroll-wrapper for display math"
+
+    # Client-side automated safety sweep in app.js
+    assert "initOverflowContainment" in js, "app.js must declare initOverflowContainment safety sweep"
+    assert "closest" in js, "initOverflowContainment must inspect closest ancestor to prevent redundant wrapping"
+    assert "table-scroll-wrapper" in js, "initOverflowContainment must wrap uncontained tables"
+    assert "formula-scroll-wrapper" in js, "initOverflowContainment must wrap uncontained KaTeX equations"
 
 

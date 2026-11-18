@@ -658,11 +658,39 @@ function initMobileDrawer() {
 }
 
 /**
+ * 10. Automated Two-Tier Overflow Containment Safety Sweep
+ */
+function initOverflowContainment() {
+  // Wrap any uncontained tables
+  const tables = document.querySelectorAll("table");
+  tables.forEach((table) => {
+    if (!table.closest(".table-scroll-wrapper")) {
+      const wrapper = document.createElement("div");
+      wrapper.className = "table-scroll-wrapper";
+      table.parentNode.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
+    }
+  });
+
+  // Wrap any uncontained KaTeX display math containers
+  const katexDisplays = document.querySelectorAll(".katex-display");
+  katexDisplays.forEach((el) => {
+    if (!el.closest(".formula-scroll-wrapper")) {
+      const wrapper = document.createElement("div");
+      wrapper.className = "formula-scroll-wrapper";
+      el.parentNode.insertBefore(wrapper, el);
+      wrapper.appendChild(el);
+    }
+  });
+}
+
+/**
  * Master Initialization on DOMContentLoaded
  */
 document.addEventListener("DOMContentLoaded", () => {
   initReadingProgress();
   initKaTeX();
+  initOverflowContainment();
   if (typeof hljs !== "undefined") {
     hljs.highlightAll();
   }

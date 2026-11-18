@@ -198,8 +198,10 @@
           <p>
             A linear Frequency-Modulated Continuous-Wave (FMCW) radar synthesizes a transmit waveform whose instantaneous carrier frequency increases linearly across bandwidth $B$ during sweep duration $T_c$:
           </p>
-          <div class="math-display-container">
-            $$f(t) = f_c + S t = f_c + \frac{B}{T_c} t, \quad 0 \le t \le T_c$$
+          <div class="formula-scroll-wrapper">
+            <div class="math-display-container">
+              $$f(t) = f_c + S t = f_c + \frac{B}{T_c} t, \quad 0 \le t \le T_c$$
+            </div>
           </div>
           <p>
             where $f_c = 77\text{ GHz}$ represents the nominal start frequency, $S = 2.72\times 10^{12}\text{ Hz/s}$ is the chirp frequency slope, and $T_c = 58.8\ \mu\text{s}$ matches industrial specifications such as the Saab SIRS 1600 radar <a href="#ref-1" class="citation-badge" data-citation="1">[1]</a>. Upon reflecting from a radial target located at initial distance $R_0$ moving with velocity $v$, the received signal encounters a round-trip time delay $\tau(t) = \frac{2(R_0 + v t)}{c}$.
@@ -207,26 +209,34 @@
           <p>
             Dechirping mixer down-conversion correlates the received reflection against the instantaneous transmit chirp. Filtering out the sum-frequency intermodulation product yields the complex intermediate frequency (IF) beat signal:
           </p>
-          <div class="math-display-container">
-            $$s_b(t) \approx \frac{A_T A_R}{2} \cos\left(2\pi \left(\frac{2 S R_0}{c} + \frac{2 f_c v}{\lambda}\right) t + \frac{4\pi R_0}{\lambda}\right)$$
+          <div class="formula-scroll-wrapper">
+            <div class="math-display-container">
+              $$s_b(t) \approx \frac{A_T A_R}{2} \cos\left(2\pi \left(\frac{2 S R_0}{c} + \frac{2 f_c v}{\lambda}\right) t + \frac{4\pi R_0}{\lambda}\right)$$
+            </div>
           </div>
           <p>
             The beat frequency $f_b = \frac{2 S R_0}{c}$ is strictly proportional to target distance, permitting instantaneous range estimation via a fast-time 1D Fast Fourier Transform (FFT). The fundamental Rayleigh range resolution is bounded purely by bandwidth:
           </p>
-          <div class="math-display-container">
-            $$\Delta R = \frac{c}{2 B} = \frac{3\times 10^8\text{ m/s}}{2 \times 1\times 10^9\text{ Hz}} = 0.15\text{ m}$$
+          <div class="formula-scroll-wrapper">
+            <div class="math-display-container">
+              $$\Delta R = \frac{c}{2 B} = \frac{3\times 10^8\text{ m/s}}{2 \times 1\times 10^9\text{ Hz}} = 0.15\text{ m}$$
+            </div>
           </div>
           <p>
             Similarly, across $N_{\text{chirp}} = 128$ coherent chirps in a radar frame, slow-time Doppler FFT yields a velocity resolution of:
           </p>
-          <div class="math-display-container">
-            $$\Delta v = \frac{\lambda}{2 N_{\text{chirp}} T_c} = \frac{0.003896\text{ m}}{2 \times 128 \times 58.8\times 10^{-6}\text{ s}} \approx 0.258\text{ m/s}$$
+          <div class="formula-scroll-wrapper">
+            <div class="math-display-container">
+              $$\Delta v = \frac{\lambda}{2 N_{\text{chirp}} T_c} = \frac{0.003896\text{ m}}{2 \times 128 \times 58.8\times 10^{-6}\text{ s}} \approx 0.258\text{ m/s}$$
+            </div>
           </div>
           <p>
             For spatial angle estimation across a 4-element Uniform Linear Array (ULA) with inter-element spacing $d = \lambda/2$, the spatial phase shift between adjacent elements is $\Delta \phi = \frac{2\pi d}{\lambda} \sin\theta = \pi \sin\theta$. The classical Rayleigh angular beamwidth limit is:
           </p>
-          <div class="math-display-container">
-            $$\Delta \theta \approx \frac{\lambda}{D \cos\theta} = \frac{\lambda}{4 (\lambda/2) \cos 0^\circ} = 0.5\text{ rad} \approx 28.6^\circ \text{ to } 38.2^\circ$$
+          <div class="formula-scroll-wrapper">
+            <div class="math-display-container">
+              $$\Delta \theta \approx \frac{\lambda}{D \cos\theta} = \frac{\lambda}{4 (\lambda/2) \cos 0^\circ} = 0.5\text{ rad} \approx 28.6^\circ \text{ to } 38.2^\circ$$
+            </div>
           </div>
           <p>
             <strong>The Close-Target Resolution Crisis:</strong> When two physical scatterers (e.g., two closely spaced pedestrians or a motorcycle riding alongside a sedan) are separated by less than $15\text{ cm}$ or less than $5.7^\circ$ azimuth, their return signals project into the same Range-Doppler-Azimuth resolution cell. In classical DSP, the two scatterers merge into a single broad sinc lobe with destructive phase interference, causing total target disappearance or massive positional estimation error <a href="#ref-5" class="citation-badge" data-citation="5">[5]</a>.
@@ -365,8 +375,10 @@ class FMCWRadarSimulator:
           <p>
             <strong>3.4 2D CA-CFAR &amp; OS-CFAR Thresholding:</strong> In Cell-Averaging CFAR (CA-CFAR), the threshold for the Cell Under Test (CUT) is estimated from $N_t$ surrounding reference cells:
           </p>
-          <div class="math-display-container">
-            $$T_{\text{CA}} = \alpha \cdot P_{\text{noise}} = \alpha \left(\frac{1}{N_t} \sum_{i=1}^{N_t} X_i\right), \quad \alpha = N_t \left(P_{\text{fa}}^{-1/N_t} - 1\right)$$
+          <div class="formula-scroll-wrapper">
+            <div class="math-display-container">
+              $$T_{\text{CA}} = \alpha \cdot P_{\text{noise}} = \alpha \left(\frac{1}{N_t} \sum_{i=1}^{N_t} X_i\right), \quad \alpha = N_t \left(P_{\text{fa}}^{-1/N_t} - 1\right)$$
+            </div>
           </div>
           <p>
             When an interfering target falls within the reference cells, the estimated noise variance $\hat{\sigma}^2$ spikes exponentially, raising the threshold and <strong>masking legitimate nearby targets</strong>. While Ordered-Statistic CFAR (OS-CFAR) selects the $k$-th ordered sample ($T_{\text{OS}} = \alpha_{\text{OS}} X_{(k)}$) to mitigate masking, it introduces $O(N_t \log N_t)$ sorting latency and incurs a $1.5\text{--}3\text{ dB}$ SNR loss in homogeneous noise <a href="#ref-6" class="citation-badge" data-citation="6">[6]</a>.
@@ -374,8 +386,10 @@ class FMCWRadarSimulator:
           <p>
             <strong>3.5 Subspace Direction-of-Arrival (MUSIC/Capon):</strong> MUSIC constructs the spatial covariance matrix $\mathbf{R}_{xx} = \frac{1}{L} \sum_{l=1}^L \mathbf{x}_l \mathbf{x}_l^H$ and projects steering vectors $\mathbf{a}(\theta)$ onto the noise subspace $\mathbf{E}_n$:
           </p>
-          <div class="math-display-container">
-            $$P_{\text{MUSIC}}(\theta) = \frac{1}{\mathbf{a}^H(\theta) \mathbf{E}_n \mathbf{E}_n^H \mathbf{a}(\theta)}$$
+          <div class="formula-scroll-wrapper">
+            <div class="math-display-container">
+              $$P_{\text{MUSIC}}(\theta) = \frac{1}{\mathbf{a}^H(\theta) \mathbf{E}_n \mathbf{E}_n^H \mathbf{a}(\theta)}$$
+            </div>
           </div>
           <p>
             When $\text{SNR} < 10\text{ dB}$, or when multipath reflections cause incident signals to become fully correlated, $\operatorname{rank}(\mathbf{R}_{xx}) < K$. The signal and noise subspaces bleed into each other, resulting in total loss of angular peaks <a href="#ref-7" class="citation-badge" data-citation="7">[7]</a>, <a href="#ref-20" class="citation-badge" data-citation="20">[20]</a>.
@@ -664,7 +678,8 @@ class AngleEstimator:
             <div style="font-size: 1.05rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.75rem; text-align: center;">
               Table 4.1: 7-Axis Research-Gap Matrix Comparing Prior Art with Proposed Adaptive Framework
             </div>
-            <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem; color: #cbd5e1; text-align: left;">
+            <div class="table-scroll-wrapper">
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem; color: #cbd5e1; text-align: left;">
               <thead>
                 <tr style="border-bottom: 2px solid var(--border-color); background: rgba(30, 41, 59, 0.6); color: #f8fafc;">
                   <th style="padding: 10px 12px;">Method / Framework</th>
@@ -750,6 +765,7 @@ class AngleEstimator:
                 </tr>
               </tbody>
             </table>
+            </div>
           </div>
         </div>
 
@@ -767,14 +783,18 @@ class AngleEstimator:
           <p>
             <strong>4.5 Mathematical Optimization Formulation:</strong> We formalize the core inquiry as a <strong>Constrained Optimization Problem</strong>:
           </p>
-          <div class="math-display-container">
-            $$\min_{\theta, \pi} \mathbb{E}_{x \sim \mathcal{D}} [C(x, \pi(x))] \quad \text{subject to} \quad \begin{cases} \text{mAP}(f_\theta, \pi) \ge \text{mAP}_{\text{oracle}} - \epsilon \\ \text{Latency}_{P95}(f_\theta, \pi) \le \tau_{\max} \end{cases}$$
+          <div class="formula-scroll-wrapper">
+            <div class="math-display-container">
+              $$\min_{\theta, \pi} \mathbb{E}_{x \sim \mathcal{D}} [C(x, \pi(x))] \quad \text{subject to} \quad \begin{cases} \text{mAP}(f_\theta, \pi) \ge \text{mAP}_{\text{oracle}} - \epsilon \\ \text{Latency}_{P95}(f_\theta, \pi) \le \tau_{\max} \end{cases}$$
+            </div>
           </div>
           <p>
             where $C(x, \pi(x))$ represents FLOP complexity under routing policy $\pi$, $\epsilon = 0.015$ is the allowable mAP degradation bound, and $\tau_{\max} = 5.0\text{ ms}$ is the automotive real-time deadline. The network optimizes a unified multi-objective Pareto loss:
           </p>
-          <div class="math-display-container">
-            $$\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{det}}(\hat{y}, y) + \lambda \frac{C(x)}{C_{\max}} + \gamma \mathcal{U}(x)$$
+          <div class="formula-scroll-wrapper">
+            <div class="math-display-container">
+              $$\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{det}}(\hat{y}, y) + \lambda \frac{C(x)}{C_{\max}} + \gamma \mathcal{U}(x)$$
+            </div>
           </div>
           <p>
             where $\mathcal{U}(x) = -\sum_{c=1}^C p_c \log p_c$ represents normalized Shannon prediction entropy.
@@ -951,7 +971,8 @@ class RadarObjectDetectorCNN(nn.Module):
             <div style="font-size: 1.05rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.75rem; text-align: center;">
               Multi-Stage End-to-End Latency Waterfall Timing Budget Table (Heterogeneous Radar Perception Pipeline)
             </div>
-            <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem; color: #cbd5e1; text-align: left;">
+            <div class="table-scroll-wrapper">
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem; color: #cbd5e1; text-align: left;">
               <thead>
                 <tr style="border-bottom: 2px solid var(--border-color); background: rgba(30, 41, 59, 0.6); color: #f8fafc;">
                   <th style="padding: 10px 12px;">Pipeline Stage</th>
@@ -1021,6 +1042,7 @@ class RadarObjectDetectorCNN(nn.Module):
                 </tr>
               </tbody>
             </table>
+            </div>
           </div>
         </div>
 
@@ -1042,7 +1064,8 @@ class RadarObjectDetectorCNN(nn.Module):
             <div style="font-size: 1.05rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.75rem; text-align: center;">
               Table III: Comprehensive Benchmark Evaluation on RadDet &amp; NIST-CBRS Datasets (ICASSP 2025 Reproduction)
             </div>
-            <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem; color: #cbd5e1; text-align: left;">
+            <div class="table-scroll-wrapper">
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem; color: #cbd5e1; text-align: left;">
               <thead>
                 <tr style="border-bottom: 2px solid var(--border-color); background: rgba(30, 41, 59, 0.6); color: #f8fafc;">
                   <th style="padding: 10px 12px;">Model Architecture</th>
@@ -1158,6 +1181,7 @@ class RadarObjectDetectorCNN(nn.Module):
                 </tr>
               </tbody>
             </table>
+            </div>
           </div>
         </div>
 
@@ -1182,7 +1206,8 @@ class RadarObjectDetectorCNN(nn.Module):
             <div style="font-size: 1.05rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.75rem; text-align: center;">
               7-Metric Master Comparison Table: Classical DSP vs. Deep Perception vs. RadDet Benchmark
             </div>
-            <table class="master-table" id="comparison" style="width: 100%; border-collapse: collapse; font-size: 0.84rem; color: #cbd5e1; text-align: left;">
+            <div class="table-scroll-wrapper">
+              <table class="master-table" id="comparison" style="width: 100%; border-collapse: collapse; font-size: 0.84rem; color: #cbd5e1; text-align: left;">
               <thead>
                 <tr style="border-bottom: 2px solid var(--border-color); background: rgba(30, 41, 59, 0.6); color: #f8fafc;">
                   <th style="padding: 10px 12px; width: 22%;">System Evaluation Metric</th>
@@ -1236,6 +1261,7 @@ class RadarObjectDetectorCNN(nn.Module):
                 </tr>
               </tbody>
             </table>
+            </div>
           </div>
         </div>
 
