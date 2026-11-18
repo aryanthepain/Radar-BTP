@@ -420,8 +420,13 @@ def test_chapter_finalization_phase2():
     assert "Table 5.2: Proposed roadmap for the subsequent phase" in above_divider
 
     # Chapter 5 Figure 5.1 Gantt Schedule
-    assert "Figure 5.1: One-Year Academic Gantt Schedule for BTP-1 and Proposed BTP-2 Activities (August 2026 – May 2027)" in above_divider
+    assert (
+        "Figure 5.1: Academic Research Schedule for BTP-1 and Proposed BTP-2 Activities (August 2026 – May 2027)"
+        in above_divider
+    )
     assert "timeline_gantt.svg" in above_divider
+    assert "A1" in above_divider and "A9" in above_divider
+    assert "23 November 2026" in above_divider or "23 Nov 2026" in above_divider
     assert above_divider.find("Table 5.2") < above_divider.find("Figure 5.1") < above_divider.find("5.6 Requirements for the Next-Stage Demonstration")
 
     # Verify Gantt chart artifacts on disk

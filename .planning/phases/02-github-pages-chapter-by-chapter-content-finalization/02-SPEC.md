@@ -2,7 +2,7 @@
 
 **Created:** 2026-11-18  
 **Ambiguity score:** 0.07 (gate: ≤ 0.20)  
-**Requirements:** 7 locked  
+**Requirements:** 7 locked
 
 ---
 
@@ -15,10 +15,12 @@ Bring the GitHub Pages BTP-1 academic thesis report (`docs/index.html` and `docs
 ## Background
 
 The repository hosts an academic thesis portal on GitHub Pages (`docs/index.html`) containing two distinct report sections:
+
 1. **The Active 5-Chapter Manuscript (`#ch1-intro` through `#ch5-conclusion`):** The authoritative submission draft for IIT Guwahati BTP-1.
 2. **The Archived 7-Chapter Original Draft (`#ch1-intro-original` through `#ch7-conclusion`):** A reference repository of mathematical derivations, classical DSP principles, and initial project history.
 
 A comprehensive audit guided by `report_content/changes.md` and user updates reveals key deliverables:
+
 - **Mathematical Derivations:** Classical FMCW physics (chirp generation, dechirping, beat frequency, range/velocity resolution, ULA steering vectors) must be recovered from the old draft and reconciled with current `src/sim/radar_config.py` parameters ($f_c = 77\text{ GHz}$, $B = 1\text{ GHz}$, $T_c = 50\ \mu\text{s}$, 256 samples, 128 chirps, 4 Rx).
 - **Experimental Discrepancies:** Five specific experimental claims require honest evidentiary reconciliation:
   1. RadDet dataset split: official 20k/14k/6k partition vs current benchmark summary of 14,001/6,001/20,001 (and 19,998 vs 20,001 bin count math).
@@ -74,6 +76,7 @@ A comprehensive audit guided by `report_content/changes.md` and user updates rev
 ## Boundaries
 
 **In scope:**
+
 - Staged execution of Phase 2 plans:
   - **Plan 02-08**: Complete repository and artifact audit, synthesis of `02-EVIDENCE-AUDIT.md`, mathematical physics derivations, and discrepancy resolution documentation.
   - **Plan 02-09**: HTML content integration in `docs/index.html`, RadDet terminology rectification, IEEE citation renumbering, `docs/app.js` dictionary synchronization, and deterministic test suite execution.
@@ -83,6 +86,7 @@ A comprehensive audit guided by `report_content/changes.md` and user updates rev
 - Creation and execution of `.planning/phases/02-github-pages-chapter-by-chapter-content-finalization/02-10-PLAN.md`.
 
 **Out of scope:**
+
 - Modifying PDF or LaTeX files in `templates/BTP_Report_Template_Overleaf/` or `build/` (e.g. `timeline_gantt.pdf`) — strictly deferred to a subsequent milestone/phase per explicit user decision.
 - Modifying or deleting the archived 7-chapter draft in `docs/index.html`.
 - Re-running full-scale 100-epoch training on external Kaggle or cloud GPU clusters during this phase.
@@ -125,15 +129,15 @@ A comprehensive audit guided by `report_content/changes.md` and user updates rev
 
 **Coverage:** 7/7 applicable edges resolved · 0 unresolved
 
-| Category | Requirement | Status | Resolution / Reason |
-|---|---|---|---|
-| Edge Case: Missing Artifacts | R1 | ✅ covered | If an execution log or checkpoint is missing, qualify claim as comparative/historical with explicit reproducibility limitations in `02-EVIDENCE-AUDIT.md`. |
-| Edge Case: Parameter Inconsistency | R2 | ✅ covered | Authoritative derivation strictly uses `src/sim/radar_config.py` ($T_c = 50\ \mu\text{s}$, $\Delta v = 0.304\text{ m/s}$, $R_{\max} = 38.4\text{ m}$); idle time distinction noted. |
-| Edge Case: Split Count Discrepancy | R3 | ✅ covered | Explicitly disclose both recorded counts (14,001/6,001/20,001) and official paper partitions (20k/14k/6k), documenting the 19,998 vs 20,001 bin math. |
-| Adjacency / Empty Input | R4 | ⛔ dismissed | Terminology rectification involves discrete semantic replacements in static HTML sections; empty input cannot occur. |
-| Ordering: Citation IDs | R5 | ✅ covered | Active references [1..N] renumbered sequentially by first appearance; legacy references placed below `<hr>` divider with intact anchors. |
-| Concurrency / File Scope | R6 | ✅ covered | Staged plan execution (02-08 audit first, 02-09 HTML injection second, 02-10 Gantt modernization third) ensures clean file scope and zero concurrent race conditions. |
-| Asset Delivery & XML Parsing | R7 | ✅ covered | Download from Canva API is validated for PNG magic bytes and dimensions before updating; SVG wrapper uses clean XML `<svg ...><image .../></svg>` structure ensuring `xml.etree.ElementTree` parsing in tests passes without error. |
+| Category                           | Requirement | Status       | Resolution / Reason                                                                                                                                                                                                                 |
+| ---------------------------------- | ----------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Edge Case: Missing Artifacts       | R1          | ✅ covered   | If an execution log or checkpoint is missing, qualify claim as comparative/historical with explicit reproducibility limitations in `02-EVIDENCE-AUDIT.md`.                                                                          |
+| Edge Case: Parameter Inconsistency | R2          | ✅ covered   | Authoritative derivation strictly uses `src/sim/radar_config.py` ($T_c = 50\ \mu\text{s}$, $\Delta v = 0.304\text{ m/s}$, $R_{\max} = 38.4\text{ m}$); idle time distinction noted.                                                 |
+| Edge Case: Split Count Discrepancy | R3          | ✅ covered   | Explicitly disclose both recorded counts (14,001/6,001/20,001) and official paper partitions (20k/14k/6k), documenting the 19,998 vs 20,001 bin math.                                                                               |
+| Adjacency / Empty Input            | R4          | ⛔ dismissed | Terminology rectification involves discrete semantic replacements in static HTML sections; empty input cannot occur.                                                                                                                |
+| Ordering: Citation IDs             | R5          | ✅ covered   | Active references [1..N] renumbered sequentially by first appearance; legacy references placed below `<hr>` divider with intact anchors.                                                                                            |
+| Concurrency / File Scope           | R6          | ✅ covered   | Staged plan execution (02-08 audit first, 02-09 HTML injection second, 02-10 Gantt modernization third) ensures clean file scope and zero concurrent race conditions.                                                               |
+| Asset Delivery & XML Parsing       | R7          | ✅ covered   | Download from Canva API is validated for PNG magic bytes and dimensions before updating; SVG wrapper uses clean XML `<svg ...><image .../></svg>` structure ensuring `xml.etree.ElementTree` parsing in tests passes without error. |
 
 ---
 
@@ -141,41 +145,41 @@ A comprehensive audit guided by `report_content/changes.md` and user updates rev
 
 **Coverage:** 5/5 applicable prohibitions resolved · 0 unresolved
 
-| Prohibition (must-NOT statement) | Requirement | Status | Verification / Reason |
-|---|---|---|---|
-| MUST NOT fabricate or invent experimental logs, checkpoints, metrics, or hardware profiles | R1, R3 | resolved | `verification: judgment` (audited against live artifacts in `02-EVIDENCE-AUDIT.md`) |
-| MUST NOT modify or commit changes to files in `templates/BTP_Report_Template_Overleaf/` or `build/` | R6, R7 | resolved | `verification: test` (`git status --porcelain templates/BTP_Report_Template_Overleaf/` must be empty) |
-| MUST NOT delete or truncate the archived 7-chapter original draft section in `docs/index.html` | R6 | resolved | `verification: test` (`tests/test_academic_website.py` asserts `#ch1-intro-original` exists) |
-| MUST NOT claim sub-Rayleigh target resolution or real-time automotive ECU performance without empirical hardware proof | R2, R3 | resolved | `verification: judgment` (textual review of Chapter 2, 4, 5) |
-| MUST NOT break SVG XML syntax or produce unparseable vector assets during Canva asset conversion | R7 | resolved | `verification: test` (`tests/test_showcase_website.py` asserts `ET.parse(fpath)` succeeds on `timeline_gantt.svg`) |
+| Prohibition (must-NOT statement)                                                                                       | Requirement | Status   | Verification / Reason                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------- | ----------- | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| MUST NOT fabricate or invent experimental logs, checkpoints, metrics, or hardware profiles                             | R1, R3      | resolved | `verification: judgment` (audited against live artifacts in `02-EVIDENCE-AUDIT.md`)                                |
+| MUST NOT modify or commit changes to files in `templates/BTP_Report_Template_Overleaf/` or `build/`                    | R6, R7      | resolved | `verification: test` (`git status --porcelain templates/BTP_Report_Template_Overleaf/` must be empty)              |
+| MUST NOT delete or truncate the archived 7-chapter original draft section in `docs/index.html`                         | R6          | resolved | `verification: test` (`tests/test_academic_website.py` asserts `#ch1-intro-original` exists)                       |
+| MUST NOT claim sub-Rayleigh target resolution or real-time automotive ECU performance without empirical hardware proof | R2, R3      | resolved | `verification: judgment` (textual review of Chapter 2, 4, 5)                                                       |
+| MUST NOT break SVG XML syntax or produce unparseable vector assets during Canva asset conversion                       | R7          | resolved | `verification: test` (`tests/test_showcase_website.py` asserts `ET.parse(fpath)` succeeds on `timeline_gantt.svg`) |
 
 ---
 
 ## Ambiguity Report
 
-| Dimension | Score | Min | Status | Notes |
-|---|---|---|---|---|
-| Goal Clarity | 0.95 | 0.75 | ✓ | Exact outcome specified: export Canva design DAHbQ0tvIMc, generate PNG/SVG, align caption/narrative with A1–A9, author Plan 02-10. |
-| Boundary Clarity | 0.95 | 0.70 | ✓ | Explicitly restricted to GitHub Pages (docs/); LaTeX strictly excluded; old draft preserved. |
-| Constraint Clarity | 0.90 | 0.65 | ✓ | Grounded in radar_config.py, XML parser compatibility, sub-30s test execution, zero secrets. |
-| Acceptance Criteria | 0.90 | 0.70 | ✓ | 17 unambiguous pass/fail checklist items. |
-| **Ambiguity** | **0.07** | **≤0.20** | ✓ | Gate passed. |
+| Dimension           | Score    | Min       | Status | Notes                                                                                                                              |
+| ------------------- | -------- | --------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Goal Clarity        | 0.95     | 0.75      | ✓      | Exact outcome specified: export Canva design DAHbQ0tvIMc, generate PNG/SVG, align caption/narrative with A1–A9, author Plan 02-10. |
+| Boundary Clarity    | 0.95     | 0.70      | ✓      | Explicitly restricted to GitHub Pages (docs/); LaTeX strictly excluded; old draft preserved.                                       |
+| Constraint Clarity  | 0.90     | 0.65      | ✓      | Grounded in radar_config.py, XML parser compatibility, sub-30s test execution, zero secrets.                                       |
+| Acceptance Criteria | 0.90     | 0.70      | ✓      | 17 unambiguous pass/fail checklist items.                                                                                          |
+| **Ambiguity**       | **0.07** | **≤0.20** | ✓      | Gate passed.                                                                                                                       |
 
 ---
 
 ## Interview Log
 
-| Round | Perspective | Question summary | Decision locked |
-|---|---|---|---|
-| 1 | Researcher | How should this comprehensive revision scope be structured within Phase 2? | Staged plan structure: Plan 02-08 for repository audit, mathematical recovery, and discrepancy dossier; Plan 02-09 for HTML content injection, bibliography split, and verification; Plan 02-10 for Canva Gantt chart modernization. |
-| 1 | Researcher | How should unresolved or partially documented experiments be handled? | Qualify claims honestly as comparative benchmarks with explicit reproducibility notes, and document the full audit trail in `02-EVIDENCE-AUDIT.md`. |
-| 1 | Researcher | How should the IEEE bibliography and citation popovers be restructured? | Renumber active citations sequentially [1..N] in the 5-chapter report and `docs/app.js` tooltip dictionary, followed by `<hr>` and an "Archival Draft References" section for legacy citations. |
-| 2 | Boundary Keeper & Implementer | How should the Canva Gantt chart be integrated into `docs/assets/diagrams/` and `docs/index.html`? | Export high-res PNG from Canva API, update `timeline_gantt.png` and wrap/render into valid `timeline_gantt.svg` so existing tests and HTML references continue working seamlessly. |
-| 2 | Boundary Keeper | Should the Overleaf LaTeX template figure (`timeline_gantt.pdf`) also be updated? | Strictly keep Phase 2 boundary to GitHub Pages (`docs/` only) — do not modify files in `templates/BTP_Report_Template_Overleaf/` during Phase 2. |
-| 2 | Implementer | Should Figure 5.1 caption and Chapter 5 narrative be aligned with Canva milestones A1–A9? | Yes — update Figure 5.1 caption, alt text, and Section 5.5 narrative to explicitly document milestones A1–A9, 23 Nov presentation, and May '27 final defense. |
+| Round | Perspective                   | Question summary                                                                                   | Decision locked                                                                                                                                                                                                                      |
+| ----- | ----------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1     | Researcher                    | How should this comprehensive revision scope be structured within Phase 2?                         | Staged plan structure: Plan 02-08 for repository audit, mathematical recovery, and discrepancy dossier; Plan 02-09 for HTML content injection, bibliography split, and verification; Plan 02-10 for Canva Gantt chart modernization. |
+| 1     | Researcher                    | How should unresolved or partially documented experiments be handled?                              | Qualify claims honestly as comparative benchmarks with explicit reproducibility notes, and document the full audit trail in `02-EVIDENCE-AUDIT.md`.                                                                                  |
+| 1     | Researcher                    | How should the IEEE bibliography and citation popovers be restructured?                            | Renumber active citations sequentially [1..N] in the 5-chapter report and `docs/app.js` tooltip dictionary, followed by `<hr>` and an "Archival Draft References" section for legacy citations.                                      |
+| 2     | Boundary Keeper & Implementer | How should the Canva Gantt chart be integrated into `docs/assets/diagrams/` and `docs/index.html`? | Export high-res PNG from Canva API, update `timeline_gantt.png` and wrap/render into valid `timeline_gantt.svg` so existing tests and HTML references continue working seamlessly.                                                   |
+| 2     | Boundary Keeper               | Should the Overleaf LaTeX template figure (`timeline_gantt.pdf`) also be updated?                  | Strictly keep Phase 2 boundary to GitHub Pages (`docs/` only) — do not modify files in `templates/BTP_Report_Template_Overleaf/` during Phase 2.                                                                                     |
+| 2     | Implementer                   | Should Figure 5.1 caption and Chapter 5 narrative be aligned with Canva milestones A1–A9?          | Yes — update Figure 5.1 caption, alt text, and Section 5.5 narrative to explicitly document milestones A1–A9, 23 Nov presentation, and May '27 final defense.                                                                        |
 
 ---
 
-*Phase: 02-github-pages-chapter-by-chapter-content-finalization*  
-*Spec updated: 2026-11-18*  
-*Next step: /gsd-discuss-phase 2 or /gsd-plan-phase 2 — implementation decisions and plan execution*  
+_Phase: 02-github-pages-chapter-by-chapter-content-finalization_  
+_Spec updated: 2026-11-18_  
+_Next step: /gsd-discuss-phase 2 or /gsd-plan-phase 2 — implementation decisions and plan execution_
