@@ -197,5 +197,5 @@ Phases 2, 3, and 4 have been removed from the active GSD planning cycle and pres
 **Plans**: 2 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Comprehensive mobile navigation drawer, WCAG 2.5.5 touch targets, body scroll lock, two-tier table/math overflow containment, and single-column reflow (Closes #23)
+- [x] 03-01-PLAN.md — Comprehensive mobile navigation drawer, WCAG 2.5.5 touch targets, body scroll lock, two-tier table/math overflow containment, and single-column reflow (Closes #23)
 - [ ] 03-02-PLAN.md — Interactive floating IEEE citation cards, mobile bottom-sheet, direct DOI links, Section 9 pulse jump, and universal verification gate (Closes #21)
