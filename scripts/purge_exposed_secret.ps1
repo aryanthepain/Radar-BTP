@@ -48,10 +48,11 @@ if os.path.exists(p):
             f.write(data)
 "@
 
-python -c "$filterScript"
-
 $env:FILTER_BRANCH_SQUELCH_WARNING = "1"
 git filter-branch --force --tree-filter "python -c `"$filterScript`"" --tag-name-filter cat -- --all
+
+# Remove original refs created by filter-branch so subsequent git rev-list --all only inspects active rewritten history
+git for-each-ref --format="%(refname)" refs/original/ | ForEach-Object { git update-ref -d $_ }
 
 Write-Host "Verifying purge across all commits..." -ForegroundColor Cyan
 $remaining = git grep "$SecretToken" $(git rev-list --all) 2>$null

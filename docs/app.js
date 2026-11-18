@@ -365,12 +365,14 @@ function initCitationTooltips() {
     if (refRow) {
       const cells = refRow.querySelectorAll("td");
       if (cells.length >= 4) {
+        const linkEl = cells[4] ? cells[4].querySelector("a") : null;
         data = {
           ref: parseInt(citeKey, 10),
           authors: cells[1].textContent.trim(),
           title: cells[2].textContent.trim(),
           year: cells[3].textContent.trim(),
-          venue: cells[4] ? cells[4].textContent.trim() : ""
+          venue: cells[4] ? cells[4].textContent.trim() : "",
+          url: linkEl ? linkEl.getAttribute("href") : ""
         };
       }
     }
@@ -405,19 +407,40 @@ function initCitationTooltips() {
     tooltipEl.appendChild(authors);
     tooltipEl.appendChild(venue);
 
-    // Position tooltip relative to badge
+    let docUrl = data.url;
+    if (!docUrl && data.venue) {
+      if (data.venue.startsWith("http")) {
+        docUrl = data.venue;
+      } else if (data.venue.startsWith("10.")) {
+        docUrl = `https://doi.org/${data.venue}`;
+      } else if (data.venue.includes("arXiv:")) {
+        docUrl = `https://arxiv.org/abs/${data.venue.replace("arXiv:", "").trim()}`;
+      }
+    }
+    if (docUrl) {
+      const link = document.createElement("a");
+      link.href = docUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.className = "tooltip-link";
+      link.textContent = "Open Document / Source ↗";
+      link.style.cssText = "display: inline-block; margin-top: 0.35rem; color: #38bdf8; font-size: 0.75rem; text-decoration: none;";
+      tooltipEl.appendChild(link);
+    }
+
+    // Position tooltip relative to badge using viewport coordinates (.citation-tooltip has position: fixed)
     const rect = badge.getBoundingClientRect();
     const tooltipWidth = 360;
-    let left = rect.left + window.scrollX - 40;
-    let top = rect.top + window.scrollY - 110;
+    let left = rect.left - 40;
+    let top = rect.top - 120;
 
     // Viewport edge collision handling
     if (left + tooltipWidth > window.innerWidth - 20) {
       left = window.innerWidth - tooltipWidth - 20;
     }
     if (left < 10) left = 10;
-    if (rect.top < 120) {
-      top = rect.bottom + window.scrollY + 10;
+    if (rect.top < 130) {
+      top = rect.bottom + 10;
     }
 
     tooltipEl.style.left = `${left}px`;
@@ -432,10 +455,44 @@ function initCitationTooltips() {
   }
 
   badges.forEach((badge) => {
-    badge.addEventListener("mouseenter", () => showTooltip(badge));
-    badge.addEventListener("mouseleave", hideTooltip);
-    badge.addEventListener("focus", () => showTooltip(badge));
-    badge.addEventListener("blur", hideTooltip);
+    badge.setAttribute("tabindex", "0");
+    badge.setAttribute("role", "button");
+    badge.setAttribute("aria-haspopup", "true");
+    badge.setAttribute("aria-expanded", "false");
+
+    badge.addEventListener("mouseenter", () => {
+      badge.setAttribute("aria-expanded", "true");
+      showTooltip(badge);
+    });
+    badge.addEventListener("mouseleave", () => {
+      badge.setAttribute("aria-expanded", "false");
+      hideTooltip();
+    });
+    badge.addEventListener("focus", () => {
+      badge.setAttribute("aria-expanded", "true");
+      showTooltip(badge);
+    });
+    badge.addEventListener("blur", () => {
+      badge.setAttribute("aria-expanded", "false");
+      hideTooltip();
+    });
+
+    badge.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const citeKey = badge.getAttribute("data-citation") || badge.textContent.replace(/[\[\]]/g, "").trim();
+        const targetId = `ref-${citeKey}`;
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          targetEl.classList.add("highlight-pulse");
+          setTimeout(() => targetEl.classList.remove("highlight-pulse"), 2000);
+        }
+      } else if (e.key === "Escape") {
+        badge.setAttribute("aria-expanded", "false");
+        hideTooltip();
+      }
+    });
 
     badge.addEventListener("click", (e) => {
       const citeKey = badge.getAttribute("data-citation") || badge.textContent.replace(/[\[\]]/g, "").trim();
@@ -485,7 +542,10 @@ function initLightbox() {
 
   if (!modal || !modalImg || !modalCaption || !closeBtn) return;
 
-  function openLightbox(src, captionText) {
+  let lastActiveElement = null;
+
+  function openLightbox(src, captionText, triggerEl) {
+    lastActiveElement = triggerEl || document.activeElement;
     modalImg.setAttribute("src", src);
     modalCaption.textContent = captionText || "";
     modalImg.style.width = "";
@@ -523,6 +583,7 @@ function initLightbox() {
 
     modal.style.display = "flex";
     document.body.style.overflow = "hidden";
+    closeBtn.focus();
   }
 
   function closeLightbox() {
@@ -535,6 +596,9 @@ function initLightbox() {
     modalImg.style.maxHeight = "";
     modalCaption.textContent = "";
     document.body.style.overflow = "";
+    if (lastActiveElement && typeof lastActiveElement.focus === "function") {
+      lastActiveElement.focus();
+    }
   }
 
   const zoomableImages = document.querySelectorAll(
@@ -543,7 +607,11 @@ function initLightbox() {
 
   zoomableImages.forEach((img) => {
     img.style.cursor = "zoom-in";
-    img.addEventListener("click", () => {
+    img.setAttribute("tabindex", "0");
+    img.setAttribute("role", "button");
+    img.setAttribute("aria-label", `Zoom image: ${img.getAttribute("alt") || "Figure diagram"}`);
+
+    function handleZoom() {
       const src = img.getAttribute("src");
       let caption = img.getAttribute("alt") || "";
       const parentCard = img.closest(".plot-card");
@@ -557,7 +625,15 @@ function initLightbox() {
           if (captionEl) caption = captionEl.textContent.trim();
         }
       }
-      openLightbox(src, caption);
+      openLightbox(src, caption, img);
+    }
+
+    img.addEventListener("click", handleZoom);
+    img.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        handleZoom();
+      }
     });
   });
 
