@@ -175,15 +175,15 @@ Plans:
 All planned thesis preparatory and exploratory phases (Phase 1, 1.1, 1.2, 01.2.1, 01.2.2, 1.3) are 100% complete and verified.
 Milestone 1 completed. Phase 2 (GitHub Pages Chapter-by-Chapter Content Finalization) completed and verified.
 
-| Phase                                                                           | Plans Complete | Status    | Completed  |
-| ------------------------------------------------------------------------------- | -------------- | --------- | ---------- |
-| 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams                    | 2/2            | Completed | 2026-09-23 |
-| 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice)    | 5/5            | Completed | 2026-11-02 |
-| 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                      | 3/3            | Completed | 2026-11-03 |
-| 01.2.1. Interactive Research Showcase & Thesis Presentation Website             | 3/3            | Completed | 2026-11-03 |
-| 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 5/5            | Completed | 2026-11-10 |
-| 1.3. High-Coverage Deterministic Unit & Integration Testing                     | 3/3            | Completed | 2026-11-10 |
-| 2. GitHub Pages Chapter-by-Chapter Content Finalization                         | 10/10          | Completed | 2026-11-18 |
+| Phase                                                                           | Plans Complete | Status   | Completed  |
+| ------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
+| 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams                    | 2/2            | Complete | 2026-09-23 |
+| 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice)    | 5/5            | Complete | 2026-11-02 |
+| 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                      | 3/3            | Complete | 2026-11-03 |
+| 01.2.1. Interactive Research Showcase & Thesis Presentation Website             | 3/3            | Complete | 2026-11-03 |
+| 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 5/5            | Complete | 2026-11-10 |
+| 1.3. High-Coverage Deterministic Unit & Integration Testing                     | 3/3            | Complete | 2026-11-10 |
+| 2. GitHub Pages Chapter-by-Chapter Content Finalization                         | 10/10          | Complete | 2026-11-18 |
 
 ## Deferred / GitHub Issue Backlog
 
