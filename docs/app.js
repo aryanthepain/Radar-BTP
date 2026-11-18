@@ -510,10 +510,39 @@ function initLightbox() {
   function openLightbox(src, captionText) {
     modalImg.setAttribute("src", src);
     modalCaption.textContent = captionText || "";
-    modalImg.style.width = "auto";
-    modalImg.style.height = "auto";
+    modalImg.style.width = "";
+    modalImg.style.height = "";
     modalImg.style.maxWidth = "92vw";
     modalImg.style.maxHeight = "82vh";
+    modalImg.style.objectFit = "contain";
+
+    const isFig31 = src && src.includes("fig3_1");
+    const isPortraitDiagram = src && (src.includes("nb1_top") || src.includes("nb2_top"));
+
+    if (isFig31) {
+      // Landscape methodological framework diagram: expand to 92vw (capped at 1400px)
+      modalImg.style.width = "min(92vw, 1400px)";
+      modalImg.style.height = "auto";
+    } else if (isPortraitDiagram) {
+      // Tall single-column diagrams: maximize height to 82vh so entire pipeline is visible
+      modalImg.style.height = "82vh";
+      modalImg.style.width = "auto";
+    } else {
+      modalImg.onload = () => {
+        const isPortrait = modalImg.naturalHeight > modalImg.naturalWidth;
+        if (isPortrait) {
+          modalImg.style.height = "82vh";
+          modalImg.style.width = "auto";
+        } else {
+          modalImg.style.width = "min(92vw, 1400px)";
+          modalImg.style.height = "auto";
+        }
+      };
+      if (modalImg.complete && modalImg.naturalWidth > 0) {
+        modalImg.onload();
+      }
+    }
+
     modal.style.display = "flex";
     document.body.style.overflow = "hidden";
   }
@@ -521,6 +550,7 @@ function initLightbox() {
   function closeLightbox() {
     modal.style.display = "none";
     modalImg.removeAttribute("src");
+    modalImg.onload = null;
     modalImg.style.width = "";
     modalImg.style.height = "";
     modalImg.style.maxWidth = "";
