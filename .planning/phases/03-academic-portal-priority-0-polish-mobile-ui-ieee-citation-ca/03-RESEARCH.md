@@ -655,11 +655,11 @@ function initOverflowContainment() {
 | A1 | Viewport breakpoint at 600px is the optimal cutoff between floating desktop tooltips and mobile bottom-sheet cards. | Architecture Patterns | If too high, small tablets might get bottom sheets; if too low, large phones might get clipped floating tooltips. 600px is industry-standard for mobile phone orientation boundaries. |
 | A2 | Accessible font scaling floor of 0.75rem (12px / 11px min) for tables and 0.85em for KaTeX formulas maintains readability on high-DPI smartphone displays. | Architecture Patterns | If too small, text becomes illegible; if too large, scroll activates too early. 0.75rem / 0.85em floor verified against WCAG standards. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **How should empty DOI values in `CITATIONS_DB` be displayed in citation cards?**
+1. **How should empty DOI values in `CITATIONS_DB` be displayed in citation cards?** — RESOLVED: If `data.doi` is empty or missing, omit the "DOI / Publisher" link button and render only "View in Reference List". This avoids dead hyperlinks (already implemented in 03-02-PLAN.md Task 2).
    - What we know: Some entries (e.g., Skolnik [4], Richards [5]) have `doi: ""` in `CITATIONS_DB` [VERIFIED: docs/app.js:50, 58].
-   - Recommendation: If `data.doi` is empty or missing, omit the "DOI / Publisher" link button and render only "View in Reference List". This avoids dead hyperlinks.
+   - Resolution: If `data.doi` is empty or missing, omit the "DOI / Publisher" link button and render only "View in Reference List". This avoids dead hyperlinks.
 
 ## Environment Availability
 
