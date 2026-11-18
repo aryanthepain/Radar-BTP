@@ -272,11 +272,13 @@ def test_academic_timeline_and_defense():
 
 
 def test_mobile_drawer_and_touch_targets():
-    """Verify WCAG 2.5.5 touch target standard (>=44x44px) and mobile navigation toggle markup."""
+    """Verify WCAG 2.5.5 touch target standard (>=44x44px), mobile drawer ergonomics, and scroll-lock."""
     with open(INDEX_HTML, "r", encoding="utf-8") as f:
         html = f.read()
     with open(STYLES_CSS, "r", encoding="utf-8") as f:
         css = f.read()
+    with open(APP_JS, "r", encoding="utf-8") as f:
+        js = f.read()
 
     # Touch target standards in CSS for nav-toggle
     assert ".nav-toggle-btn" in css, "CSS must define .nav-toggle-btn"
@@ -289,6 +291,20 @@ def test_mobile_drawer_and_touch_targets():
     assert 'aria-expanded=' in html, "#nav-toggle must declare aria-expanded attribute"
     assert 'aria-controls="academic-sidebar"' in html, "#nav-toggle must declare aria-controls='academic-sidebar'"
     assert 'id="nav-backdrop"' in html, "Backdrop must have id='nav-backdrop'"
+
+    # Background body scroll-lock
+    assert "body.nav-open" in css, "CSS must define body.nav-open scroll lock rule"
+    assert "overflow: hidden" in css and "touch-action: none" in css, "body.nav-open must enforce overflow: hidden and touch-action: none"
+
+    # Touch target minimum 44px on TOC links
+    assert "min-height: 44px" in css and ".toc-link" in css, "TOC links must have min-height: 44px per WCAG 2.5.5"
+
+    # Mobile drawer logic in app.js
+    assert "initMobileDrawer" in js, "app.js must declare initMobileDrawer function"
+    assert "nav-open" in js, "initMobileDrawer must toggle nav-open on document.body"
+    assert "aria-expanded" in js, "initMobileDrawer must update aria-expanded"
+    assert "✕" in js and "☰" in js, "initMobileDrawer must morph icon between '☰' and '✕'"
+    assert "Escape" in js, "initMobileDrawer must support Escape key drawer dismissal"
 
 
 def test_overflow_containment_and_scroll_wrappers():

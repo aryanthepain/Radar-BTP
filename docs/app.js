@@ -628,13 +628,19 @@ function initMobileDrawer() {
   if (!toggleBtn || !sidebar || !backdrop) return;
 
   function toggleDrawer() {
-    sidebar.classList.toggle("open");
-    backdrop.classList.toggle("open");
+    const isOpen = sidebar.classList.toggle("open");
+    backdrop.classList.toggle("open", isOpen);
+    document.body.classList.toggle("nav-open", isOpen);
+    toggleBtn.textContent = isOpen ? "✕" : "☰";
+    toggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
   }
 
   function closeDrawer() {
     sidebar.classList.remove("open");
     backdrop.classList.remove("open");
+    document.body.classList.remove("nav-open");
+    toggleBtn.textContent = "☰";
+    toggleBtn.setAttribute("aria-expanded", "false");
   }
 
   toggleBtn.addEventListener("click", toggleDrawer);
@@ -642,6 +648,12 @@ function initMobileDrawer() {
 
   tocLinks.forEach((link) => {
     link.addEventListener("click", closeDrawer);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && sidebar.classList.contains("open")) {
+      closeDrawer();
+    }
   });
 }
 

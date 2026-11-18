@@ -217,10 +217,12 @@ body {
 }
 
 .toc-link {
+  min-height: 44px;
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  padding: 0.55rem 0.75rem;
+  padding: 0.65rem 0.85rem;
+  box-sizing: border-box;
   border-radius: var(--radius-sm);
   color: var(--text-secondary);
   text-decoration: none;
@@ -228,6 +230,11 @@ body {
   font-weight: 500;
   transition: all var(--transition-fast);
   border-left: 2px solid transparent;
+}
+
+.toc-link:focus-visible {
+  outline: 2px solid var(--accent-sky, #38bdf8);
+  outline-offset: -2px;
 }
 
 .toc-link:hover {
@@ -971,6 +978,15 @@ body {
   height: 100vh;
   background: rgba(0, 0, 0, 0.6);
   z-index: 99;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+/* Background body scroll lock */
+body.nav-open {
+  overflow: hidden !important;
+  touch-action: none !important;
 }
 
 /* ==========================================================================
@@ -1089,22 +1105,24 @@ body {
 
 @media (max-width: 1024px) {
   .nav-toggle-btn {
-    display: block;
+    display: flex !important;
   }
 
-  .sidebar {
+  .sidebar, #academic-sidebar {
     position: fixed;
     left: -290px;
-    transition: left 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), left 0.3s ease;
     box-shadow: 4px 0 20px rgba(0, 0, 0, 0.7);
   }
 
-  .sidebar.open {
+  .sidebar.open, #academic-sidebar.open {
     left: 0;
   }
 
   .nav-backdrop.open {
-    display: block;
+    display: block !important;
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .content {
@@ -1170,14 +1188,21 @@ body {
 }
 
 #chapter-toc .toc-link, .chapter-toc .toc-link {
+  min-height: 44px;
   display: flex;
   align-items: center;
-  padding: 0.45rem 0.75rem;
+  padding: 0.65rem 0.85rem;
+  box-sizing: border-box;
   border-radius: var(--radius-sm, 6px);
   color: var(--text-secondary, #94a3b8);
   text-decoration: none;
   font-size: 0.85rem;
   transition: all var(--transition-fast, 0.2s);
+}
+
+#chapter-toc .toc-link:focus-visible, .chapter-toc .toc-link:focus-visible {
+  outline: 2px solid var(--accent-sky, #38bdf8);
+  outline-offset: -2px;
 }
 
 #chapter-toc .toc-link:hover, .chapter-toc .toc-link:hover {
