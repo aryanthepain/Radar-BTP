@@ -36,6 +36,12 @@
 - [x] **TEST-COV-03**: Automated integration smoke tests `tests/test_pipeline_scripts.py` covering `scripts/run_radar_pipeline.py`, `scripts/push_kaggle_kernel.py`, and notebook generators.
 - [x] **TEST-COV-04**: Universal verification gate (`scripts/verify.ps1`) enforces `>=90%` code coverage with `pytest-cov` while maintaining deterministic, sub-30s local execution.
 
+### Academic Portal Priority 0 Polish (PORTAL-P0 — Issues #21, #23)
+
+- [ ] **PORTAL-MOB-01**: Comprehensive responsive overhaul covering mobile navigation drawer (>=44x44px touch target, smooth off-canvas transition, backdrop dismiss), wide KaTeX formula & comparison table horizontal scroll containers (`-webkit-overflow-scrolling: touch`), and single-column text reflow (`column-count: 1 !important`) for `.academic-two-column` below 900px. *(Closes [#23](https://github.com/aryanthepain/Radar-BTP/issues/23))*
+- [ ] **PORTAL-CITE-01**: Interactive floating citation cards and bibliography previews for inline IEEE citation markers (`[1]`, `[2]`, etc.) displaying paper title, authors, venue, year, and direct DOI/arXiv links with viewport collision avoidance and keyboard accessibility (`aria-describedby` or popover API). *(Closes [#21](https://github.com/aryanthepain/Radar-BTP/issues/21))*
+- [ ] **PORTAL-VERIF-01**: Deterministic unit and DOM smoke tests in `tests/test_showcase_website.py` and `tests/test_academic_website.py` verifying mobile viewport rules, overflow containment, touch targets, and citation preview rendering passing 100% under `scripts/verify.ps1`.
+
 ## Deferred to GitHub Issues (Post-Exploratory Backlog)
 
 The following ingestion decoupling and verification expansion requirements have been migrated from active planning into dedicated GitHub issues:
@@ -91,6 +97,9 @@ The following ingestion decoupling and verification expansion requirements have 
 | TEST-COV-02     | Phase 1.3    | Complete                           |
 | TEST-COV-03     | Phase 1.3    | Complete                           |
 | TEST-COV-04     | Phase 1.3    | Complete                           |
+| PORTAL-MOB-01   | Phase 3      | Pending (Issue #23)                |
+| PORTAL-CITE-01  | Phase 3      | Pending (Issue #21)                |
+| PORTAL-VERIF-01 | Phase 3      | Pending                            |
 | DATA-01         | Backlog      | Deferred (Issue #17)               |
 | DATA-02         | Backlog      | Deferred (Issue #17)               |
 | DATA-03         | Backlog      | Deferred (Issue #3)                |
@@ -101,10 +110,11 @@ The following ingestion decoupling and verification expansion requirements have 
 **Coverage:**
 
 - Completed exploratory requirements: 16 total (100% complete)
+- Active Phase 3 requirements: 3 total (tracked in #21, #23)
 - Deferred to GitHub Issues: 6 total (tracked in #3, #17, #18, #19)
 - Unmapped: 0 ✓
 
 ---
 
 _Requirements defined: 2026-09-23_
-_Last updated: 2026-11-12 (Phases 2, 3, 4 moved to GitHub Issues #3, #17-#22)_
+_Last updated: 2026-11-19 (Phase 3 added for GitHub Priority 0 Issues #21, #23)_

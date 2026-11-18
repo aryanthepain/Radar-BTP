@@ -1,19 +1,19 @@
 ---
 gsd_state_version: "1.0"
-current_phase: null
-current_phase_name: milestone-exploratory-complete
-status: "All planned exploratory phases (1, 1.1, 1.2, 01.2.1, 01.2.2, 1.3) complete — Phases 2, 3, 4 moved to GitHub Issues #3, #17-#22"
-stopped_at: "Exploratory milestone 100% complete and verified; awaiting professor thesis review or backlog issue pickup"
-last_updated: "2026-11-12T17:35:00.000Z"
-last_activity: 2026-11-12
-last_activity_desc: 2026-11-12 -- Phases 2, 3, 4 moved to GitHub Issues #3, #17-#22 and removed from active planning
-state_head: d38b7b8
+current_phase: "3"
+current_phase_name: "academic-portal-priority-0-polish-mobile-ui-ieee-citation-ca"
+status: "Phase 3 added to roadmap: Academic Portal Priority 0 Polish (Mobile UI Overhaul & Floating IEEE Citation Cards - Issues #21, #23)"
+stopped_at: "Phase 3 added; awaiting /gsd-plan-phase 3"
+last_updated: "2026-11-19T01:08:00.000Z"
+last_activity: 2026-11-19
+last_activity_desc: 2026-11-19 -- Phase 3 added to pick up GitHub Priority 0 issues #21 and #23
+state_head: 93a70aa
 progress:
-  total_phases: 6
+  total_phases: 7
   completed_phases: 6
-  total_plans: 21
+  total_plans: 23
   completed_plans: 21
-  percent: 100
+  percent: 91
 granularity: fine
 ---
 
@@ -28,11 +28,11 @@ See: .planning/PROJECT.md (updated 2026-11-12)
 
 ## Current Position
 
-Phase: 01.2.2 & 01.3 — COMPLETED (All exploratory milestone phases 1, 1.1, 1.2, 01.2.1, 01.2.2, 1.3 complete)
-Status: Exploratory milestone 100% complete — all plans executed and verified
-Last activity: 2026-11-12 — Transferred Phases 2, 3, 4 to GitHub Issues (#3, #17, #18, #19, #20, #21, #22) and updated roadmap.
+Phase: Phase 3 — NOT STARTED (Academic Portal Priority 0 Polish: Mobile UI & IEEE Citation Cards)
+Status: Phase added to roadmap — ready for /gsd-plan-phase 3
+Last activity: 2026-11-19 — Picked up GitHub Priority 0 issues (#21, #23) into Phase 3.
 
-Progress: [██████████] 100%
+Progress: [█████████░] 91%
 
 ## Performance Metrics
 
@@ -68,6 +68,11 @@ Decisions are logged in PROJECT.md Key Decisions table and Phase Context documen
 - Phase 1.2: Full-scale RadDet S-128 variant benchmark with YOLOv9c (25.3M params), empirical batch testing under AMP FP16, 6-bin SNR evaluation ([-20 dB to +20 dB]), Table III export, and single-frame CUDA event latency profiler.
 - Phase 01.2.1: Zero-build static presentation website in `docs/` with fixed Dark Cyber-Radar theme, single-page longform scroll, 3-stage evolution timeline (Toy -> Sim -> Real), standardized 5-part notebook blocks, static SVG diagrams, Prism.js code snippets, interactive image lightboxes, automated asset extraction script, 7-metric master table, and concise conclusion bullets.
 - Phase 1.3: Target >=90% deterministic coverage on src/ and scripts/ using modular test suites.
+- Phase 3: Picked up GitHub Priority 0 issues (#21, #23) as a single consolidated phase covering mobile UI overhaul and responsive ergonomics first (#23), followed by interactive floating IEEE citation previews (#21).
+
+### Roadmap Evolution
+
+- Phase 3 added: Academic Portal Priority 0 Polish: Mobile UI & IEEE Citation Cards (P0 GitHub Issues #21, #23)
 
 ## Session
 
