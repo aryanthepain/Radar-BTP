@@ -41,9 +41,9 @@
 - [x] **PORTAL-MOB-01**: Mobile navigation drawer (>=44x44px touch targets, smooth off-canvas transition, backdrop dismiss, body scroll lock, morphing toggle icon). *(Closes [#23](https://github.com/aryanthepain/Radar-BTP/issues/23))*
 - [x] **PORTAL-MOB-02**: Two-tier KaTeX math & comparison table horizontal overflow containment (fluid font scaling with accessible floor 0.75rem / 11px tables, 0.85em KaTeX math, momentum scroll with edge-fade indicators, zero horizontal body scroll). *(Closes [#23](https://github.com/aryanthepain/Radar-BTP/issues/23))*
 - [x] **PORTAL-MOB-03**: Single-column reflow & responsive media (two-column collapse below 900px, responsive typography scaling, `max-width: 100%; height: auto;` figure constraint). *(Closes [#23](https://github.com/aryanthepain/Radar-BTP/issues/23))*
-- [ ] **PORTAL-CITE-01**: Always-active floating citation cards and bibliography previews for all 30 IEEE references in `CITATIONS_DB` without debug gate flag; renders title, authors, venue, year, direct DOI/arXiv hyperlink. *(Closes [#21](https://github.com/aryanthepain/Radar-BTP/issues/21))*
-- [ ] **PORTAL-CITE-02**: Mobile touch tap-to-inspect & viewport collision avoidance: first tap opens preview; desktop (>600px) floating tooltip with boundary clamping; mobile (<600px) slide-up bottom-sheet with darkened backdrop, "View in Reference List" button with Section 9 pulse highlight (`.highlight-pulse`), and outside tap dismissal. *(Closes [#21](https://github.com/aryanthepain/Radar-BTP/issues/21))*
-- [ ] **PORTAL-VERIF-01**: Deterministic unit and DOM smoke tests in `tests/test_showcase_website.py` and `tests/test_academic_website.py` verifying mobile viewport rules, overflow containment, touch targets, and citation preview rendering passing 100% under `scripts/verify.ps1`.
+- [x] **PORTAL-CITE-01**: Always-active floating citation cards and bibliography previews for all 30 IEEE references in `CITATIONS_DB` without debug gate flag; renders title, authors, venue, year, direct DOI/arXiv hyperlink. *(Closes [#21](https://github.com/aryanthepain/Radar-BTP/issues/21))*
+- [x] **PORTAL-CITE-02**: Mobile touch tap-to-inspect & viewport collision avoidance: first tap opens preview; desktop (>600px) floating tooltip with boundary clamping; mobile (<600px) slide-up bottom-sheet with darkened backdrop, "View in Reference List" button with Section 9 pulse highlight (`.highlight-pulse`), and outside tap dismissal. *(Closes [#21](https://github.com/aryanthepain/Radar-BTP/issues/21))*
+- [x] **PORTAL-VERIF-01**: Deterministic unit and DOM smoke tests in `tests/test_showcase_website.py` and `tests/test_academic_website.py` verifying mobile viewport rules, overflow containment, touch targets, and citation preview rendering passing 100% under `scripts/verify.ps1`.
 
 ## Deferred to GitHub Issues (Post-Exploratory Backlog)
 
@@ -103,9 +103,9 @@ The following ingestion decoupling and verification expansion requirements have 
 | PORTAL-MOB-01   | Phase 3      | Complete (Plan 03-01, Issue #23)   |
 | PORTAL-MOB-02   | Phase 3      | Complete (Plan 03-01, Issue #23)   |
 | PORTAL-MOB-03   | Phase 3      | Complete (Plan 03-01, Issue #23)   |
-| PORTAL-CITE-01  | Phase 3      | Pending (Issue #21)                |
-| PORTAL-CITE-02  | Phase 3      | Pending (Issue #21)                |
-| PORTAL-VERIF-01 | Phase 3      | Pending                            |
+| PORTAL-CITE-01  | Phase 3      | Complete (Plan 03-02, Issue #21)   |
+| PORTAL-CITE-02  | Phase 3      | Complete (Plan 03-02, Issue #21)   |
+| PORTAL-VERIF-01 | Phase 3      | Complete (Plan 03-02, Issue #21)   |
 | DATA-01         | Backlog      | Deferred (Issue #17)               |
 | DATA-02         | Backlog      | Deferred (Issue #17)               |
 | DATA-03         | Backlog      | Deferred (Issue #3)                |
