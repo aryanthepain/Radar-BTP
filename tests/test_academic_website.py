@@ -361,10 +361,37 @@ def test_citation_popover_active_by_default():
 
 
 def test_citation_bottom_sheet_and_pulse_jump():
-    """Verify mobile bottom-sheet card, Section 9 pulse jump, and touch tap-to-inspect (D-03, PORTAL-CITE-02)."""
+    """Verify mobile slide-up bottom-sheet card, Section 9 pulse jump, and touch tap-to-inspect (D-03, PORTAL-CITE-02)."""
+    with open(STYLES_CSS, "r", encoding="utf-8") as f:
+        css = f.read()
     with open(APP_JS, "r", encoding="utf-8") as f:
         js = f.read()
+
+    # Absence of gating debug flag (D-04)
     assert "ENABLE_CITATION_TOOLTIPS" not in js, "Citation cards must be unconditionally active (D-04)"
+
+    # Mobile bottom sheet CSS rules and keyframes
+    assert "highlightPulse" in css or "@keyframes highlightPulse" in css, "CSS must define @keyframes highlightPulse"
+    assert ".highlight-pulse" in css, "CSS must define .highlight-pulse"
+    assert ".citation-backdrop" in css, "CSS must define .citation-backdrop"
+    assert "safe-area-inset-bottom" in css, "Must support mobile safe-area insets"
+    assert "16px 16px 0 0" in css, "Mobile bottom-sheet must have rounded top corners"
+
+    # Action buttons styling in CSS
+    assert ".tooltip-doi-btn" in css, "CSS must style .tooltip-doi-btn"
+    assert ".tooltip-jump-btn" in css, "CSS must style .tooltip-jump-btn"
+
+    # Smooth scroll to Section 9 and pulse animation in app.js
+    assert "scrollIntoView" in js, "app.js must smooth-scroll to bibliography target"
+    assert "highlight-pulse" in js, "app.js must add .highlight-pulse animation class to reference item"
+    assert "tooltip-doi-btn" in js, "app.js must construct DOI link button"
+    assert "tooltip-jump-btn" in js, "app.js must construct Section 9 jump button"
+
+    # Touch tap-to-inspect (prevents immediate jump) and backdrop dismissal
+    assert "e.preventDefault()" in js, "Citation badge click must prevent default immediate anchor jump"
+    assert "showTooltip(badge, true)" in js, "Citation badge click must open bottom-sheet with isTouch=true"
+    assert "backdropEl.addEventListener(\"click\", hideTooltip)" in js or "backdropEl" in js, "Backdrop must dismiss bottom-sheet"
+    assert "nav-open" in js, "Touch/mobile bottom-sheet must apply nav-open scroll lock"
 
 
 

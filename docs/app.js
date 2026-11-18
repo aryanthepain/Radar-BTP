@@ -381,86 +381,137 @@ function initCitationTooltips() {
 
   let hideTimeout = null;
 
-  function showTooltip(badge) {
+  function showTooltip(badge, isTouch = false) {
     clearTimeout(hideTimeout);
     const citeKey = badge.getAttribute("data-citation") || badge.textContent.replace(/[\[\]]/g, "").trim();
     const data = CITATIONS_DB[citeKey];
 
     if (!data) return;
 
-    // Build tooltip safely without innerHTML
+    // Build tooltip safely without innerHTML (CWE-79 DOM XSS prevention)
     while (tooltipEl.firstChild) {
       tooltipEl.removeChild(tooltipEl.firstChild);
     }
 
+    const header = document.createElement("div");
+    header.className = "tooltip-header";
+
     const refNum = document.createElement("div");
     refNum.className = "tooltip-ref-num";
     refNum.textContent = `IEEE Reference [${data.ref}]`;
+    header.appendChild(refNum);
+
+    if (isTouch || window.innerWidth <= 600) {
+      const closeBtn = document.createElement("button");
+      closeBtn.className = "tooltip-close-btn";
+      closeBtn.textContent = "✕";
+      closeBtn.setAttribute("aria-label", "Close citation preview");
+      closeBtn.addEventListener("click", hideTooltip);
+      header.appendChild(closeBtn);
+    }
+    tooltipEl.appendChild(header);
 
     const title = document.createElement("div");
     title.className = "tooltip-title";
     title.textContent = data.title;
+    tooltipEl.appendChild(title);
 
     const authors = document.createElement("div");
     authors.className = "tooltip-authors";
     authors.textContent = data.authors;
+    tooltipEl.appendChild(authors);
 
     const venue = document.createElement("div");
     venue.className = "tooltip-venue";
     venue.textContent = `${data.venue} (${data.year})`;
-
-    tooltipEl.appendChild(refNum);
-    tooltipEl.appendChild(title);
-    tooltipEl.appendChild(authors);
     tooltipEl.appendChild(venue);
 
-    // Position tooltip relative to badge
-    const rect = badge.getBoundingClientRect();
-    const tooltipWidth = 360;
-    let left = rect.left + window.scrollX - 40;
-    let top = rect.top + window.scrollY - 110;
+    const actions = document.createElement("div");
+    actions.className = "tooltip-actions";
 
-    // Viewport edge collision handling
-    if (left + tooltipWidth > window.innerWidth - 20) {
-      left = window.innerWidth - tooltipWidth - 20;
-    }
-    if (left < 10) left = 10;
-    if (rect.top < 120) {
-      top = rect.bottom + window.scrollY + 10;
+    if (data.doi && data.doi.trim().length > 0) {
+      const doiBtn = document.createElement("a");
+      doiBtn.className = "tooltip-doi-btn";
+      doiBtn.href = data.doi.startsWith("http") ? data.doi : `https://doi.org/${data.doi}`;
+      doiBtn.target = "_blank";
+      doiBtn.rel = "noopener noreferrer";
+      doiBtn.textContent = "DOI / Publisher";
+      actions.appendChild(doiBtn);
     }
 
-    tooltipEl.style.left = `${left}px`;
-    tooltipEl.style.top = `${top}px`;
-    tooltipEl.classList.add("visible");
-  }
-
-  function hideTooltip() {
-    hideTimeout = setTimeout(() => {
-      tooltipEl.classList.remove("visible");
-    }, 150);
-  }
-
-  badges.forEach((badge) => {
-    badge.addEventListener("mouseenter", () => showTooltip(badge));
-    badge.addEventListener("mouseleave", hideTooltip);
-    badge.addEventListener("focus", () => showTooltip(badge));
-    badge.addEventListener("blur", hideTooltip);
-
-    badge.addEventListener("click", (e) => {
-      const citeKey = badge.getAttribute("data-citation") || badge.textContent.replace(/[\[\]]/g, "").trim();
+    const jumpBtn = document.createElement("button");
+    jumpBtn.className = "tooltip-jump-btn";
+    jumpBtn.textContent = "View in Reference List";
+    jumpBtn.addEventListener("click", () => {
+      hideTooltip();
       const targetId = `ref-${citeKey}`;
       const targetEl = document.getElementById(targetId);
       if (targetEl) {
-        e.preventDefault();
         targetEl.scrollIntoView({ behavior: "smooth", block: "center" });
         targetEl.classList.add("highlight-pulse");
         setTimeout(() => targetEl.classList.remove("highlight-pulse"), 2000);
       }
     });
+    actions.appendChild(jumpBtn);
+    tooltipEl.appendChild(actions);
+
+    // Dynamic Viewport Mode Switch
+    if (window.innerWidth <= 600 || isTouch) {
+      backdropEl.classList.add("visible");
+      document.body.classList.add("nav-open");
+    } else {
+      const rect = badge.getBoundingClientRect();
+      const tooltipWidth = Math.min(480, window.innerWidth - 40);
+      let left = rect.left + window.scrollX - 40;
+      let top = rect.top + window.scrollY - 140;
+
+      // Viewport edge collision handling
+      if (left + tooltipWidth > window.innerWidth - 20) {
+        left = window.innerWidth - tooltipWidth - 20;
+      }
+      if (left < 10) left = 10;
+      if (rect.top < 150) {
+        top = rect.bottom + window.scrollY + 10;
+      }
+
+      tooltipEl.style.left = `${left}px`;
+      tooltipEl.style.top = `${top}px`;
+    }
+
+    tooltipEl.classList.add("visible");
+  }
+
+  function hideTooltip() {
+    tooltipEl.classList.remove("visible");
+    backdropEl.classList.remove("visible");
+    document.body.classList.remove("nav-open");
+  }
+
+  badges.forEach((badge) => {
+    badge.addEventListener("mouseenter", () => {
+      if (window.innerWidth > 600) showTooltip(badge, false);
+    });
+    badge.addEventListener("mouseleave", () => {
+      if (window.innerWidth > 600) hideTimeout = setTimeout(hideTooltip, 200);
+    });
+    badge.addEventListener("focus", () => {
+      if (window.innerWidth > 600) showTooltip(badge, false);
+    });
+    badge.addEventListener("blur", () => {
+      if (window.innerWidth > 600) hideTimeout = setTimeout(hideTooltip, 200);
+    });
+
+    badge.addEventListener("click", (e) => {
+      e.preventDefault();
+      showTooltip(badge, true);
+    });
   });
 
   tooltipEl.addEventListener("mouseenter", () => clearTimeout(hideTimeout));
-  tooltipEl.addEventListener("mouseleave", hideTooltip);
+  tooltipEl.addEventListener("mouseleave", () => {
+    if (window.innerWidth > 600) hideTimeout = setTimeout(hideTooltip, 200);
+  });
+  backdropEl.addEventListener("click", hideTooltip);
 }
 
 /**
