@@ -2,14 +2,14 @@ name: Deploy GitHub Pages
 
 on:
   push:
-    branches: ["gsd/phase-02-gh-pages-content", "gsd-2"]
+    branches: ["main"]
     paths:
       - "docs/**"
       - ".github/workflows/deploy-pages.yml"
       - "tests/test_showcase_website.py"
       - "tests/test_academic_website.py"
   pull_request:
-    branches: ["gsd/phase-02-gh-pages-content", "gsd-2"]
+    branches: ["main"]
     paths:
       - "docs/**"
       - ".github/workflows/deploy-pages.yml"
@@ -32,10 +32,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
@@ -51,23 +51,23 @@ jobs:
   deploy:
     name: Deploy to GitHub Pages
     needs: test
-    if: (github.ref == 'refs/heads/gsd/phase-02-gh-pages-content' || github.ref == 'refs/heads/gsd-2') && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    if: (github.ref == 'refs/heads/main') && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: "./docs"
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
