@@ -397,6 +397,13 @@ def test_chapter_finalization_phase2():
     assert "25.25%" in above_divider, "Missing Table III reproduction grand mean"
     assert "892.9 FPS" in above_divider or "1.12 ms" in above_divider, "Missing inference speed metric"
 
+    # Chapter 4 Forensic Reconciliations & Disclosures (D-01, D-02, D-03, D-04, R4)
+    assert "Partition & Chunking Disclosure Note" in above_divider, "Missing partition disclosure footnote"
+    assert "14,001 train" in above_divider and "20,001 test" in above_divider, "Missing 14,001/20,001 partition count"
+    assert "19,998" in above_divider, "Missing 19,998 chunking calculation in disclosure note"
+    assert "total average signal-power reduction" in above_divider, "Missing formal 12.94 dB clutter attenuation definition"
+    assert "Rayleigh angular resolution limit" in above_divider, "Missing Rayleigh physical limit distinction"
+
     # Chapter 5 Conclusion and Future Work present above divider
     assert '<section id="ch5-conclusion"' in above_divider
     assert "Chapter 5: Conclusion and Future Work" in above_divider
@@ -516,6 +523,88 @@ def test_evidence_audit_dossier():
     assert "AdaRadar" in content and "2023" in content
     for ref_num in range(1, 19):
         assert f"ref-{ref_num}" in content or f"[{ref_num}]" in content, f"Missing active ref {ref_num} in mapping"
+
+
+def test_no_legacy_radar_parameters():
+    """Verify zero instances of legacy parameters above the transition divider (D-05, D-16, R2)."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    divider = 'id="manuscript-transition-divider"'
+    assert divider in html, "manuscript-transition-divider must exist in docs/index.html"
+    above_divider = html.split(divider)[0]
+
+    # Assert zero legacy parameters in active manuscript
+    for legacy_str in ["58.8", "0.258", "2.72"]:
+        assert legacy_str not in above_divider, f"Legacy parameter '{legacy_str}' found above transition divider!"
+
+    # Assert presence of authoritative parameters (D-05, R2)
+    assert "50 μs" in above_divider or "50\\ \\mu\\text{s}" in above_divider or "50 \\mu\\text{s}" in above_divider
+    assert "0.304" in above_divider
+    assert "38.4" in above_divider
+    assert "20\\text{ THz/s}" in above_divider or "20 THz/s" in above_divider or "20.0\\text{ THz/s}" in above_divider
+    assert "28.6" in above_divider or "Rayleigh" in above_divider
+
+
+def test_active_citation_anchors_and_tooltips():
+    """Verify in-text citation anchors [1..18] are sequential, discrete, and resolve in docs/app.js (D-09, D-10, D-12, R5)."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+    with open(APP_JS, "r", encoding="utf-8") as f:
+        js = f.read()
+
+    divider = 'id="manuscript-transition-divider"'
+    above_divider = html.split(divider)[0]
+
+    # Parse in-text citation badges above divider
+    badge_matches = re.findall(
+        r'<a\s+href="#ref-([^"]+)"\s+class="citation-badge"\s+data-citation="([^"]+)">\[([^\]]+)\]</a>',
+        above_divider,
+    )
+    assert len(badge_matches) >= 18, f"Expected at least 18 citation badges, found {len(badge_matches)}"
+
+    # Check discrete first-appearance order is exactly 1, 2, ..., 18
+    seen_citations = []
+    for href_id, data_cite, text_cite in badge_matches:
+        assert href_id == data_cite == text_cite, f"Badge mismatch: href={href_id}, data={data_cite}, text={text_cite}"
+        if data_cite not in seen_citations:
+            seen_citations.append(data_cite)
+
+    expected_sequence = [str(i) for i in range(1, 19)]
+    assert seen_citations == expected_sequence, f"Active citations out of order: {seen_citations}"
+
+    # Verify all 1..32 references exist in bibliography and app.js CITATIONS_DB
+    for ref_i in range(1, 33):
+        assert f'id="ref-{ref_i}"' in html, f"Missing id='ref-{ref_i}' in bibliography"
+        assert f'"{ref_i}": {{' in js, f"Missing key '{ref_i}' in docs/app.js CITATIONS_DB"
+
+
+def test_scope_and_archival_preservation():
+    """Verify LaTeX report templates untouched, archived draft intact, and bibliography segregated (D-09, D-16, R6)."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    # Archival original 7-chapter draft intact
+    assert 'id="manuscript-transition-divider"' in html
+    assert 'id="ch1-intro-original"' in html
+    assert 'id="ch7-conclusion"' in html
+
+    # Bibliography segregation
+    assert 'class="archival-ref-divider"' in html
+    assert 'class="references-list archival-list"' in html
+
+    # Enforce zero modified files in templates/BTP_Report_Template_Overleaf/
+    import subprocess
+    git_status = subprocess.run(
+        ["git", "status", "--porcelain", "templates/BTP_Report_Template_Overleaf/"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert not git_status.stdout.strip(), (
+        f"templates/BTP_Report_Template_Overleaf/ must have zero git modifications! Found:\n{git_status.stdout}"
+    )
+
 
 
 
