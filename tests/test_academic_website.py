@@ -436,3 +436,86 @@ def test_chapter_finalization_phase2():
     assert '<a href="#ch5-conclusion" class="toc-link">' in html
 
 
+def test_evidence_audit_dossier():
+    """Verify Phase 2 forensic evidence audit dossier (02-EVIDENCE-AUDIT.md) completeness."""
+    audit_path = os.path.join(
+        REPO_ROOT,
+        ".planning",
+        "phases",
+        "02-github-pages-chapter-by-chapter-content-finalization",
+        "02-EVIDENCE-AUDIT.md",
+    )
+    assert os.path.exists(audit_path), f"Missing forensic audit dossier at {audit_path}"
+    assert os.path.getsize(audit_path) > 5000, "02-EVIDENCE-AUDIT.md is smaller than 5,000 bytes"
+
+    with open(audit_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    # Assert all 9 mandatory sections exist
+    required_sections = [
+        "## 1. Executive Summary & Audit Mandate",
+        "## 2. 3-Tier Evidence Taxonomy",
+        "## 3. Authoritative FMCW Physical Radar Mathematical Derivations",
+        "## 4. Classical DSP Baseline 6-Column Synthesis Matrix",
+        "## 5. Forensic Audit of the 5 Critical Disputed Experimental Areas",
+        "## 6. Track I vs Track II Dual-Track Architectural Grounding",
+        "## 7. 7-Axis Literature Comparison Matrix Grounding",
+        "## 8. Structured Human Confirmation Registry & Defense Triage",
+        "## 9. Canonical Reference Verification Table & IEEE Bijective Renumbering Mapping",
+    ]
+    for section in required_sections:
+        assert section in content, f"Missing section in 02-EVIDENCE-AUDIT.md: {section}"
+
+    # Assert 3-Tier Taxonomy per D-14
+    assert "Tier 1" in content and "Verified" in content
+    assert "Tier 2" in content and "Partially Verified" in content
+    assert "Tier 3" in content and "Smoke Test" in content
+
+    # Assert Authoritative FMCW Physical Radar Parameters (D-04, D-05, R2)
+    assert "77 GHz" in content or "77.0e9" in content
+    assert "1.0 GHz" in content or "1 GHz" in content or "1.0e9" in content
+    assert "50" in content and "μs" in content
+    assert "0.304" in content
+    assert "38.4" in content
+    assert "Rayleigh" in content
+
+    # Assert Classical DSP 6-column matrix coverage (D-06)
+    for dsp_method in [
+        "1D Range FFT",
+        "MTI Clutter Filter",
+        "2D Slow-Time Doppler FFT",
+        "CFAR",
+        "MUSIC",
+        "DBSCAN",
+    ]:
+        assert dsp_method in content, f"Missing {dsp_method} in DSP synthesis matrix"
+    assert "exponential noise power" in content or "exponential" in content
+
+    # Assert 5 Critical Disputed Claims Reconciled (D-01, D-02, D-03, D-04, D-08)
+    assert "14,001" in content and "6,001" in content and "20,001" in content
+    assert "19,998" in content  # Integer division chunking math (3,333 * 6)
+    assert "25.25%" in content and "25.30M" in content  # YOLOv9-C benchmark metrics
+    assert "136,041" in content and "32" in content  # Synthetic CNN smoke test audit
+    assert "12.94" in content  # Clutter attenuation power ratio
+    assert "180" in content  # MUSIC evaluation grid vs physical aperture
+
+    # Assert Track I vs Track II Decoupling & RadDet RF Spectrum Grounding (R3, R4)
+    assert "Track I" in content and "Track II" in content
+    assert "LFM" in content and "Barker" in content and "FMCW" in content
+
+    # Assert Structured Human Confirmation Registry & GitHub Issue Spec (D-13, D-15)
+    assert "Why Confirmation is Necessary" in content
+    assert "Available Evidence" in content
+    assert "What Remains Uncertain" in content
+    assert "Recommended Action" in content
+    assert "docs: Triage Phase 2 experimental discrepancies for oral thesis defense" in content
+
+    # Assert Canonical Reference Table & Bijective Renumbering Map (D-09, D-10, D-11)
+    assert "Skolnik" in content and "2001" in content
+    assert "Huang" in content and "RadDet" in content and "2025" in content
+    assert "AdaRadar" in content and "2023" in content
+    for ref_num in range(1, 19):
+        assert f"ref-{ref_num}" in content or f"[{ref_num}]" in content, f"Missing active ref {ref_num} in mapping"
+
+
+

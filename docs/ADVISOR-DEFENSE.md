@@ -16,7 +16,7 @@
 
 ## Executive Summary
 
-This document serves as the formal mathematical and physical defense dossier addressing the eight critical focus questions posed by IIT Guwahati supervising faculty. These rigorous mathematical proofs and physical boundary derivations justify why deep neural networks provide decisive value over classical heuristic radar DSP, why 2.5D Range-Azimuth-Doppler spectrum detection resolves sub-Rayleigh targets, and how real-time edge constraints are satisfied without ungrounded heuristics.
+This document serves as the formal mathematical and physical defense dossier addressing the nine critical focus questions posed by IIT Guwahati supervising faculty. These rigorous mathematical proofs and physical boundary derivations justify why deep neural networks provide decisive value over classical heuristic radar DSP, why 2.5D Range-Azimuth-Doppler spectrum detection resolves sub-Rayleigh targets, and how real-time edge constraints are satisfied without ungrounded heuristics.
 
 ---
 
@@ -165,5 +165,34 @@ Our Track I simulation architecture is **inspired by MATLAB's Radar Toolbox / Ra
 
 **Summary:**  
 By adapting the proven architecture of MATLAB's radar creator workflow into an open-source Python engine, we obtain complete mathematical control and transparent ground truth over automotive radar physics before tackling empirical wideband datasets.
+
+---
+
+## Focus Question 9: Understanding Detection Metrics: $\text{mAP}$, $\text{mAP}_{50}$, and $\text{mAP}_{50:95}$
+
+### Professor's Challenge
+> *"You report an $\text{mAP}@0.5$ of $25.25\%$ and an $\text{mAP}@0.5:0.95$ of $19.03\%$ for the YOLOv9 detector on the RadDet benchmark. What mathematically is Mean Average Precision, why does this numerical discrepancy between $\text{mAP}_{50}$ and $\text{mAP}_{50:95}$ occur, and what does it reveal about your radar detector's localization precision?"*
+
+### Direct Defense (Spoken-Ready)
+**Core Takeaway:**  
+$\text{mAP}$ measures the overall trade-off between detection precision and recall averaged across all classes. The numerical gap between $\text{mAP}_{50}$ ($25.25\%$) and $\text{mAP}_{50:95}$ ($19.03\%$) occurs because $\text{mAP}_{50}$ only requires a coarse $50\%$ spatial overlap ($\text{IoU} \ge 0.50$) to count a detection as a True Positive, whereas $\text{mAP}_{50:95}$ averages performance across ten increasingly strict overlap thresholds up to $95\%$, rigorously penalizing boundary fuzziness in radar representations.
+
+**Key Points:**
+- **What is $\text{mAP}$ (Mean Average Precision)?**  
+  For each target class, predicted detections are ranked by confidence score to plot the **Precision-Recall (PR) curve**. Average Precision ($\text{AP}$) is the area under this interpolated PR curve ($\text{AP} = \int_0^1 p(r) \, dr$). Mean Average Precision ($\text{mAP}$) is the arithmetic mean of $\text{AP}$ across all $C$ target classes:
+  $$\text{mAP} = \frac{1}{C} \sum_{c=1}^C \text{AP}_c$$
+- **What is $\text{mAP}_{50}$ ($\text{mAP}@0.50$ — PASCAL VOC Standard)?**  
+  A predicted bounding box is marked as a True Positive if its Intersection over Union ($\text{IoU}$) with a ground-truth box meets a single fixed threshold:
+  $$\text{IoU} = \frac{\text{Area}(B_{\text{pred}} \cap B_{\text{gt}})}{\text{Area}(B_{\text{pred}} \cup B_{\text{gt}})} \ge 0.50$$
+  This metric evaluates whether the model successfully detected and classified the radar emission or target, tolerating loose or slightly oversized bounding box boundaries.
+- **What is $\text{mAP}_{50:95}$ ($\text{mAP}@[0.50:0.95]$ — COCO Benchmark Standard)?**  
+  $\text{mAP}_{50:95}$ is the average of mAP evaluated over 10 discrete $\text{IoU}$ cutoff thresholds from $0.50$ to $0.95$ in steps of $0.05$ ($\text{IoU} \in \{0.50, 0.55, \dots, 0.95\}$):
+  $$\text{mAP}_{50:95} = \frac{1}{10} \sum_{k=0}^9 \text{mAP}_{\text{IoU} = 0.50 + 0.05k}$$
+  It strictly penalizes imprecise localization. If a predicted box achieves $60\%$ overlap, it counts as a True Positive at $\text{IoU} = 0.50$ and $0.55$, but instantly flips to a False Positive for all thresholds $\ge 0.65$, pulling down the composite score.
+- **Why the Metric Drop is Normal and Informative in Radar Sensing:**  
+  Unlike optical camera images where objects have sharp, knife-edge physical silhouettes, radar spectrograms and Range-Doppler heatmaps exhibit diffuse energy tails governed by the radar's Point Spread Function (Dirichlet sinc sidelobes and window leakage). While our YOLO detector reliably isolates the presence and modulation type of emissions ($\text{mAP}_{50} = 25.25\%$), drawing pixel-tight boxes around diffuse energy boundaries at strict thresholds like $\text{IoU} \ge 0.80\text{--}0.95$ is inherently ambiguous, which naturally accounts for the drop to $19.03\%$.
+
+**Summary:**  
+$\text{mAP}_{50}$ validates target recognition capability, while $\text{mAP}_{50:95}$ measures bounding box tightness; the gap highlights the physical reality of diffuse energy boundaries in radar signal representations.
 
 
