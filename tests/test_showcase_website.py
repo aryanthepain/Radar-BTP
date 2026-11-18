@@ -311,14 +311,17 @@ class TestShowcaseWebsite(unittest.TestCase):
         self.assertIn("min-height: 44px", css_content)
         self.assertIn("-webkit-overflow-scrolling: touch", css_content)
 
-        # JS mobile navigation and safety sweep
+        # JS mobile navigation, citation popovers, and safety sweep
         self.assertIn("initMobileDrawer", js_content)
+        self.assertIn("initCitationTooltips", js_content)
         self.assertIn("initOverflowContainment", js_content)
 
-        # Re-verify offline resilience: zero external CDNs
+        # Re-verify offline resilience: zero external CDNs across HTML, CSS, and JS
         for forbidden in ["http://", "https://", "unpkg.com", "cdnjs.cloudflare.com", "cdn.jsdelivr.net"]:
             self.assertNotIn(forbidden, html_content)
             self.assertNotIn(forbidden, css_content)
+        for cdn in ["unpkg.com", "cdnjs.cloudflare.com", "cdn.jsdelivr.net", "fonts.googleapis.com"]:
+            self.assertNotIn(cdn, js_content)
 
 
 if __name__ == "__main__":

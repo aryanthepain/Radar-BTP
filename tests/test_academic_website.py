@@ -394,4 +394,26 @@ def test_citation_bottom_sheet_and_pulse_jump():
     assert "nav-open" in js, "Touch/mobile bottom-sheet must apply nav-open scroll lock"
 
 
+def test_desktop_citation_tooltip_collision_clamping():
+    """Verify desktop floating tooltip viewport boundary clamping and collision avoidance (D-03)."""
+    with open(STYLES_CSS, "r", encoding="utf-8") as f:
+        css = f.read()
+    with open(APP_JS, "r", encoding="utf-8") as f:
+        js = f.read()
+
+    # Desktop card styling (max-width: 480px)
+    assert "max-width: 480px" in css, "CSS must declare max-width: 480px for desktop tooltip"
+
+    # JS Boundary clamping calculations
+    assert "Math.min(480, window.innerWidth - 40)" in js, "app.js must dynamically calculate tooltip width up to 480px"
+    assert "getBoundingClientRect" in js, "app.js must inspect badge bounding rectangle"
+    assert "rect.left" in js and "rect.top" in js, "app.js must calculate relative badge coordinates"
+    assert "left + tooltipWidth > window.innerWidth" in js, "app.js must clamp right viewport collision"
+    assert "rect.top < 150" in js, "app.js must flip tooltip below badge when top boundary is exceeded"
+
+    # Hover timeout debounce
+    assert "hideTimeout = setTimeout(hideTooltip, 200)" in js, "app.js must debounce tooltip hiding with 200ms grace period"
+    assert "clearTimeout(hideTimeout)" in js, "app.js must cancel pending hide timeout upon hover re-entry"
+
+
 
