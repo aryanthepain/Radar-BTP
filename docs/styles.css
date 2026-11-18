@@ -1336,7 +1336,7 @@ body.nav-open {
   font-size: 0.9em;
 }
 
-/* Interactive IEEE Citation Tooltips */
+/* Interactive IEEE Citation Popovers & Bottom Sheets (PORTAL-CITE-01, PORTAL-CITE-02) */
 .citation-badge {
   display: inline-flex;
   align-items: center;

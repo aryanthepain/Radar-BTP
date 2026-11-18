@@ -355,21 +355,28 @@ function initScrollSpy() {
 }
 
 /**
- * 4. Interactive IEEE Citation Hover Tooltips (Phase 4 Design Cherishment)
- * Only enabled when window.ENABLE_CITATION_TOOLTIPS is true to keep core reader light.
+ * 4. Interactive IEEE Citation Cards & Popovers (PORTAL-CITE-01, PORTAL-CITE-02)
+ * Unconditionally active by default for all IEEE references in CITATIONS_DB (D-04).
  */
 function initCitationTooltips() {
-  if (!window.ENABLE_CITATION_TOOLTIPS) return;
-
   const badges = document.querySelectorAll(".citation-badge, [data-citation]");
   if (!badges.length) return;
 
   let tooltipEl = document.getElementById("citation-tooltip");
+  let backdropEl = document.getElementById("citation-backdrop");
+
   if (!tooltipEl) {
     tooltipEl = document.createElement("div");
     tooltipEl.id = "citation-tooltip";
     tooltipEl.className = "citation-tooltip";
     document.body.appendChild(tooltipEl);
+  }
+
+  if (!backdropEl) {
+    backdropEl = document.createElement("div");
+    backdropEl.id = "citation-backdrop";
+    backdropEl.className = "citation-backdrop";
+    document.body.appendChild(backdropEl);
   }
 
   let hideTimeout = null;

@@ -340,3 +340,31 @@ def test_overflow_containment_and_scroll_wrappers():
     assert "formula-scroll-wrapper" in js, "initOverflowContainment must wrap uncontained KaTeX equations"
 
 
+def test_citation_popover_active_by_default():
+    """Verify IEEE citation popovers are active unconditionally by default without gating flags (D-04, PORTAL-CITE-01)."""
+    with open(APP_JS, "r", encoding="utf-8") as f:
+        js = f.read()
+
+    # Absence of gating debug flag (D-04)
+    assert "ENABLE_CITATION_TOOLTIPS" not in js, "docs/app.js must not gate citations behind ENABLE_CITATION_TOOLTIPS"
+    assert "initCitationTooltips" in js, "docs/app.js must declare initCitationTooltips"
+
+    # Verify safe DOM construction (mitigates CWE-79 DOM XSS)
+    assert "document.createElement" in js, "docs/app.js must construct popover nodes via document.createElement"
+    assert "textContent" in js, "docs/app.js must populate text content securely via textContent"
+
+    # Citation metadata card structure
+    assert "tooltip-ref-num" in js or "IEEE Reference" in js, "Popover must render reference number"
+    assert "tooltip-title" in js, "Popover must render title node"
+    assert "tooltip-authors" in js, "Popover must render authors node"
+    assert "tooltip-venue" in js, "Popover must render venue node"
+
+
+def test_citation_bottom_sheet_and_pulse_jump():
+    """Verify mobile bottom-sheet card, Section 9 pulse jump, and touch tap-to-inspect (D-03, PORTAL-CITE-02)."""
+    with open(APP_JS, "r", encoding="utf-8") as f:
+        js = f.read()
+    assert "ENABLE_CITATION_TOOLTIPS" not in js, "Citation cards must be unconditionally active (D-04)"
+
+
+
