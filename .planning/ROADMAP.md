@@ -153,8 +153,8 @@ Plans:
 **Goal:** Progressively refine, update, and finalize the academic BTP thesis report content on the GitHub Pages website (`docs/`) chapter-by-chapter based on iterative user-supplied content and guidance, accommodating multiple sequential planning and execution waves within this single phase.
 **Mode:** standard
 **Depends on:** Phase 01.2.2, Phase 1.3
-**Requirements:** GH-PAGES-CONTENT, R1, R2, R3, R4, R5, R6
-**Plans:** 9 plans
+**Requirements:** GH-PAGES-CONTENT, R1, R2, R3, R4, R5, R6, R7
+**Plans:** 10 plans
 
 Plans:
 
@@ -167,6 +167,7 @@ Plans:
 - [x] 02-07: Additional thesis artifacts finalization (Gantt chart, appendices, or defense dossier as requested)
 - [ ] 02-08-PLAN.md — Evidence audit dossier, FMCW physics recalculation, 5-discrepancy reconciliation, and reference verification in 02-EVIDENCE-AUDIT.md
 - [ ] 02-09-PLAN.md — HTML content integration in docs/index.html, RadDet RF terminology rectification, sequential citation renumbering [1..18], docs/app.js tooltip DB sync, archival bibliography segregation, and permanent invariant tests
+- [ ] 02-10-PLAN.md — Canva Gantt chart modernization (export high-res graphic from Canva DAHbQ0tvIMc, update timeline_gantt.png and timeline_gantt.svg, update Figure 5.1 caption, alt text, and Section 5.5 narrative to align with A1–A9 milestones, and verify deterministic test suite)
 
 ## Progress
 
