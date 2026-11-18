@@ -51,34 +51,34 @@ DA4098P BTP Project I (Autumn 2026) -> DA4098P BTP Project I
 
 ### Action Checklist Derived from User Prompt:
 
-- [ ] 0. Prompt saved verbatim in `WORKING.md` (Done).
-- [ ] 1. Preserve user changes in `docs/index.html` (check git diff before editing).
-- [ ] 2. Remove "Index Terms: 77 GHz FMCW Radar, Resource-Efficient AI..." div completely.
-- [ ] 3. Move old 7-chapter report and archived references to `docs/archived-report.html`. Add clean reciprocal links between `index.html` and `archived-report.html`.
-- [ ] 4. Fix formulas with horizontal scrollbars (split long side-by-side equations, e.g., $\Delta R$, $\Delta v$, $R_{\max}$, $v_{\max}$ so they wrap nicely within one column without scrollbars).
-- [ ] 5. Fix full-width formulas across the page that should be single-column (e.g., $C=\{\text{Rect}, \dots\}$).
-- [ ] 6. Fix `\Delta R pprox 0.1499\text{ m}` syntax error in Chapter 4 ($\Delta R \approx 0.15\text{ m}$).
-- [ ] 7. Tables 3.2 and 3.3 moved to single column instead of full width.
-- [ ] 8. Remove file path headers from code listings (e.g., `src/dsp/range_processing.py`).
-- [ ] 9. Remove Code Listing 3.3 (Grayscale Spectrogram Loading and Normalisation) and adjust surrounding text.
-- [ ] 10. Add Python code snippets to other subsections of 3.2.2 (e.g., Doppler processing, CFAR, AoA, DBSCAN).
-- [ ] 11. Refactor Chapter 3 Mermaid flowcharts to be vertical / single-column presentable, matching A4 column layout.
-- [ ] 12. Mention in 3.1 that the synthetic radar was modeled on the MATLAB Radar Designer App and add citation to it.
-- [ ] 13. Remove Code Listing 4.1 (Calculation of Range and Velocity Errors) and adjust surrounding text.
-- [ ] 14. Remove Table 4.4 and explain using graph only; replace Figure 4.6 (a) smoke run with a full training process curve graph if available (or high-res full curve).
-- [ ] 15. Remove the Partition & Chunking Disclosure Note in 4.3.2; remove the 15-epoch smoke test from Table 4.5 and surrounding text.
-- [ ] 16. Remove Table 5.2 and use Figure 5.1 to present roadmap.
-- [ ] 17. Remove "Laboratory & Hardware Confirmation Protocol".
-- [ ] 18. Remove mentions of "(ONNX Runtime, OpenVINO)" from everywhere.
-- [ ] 19. Header/Hero cleanups:
+- [x] 0. Prompt saved verbatim in `WORKING.md` (Done).
+- [x] 1. Preserve user changes in `docs/index.html` (check git diff before editing).
+- [x] 2. Remove "Index Terms: 77 GHz FMCW Radar, Resource-Efficient AI..." div completely.
+- [x] 3. Move old 7-chapter report and archived references to `docs/archived-report.html`. Add clean reciprocal links between `index.html` and `archived-report.html`.
+- [x] 4. Fix formulas with horizontal scrollbars (split long side-by-side equations, e.g., $\Delta R$, $\Delta v$, $R_{\max}$, $v_{\max}$ so they wrap nicely within one column without scrollbars).
+- [x] 5. Fix full-width formulas across the page that should be single-column (e.g., $C=\{\text{Rect}, \dots\}$).
+- [x] 6. Fix `\Delta R pprox 0.1499\text{ m}` syntax error in Chapter 4 ($\Delta R \approx 0.15\text{ m}$).
+- [x] 7. Tables 3.2 and 3.3 moved to single column instead of full width.
+- [x] 8. Remove file path headers from code listings (e.g., `src/dsp/range_processing.py`).
+- [x] 9. Remove Code Listing 3.3 (Grayscale Spectrogram Loading and Normalisation) and adjust surrounding text.
+- [x] 10. Add Python code snippets to other subsections of 3.2.2 (e.g., Doppler processing, CFAR, AoA, DBSCAN).
+- [x] 11. Refactor Chapter 3 Mermaid flowcharts to be vertical / single-column presentable, matching A4 column layout.
+- [x] 12. Mention in 3.1 that the synthetic radar was modeled on the MATLAB Radar Designer App and add citation to it.
+- [x] 13. Remove Code Listing 4.1 (Calculation of Range and Velocity Errors) and adjust surrounding text.
+- [x] 14. Remove Table 4.4 and explain using graph only; replace Figure 4.6 (a) smoke run with a full training process curve graph if available (or high-res full curve).
+- [x] 15. Remove the Partition & Chunking Disclosure Note in 4.3.2; remove the 15-epoch smoke test from Table 4.5 and surrounding text.
+- [x] 16. Remove Table 5.2 and use Figure 5.1 to present roadmap.
+- [x] 17. Remove "Laboratory & Hardware Confirmation Protocol".
+- [x] 18. Remove mentions of "(ONNX Runtime, OpenVINO)" from everywhere.
+- [x] 19. Header/Hero cleanups:
   - Remove "BTP-1 Thesis Portal · Autumn 2026", "KaTeX: Offline (20 Fonts)", "Verified: ICASSP Table III".
   - Change "DA4098P BTP Project I (Autumn 2026)" to "DA4098P BTP Project I".
-- [ ] 20. Reference & Bibliography Audit:
+- [x] 20. Reference & Bibliography Audit:
   - Add references 19, 20, 26, 27, 30, 31 to bibliography.
   - Mention 19, 20, 26, 27 in Figure 5.1 in respective locations.
   - Provide citations to Karlsson's PhD thesis wherever topics need explanation.
   - Fix dataset citations: TransRAD, CARRADA, AdaRadar, RAVEN, etc., verifying every reference mapping in both `index.html` and `app.js`.
-- [ ] 21. Draft and formulate the 3 Advisor Defense Focus Questions in chat under `/add-question`:
+- [x] 21. Draft and formulate the 3 Advisor Defense Focus Questions in chat under `/add-question`:
   - Q1: What does the stuff in Chapter 2 mean?
   - Q2: Explanation of Table 3.1 parameters & equations.
   - Q3: Explanation of tensor formula $X \in \mathbb{C}^{N_{rx} \times N_{chirp} \times N_{sample}}$.
@@ -86,10 +86,9 @@ DA4098P BTP Project I (Autumn 2026) -> DA4098P BTP Project I
 ---
 
 - **Project**: Radar DSP & AI Detection Testbench (BTP)
-- **Active Phase**: Phase 2: Multi-Level Decoupled Radar Data Ingestion (Ready to begin)
+- **Active Phase**: Phase 2 Complete (Merged into `main` via PR #24; GitHub Pages live from `main`)
 - **Active Branch**: `main` (clean, fully synced with `origin/main`)
-- **Status**: Phase 1, Phase 1.1, Phase 1.2, Phase 01.2.1, Phase 01.2.2, and Phase 1.3 are all 100% complete, verified, and merged. 58/58 deterministic tests passing at 97.35% coverage.
-- **Next Step**: Plan and execute Phase 2 (Multi-Level Decoupled Radar Data Ingestion, resolving GitHub Issues #2 and #3).
+- **Status**: Phase 2 fully merged, GitHub Issue #21 closed, GitHub Pages deployment run #44406734785 succeeded on `main`. 60/60 deterministic tests passing at 97.35% coverage.
 
 ---
 
