@@ -233,6 +233,15 @@ class TestShowcaseWebsite(unittest.TestCase):
                 f"External CDN '{cdn}' detected in docs/styles.css (violates offline resilience)",
             )
 
+        # Ensure zero external asset loads (scripts, stylesheets, images) across index.html
+        import re
+        external_assets = re.findall(r'<(?:script|link|img)[^>]+(?:src|href)=["\']https?://', html_content, re.IGNORECASE)
+        self.assertEqual(
+            external_assets,
+            [],
+            f"External asset links detected in index.html (must be offline/local): {external_assets}"
+        )
+
         # Check CSS Dark Cyber-Radar design tokens
         self.assertIn("--bg-primary: #0a0e17", css_content)
         self.assertIn("--accent-cyan: #00f0ff", css_content)

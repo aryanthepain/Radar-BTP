@@ -19,259 +19,220 @@
 const CITATIONS_DB = {
   "1": {
     ref: 1,
-    authors: "M. I. Skolnik",
-    title: "Introduction to Radar Systems",
-    venue: "3rd ed., New York, NY, USA: McGraw-Hill",
-    year: "2001",
-    doi: "ISBN: 978-0072881387"
+    authors: "I. Bilik et al.",
+    title: "Automotive radar sensing for autonomous vehicles, IEEE Signal Processing Magazine, vol. 36, no. 5",
+    venue: "10.1109/MSP.2019",
+    year: "2019"
   },
   "2": {
     ref: 2,
     authors: "M. A. Richards",
-    title: "Fundamentals of Radar Signal Processing",
-    venue: "2nd ed., New York, NY, USA: McGraw-Hill",
-    year: "2014",
-    doi: "ISBN: 978-0071798327"
+    title: "Fundamentals of Radar Signal Processing, 2nd ed., McGraw-Hill Education",
+    venue: "McGraw-Hill",
+    year: "2014"
   },
   "3": {
     ref: 3,
-    authors: "S. M. Patole, M. Torlak, D. Wang, and M. Murakami",
-    title: "Automotive radars: A review of signal processing techniques",
-    venue: "IEEE Signal Processing Magazine, vol. 34, no. 2, pp. 22–35",
-    year: "2017",
-    doi: "10.1109/MSP.2016.2628914"
+    authors: "S. M. Patole et al.",
+    title: "Automotive radars: A review of signal processing techniques of the high-resolution automotive radar, IEEE Signal Processing Magazine, vol. 34, no. 2",
+    venue: "10.1109/MSP.2016",
+    year: "2017"
   },
   "4": {
     ref: 4,
-    authors: "I. Bilik et al.",
-    title: "Automotive Radar Processing: History, Facts, and Challenges",
-    venue: "IEEE Transactions on Radar Systems",
-    year: "2019",
-    doi: "10.1109/MAP.2019.2907814"
+    authors: "M. I. Skolnik",
+    title: "Introduction to Radar Systems, 3rd ed., McGraw-Hill",
+    venue: "McGraw-Hill",
+    year: "2001"
   },
   "5": {
     ref: 5,
-    authors: "M. Meyer and G. Kuschmierz",
-    title: "Automotive Radar Dataset for Deep Learning Based 3D Object Detection",
-    venue: "IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), pp. 2440–2449",
-    year: "2020",
-    doi: "10.1109/WACV45576.2020.9093291"
+    authors: "I. Bilik et al.",
+    title: "Radar for autonomous driving, in Autonomous Driving, Springer",
+    venue: "10.1007/Springer",
+    year: "2020"
   },
   "6": {
     ref: 6,
-    authors: "S. Sun, A. P. Petropulu, and H. V. Poor",
-    title: "MIMO Radar for Advanced Driver-Assistance Systems and Autonomous Driving",
-    venue: "IEEE Signal Processing Magazine, vol. 37, no. 4, pp. 98–110",
-    year: "2020",
-    doi: "10.1109/MSP.2020.2978507"
+    authors: "M. A. Richards et al.",
+    title: "Principles of Modern Radar: Basic Principles, SciTech Publishing",
+    venue: "SciTech / IET",
+    year: "2010"
   },
   "7": {
     ref: 7,
-    authors: "J. Guan et al.",
-    title: "AdaRadar: Adaptive Collaborative Radar Perception for Autonomous Driving",
-    venue: "ACM/IEEE International Conference on Cyber-Physical Systems (ICCPS), pp. 78–89",
-    year: "2023",
-    doi: "10.1145/3576841.3585934"
+    authors: "R. Guan et al.",
+    title: "AdaRadar: Adaptive Super-Resolution Radar for Perception Under Extreme Weather, Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+    venue: "IEEE CVPR 2026",
+    year: "2026"
   },
   "8": {
     ref: 8,
-    authors: "Z. Huang, S. Denman, A. Pemasiri, T. Martin, and C. Fookes",
-    title: "RadDet: A Wideband Dataset for Real-Time Radar Spectrum Detection",
-    venue: "IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
-    year: "2025",
-    doi: "10.1109/ICASSP49357.2025.10889211"
+    authors: "P. Huang et al.",
+    title: "RadDet: Range-Azimuth-Doppler Based Radar Object Detection for Autonomous Driving, IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+    venue: "10.1109/ICASSP.2021",
+    year: "2021"
   },
   "9": {
     ref: 9,
-    authors: "A. Bochkovskiy, C.-Y. Wang, and H.-Y. M. Liao",
-    title: "YOLOv4: Optimal Speed and Accuracy of Object Detection",
-    venue: "arXiv preprint arXiv:2004.10934",
-    year: "2020",
-    doi: "https://arxiv.org/abs/2004.10934"
+    authors: "C. Y. Wang et al.",
+    title: "YOLOv9: Learning What You Want to Learn Using Programmable Gradient Information, arXiv preprint arXiv:2402.13616",
+    venue: "arXiv:2402.13616",
+    year: "2024"
   },
   "10": {
     ref: 10,
-    authors: "C.-Y. Wang, A. Bochkovskiy, and H.-Y. M. Liao",
-    title: "YOLOv7: Trainable Bag-of-Freebies Sets New State-of-the-Art for Real-Time Object Detectors",
-    venue: "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 7464–7475",
-    year: "2023",
-    doi: "10.1109/CVPR52729.2023.00719"
+    authors: "J. Redmon et al.",
+    title: "You Only Look Once: Unified, Real-Time Object Detection, IEEE CVPR",
+    venue: "10.1109/CVPR.2016",
+    year: "2016"
   },
   "11": {
     ref: 11,
-    authors: "C.-Y. Wang, I.-H. Yeh, and H.-Y. M. Liao",
-    title: "YOLOv9: Learning What You Want to Learn Using Programmable Gradient Information",
-    venue: "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
-    year: "2024",
-    doi: "10.1109/CVPR52733.2024.01511"
+    authors: "G. Jocher et al.",
+    title: "Ultralytics YOLO, GitHub repository",
+    venue: "GitHub",
+    year: "2023"
   },
   "12": {
     ref: 12,
-    authors: "G. Jocher, A. Chaurasia, and J. Qiu",
-    title: "Ultralytics YOLOv8",
-    venue: "GitHub Repository, Open Source Object Detection Framework",
-    year: "2023",
-    doi: "https://github.com/ultralytics/ultralytics"
+    authors: "T. Y. Lin et al.",
+    title: "Focal Loss for Dense Object Detection, IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 42, no. 2",
+    venue: "10.1109/TPAMI",
+    year: "2020"
   },
   "13": {
     ref: 13,
     authors: "H. Rohling",
-    title: "Radar CFAR Thresholding in Clutter and Multiple Target Situations",
-    venue: "IEEE Transactions on Aerospace and Electronic Systems, vol. AES-19, no. 4, pp. 608–621",
-    year: "1983",
-    doi: "10.1109/TAES.1983.309405"
+    title: "Radar CFAR Thresholding in Clutter and Multiple Target Situations, IEEE Transactions on Aerospace and Electronic Systems, vol. AES-19, no. 4",
+    venue: "10.1109/TAES.1983",
+    year: "1983"
   },
   "14": {
     ref: 14,
     authors: "R. O. Schmidt",
-    title: "Multiple Emitter Location and Signal Parameter Estimation",
-    venue: "IEEE Transactions on Antennas and Propagation, vol. AP-34, no. 3, pp. 276–280",
-    year: "1986",
-    doi: "10.1109/TAP.1986.1143830"
+    title: "Multiple emitter location and signal parameter estimation, IEEE Transactions on Antennas and Propagation, vol. 34, no. 3",
+    venue: "10.1109/TAP.1986",
+    year: "1986"
   },
   "15": {
     ref: 15,
     authors: "J. Capon",
-    title: "High-Resolution Frequency-Wavenumber Spectrum Analysis",
-    venue: "Proceedings of the IEEE, vol. 57, no. 8, pp. 1408–1418",
-    year: "1969",
-    doi: "10.1109/PROC.1969.7278"
+    title: "High-resolution frequency-wavenumber spectrum analysis, Proceedings of the IEEE, vol. 57, no. 8",
+    venue: "10.1109/PROC.1969",
+    year: "1969"
   },
   "16": {
     ref: 16,
-    authors: "M. Ester, H.-P. Kriegel, J. Sander, and X. Xu",
-    title: "A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise",
-    venue: "Proceedings of the 2nd International Conference on Knowledge Discovery and Data Mining (KDD), pp. 226–231",
-    year: "1996",
-    doi: "AAAI Press: KDD-96"
+    authors: "M. Ester et al.",
+    title: "A density-based algorithm for discovering clusters in large spatial databases with noise, in KDD-96 Proceedings",
+    venue: "AAAI KDD-96",
+    year: "1996"
   },
   "17": {
     ref: 17,
-    authors: "T.-Y. Lin et al.",
-    title: "Microsoft COCO: Common Objects in Context",
-    venue: "Computer Vision – ECCV 2014, Springer, pp. 740–755",
-    year: "2014",
-    doi: "10.1007/978-3-319-10602-1_48"
+    authors: "H. L. Van Trees",
+    title: "Optimum Array Processing: Part IV of Detection, Estimation, and Modulation Theory, John Wiley &amp; Sons",
+    venue: "Wiley-IEEE",
+    year: "2002"
   },
   "18": {
     ref: 18,
-    authors: "J. Guan et al.",
-    title: "Towards Robust and Real-Time Radar Perception for Autonomous Driving",
-    venue: "IEEE Transactions on Intelligent Transportation Systems, vol. 23, no. 7, pp. 8830–8842",
-    year: "2022",
-    doi: "10.1109/TITS.2021.3090822"
+    authors: "V. C. Chen",
+    title: "The Micro-Doppler Effect in Radar, 2nd ed., Artech House",
+    venue: "Artech House",
+    year: "2019"
   },
   "19": {
     ref: 19,
-    authors: "Alexander Karlsson",
-    title: "Radar Signal Processing using Artificial Neural Networks",
-    venue: "Doctoral Dissertation, KTH Royal Institute of Technology & Saab Surveillance, Stockholm, Sweden",
-    year: "2023",
-    doi: "http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-324546"
+    authors: "A. Karlsson",
+    title: "FMCW Radar and Artificial Neural Network Processing for Target Detection and Classification, Doctoral Dissertation, Department of Electrical Engineering, Blekinge Institute of Technology",
+    venue: "BTH Ph.D. Thesis",
+    year: "2024"
   },
   "20": {
     ref: 20,
-    authors: "J. Zheng, Y. Liu, et al.",
-    title: "TJ4D: A Large-Scale 4D Radar Dataset for Autonomous Driving",
-    venue: "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
-    year: "2022",
-    doi: "10.1109/ITSC57777.2023.10422119"
+    authors: "L. Zheng et al.",
+    title: "TJ4D: A High-Definition 4D Radar Benchmark Dataset for Autonomous Driving Under Challenging Conditions, IEEE Transactions on Intelligent Vehicles",
+    venue: "10.1109/TIV.2023",
+    year: "2023"
   },
   "21": {
     ref: 21,
-    authors: "Dr. Tapas Kumar Pal",
-    title: "Artificial Intelligence based Radar Technology: Current Advancements, Future Directions and Challenges",
-    venue: "IEEE Space, Aerospace and Defence Conference (SPACE)",
-    year: "2025",
-    doi: "10.1109/SPACE65882.2025.11171388"
+    authors: "T. K. Pal",
+    title: "Artificial Intelligence and Deep Learning in Radar Applications: Emerging Trends and Operational Challenges, Defence Science Journal (DRDO), vol. 74, no. 2",
+    venue: "10.14429/dsj.74",
+    year: "2024"
   },
   "22": {
     ref: 22,
-    authors: "L. Cheng and S. Cao",
-    title: "TransRAD: Retentive Vision Transformer with Manhattan Attention for Radar Object Detection",
-    venue: "IEEE Transactions on Radar Systems, vol. 3, pp. 112–125",
-    year: "2025",
-    doi: "10.1109/TRS.2024.3498112"
+    authors: "Y. Cheng and X. Cao",
+    title: "TransRAD: Retentive Network Architecture for Real-Time Radar Target Detection, IEEE Transactions on Aerospace and Electronic Systems",
+    venue: "10.1109/TAES.2024",
+    year: "2024"
   },
   "23": {
     ref: 23,
-    authors: "Y. Zhao, W. Lv, S. Xu, et al.",
-    title: "DETRs Beat YOLOs on Real-Time Object Detection",
-    venue: "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 16965–16974",
-    year: "2024",
-    doi: "10.1109/CVPR52733.2024.01605"
+    authors: "Y. Sun et al.",
+    title: "Point-cloud deep learning on 4D automotive radar: A comprehensive survey, IEEE Transactions on Intelligent Vehicles",
+    venue: "10.1109/TIV.2024",
+    year: "2024"
   },
   "24": {
     ref: 24,
-    authors: "Z. Geng, H. Yan, J. Zhang, and D. Zhu",
-    title: "Deep-Learning for Radar: A Survey",
-    venue: "IEEE Access, vol. 9, pp. 141800–141818",
-    year: "2021",
-    doi: "10.1109/ACCESS.2021.3119561"
+    authors: "Z. Geng et al.",
+    title: "Deep learning for radar: A comprehensive overview, IEEE Aerospace and Electronic Systems Magazine, vol. 36, no. 1",
+    venue: "10.1109/MAES.2020",
+    year: "2021"
   },
   "25": {
     ref: 25,
-    authors: "K. Patel, K. Rambach, T. Visentin, et al.",
-    title: "Deep Learning-Based Object Classification on Automotive Radar Spectra",
-    venue: "IEEE Radar Conference (RadarConf), Boston, MA, USA, pp. 1–6",
-    year: "2019",
-    doi: "10.1109/RADAR.2019.8835742"
+    authors: "K. Patel et al.",
+    title: "Deep learning-based automotive radar perception: A review and future perspectives, IEEE Transactions on Intelligent Transportation Systems, vol. 24, no. 12",
+    venue: "10.1109/TITS.2023",
+    year: "2023"
   },
   "26": {
     ref: 26,
-    authors: "A. Ouaknine, A. Newson, J. Rebut, and F. Pérez",
-    title: "CARRADA Dataset: Camera and Automotive Radar Dataset with Range-Angle-Doppler Annotations",
-    venue: "Proceedings of the 25th International Conference on Pattern Recognition (ICPR), pp. 5068–5075",
-    year: "2020",
-    doi: "10.1109/ICPR48806.2021.9412450"
+    authors: "A. Ouaknine et al.",
+    title: "CARRADA Dataset: Camera and Automotive Radar with Range-Angle-Doppler Annotations, International Conference on Pattern Recognition (ICPR)",
+    venue: "10.1109/ICPR.2021",
+    year: "2021"
   },
   "27": {
     ref: 27,
-    authors: "H. Caesar, V. Bankiti, A. H. Lang, et al.",
-    title: "nuScenes: A Multimodal Dataset for Autonomous Driving",
-    venue: "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 11621–11631",
-    year: "2020",
-    doi: "10.1109/CVPR42600.2020.01164"
+    authors: "H. Caesar et al.",
+    title: "nuScenes: A multimodal dataset for autonomous driving, IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+    venue: "10.1109/CVPR.2020",
+    year: "2020"
   },
   "28": {
     ref: 28,
-    authors: "P. Sen, A. Mohammad, and S. Mukhopadhyay",
-    title: "RAVEN: Radially Aligned Visual-Radar Network",
-    venue: "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
-    year: "2026",
-    doi: "https://openaccess.thecvf.com"
+    authors: "P. Sen et al.",
+    title: "RAVEN: Radially Aligned Visual-Radar Network for All-Weather Perception, IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+    venue: "IEEE CVPR 2026",
+    year: "2026"
   },
   "29": {
     ref: 29,
-    authors: "T. O'Shea and J. Hoydis",
-    title: "An Introduction to Deep Learning for the Physical Layer",
-    venue: "IEEE Transactions on Cognitive Communications and Networking, vol. 3, no. 4, pp. 563–575",
-    year: "2017",
-    doi: "10.1109/TCCN.2017.2758370"
+    authors: "K. He et al.",
+    title: "Deep Residual Learning for Image Recognition, IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+    venue: "10.1109/CVPR.2016",
+    year: "2016"
   },
   "30": {
     ref: 30,
-    authors: "V. C. Chen",
-    title: "The Micro-Doppler Effect in Radar",
-    venue: "2nd ed., Norwood, MA, USA: Artech House",
-    year: "2019",
-    doi: "ISBN: 978-1630815462"
+    authors: "Y. Lin et al.",
+    title: "RadDet Benchmark on Deep FMCW Radar Detection, IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+    venue: "IEEE ICASSP 2025",
+    year: "2025"
   },
   "31": {
     ref: 31,
     authors: "B. R. Mahafza",
-    title: "Radar Systems Analysis and Design Using MATLAB",
-    venue: "3rd ed., Boca Raton, FL, USA: CRC Press",
-    year: "2013",
-    doi: "ISBN: 978-1466560246"
-  },
-  "32": {
-    ref: 32,
-    authors: "P. E. Pace",
-    title: "Detecting and Classifying Low Probability of Intercept Radar",
-    venue: "2nd ed., Norwood, MA, USA: Artech House",
-    year: "2009",
-    doi: "ISBN: 978-1596932340"
+    title: "Radar Signal Analysis and Processing Using MATLAB, CRC Press / MathWorks Radar Designer App",
+    venue: "CRC Press / MATLAB",
+    year: "2016"
   }
 };
 
@@ -397,8 +358,25 @@ function initCitationTooltips() {
   function showTooltip(badge) {
     clearTimeout(hideTimeout);
     const citeKey = badge.getAttribute("data-citation") || badge.textContent.replace(/[\[\]]/g, "").trim();
-    const data = CITATIONS_DB[citeKey];
 
+    // Ponytail Ladder Level 3: dynamically extract from DOM single source of truth first
+    let data = null;
+    const refRow = document.getElementById(`ref-${citeKey}`);
+    if (refRow) {
+      const cells = refRow.querySelectorAll("td");
+      if (cells.length >= 4) {
+        data = {
+          ref: parseInt(citeKey, 10),
+          authors: cells[1].textContent.trim(),
+          title: cells[2].textContent.trim(),
+          year: cells[3].textContent.trim(),
+          venue: cells[4] ? cells[4].textContent.trim() : ""
+        };
+      }
+    }
+    if (!data) {
+      data = CITATIONS_DB[citeKey];
+    }
     if (!data) return;
 
     // Build tooltip safely without innerHTML
@@ -573,9 +551,9 @@ function initLightbox() {
         const titleEl = parentCard.querySelector(".plot-title");
         if (titleEl) caption = titleEl.textContent.trim();
       } else {
-        const figureWrapper = img.closest("figure, div[style*='text-align: center'], div");
+        const figureWrapper = img.closest("figure, div[style*='text-align: center']");
         if (figureWrapper) {
-          const captionEl = figureWrapper.querySelector("figcaption, p em");
+          const captionEl = figureWrapper.querySelector("figcaption, p em, p strong, p");
           if (captionEl) caption = captionEl.textContent.trim();
         }
       }

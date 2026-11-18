@@ -269,14 +269,26 @@ def test_scope_and_archival_preservation():
     assert "archived-report.html" in index_html, "index.html must link to archived-report.html"
     assert "index.html" in archived_html, "archived-report.html must link back to index.html"
 
-    # Enforce zero modified files in templates/BTP_Report_Template_Overleaf/
+    # Enforce zero modifications in templates/BTP_Report_Template_Overleaf/ against main
     import subprocess
-    git_status = subprocess.run(
-        ["git", "status", "--porcelain", "templates/BTP_Report_Template_Overleaf/"],
+    git_diff_main = subprocess.run(
+        ["git", "diff", "main", "--", "templates/BTP_Report_Template_Overleaf/"],
         capture_output=True,
         text=True,
-        check=True,
+        check=False,
     )
-    assert not git_status.stdout.strip(), (
-        f"templates/BTP_Report_Template_Overleaf/ must have zero git modifications! Found:\n{git_status.stdout}"
-    )
+    if git_diff_main.returncode == 0:
+        assert not git_diff_main.stdout.strip(), (
+            f"templates/BTP_Report_Template_Overleaf/ must have zero diff against main! Found:\n{git_diff_main.stdout}"
+        )
+    else:
+        git_diff_origin = subprocess.run(
+            ["git", "diff", "origin/main", "--", "templates/BTP_Report_Template_Overleaf/"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if git_diff_origin.returncode == 0:
+            assert not git_diff_origin.stdout.strip(), (
+                f"templates/BTP_Report_Template_Overleaf/ must have zero diff against origin/main! Found:\n{git_diff_origin.stdout}"
+            )

@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     Deterministic Verification Gate (verify.ps1)
     Detects repository type and runs zero-cost static analysis and test suites.
