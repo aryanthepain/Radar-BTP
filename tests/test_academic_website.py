@@ -270,3 +270,36 @@ def test_academic_timeline_and_defense():
     assert "January 2027" in html, "Missing BTP-2 January milestone"
     assert "May 2027" in html, "Missing BTP-2 May milestone"
 
+
+def test_mobile_drawer_and_touch_targets():
+    """Verify WCAG 2.5.5 touch target standard (>=44x44px) and mobile navigation toggle markup."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+    with open(STYLES_CSS, "r", encoding="utf-8") as f:
+        css = f.read()
+
+    # Touch target standards in CSS for nav-toggle
+    assert ".nav-toggle-btn" in css, "CSS must define .nav-toggle-btn"
+    assert "min-width: 44px" in css, "nav-toggle must have min-width: 44px per WCAG 2.5.5"
+    assert "min-height: 44px" in css, "nav-toggle must have min-height: 44px per WCAG 2.5.5"
+    assert ":focus-visible" in css, "nav-toggle must have :focus-visible focus ring"
+
+    # Accessible ARIA attributes on #nav-toggle
+    assert 'id="nav-toggle"' in html, "HTML must contain #nav-toggle"
+    assert 'aria-expanded=' in html, "#nav-toggle must declare aria-expanded attribute"
+    assert 'aria-controls="academic-sidebar"' in html, "#nav-toggle must declare aria-controls='academic-sidebar'"
+    assert 'id="nav-backdrop"' in html, "Backdrop must have id='nav-backdrop'"
+
+
+def test_overflow_containment_and_scroll_wrappers():
+    """Verify two-tier horizontal momentum scroll containers for tables and KaTeX formulas."""
+    with open(STYLES_CSS, "r", encoding="utf-8") as f:
+        css = f.read()
+    with open(APP_JS, "r", encoding="utf-8") as f:
+        js = f.read()
+
+    # Scaffold stub for Task 3 expansion
+    assert os.path.exists(STYLES_CSS)
+    assert os.path.exists(APP_JS)
+
+

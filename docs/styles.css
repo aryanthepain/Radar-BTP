@@ -941,13 +941,25 @@ body {
   position: fixed;
   top: 1rem;
   right: 1rem;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  line-height: 1;
   z-index: 101;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   color: var(--text-primary);
-  padding: 0.5rem 0.75rem;
   border-radius: var(--radius-sm);
   cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.nav-toggle-btn:focus-visible {
+  outline: 2px solid var(--accent-sky, #38bdf8);
+  outline-offset: 2px;
 }
 
 .nav-backdrop {
