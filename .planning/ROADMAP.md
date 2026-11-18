@@ -17,7 +17,7 @@ A phased journey to prepare an undergraduate thesis exploratory presentation for
 - [x] **Phase 01.2.1: Interactive Research Showcase & Thesis Presentation Website** (INSERTED) - Deliver a clean, responsive showcase website for the supervising professor synthesizing all three notebooks, experimental results, comparative radar data progression (toy -> synthetic -> real RadDet), architecture flowcharts, and key code snippets.
 - [x] **Phase 01.2.2: Comprehensive BTP Thesis Report & Academic Publication Showcase Website** (INSERTED) - Deliver publication-grade ~20-page IIT Guwahati BTP Report and rework GitHub Pages website into an academic reading experience for professor finalization.
 - [x] **Phase 1.3: High-Coverage Deterministic Unit & Integration Testing** (INSERTED) - Comprehensive test expansion achieving >=90% code coverage across DSP algorithms, PyTorch dataset/models, and pipeline scripts with pytest-cov.
-- [ ] **Phase 3: Academic Portal Priority 0 Polish: Mobile UI & IEEE Citation Cards** - Deliver publication-grade responsive ergonomics, mobile drawer navigation, formula/table overflow containment (#23), and interactive floating IEEE citation previews (#21) for the thesis portal.
+- [x] **Phase 3: Academic Portal Priority 0 Polish: Mobile UI & IEEE Citation Cards** - Deliver publication-grade responsive ergonomics, mobile drawer navigation, formula/table overflow containment (#23), and interactive floating IEEE citation previews (#21) for the thesis portal. (completed 2026-11-19)
 
 ## Phase Details
 
@@ -161,7 +161,7 @@ All planned thesis preparatory and exploratory phases (Phase 1, 1.1, 1.2, 01.2.1
 | 01.2.1. Interactive Research Showcase & Thesis Presentation Website             | 3/3            | Completed   | 2026-11-03 |
 | 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 5/5            | Completed   | 2026-11-10 |
 | 1.3. High-Coverage Deterministic Unit & Integration Testing                     | 3/3            | Completed   | 2026-11-10 |
-| 3. Academic Portal Priority 0 Polish: Mobile UI & IEEE Citation Cards           | 2/2 | Completed   | 2026-11-19 |
+| 3. Academic Portal Priority 0 Polish: Mobile UI & IEEE Citation Cards           | 2/2 | Complete    | 2026-11-19 |
 
 ## Deferred / GitHub Issue Backlog
 
@@ -194,7 +194,7 @@ Phases 2, 3, and 4 have been removed from the active GSD planning cycle and pres
 4. Interactive floating IEEE citation cards render on hover/tap for inline citations (`[1]`, `[2]`, etc.) showing paper title, authors, venue, year, and direct DOI/arXiv hyperlinks with viewport collision detection.
 5. All deterministic tests in `tests/test_showcase_website.py` and `tests/test_academic_website.py` pass 100% under `pwsh -File ./scripts/verify.ps1`.
 
-**Plans**: 2/2 plans executed
+**Plans**: 2/2 plans complete
 
 Plans:
 - [x] 03-01-PLAN.md — Comprehensive mobile navigation drawer, WCAG 2.5.5 touch targets, body scroll lock, two-tier table/math overflow containment, and single-column reflow (Closes #23)
