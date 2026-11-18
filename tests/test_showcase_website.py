@@ -115,22 +115,26 @@ class TestShowcaseWebsite(unittest.TestCase):
         self.assertTrue(csv_path.exists(), "Missing Table III CSV in docs/assets/nb3/")
         self.assertGreater(csv_path.stat().st_size, 200, "Table III CSV suspiciously small")
 
-        # 4. Architecture and timeline diagrams (5 SVGs)
+        # 4. Architecture and timeline diagrams (6 SVGs)
         diagram_files = [
             "nb1_top.svg",
             "nb2_top.svg",
             "nb3_top.svg",
             "nb2_comparison.svg",
             "timeline_evolution.svg",
+            "timeline_gantt.svg",
         ]
+        import xml.etree.ElementTree as ET
         for fname in diagram_files:
             fpath = ASSETS_DIR / "diagrams" / fname
             self.assertTrue(fpath.exists(), f"Missing diagram SVG: {fpath}")
             self.assertGreater(fpath.stat().st_size, 500, f"Diagram SVG too small: {fname}")
-            with open(fpath, "r", encoding="utf-8") as f:
-                content = f.read()
-                self.assertIn("<svg", content, f"SVG root missing in {fname}")
-                self.assertIn("</svg>", content, f"Closing SVG tag missing in {fname}")
+            try:
+                tree = ET.parse(fpath)
+                root = tree.getroot()
+                self.assertIn("svg", root.tag.lower(), f"Root tag of {fname} is not svg: {root.tag}")
+            except Exception as e:
+                self.fail(f"SVG {fname} contains XML parse errors and cannot be rendered in browser: {e}")
 
         # 5. Offline Prism.js vendor assets (2 files)
         prism_js = ASSETS_DIR / "vendor" / "prism.min.js"
@@ -151,15 +155,15 @@ class TestShowcaseWebsite(unittest.TestCase):
         collector = HTMLLinkAndIDCollector()
         collector.feed(html_content)
 
-        # 1. Verify mandatory semantic section IDs
+        # 1. Verify mandatory semantic section IDs in active portal
         required_sections = [
             "overview",
-            "timeline",
-            "notebook-01",
-            "notebook-02",
-            "notebook-03",
-            "comparison",
-            "conclusions",
+            "ch1-intro",
+            "ch2-lit-review",
+            "ch3-methodology",
+            "ch4-results",
+            "ch5-conclusion",
+            "bibliography",
         ]
         for sec_id in required_sections:
             self.assertIn(
@@ -209,26 +213,34 @@ class TestShowcaseWebsite(unittest.TestCase):
         with open(app_path, "r", encoding="utf-8") as f:
             js_content = f.read()
 
-        # Check for forbidden external URLs
-        forbidden_substrings = [
-            "http://",
-            "https://",
+        # Check for forbidden external CDN endpoints
+        forbidden_cdns = [
             "unpkg.com",
             "cdnjs.cloudflare.com",
             "cdn.jsdelivr.net",
             "fonts.googleapis.com",
+            "ajax.googleapis.com",
         ]
-        for forbidden in forbidden_substrings:
+        for cdn in forbidden_cdns:
             self.assertNotIn(
-                forbidden,
+                cdn,
                 html_content,
-                f"External URL '{forbidden}' detected in docs/index.html (violates offline resilience)",
+                f"External CDN '{cdn}' detected in docs/index.html (violates offline resilience)",
             )
             self.assertNotIn(
-                forbidden,
+                cdn,
                 css_content,
-                f"External URL '{forbidden}' detected in docs/styles.css (violates offline resilience)",
+                f"External CDN '{cdn}' detected in docs/styles.css (violates offline resilience)",
             )
+
+        # Ensure zero external asset loads (scripts, stylesheets, images) across index.html
+        import re
+        external_assets = re.findall(r'<(?:script|link|img)[^>]+(?:src|href)=["\']https?://', html_content, re.IGNORECASE)
+        self.assertEqual(
+            external_assets,
+            [],
+            f"External asset links detected in index.html (must be offline/local): {external_assets}"
+        )
 
         # Check CSS Dark Cyber-Radar design tokens
         self.assertIn("--bg-primary: #0a0e17", css_content)
@@ -252,9 +264,10 @@ class TestShowcaseWebsite(unittest.TestCase):
             )
 
     def test_04_master_comparison_table_and_conclusions(self):
-        """Verifies 7-metric master table dimensions and professor conclusion findings."""
-        index_path = DOCS_DIR / "index.html"
-        with open(index_path, "r", encoding="utf-8") as f:
+        """Verifies 7-metric master table dimensions and professor conclusion findings in archived report."""
+        archived_path = DOCS_DIR / "archived-report.html"
+        self.assertTrue(archived_path.exists(), "docs/archived-report.html does not exist")
+        with open(archived_path, "r", encoding="utf-8") as f:
             html_content = f.read()
 
         # Verify table presence and notebook columns

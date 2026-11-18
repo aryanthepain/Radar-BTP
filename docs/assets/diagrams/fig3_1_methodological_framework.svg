@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1020 610" width="100%" height="100%" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="grad-fmcw-31" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="grad-raddet-31" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d9488" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="grad-eval-31" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="card-inner-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="arrow-sky" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8" />
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#2dd4bf" />
+    </marker>
+    <marker id="arrow-indigo" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#818cf8" />
+    </marker>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="shadow-f31" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1020" height="610" rx="12" fill="#0b1120" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- ========================================== -->
+  <!-- BRANCH 1: SYNTHETIC FMCW RADAR PERCEPTION -->
+  <!-- ========================================== -->
+  <rect x="24" y="24" width="476" height="330" rx="10" fill="url(#grad-fmcw-31)" stroke="#38bdf8" stroke-width="1.8" filter="url(#shadow-f31)"/>
+  
+  <!-- Branch 1 Header Badge -->
+  <rect x="44" y="38" width="436" height="28" rx="5" fill="#0369a1" />
+  <text x="262" y="57" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle" letter-spacing="0.06em">BRANCH 1: SYNTHETIC FMCW RADAR PERCEPTION</text>
+  
+  <!-- Step 1.1: Radar Simulation -->
+  <rect x="44" y="76" width="436" height="46" rx="6" fill="url(#card-inner-grad)" stroke="#0284c7" stroke-width="1.2"/>
+  <text x="262" y="96" fill="#f8fafc" font-size="13.5" font-weight="700" text-anchor="middle">77 GHz FMCW Radar Simulation Environment</text>
+  <text x="262" y="113" fill="#94a3b8" font-size="11.5" text-anchor="middle">MATLAB Radar Designer Baseline · B = 1.0 GHz, Tc = 50 µs</text>
+  
+  <!-- Arrow 1.1 -> 1.2 -->
+  <line x1="262" y1="122" x2="262" y2="134" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow-sky)"/>
+
+  <!-- Step 1.2: Complex Baseband Radar Cube -->
+  <rect x="44" y="134" width="436" height="46" rx="6" fill="url(#card-inner-grad)" stroke="#0284c7" stroke-width="1.2"/>
+  <text x="262" y="154" fill="#f8fafc" font-size="13.5" font-weight="700" text-anchor="middle">Complex Baseband Radar Data Cube</text>
+  <text x="262" y="171" fill="#38bdf8" font-size="11.5" font-weight="600" text-anchor="middle">X ∈ ℂ^(4 × 128 × 256) · 4 Rx × 128 Chirps × 256 Samples</text>
+
+  <!-- Fork Arrows 1.2 -> Dual DSP/AI Pathways -->
+  <path d="M 262 180 L 262 190 L 150 190 L 150 200" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow-sky)"/>
+  <path d="M 262 180 L 262 190 L 374 190 L 374 200" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow-sky)"/>
+
+  <!-- Step 1.3A: Conventional Radar DSP -->
+  <rect x="44" y="200" width="212" height="80" rx="6" fill="#0f172a" stroke="#0284c7" stroke-width="1.2"/>
+  <text x="150" y="221" fill="#38bdf8" font-size="12.5" font-weight="700" text-anchor="middle">Conventional Radar DSP</text>
+  <text x="150" y="239" fill="#e2e8f0" font-size="11.5" text-anchor="middle">Range &amp; Doppler 2D-FFT</text>
+  <text x="150" y="255" fill="#94a3b8" font-size="11" text-anchor="middle">MTI Clutter · 2D CA-CFAR</text>
+  <text x="150" y="271" fill="#64748b" font-size="10.5" text-anchor="middle">MUSIC AoA + DBSCAN BEV</text>
+
+  <!-- Step 1.3B: Multi-Task Radar CNN -->
+  <rect x="268" y="200" width="212" height="80" rx="6" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.2"/>
+  <text x="374" y="221" fill="#a78bfa" font-size="12.5" font-weight="700" text-anchor="middle">Multi-Task Radar CNN</text>
+  <text x="374" y="239" fill="#e2e8f0" font-size="11.5" text-anchor="middle">4× Residual Blocks (128×256)</text>
+  <text x="374" y="255" fill="#cbd5e1" font-size="11" text-anchor="middle">BCE Logits Heatmap Head</text>
+  <text x="374" y="271" fill="#a78bfa" font-size="10.5" text-anchor="middle">Sigmoid (cx, cy, w, h) Box Head</text>
+
+  <!-- Merge Arrows 1.3A & 1.3B -> 1.4 -->
+  <path d="M 150 280 L 150 290 L 262 290 L 262 298" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow-sky)"/>
+  <path d="M 374 280 L 374 290 L 262 290 L 262 298" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+
+  <!-- Step 1.4: Output Detections & Kinematics -->
+  <rect x="44" y="298" width="436" height="46" rx="6" fill="url(#card-inner-grad)" stroke="#10b981" stroke-width="1.3"/>
+  <text x="262" y="318" fill="#a7f3d0" font-size="13" font-weight="700" text-anchor="middle">Spatial Target Detections, Extents &amp; Kinematics</text>
+  <text x="262" y="335" fill="#6ee7b7" font-size="11.5" text-anchor="middle">Classes: Car, Pedestrian, Cyclist, Drone · 3D Kinematics</text>
+
+  <!-- ============================================== -->
+  <!-- BRANCH 2: WIDEBAND RADAR SPECTRUM DETECTION   -->
+  <!-- ============================================== -->
+  <rect x="520" y="24" width="476" height="330" rx="10" fill="url(#grad-raddet-31)" stroke="#2dd4bf" stroke-width="1.8" filter="url(#shadow-f31)"/>
+  
+  <!-- Branch 2 Header Badge -->
+  <rect x="540" y="38" width="436" height="28" rx="5" fill="#0f766e" />
+  <text x="758" y="57" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle" letter-spacing="0.06em">BRANCH 2: WIDEBAND RADAR SPECTRUM DETECTION</text>
+  
+  <!-- Step 2.1: RadDet Benchmark Dataset -->
+  <rect x="540" y="76" width="436" height="46" rx="6" fill="url(#card-inner-grad)" stroke="#0d9488" stroke-width="1.2"/>
+  <text x="758" y="96" fill="#f8fafc" font-size="13.5" font-weight="700" text-anchor="middle">RadDet Benchmark Dataset (ICASSP 2025)</text>
+  <text x="758" y="113" fill="#94a3b8" font-size="11.5" text-anchor="middle">40,003 High-Fidelity Spectrograms across 6 SNR Tiers</text>
+  
+  <!-- Arrow 2.1 -> 2.2 -->
+  <line x1="758" y1="122" x2="758" y2="134" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <!-- Step 2.2: Time-Frequency Spectrograms -->
+  <rect x="540" y="134" width="436" height="46" rx="6" fill="url(#card-inner-grad)" stroke="#0d9488" stroke-width="1.2"/>
+  <text x="758" y="154" fill="#f8fafc" font-size="13.5" font-weight="700" text-anchor="middle">2D Time-Frequency Spectrogram Representation</text>
+  <text x="758" y="171" fill="#2dd4bf" font-size="11.5" font-weight="600" text-anchor="middle">S-128: 128 × 128 Grid · 11 Radar Modulation Classes</text>
+
+  <!-- Arrow 2.2 -> 2.3 -->
+  <line x1="758" y1="180" x2="758" y2="196" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <!-- Step 2.3: YOLOv9-C Deep Detector -->
+  <rect x="540" y="196" width="436" height="86" rx="6" fill="#0f172a" stroke="#0d9488" stroke-width="1.2"/>
+  <text x="758" y="217" fill="#2dd4bf" font-size="13.5" font-weight="700" text-anchor="middle">YOLOv9-C Deep Spectrum Detector (GELAN-C)</text>
+  <text x="758" y="236" fill="#e2e8f0" font-size="11.5" text-anchor="middle">GELAN-C Architecture · 25.30M Parameters</text>
+  <text x="758" y="253" fill="#cbd5e1" font-size="11.5" text-anchor="middle">102.2 GFLOPs Compute · Multi-Scale P3/P4/P5 Heads</text>
+  <text x="758" y="269" fill="#94a3b8" font-size="11" text-anchor="middle">Programmable Gradient Information (PGI) Aux Loss</text>
+
+  <!-- Arrow 2.3 -> 2.4 -->
+  <line x1="758" y1="282" x2="758" y2="298" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow-teal)"/>
+
+  <!-- Step 2.4: Detection Results & Benchmarking -->
+  <rect x="540" y="298" width="436" height="46" rx="6" fill="url(#card-inner-grad)" stroke="#10b981" stroke-width="1.3"/>
+  <text x="758" y="318" fill="#a7f3d0" font-size="13" font-weight="700" text-anchor="middle">Multi-SNR Pulse Bounding Boxes &amp; Classification</text>
+  <text x="758" y="335" fill="#6ee7b7" font-size="11.5" text-anchor="middle">Robust Evaluation (-20 dB to +20 dB) · Box Offsets</text>
+
+  <!-- ============================================== -->
+  <!-- FLOW ARROWS CONVERGING INTO COMMON STAGE      -->
+  <!-- ============================================== -->
+  <path d="M 262 354 L 262 374 L 480 374 L 480 392" fill="none" stroke="#38bdf8" stroke-width="2.2"/>
+  <path d="M 758 354 L 758 374 L 540 374 L 540 392" fill="none" stroke="#2dd4bf" stroke-width="2.2"/>
+  <line x1="510" y1="374" x2="510" y2="394" stroke="#818cf8" stroke-width="2.2" marker-end="url(#arrow-indigo)"/>
+
+  <!-- ============================================== -->
+  <!-- UNIFYING STAGE: RESOURCE-EFFICIENT AI RADAR   -->
+  <!-- ============================================== -->
+  <rect x="24" y="394" width="972" height="192" rx="10" fill="url(#grad-eval-31)" stroke="#818cf8" stroke-width="1.8" filter="url(#shadow-f31)"/>
+  
+  <!-- Unifying Header Badge -->
+  <rect x="44" y="408" width="932" height="28" rx="5" fill="#4338ca" />
+  <text x="510" y="427" fill="#ffffff" font-size="13.5" font-weight="800" text-anchor="middle" letter-spacing="0.06em">UNIFYING INVESTIGATION: RESOURCE-EFFICIENT AI FOR RADAR PERCEPTION</text>
+  
+  <!-- Left Column: Algorithm-Level Efficiency & Optimization -->
+  <rect x="44" y="446" width="456" height="126" rx="6" fill="#0f172a" stroke="#6366f1" stroke-width="1.2"/>
+  <text x="272" y="468" fill="#c7d2fe" font-size="13" font-weight="700" text-anchor="middle">Algorithm-Level Efficiency &amp; Optimization</text>
+  <text x="64" y="492" fill="#e2e8f0" font-size="11.5"><tspan fill="#818cf8" font-weight="700">•</tspan> Structured Pruning: Removing redundant conv filters</text>
+  <text x="64" y="514" fill="#e2e8f0" font-size="11.5"><tspan fill="#818cf8" font-weight="700">•</tspan> Post-Training Quantization: FP32 to INT8 precision</text>
+  <text x="64" y="536" fill="#e2e8f0" font-size="11.5"><tspan fill="#818cf8" font-weight="700">•</tspan> Knowledge Distillation: Heavy teacher to compact student</text>
+  <text x="64" y="558" fill="#e2e8f0" font-size="11.5"><tspan fill="#818cf8" font-weight="700">•</tspan> Adaptive Compute: Dynamic SNR-conditioned radar routing</text>
+
+  <!-- Right Column: Hardware-Oriented Deployment -->
+  <rect x="520" y="446" width="456" height="126" rx="6" fill="#0f172a" stroke="#6366f1" stroke-width="1.2"/>
+  <text x="748" y="468" fill="#c7d2fe" font-size="13" font-weight="700" text-anchor="middle">Hardware-Oriented Deployment &amp; Benchmarks</text>
+  <text x="540" y="492" fill="#e2e8f0" font-size="11.5"><tspan fill="#818cf8" font-weight="700">•</tspan> Latency Profiling: CPU execution vs. GPU inference</text>
+  <text x="540" y="514" fill="#e2e8f0" font-size="11.5"><tspan fill="#818cf8" font-weight="700">•</tspan> Memory Footprint: Peak VRAM &amp; parameter auditing</text>
+  <text x="540" y="536" fill="#e2e8f0" font-size="11.5"><tspan fill="#818cf8" font-weight="700">•</tspan> Real-Time Budget: Latency within chirp duty cycle</text>
+  <text x="540" y="558" fill="#e2e8f0" font-size="11.5"><tspan fill="#818cf8" font-weight="700">•</tspan> Target Platforms: Low-power edge processors &amp; SoCs</text>
+</svg>

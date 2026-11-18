@@ -16,7 +16,7 @@
 
 ## Executive Summary
 
-This document serves as the formal mathematical and physical defense dossier addressing the six critical focus questions posed by IIT Guwahati supervising faculty. These rigorous mathematical proofs and physical boundary derivations justify why deep neural networks provide decisive value over classical heuristic radar DSP, why 2.5D Range-Azimuth-Doppler spectrum detection resolves sub-Rayleigh targets, and how real-time edge constraints are satisfied without ungrounded heuristics.
+This document serves as the formal mathematical and physical defense dossier addressing the twelve critical focus questions posed by IIT Guwahati supervising faculty. These rigorous mathematical proofs and physical boundary derivations justify why deep neural networks provide decisive value over classical heuristic radar DSP, why 2.5D Range-Azimuth-Doppler spectrum detection resolves sub-Rayleigh targets, and how real-time edge constraints are satisfied without ungrounded heuristics.
 
 ---
 
@@ -117,4 +117,150 @@ We enforce strict sim-to-real fidelity across two orthogonal axes:
 1. **Physical Clutter Invariants in Simulation:** Our simulator models ground clutter using non-Rayleigh compound K-distributions and Weibull distributions, incorporating spatial array steering vector phase noise and antenna mutual coupling matrices:
    $$\mathbf{x}_{\text{received}} = \mathbf{C}_{\text{coupling}} \mathbf{A}(\theta) \mathbf{s}(t) + \mathbf{n}_{\text{Weibull}}(t)$$
 2. **Real-World Empirical Validation:** All quantitative benchmark claims in our thesis are evaluated directly on the **ICASSP 2025 RadDet real-world dataset**, recorded with physical 77 GHz FMCW automotive radar sensors in physical traffic environments across diverse weather, lighting, and multi-path scenarios.
+
+---
+
+## Focus Question 7: Why 77 GHz for the FMCW Radar Perception Track?
+
+### Professor's Challenge
+> *"Why did you choose 77 GHz for the automotive FMCW simulation track instead of lower frequencies like 24 GHz or higher ones like 140 GHz?"*
+
+### Direct Defense (Spoken-Ready)
+**Core Takeaway:**  
+We chose $77\text{ GHz}$ ($76\text{--}81\text{ GHz}$ band) because it is the global industry standard for automotive radar, offering the optimal balance between high range resolution, compact antenna size, and low atmospheric attenuation.
+
+**Key Points:**
+- **Much Higher Range Resolution ($\Delta R = \frac{c}{2B}$):**  
+  At $77\text{ GHz}$, international regulations allocate up to $4\text{ GHz}$ of continuous bandwidth ($76\text{--}81\text{ GHz}$), allowing our $1\text{ GHz}$ sweep to achieve $\mathbf{15\text{ cm}}$ range resolution (down to $4\text{ cm}$ at full bandwidth). In contrast, older $24\text{ GHz}$ systems are limited to a narrow $250\text{ MHz}$ band, giving a coarse $\mathbf{60\text{ cm}}$ resolution that cannot separate a pedestrian standing beside a car.
+- **Compact Antenna & MIMO Array:**  
+  At $77\text{ GHz}$, the wavelength is only $\mathbf{\lambda \approx 3.9\text{ mm}}$ (compared to $12.5\text{ mm}$ at $24\text{ GHz}$). Since antenna spacing is $\frac{\lambda}{2} \approx 2\text{ mm}$, an entire multi-channel virtual MIMO array fits onto a chip of just a few square centimeters, making it easy to package behind a vehicle bumper.
+- **Higher Doppler Sensitivity:**  
+  Because Doppler shift scales with frequency ($f_d = \frac{2v}{\lambda}$), $77\text{ GHz}$ produces $3.2\times$ higher frequency shifts than $24\text{ GHz}$ for the same velocity, helping the model detect slow pedestrian motion and limb gait signatures.
+- **Atmospheric Window & Global Standards:**  
+  Unlike $60\text{ GHz}$ (which suffers severe oxygen absorption of $\sim 15\text{ dB/km}$), $77\text{ GHz}$ sits in a low-attenuation transmission window ($<0.5\text{ dB/km}$) capable of $200\text{ m}+$ long-range sensing in rain and fog. Additionally, ITU and FCC phased out $24\text{ GHz}$ ultra-wideband to protect radio astronomy, making $77\text{ GHz}$ the universally mandated band with mature commercial hardware (e.g., TI AWR1843).
+
+**Summary:**  
+$77\text{ GHz}$ provides the necessary bandwidth for sub-meter resolution and a compact form factor while remaining within regulatory and atmospheric transmission limits.
+
+---
+
+## Focus Question 8: Synthetic Radar Data Generation & Hardware Modeling Provenance
+
+### Professor's Challenge
+> *"Where does the synthetic data for Track I come from? What physical radar system is it based on, and how do you justify generating data mathematically rather than capturing it directly from hardware?"*
+
+### Direct Defense (Spoken-Ready)
+**Core Takeaway:**  
+Our Track I simulation architecture is **inspired by MATLAB's Radar Toolbox / Radar Creator module** workflows, built from first-principles FMCW dechirp mixer physics and parameterized after commercial 77 GHz automotive transceivers (such as the Texas Instruments AWR1843). We implemented this natively in Python to eliminate proprietary software dependencies, allow on-the-fly PyTorch training generation, and provide exact mathematical ground truth across every intermediate DSP stage.
+
+**Key Points:**
+- **Inspiration from MATLAB's Radar Creator Workflow:**  
+  The mathematical architecture replicates the modular pipeline found in MATLAB's Radar Toolbox / Creator modules: synthesizing linear chirp frequency ramps, modeling two-way propagation delays, computing mixer dechirping, and constructing the 3D complex baseband radar cube ($N_{\text{rx}} \times N_{\text{chirp}} \times N_{\text{sample}}$). Implementing this in native NumPy/PyTorch enables high-throughput batch generation and seamless integration with deep learning detectors.
+- **Physical Hardware Specification (77 GHz Automotive Baseline):**  
+  The configuration mirrors standard 76–81 GHz automotive mmWave sensors: carrier frequency $f_c = 77\text{ GHz}$ ($\lambda \approx 3.896\text{ mm}$), sweep bandwidth $B = 1.0\text{ GHz}$ (yielding theoretical range resolution $\Delta R = \frac{c}{2B} = 0.15\text{ m}$), chirp duration $T_c = 50\ \mu\text{s}$, 256 fast-time ADC samples, 128 slow-time chirps, and a 4-channel Uniform Linear Array (ULA) with $\lambda/2$ receiver spacing.
+- **Analytical Scatterer & Clutter Modeling:**  
+  Target reflections follow classical radar equations (Skolnik [4], Richards [5], Mahafza [19]), incorporating two-way $1/R^2$ field path loss, spatial steering phases, and realistic radar cross-sections ($\sigma_{\text{car}} \approx 10\text{ dBsm}$, $\sigma_{\text{pedestrian}} \approx -5\text{ dBsm}$). Micro-Doppler limb oscillations follow Chen [18], while environmental ground returns are injected as Rayleigh-distributed stationary clutter.
+- **Why Simulation for Track I:**  
+  Physical hardware recordings do not provide isolated ground-truth labels for intermediate DSP stages without complex, synchronized external LiDAR/camera tracking rigs. The simulator provides exact, unambiguous ground truth to verify every discrete DSP stage (Range FFT, MTI, Doppler FFT, 2D CFAR, MUSIC/Capon AoA, DBSCAN) and supervise the `RadarObjectDetectorCNN`, establishing a controlled analytical baseline before we evaluate the separate real-world RadDet RF spectrum dataset in Track II.
+
+**Summary:**  
+By adapting the proven architecture of MATLAB's radar creator workflow into an open-source Python engine, we obtain complete mathematical control and transparent ground truth over automotive radar physics before tackling empirical wideband datasets.
+
+---
+
+## Focus Question 9: Understanding Detection Metrics: $\text{mAP}$, $\text{mAP}_{50}$, and $\text{mAP}_{50:95}$
+
+### Professor's Challenge
+> *"You report an $\text{mAP}@0.5$ of $25.25\%$ and an $\text{mAP}@0.5:0.95$ of $19.03\%$ for the YOLOv9 detector on the RadDet benchmark. What mathematically is Mean Average Precision, why does this numerical discrepancy between $\text{mAP}_{50}$ and $\text{mAP}_{50:95}$ occur, and what does it reveal about your radar detector's localization precision?"*
+
+### Direct Defense (Spoken-Ready)
+**Core Takeaway:**  
+$\text{mAP}$ measures the overall trade-off between detection precision and recall averaged across all classes. The numerical gap between $\text{mAP}_{50}$ ($25.25\%$) and $\text{mAP}_{50:95}$ ($19.03\%$) occurs because $\text{mAP}_{50}$ only requires a coarse $50\%$ spatial overlap ($\text{IoU} \ge 0.50$) to count a detection as a True Positive, whereas $\text{mAP}_{50:95}$ averages performance across ten increasingly strict overlap thresholds up to $95\%$, rigorously penalizing boundary fuzziness in radar representations.
+
+**Key Points:**
+- **What is $\text{mAP}$ (Mean Average Precision)?**  
+  For each target class, predicted detections are ranked by confidence score to plot the **Precision-Recall (PR) curve**. Average Precision ($\text{AP}$) is the area under this interpolated PR curve ($\text{AP} = \int_0^1 p(r) \, dr$). Mean Average Precision ($\text{mAP}$) is the arithmetic mean of $\text{AP}$ across all $C$ target classes:
+  $$\text{mAP} = \frac{1}{C} \sum_{c=1}^C \text{AP}_c$$
+- **What is $\text{mAP}_{50}$ ($\text{mAP}@0.50$ — PASCAL VOC Standard)?**  
+  A predicted bounding box is marked as a True Positive if its Intersection over Union ($\text{IoU}$) with a ground-truth box meets a single fixed threshold:
+  $$\text{IoU} = \frac{\text{Area}(B_{\text{pred}} \cap B_{\text{gt}})}{\text{Area}(B_{\text{pred}} \cup B_{\text{gt}})} \ge 0.50$$
+  This metric evaluates whether the model successfully detected and classified the radar emission or target, tolerating loose or slightly oversized bounding box boundaries.
+- **What is $\text{mAP}_{50:95}$ ($\text{mAP}@[0.50:0.95]$ — COCO Benchmark Standard)?**  
+  $\text{mAP}_{50:95}$ is the average of mAP evaluated over 10 discrete $\text{IoU}$ cutoff thresholds from $0.50$ to $0.95$ in steps of $0.05$ ($\text{IoU} \in \{0.50, 0.55, \dots, 0.95\}$):
+  $$\text{mAP}_{50:95} = \frac{1}{10} \sum_{k=0}^9 \text{mAP}_{\text{IoU} = 0.50 + 0.05k}$$
+  It strictly penalizes imprecise localization. If a predicted box achieves $60\%$ overlap, it counts as a True Positive at $\text{IoU} = 0.50$ and $0.55$, but instantly flips to a False Positive for all thresholds $\ge 0.65$, pulling down the composite score.
+- **Why the Metric Drop is Normal and Informative in Radar Sensing:**  
+  Unlike optical camera images where objects have sharp, knife-edge physical silhouettes, radar spectrograms and Range-Doppler heatmaps exhibit diffuse energy tails governed by the radar's Point Spread Function (Dirichlet sinc sidelobes and window leakage). While our YOLO detector reliably isolates the presence and modulation type of emissions ($\text{mAP}_{50} = 25.25\%$), drawing pixel-tight boxes around diffuse energy boundaries at strict thresholds like $\text{IoU} \ge 0.80\text{--}0.95$ is inherently ambiguous, which naturally accounts for the drop to $19.03\%$.
+
+**Summary:**  
+$\text{mAP}_{50}$ validates target recognition capability, while $\text{mAP}_{50:95}$ measures bounding box tightness; the gap highlights the physical reality of diffuse energy boundaries in radar signal representations.
+
+---
+
+## Focus Question 10: FMCW Physics Foundations — What Does the Formulation in Chapter 2 Actually Mean?
+
+### Professor's Challenge
+> *"Walk me through the mathematics in Chapter 2. Beyond writing down dechirping and Fourier equations, what is the physical intuition behind how an FMCW radar extracts distance, velocity, and angle?"*
+
+### Direct Defense (Spoken-Ready)
+**Core Takeaway:**  
+FMCW radar maps three orthogonal spatial and motion dimensions into three independent frequency and phase dimensions: **Fast-time frequency shift** yields target range ($R$), **slow-time phase progression** yields radial velocity ($v$), and **spatial channel phase difference** yields azimuth angle ($\theta$).
+
+**Key Points:**
+- **Why Beat Frequency Gives Range ($f_b = \frac{2SR}{c}$):**  
+  Because the transmitted signal frequency sweeps linearly at rate $S = B/T_c$, a round-trip echo delayed by $\tau = 2R/c$ arrives slightly shifted in frequency. Mixing the returned echo with the current transmit chirp (homodyne dechirping) produces an intermediate beat frequency $f_b = S\tau$. A 1D fast-time Range FFT simply converts this beat note into target distance, with physical resolution $\Delta R = \frac{c}{2B} \approx 0.15\text{ m}$.
+- **Why Phase (Not Frequency) Gives Velocity ($\Delta \phi = \frac{4\pi v T_c}{\lambda}$):**  
+  Within a single 50 $\mu$s chirp, target motion causes negligible frequency shift. However, across successive chirps separated by $T_c$, tiny millimeter-scale displacements shift the carrier phase by $\Delta \phi = \frac{4\pi v T_c}{\lambda}$. Taking an FFT across the sequence of chirps (slow-time Doppler FFT) computes this phase rotation rate, resolving velocity with precision $\Delta v = \frac{\lambda}{2 N_c T_c} \approx 0.304\text{ m/s}$.
+- **Why Spatial Phase Gives Azimuth Angle ($\Delta \Phi = \frac{2\pi d \sin\theta}{\lambda}$):**  
+  A wavefront arriving at angle $\theta$ hits adjacent receiver antennas (spaced by $d = \lambda/2$) with a geometric path length difference of $d\sin\theta$. This creates an inter-channel phase shift. Beamformers and subspace methods (MUSIC/Capon) sweep steering vectors $\mathbf{a}(\theta)$ across antenna channels to locate spatial energy peaks.
+
+**Summary:**  
+Chapter 2 establishes that range is extracted from intermediate frequency, velocity from chirp-to-chirp phase rotation, and angle from inter-antenna spatial phase shifts.
+
+---
+
+## Focus Question 11: Deciphering Table 3.1 — Classical DSP Baseline, Complexities, and Failure Modes
+
+### Professor's Challenge
+> *"In Table 3.1, you synthesize the governing equations, complexities, and failure modes across six classical DSP stages. Explain why this classical pipeline breaks down in adverse, dense multi-target environments."*
+
+### Direct Defense (Spoken-Ready)
+**Core Takeaway:**  
+Classical radar DSP is composed of decoupled, localized linear estimators. While computationally light ($\mathcal{O}(N\log N)$), each stage operates under idealized assumptions that fail in dense real-world traffic: windowing causes spectral leakage, MTI creates blind speeds, CA-CFAR suffers target masking, and subspace AoA collapses under coherent multipath.
+
+**Key Points:**
+- **Range & Doppler FFTs ($\mathcal{O}(N\log N)$):** Hann windowing suppresses sidelobes from finite observation time, but broadens the mainlobe by $\approx 1.4\times$, worsening straddling loss and obscuring weak scatterers near strong vehicles.
+- **MTI Clutter Filtering ($\mathcal{O}(N_c)$):** Subtracting slow-time averages removes stationary ground reflections ($A_{\text{clutter}} \approx 12.94\text{ dB}$), but creates blind speeds at multiples of $v_{\text{blind}} = \frac{\lambda}{2 T_c}$, attenuating vehicles moving at those speeds.
+- **CA-CFAR Thresholding ($\mathcal{O}(N_s N_c)$):** Assumes homogeneous exponential noise power. When multiple targets cluster in the reference window, the estimated noise floor spikes artificially, causing severe **target masking** (false dismissals of adjacent pedestrians or cyclists).
+- **Subspace AoA Estimation (MUSIC/Capon, $\mathcal{O}(N_{\text{rx}}^3 + N_{\text{grid}}N_{\text{rx}}^2)$):** Requires uncorrelated scatterers and sufficient snapshots ($L \ge N_{\text{rx}}$). In automotive multipath, road reflections are coherent, causing the spatial covariance matrix rank to collapse ($\operatorname{rank}(\mathbf{R}_{xx}) < K$) and washing out directional peaks.
+- **DBSCAN Clustering ($\mathcal{O}(N\log N)$):** Groups points by Euclidean distance without prior knowledge of cluster count, but fails when clusters have unequal densities and lacks semantic classification capability.
+
+**Summary:**  
+Table 3.1 proves that classical DSP fails when scenes violate homogeneous noise and uncorrelated source assumptions, directly motivating deep learning architectures that learn global contextual priors.
+
+---
+
+## Focus Question 12: Physical Meaning and Structure of the Radar Data Cube $\mathbf{X} \in \mathbb{C}^{N_{\mathrm{rx}} \times N_{\mathrm{chirp}} \times N_{\mathrm{sample}}}$
+
+### Professor's Challenge
+> *"Why is your raw radar data structured as a complex 3D tensor $\mathbf{X} \in \mathbb{C}^{N_{\mathrm{rx}} \times N_{\mathrm{chirp}} \times N_{\mathrm{sample}}}$? Explain what each axis physically represents and why the samples must be complex-valued."*
+
+### Direct Defense (Spoken-Ready)
+**Core Takeaway:**  
+The radar cube $\mathbf{X} \in \mathbb{C}^{4 \times 128 \times 256}$ is the discretized discrete-time spatio-temporal representation of the radar environment: the three dimensions physically capture **Space** ($N_{\text{rx}} = 4$), **Slow Time** ($N_{\text{chirp}} = 128$), and **Fast Time** ($N_{\text{sample}} = 256$).
+
+**Key Points:**
+- **Fast-Time Dimension ($N_{\text{sample}} = 256$ samples per chirp):**  
+  Sampled at $F_s = 5.12\text{ MHz}$ during the active $50\ \mu\text{s}$ chirp duration. The frequency content along this axis directly encodes target **Range** ($R = \frac{c f_b}{2S}$).
+- **Slow-Time Dimension ($N_{\text{chirp}} = 128$ chirps per frame):**  
+  Samples the scene across successive chirps over a Coherent Processing Interval ($\text{CPI} = 128 \times 50\ \mu\text{s} = 6.4\text{ ms}$). The phase drift along this axis directly encodes target **Radial Velocity** ($v = \frac{\lambda f_d}{2}$).
+- **Spatial Dimension ($N_{\text{rx}} = 4$ antenna channels):**  
+  The four physical receiver antennas arranged in a uniform linear array with spacing $d = \lambda/2 \approx 1.95\text{ mm}$. Phase shifts across this axis directly encode target **Azimuth Angle** ($\theta = \arcsin\left(\frac{\Delta \Phi \lambda}{2\pi d}\right)$).
+- **Why Complex-Valued ($\mathbb{C}$):**  
+  Quadrature mixer downconversion extracts both In-phase ($I$) and Quadrature ($Q$) baseband channels ($x(t) = I(t) + j Q(t)$). The complex representation preserves instantaneous phase information $\phi(t) = \arctan(Q/I)$, which is essential for detecting sub-millimeter Doppler motion and spatial steering phases that real-only magnitude would discard.
+
+**Summary:**  
+The 3D complex radar cube organizes fast-time range frequency, slow-time Doppler phase, and spatial array channel phases into a single structured tensor for joint multi-dimensional perception.
+
+
 

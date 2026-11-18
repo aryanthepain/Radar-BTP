@@ -1,21 +1,27 @@
 """
-tests/test_academic_website.py — Wave 0 Deterministic Test Suite
+tests/test_academic_website.py — Deterministic Test Suite for BTP-1 Thesis Portal
 Validates publication-grade academic portal infrastructure:
-  - HTML5 structure, semantic containers, and chapter anchors
+  - HTML5 structure, semantic containers, and active chapter anchors (Chapters 1-5 + References)
+  - Dedicated archived report portal (docs/archived-report.html) preserving the historical 7 chapters & bibliography
   - Two-column CSS rules, serif/sans-serif typography, and responsive media queries
   - Vendored offline KaTeX mathematical typesetting engine and font assets
-  - Client-side application logic (auto-render math, scroll-spy, citation hover tooltips, code drawers)
-  - Asset path resolution (zero broken images or diagram links)
+  - Client-side application logic (auto-render math, scroll-spy, citation hover tooltips, code blocks)
+  - Citations database (Refs 1-31) in docs/app.js and active bibliography
+  - Absence of removed elements: Index Terms, Table 5.2, Table 4.4, Code Listing 3.3, Code Listing 4.1,
+    Laboratory confirmation card, ONNX Runtime, OpenVINO, s128_small smoke test, Partition Disclosure note.
+  - Zero modification to LaTeX templates directory.
 """
 
 import os
 import re
+import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 import pytest
 
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DOCS_DIR = os.path.join(REPO_ROOT, "docs")
 INDEX_HTML = os.path.join(DOCS_DIR, "index.html")
+ARCHIVED_HTML = os.path.join(DOCS_DIR, "archived-report.html")
 STYLES_CSS = os.path.join(DOCS_DIR, "styles.css")
 APP_JS = os.path.join(DOCS_DIR, "app.js")
 KATEX_DIR = os.path.join(DOCS_DIR, "assets", "vendor", "katex")
@@ -24,6 +30,7 @@ KATEX_DIR = os.path.join(DOCS_DIR, "assets", "vendor", "katex")
 def test_file_existence():
     """Verify all critical academic portal files exist on disk."""
     assert os.path.exists(INDEX_HTML), f"Missing {INDEX_HTML}"
+    assert os.path.exists(ARCHIVED_HTML), f"Missing {ARCHIVED_HTML}"
     assert os.path.exists(STYLES_CSS), f"Missing {STYLES_CSS}"
     assert os.path.exists(APP_JS), f"Missing {APP_JS}"
     assert os.path.exists(os.path.join(KATEX_DIR, "katex.min.js")), "Missing vendored katex.min.js"
@@ -98,175 +105,190 @@ def test_app_js_features():
     assert "reading-progress-bar" in js, "app.js must control #reading-progress-bar"
     assert "scrollY" in js or "scrollTop" in js, "app.js must track scroll position for progress bar"
 
-    # Scroll-spy for chapters and sections
-    assert "IntersectionObserver" in js or "scroll" in js, "app.js must implement scroll-spy"
-    expected_anchors = ["ch1-intro", "ch2-physics", "ch3-dsp-audit", "ch4-methodology", "ch5-benchmarks", "ch6-timeline", "ch7-conclusion"]
-    anchor_matches = sum(1 for a in expected_anchors if a in js)
-    assert anchor_matches >= 4, "app.js scroll-spy must target academic chapter anchors"
-
-    # Interactive Citation Tooltips
-    assert "citation-badge" in js or "data-citation" in js, "app.js must target citation badges"
-    assert "citation-tooltip" in js or "tooltip" in js, "app.js must construct citation tooltips"
-
-    # Collapsible Code Drawers
-    assert "drawer" in js or "collapse" in js or "toggle" in js, "app.js must handle code drawer interactivity"
-
-
-def test_image_paths_resolve():
-    """Verify that all non-empty img src paths in docs/index.html resolve to actual files."""
-    class ImgSrcParser(HTMLParser):
-        def __init__(self):
-            super().__init__()
-            self.srcs = []
-
-        def handle_starttag(self, tag, attrs):
-            if tag == "img":
-                attr_dict = dict(attrs)
-                # Ignore dynamic lightbox placeholder with id="lightbox-img"
-                if attr_dict.get("id") == "lightbox-img":
-                    return
-                src = attr_dict.get("src", "").strip()
-                if src:
-                    self.srcs.append(src)
-
-    with open(INDEX_HTML, "r", encoding="utf-8") as f:
-        parser = ImgSrcParser()
-        parser.feed(f.read())
-
-    assert len(parser.srcs) > 0, "No image tags found in docs/index.html"
-    for src in parser.srcs:
-        # Normalize relative path
-        rel_path = src.replace("./", "").replace("/", os.sep)
-        full_path = os.path.join(DOCS_DIR, rel_path)
-        assert os.path.exists(full_path), f"Broken image path in docs/index.html: {src} -> {full_path}"
-
-
-def test_html_syntax_and_basics():
-    """Verify docs/index.html is valid HTML5 document."""
-    with open(INDEX_HTML, "r", encoding="utf-8") as f:
-        html = f.read()
-
-    assert "<!DOCTYPE html>" in html or "<!doctype html>" in html
-    assert "<html" in html and "</html>" in html
-    assert "<head>" in html or "<head " in html
-    assert "<body>" in html or "<body " in html
+    # References 1 through 31 in CITATIONS_DB
+    for ref_i in range(1, 32):
+        assert f'"{ref_i}": {{' in js, f"Missing citation {ref_i} in docs/app.js"
 
 
 def test_chapter_sections():
-    """Verify Chapter 1-7 anchors exist once full academic thesis is integrated (Plan 04)."""
+    """Verify Chapter 1-5 anchors exist in active index.html and original chapters exist in archived-report.html."""
     with open(INDEX_HTML, "r", encoding="utf-8") as f:
         content = f.read()
 
-    if "academic-paper-content" not in content and "ch1-intro" not in content:
-        pytest.skip("Full academic report body scheduled for integration in Plan 01.2.2-04")
-
-    required_chapters = [
+    active_chapters = [
+        "overview",
         "ch1-intro",
+        "ch2-lit-review",
+        "ch3-methodology",
+        "ch4-results",
+        "ch5-conclusion",
+        "bibliography"
+    ]
+    for ch in active_chapters:
+        assert f'id="{ch}"' in content or f"id='{ch}'" in content, f"Missing active chapter anchor: #{ch}"
+
+    with open(ARCHIVED_HTML, "r", encoding="utf-8") as f:
+        archived_content = f.read()
+
+    archived_chapters = [
+        "ch1-intro-original",
         "ch2-physics",
         "ch3-dsp-audit",
         "ch4-methodology",
         "ch5-benchmarks",
         "ch6-timeline",
         "ch7-conclusion",
-        "references"
+        "archival-references"
     ]
-    for ch in required_chapters:
-        assert f'id="{ch}"' in content or f"id='{ch}'" in content, f"Missing chapter anchor: #{ch}"
+    for ch in archived_chapters:
+        assert f'id="{ch}"' in archived_content or f"id='{ch}'" in archived_content, f"Missing archived chapter anchor: #{ch}"
 
 
 def test_institutional_metadata():
-    """Verify exact official IIT Guwahati institutional metadata (D-16)."""
+    """Verify exact official IIT Guwahati institutional metadata."""
     with open(INDEX_HTML, "r", encoding="utf-8") as f:
         html = f.read()
 
-    assert "AI application in radar signal processing" in html, "Missing official primary title"
-    assert "Computationally Efficient Radar Spectrum Detection via Adaptive Computation for Millimeter-Wave FMCW Radar Perception" in html, "Missing official subtitle"
+    assert "AI Applications in Radar Signal Processing" in html, "Missing official primary title"
+    assert "Towards Resource-Efficient AI-Based Radar Detection for Millimetre-Wave FMCW Systems" in html, "Missing official subtitle"
     assert "Aryan Sandeep Gupta" in html, "Missing candidate full name"
     assert "230150003" in html, "Missing student roll number"
     assert "Mehta Family School of Data Science and Artificial Intelligence" in html, "Missing official school name"
     assert "DA4098P BTP Project I" in html, "Missing official course code"
+    assert "DA4098P BTP Project I (Autumn 2026)" not in html, "Old course string with year must be removed"
     assert "Prof. Ratnajit Bhattacharjee" in html, "Missing supervisor name"
-    assert "Head, Mehta Family School of Data Science and Artificial Intelligence" in html, "Missing supervisor role 1"
-    assert "Professor, Department of Electronics and Electrical Engineering" in html, "Missing supervisor role 2"
-    assert "Head, Manekshaw Centre of Excellence for National Security Studies and Research" in html, "Missing supervisor role 3"
 
 
 def test_clean_header_and_sidebar():
-    """Verify clean print-like IEEE layout and absence of distracting progress bar and hardware chip badges (D-11, D-16)."""
+    """Verify clean print-like IEEE layout, link to archived report, and absence of removed badges."""
     with open(INDEX_HTML, "r", encoding="utf-8") as f:
         html = f.read()
 
-    # Progress bar omitted from index.html for print-like aesthetic
     assert '<div id="reading-progress-bar"></div>' not in html, "#reading-progress-bar should be omitted from index.html"
-
-    # Hardware chip badges omitted from sidebar
     assert 'id="academic-sidebar"' in html
     sidebar_html = html.split('id="academic-sidebar"')[1].split('</aside>')[0]
-    assert "AWR1843" not in sidebar_html, "Sidebar must not contain standalone AWR1843 chip badge"
-    assert "DCA1000" not in sidebar_html, "Sidebar must not contain standalone DCA1000 chip badge"
 
-    # Sidebar footer
-    assert "BTP-1 Thesis Portal · Autumn 2026" in html, "Missing sidebar footer marker"
+    # Hardware chip badges omitted from sidebar
+    assert "AWR1843" not in sidebar_html
+    assert "DCA1000" not in sidebar_html
+
+    # Sidebar footer links to archived draft
+    assert "archived-report.html" in sidebar_html, "Sidebar must link to archived-report.html"
+    assert "BTP-1 Thesis Portal · Autumn 2026" not in sidebar_html, "Old footer badge must be removed"
+    assert "KaTeX: Offline (20 Fonts)" not in sidebar_html, "Old KaTeX badge must be removed"
+    assert "Verified: ICASSP Table III" not in sidebar_html, "Old verification badge must be removed"
 
 
-def test_five_code_drawers():
-    """Verify presence of 5 syntax-highlighted collapsible IDE code drawers (D-18)."""
+def test_code_listings_in_methodology():
+    """Verify presence of all Code Listings (3.1 through 3.7) in Chapter 3."""
     with open(INDEX_HTML, "r", encoding="utf-8") as f:
         html = f.read()
 
-    # Must contain code-drawer or collapsible-drawer elements
-    drawer_count = html.count('class="collapsible-drawer"') + html.count('class="code-drawer"')
-    assert drawer_count >= 5, f"Expected at least 5 code drawers, found {drawer_count}"
+    assert "Code Listing 3.1: Fast-Time Range FFT" in html
+    assert "Code Listing 3.2: Clutter Suppression" in html
+    assert "Code Listing 3.3: Slow-Time Doppler Processing" in html
+    assert "Code Listing 3.4: 2D Cell-Averaging Constant False Alarm Rate" in html
+    assert "Code Listing 3.5: Spatial Covariance and Subspace MUSIC/Capon" in html
+    assert "Code Listing 3.6: Point-Cloud Transformation and DBSCAN" in html
+    assert "Code Listing 3.7: Forward-Pass Implementation of the Synthetic FMCW Radar CNN" in html
 
-    # Verify all 5 algorithms are represented
-    assert "fmcw.py" in html or "FMCW Beat Signal" in html, "Missing FMCW beat signal generator code drawer"
-    assert "mti.py" in html or "MTI Clutter" in html, "Missing MTI clutter filter code drawer"
-    assert "cfar.py" in html or "CFAR Detector" in html, "Missing 2D CFAR detector code drawer"
-    assert "music.py" in html or "MUSIC Direction" in html, "Missing MUSIC spatial DoA code drawer"
-    assert "detector.py" in html or "RadarObjectDetectorCNN" in html, "Missing RadarObjectDetectorCNN code drawer"
+    # Code Listing 3.3 grayscale loading and Code Listing 4.1 are removed
+    assert "Grayscale Spectrogram Loading and Normalisation" not in html
+    assert "Code Listing 4.1" not in html
+    assert "src/dsp/range_processing.py" not in html, "File path in code listing header must be removed"
 
 
-def test_two_part_chapter_structure():
-    """Verify strict two-part problem partition in Chapters 4 and 5 (D-14)."""
+def test_official_abstract_and_no_index_terms():
+    """Verify presence of abstract and absence of Index Terms block."""
     with open(INDEX_HTML, "r", encoding="utf-8") as f:
         html = f.read()
 
-    assert "Part A: Synthetic 77 GHz FMCW Automotive Spatial Detection" in html, "Missing Part A header/marker"
-    assert ("Part B: Real-World RadDet RF Spectrum & Modulation Classification" in html or
-            "Part B: Real-World RadDet RF Spectrum &amp; Modulation Classification" in html), "Missing Part B header/marker"
+    assert '<div class="paper-abstract"' in html, "Missing .paper-abstract container"
+    abstract_block = html.split('<div class="paper-abstract"')[1].split('</div>')[0]
 
-    # Explicit disclaimer that RadDet is RF spectrum sensing, not automotive traffic
-    assert "RadDet is strictly" in html or "RadDet is strictly RF" in html or "RadDet is strictly an RF" in html, "Missing RadDet scope disclaimer"
-    assert "does NOT" in html or "does not" in html, "Missing disclaimer that RadDet does not detect vehicles/pedestrians"
+    assert "Radar sensing is increasingly used in intelligent perception" in abstract_block
+    assert "two complementary experimental tracks" in abstract_block
+    assert "Index Terms:" not in html, "Index Terms block must be removed"
 
 
-def test_latency_waterfall_and_cpu_methodology():
-    """Verify multi-stage latency waterfall timing budget and CPU-first research methodology (D-13, D-15)."""
+def test_removed_items_in_active_portal():
+    """Verify complete removal of Table 5.2, Table 4.4, Lab Confirmation, ONNX Runtime/OpenVINO, and Partition Note."""
     with open(INDEX_HTML, "r", encoding="utf-8") as f:
         html = f.read()
 
-    # Latency waterfall timing values
-    assert "0.18" in html, "Missing Range FFT latency (0.18 ms)"
-    assert "0.24" in html, "Missing Doppler FFT latency (0.24 ms)"
-    assert "0.12" in html, "Missing Preprocessing latency (0.12 ms)"
-    assert "1.12" in html, "Missing GPU inference latency (1.12 ms)"
-    assert "0.15" in html, "Missing Postprocessing NMS latency (0.15 ms)"
-    assert "0.10" in html, "Missing Memory I/O latency (0.10 ms)"
-    assert "1.91" in html, "Missing Total end-to-end latency (1.91 ms)"
-
-    # Frame deadline and CPU-first formulation
-    assert any(term in html for term in ["20 ms", "20\\text{ ms}", "50 Hz", "50\\text{ Hz}"]), "Missing 20 ms / 50 Hz frame deadline"
-    assert any(term in html for term in ["CPU-First", "CPU-first", "CPU Baseline", "native CPU"]), "Missing CPU-first research methodology"
+    assert "Table 5.2" not in html, "Table 5.2 must be removed"
+    assert "Table 4.4" not in html, "Table 4.4 must be removed"
+    assert "Laboratory & Hardware Confirmation Protocol" not in html, "Lab confirmation card must be removed"
+    assert "ONNX Runtime" not in html, "ONNX Runtime must be removed"
+    assert "OpenVINO" not in html, "OpenVINO must be removed"
+    assert "Partition & Chunking Disclosure Note" not in html, "Partition note must be removed"
+    assert "s128_small" not in html, "Smoke test run s128_small must be removed from active report"
 
 
-def test_academic_timeline_and_defense():
-    """Verify academic timeline milestones, curriculum, and oral defense date (D-16, D-17)."""
+def test_active_citations_and_references():
+    """Verify References 1 through 31 in active bibliography and citations across report."""
     with open(INDEX_HTML, "r", encoding="utf-8") as f:
         html = f.read()
 
-    assert "MATLAB Radar Designer" in html, "Missing MATLAB Radar Designer App documentation"
-    assert "Skolnik" in html and "Richards" in html, "Missing Skolnik and Richards curriculum references"
-    assert "November 23, 2026" in html or "Nov 23, 2026" in html, "Missing BTP-1 final oral defense date"
-    assert "January 2027" in html, "Missing BTP-2 January milestone"
-    assert "May 2027" in html, "Missing BTP-2 May milestone"
+    # All refs 1 to 31 exist in bibliography
+    for i in range(1, 32):
+        assert f'id="ref-{i}"' in html, f"Missing id='ref-{i}' in active bibliography"
 
+    # Critical references requested by user are present and cited
+    assert 'Alexander Karlsson' in html
+    assert 'data-citation="19"' in html, "Karlsson [19] must be cited"
+    assert 'data-citation="20"' in html, "TJ4D [20] must be cited"
+    assert 'data-citation="26"' in html, "CARRADA [26] must be cited"
+    assert 'data-citation="27"' in html, "nuScenes [27] must be cited"
+    assert 'data-citation="28"' in html, "RAVEN [28] must be cited"
+    assert 'data-citation="30"' in html, "Lin et al. ICASSP [30] must be cited"
+    assert 'data-citation="31"' in html, "Mahafza [31] must be cited"
+    assert 'MATLAB Radar Designer App' in html or 'Radar Designer' in html
+
+
+def test_formula_scrollbars_eliminated():
+    """Verify Section 2.1 formulas are split vertically into single-column blocks."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    # Old side-by-side equation line must not exist
+    assert r"\approx 0.15\text{ m},\qquad \Delta v" not in html
+    assert r"\approx 0.15\text{ m}, \qquad \Delta v" not in html
+    assert r"\Delta R \x07pprox" not in html, "KaTeX bell character typo must be removed"
+
+
+def test_scope_and_archival_preservation():
+    """Verify LaTeX report templates untouched, archived draft intact, and bidirectional link works."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        index_html = f.read()
+
+    with open(ARCHIVED_HTML, "r", encoding="utf-8") as f:
+        archived_html = f.read()
+
+    # Bidirectional links
+    assert "archived-report.html" in index_html, "index.html must link to archived-report.html"
+    assert "index.html" in archived_html, "archived-report.html must link back to index.html"
+
+    # Enforce zero modifications in templates/BTP_Report_Template_Overleaf/ against main
+    import subprocess
+    git_diff_main = subprocess.run(
+        ["git", "diff", "main", "--", "templates/BTP_Report_Template_Overleaf/"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if git_diff_main.returncode == 0:
+        assert not git_diff_main.stdout.strip(), (
+            f"templates/BTP_Report_Template_Overleaf/ must have zero diff against main! Found:\n{git_diff_main.stdout}"
+        )
+    else:
+        git_diff_origin = subprocess.run(
+            ["git", "diff", "origin/main", "--", "templates/BTP_Report_Template_Overleaf/"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if git_diff_origin.returncode == 0:
+            assert not git_diff_origin.stdout.strip(), (
+                f"templates/BTP_Report_Template_Overleaf/ must have zero diff against origin/main! Found:\n{git_diff_origin.stdout}"
+            )

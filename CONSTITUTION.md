@@ -5,6 +5,7 @@
 ---
 
 ## 1. Technical Stack & Mathematical Invariants
+
 - **Primary Language & Runtime**: Python 3.12+ (NumPy, SciPy, PyTorch 2.x, Matplotlib, Scikit-Learn).
 - **Physical Radar Physics**:
   - Speed of light constant: $c = 299,792,458\text{ m/s}$.
@@ -20,24 +21,29 @@
 ---
 
 ## 2. Security Boundaries & Execution Safety
-- **Zero Hardcoded Secrets**: No credentials or private paths in source code.
+
+- **Zero Hardcoded Secrets**: Absolutely no API tokens, Bearer tokens, private keys, or credentials in source code, configuration files (including `.agents/mcp_config.json`, `.json`, `.yaml`), or notebooks. All credentials must be sourced strictly from environment variables or untracked local files (`*.local.json`, `.env`).
+- **Automated Secret Scanning Gate**: Deterministic verification (`verify.ps1`) must audit git-tracked and modified files for secret signatures before any commit or push.
 - **No Destructive File Deletions**: Never wipe processed radar data or test fixtures without confirmation.
 - **Resource Attribution**: Optimize memory allocations when processing large 4D radar tensors (Rx × Tx × Chirps × Samples) to prevent OOM errors.
 
 ---
 
 ## 3. Dependency Management Policy
+
 - **Zero Speculative Dependencies**: Stick to standard scientific computing stack (`numpy`, `scipy`, `torch`, `matplotlib`, `scikit-learn`). No redundant heavy frameworks.
 
 ---
 
 ## 4. Code Quality & Verification Gates
+
 - **Deterministic Gate**: All code modifications must pass `./scripts/verify.ps1` before completion.
 - **Backward Compatibility**: Preserve existing DSP primitive APIs (`RangeProcessor`, `DopplerProcessor`, `CFARDetector2D`, `AngleEstimator`, `ClutterFilter`).
 
 ---
 
 ## 5. Kaggle Cloud & In-Container Invariants
+
 - **Read-Only Input Boundary**: Code running in Kaggle cloud runtime must treat `/kaggle/input/` as strictly read-only. Never attempt to create, write, or mutate files within `/kaggle/input/`.
 - **Writable Output Target**: All generated model weights, checkpoints, metrics, evaluation reports, and figures must be directed to `/kaggle/working/` (or `./output/` locally).
 - **Mandatory In-Container Telemetry (Zero External Polling Dependency)**:
