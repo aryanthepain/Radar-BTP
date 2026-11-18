@@ -510,13 +510,10 @@ function initLightbox() {
   function openLightbox(src, captionText) {
     modalImg.setAttribute("src", src);
     modalCaption.textContent = captionText || "";
-    if (src && src.toLowerCase().endsWith(".svg")) {
-      modalImg.style.width = "92vw";
-      modalImg.style.maxWidth = "1200px";
-    } else {
-      modalImg.style.width = "auto";
-      modalImg.style.maxWidth = "90vw";
-    }
+    modalImg.style.width = "auto";
+    modalImg.style.height = "auto";
+    modalImg.style.maxWidth = "92vw";
+    modalImg.style.maxHeight = "82vh";
     modal.style.display = "flex";
     document.body.style.overflow = "hidden";
   }
@@ -525,7 +522,9 @@ function initLightbox() {
     modal.style.display = "none";
     modalImg.removeAttribute("src");
     modalImg.style.width = "";
+    modalImg.style.height = "";
     modalImg.style.maxWidth = "";
+    modalImg.style.maxHeight = "";
     modalCaption.textContent = "";
     document.body.style.overflow = "";
   }
@@ -542,7 +541,13 @@ function initLightbox() {
       const parentCard = img.closest(".plot-card");
       if (parentCard) {
         const titleEl = parentCard.querySelector(".plot-title");
-        if (titleEl) caption = titleEl.textContent;
+        if (titleEl) caption = titleEl.textContent.trim();
+      } else {
+        const figureWrapper = img.closest("figure, div[style*='text-align: center'], div");
+        if (figureWrapper) {
+          const captionEl = figureWrapper.querySelector("figcaption, p em");
+          if (captionEl) caption = captionEl.textContent.trim();
+        }
       }
       openLightbox(src, caption);
     });
