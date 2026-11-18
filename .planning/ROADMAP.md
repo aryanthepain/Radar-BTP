@@ -185,7 +185,7 @@ Phases 2, 3, and 4 have been removed from the active GSD planning cycle and pres
 **Goal:** Deliver publication-grade mobile responsiveness, touch ergonomics, equation/table overflow handling, and interactive floating IEEE citation previews for the BTP academic thesis reading portal (`docs/index.html` and `docs/styles.css`), fulfilling GitHub Priority 0 issues [#23](https://github.com/aryanthepain/Radar-BTP/issues/23) and [#21](https://github.com/aryanthepain/Radar-BTP/issues/21).
 **Mode**: standard
 **Depends on:** Phase 01.2.2
-**Requirements**: PORTAL-MOB-01, PORTAL-CITE-01, PORTAL-VERIF-01
+**Requirements**: PORTAL-MOB-01, PORTAL-MOB-02, PORTAL-MOB-03, PORTAL-CITE-01, PORTAL-CITE-02, PORTAL-VERIF-01
 **Success Criteria** (what must be TRUE):
 
 1. Responsive mobile navigation drawer with `>=44x44px` touch targets, smooth off-canvas transition, backdrop dismissal, and auto-close on TOC link selection.
@@ -197,5 +197,5 @@ Phases 2, 3, and 4 have been removed from the active GSD planning cycle and pres
 **Plans**: 2 plans
 
 Plans:
-- [ ] 03-01: Comprehensive mobile-friendly UI overhaul, responsive drawer, touch targets, and equation/table overflow containment (Closes #23).
-- [ ] 03-02: Interactive floating IEEE citation hover/tap cards, bibliography previews, and deterministic verification suite (Closes #21).
+- [ ] 03-01-PLAN.md — Comprehensive mobile navigation drawer, WCAG 2.5.5 touch targets, body scroll lock, two-tier table/math overflow containment, and single-column reflow (Closes #23)
+- [ ] 03-02-PLAN.md — Interactive floating IEEE citation cards, mobile bottom-sheet, direct DOI links, Section 9 pulse jump, and universal verification gate (Closes #21)

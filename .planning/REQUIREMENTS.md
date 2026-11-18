@@ -38,8 +38,11 @@
 
 ### Academic Portal Priority 0 Polish (PORTAL-P0 — Issues #21, #23)
 
-- [ ] **PORTAL-MOB-01**: Comprehensive responsive overhaul covering mobile navigation drawer (>=44x44px touch target, smooth off-canvas transition, backdrop dismiss), wide KaTeX formula & comparison table horizontal scroll containers (`-webkit-overflow-scrolling: touch`), and single-column text reflow (`column-count: 1 !important`) for `.academic-two-column` below 900px. *(Closes [#23](https://github.com/aryanthepain/Radar-BTP/issues/23))*
-- [ ] **PORTAL-CITE-01**: Interactive floating citation cards and bibliography previews for inline IEEE citation markers (`[1]`, `[2]`, etc.) displaying paper title, authors, venue, year, and direct DOI/arXiv links with viewport collision avoidance and keyboard accessibility (`aria-describedby` or popover API). *(Closes [#21](https://github.com/aryanthepain/Radar-BTP/issues/21))*
+- [ ] **PORTAL-MOB-01**: Mobile navigation drawer (>=44x44px touch targets, smooth off-canvas transition, backdrop dismiss, body scroll lock, morphing toggle icon). *(Closes [#23](https://github.com/aryanthepain/Radar-BTP/issues/23))*
+- [ ] **PORTAL-MOB-02**: Two-tier KaTeX math & comparison table horizontal overflow containment (fluid font scaling with accessible floor 0.75rem / 11px tables, 0.85em KaTeX math, momentum scroll with edge-fade indicators, zero horizontal body scroll). *(Closes [#23](https://github.com/aryanthepain/Radar-BTP/issues/23))*
+- [ ] **PORTAL-MOB-03**: Single-column reflow & responsive media (two-column collapse below 900px, responsive typography scaling, `max-width: 100%; height: auto;` figure constraint). *(Closes [#23](https://github.com/aryanthepain/Radar-BTP/issues/23))*
+- [ ] **PORTAL-CITE-01**: Always-active floating citation cards and bibliography previews for all 30 IEEE references in `CITATIONS_DB` without debug gate flag; renders title, authors, venue, year, direct DOI/arXiv hyperlink. *(Closes [#21](https://github.com/aryanthepain/Radar-BTP/issues/21))*
+- [ ] **PORTAL-CITE-02**: Mobile touch tap-to-inspect & viewport collision avoidance: first tap opens preview; desktop (>600px) floating tooltip with boundary clamping; mobile (<600px) slide-up bottom-sheet with darkened backdrop, "View in Reference List" button with Section 9 pulse highlight (`.highlight-pulse`), and outside tap dismissal. *(Closes [#21](https://github.com/aryanthepain/Radar-BTP/issues/21))*
 - [ ] **PORTAL-VERIF-01**: Deterministic unit and DOM smoke tests in `tests/test_showcase_website.py` and `tests/test_academic_website.py` verifying mobile viewport rules, overflow containment, touch targets, and citation preview rendering passing 100% under `scripts/verify.ps1`.
 
 ## Deferred to GitHub Issues (Post-Exploratory Backlog)
@@ -98,7 +101,10 @@ The following ingestion decoupling and verification expansion requirements have 
 | TEST-COV-03     | Phase 1.3    | Complete                           |
 | TEST-COV-04     | Phase 1.3    | Complete                           |
 | PORTAL-MOB-01   | Phase 3      | Pending (Issue #23)                |
+| PORTAL-MOB-02   | Phase 3      | Pending (Issue #23)                |
+| PORTAL-MOB-03   | Phase 3      | Pending (Issue #23)                |
 | PORTAL-CITE-01  | Phase 3      | Pending (Issue #21)                |
+| PORTAL-CITE-02  | Phase 3      | Pending (Issue #21)                |
 | PORTAL-VERIF-01 | Phase 3      | Pending                            |
 | DATA-01         | Backlog      | Deferred (Issue #17)               |
 | DATA-02         | Backlog      | Deferred (Issue #17)               |
@@ -110,7 +116,7 @@ The following ingestion decoupling and verification expansion requirements have 
 **Coverage:**
 
 - Completed exploratory requirements: 16 total (100% complete)
-- Active Phase 3 requirements: 3 total (tracked in #21, #23)
+- Active Phase 3 requirements: 6 total (tracked in #21, #23)
 - Deferred to GitHub Issues: 6 total (tracked in #3, #17, #18, #19)
 - Unmapped: 0 ✓
 
