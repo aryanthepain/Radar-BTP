@@ -167,8 +167,7 @@ const CITATIONS_DB = {
     title: "Radar Signal Processing using Artificial Neural Networks",
     venue: "Doctoral Dissertation, KTH Royal Institute of Technology & Saab Surveillance, Stockholm, Sweden",
     year: "2023",
-    doi: "http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-324546",
-    archival: true
+    doi: "http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-324546"
   },
   "20": {
     ref: 20,
@@ -176,8 +175,7 @@ const CITATIONS_DB = {
     title: "TJ4D: A Large-Scale 4D Radar Dataset for Autonomous Driving",
     venue: "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
     year: "2022",
-    doi: "10.1109/ITSC57777.2023.10422119",
-    archival: true
+    doi: "10.1109/ITSC57777.2023.10422119"
   },
   "21": {
     ref: 21,
@@ -185,8 +183,7 @@ const CITATIONS_DB = {
     title: "Artificial Intelligence based Radar Technology: Current Advancements, Future Directions and Challenges",
     venue: "IEEE Space, Aerospace and Defence Conference (SPACE)",
     year: "2025",
-    doi: "10.1109/SPACE65882.2025.11171388",
-    archival: true
+    doi: "10.1109/SPACE65882.2025.11171388"
   },
   "22": {
     ref: 22,
@@ -194,8 +191,7 @@ const CITATIONS_DB = {
     title: "TransRAD: Retentive Vision Transformer with Manhattan Attention for Radar Object Detection",
     venue: "IEEE Transactions on Radar Systems, vol. 3, pp. 112–125",
     year: "2025",
-    doi: "10.1109/TRS.2024.3498112",
-    archival: true
+    doi: "10.1109/TRS.2024.3498112"
   },
   "23": {
     ref: 23,
@@ -203,8 +199,7 @@ const CITATIONS_DB = {
     title: "DETRs Beat YOLOs on Real-Time Object Detection",
     venue: "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 16965–16974",
     year: "2024",
-    doi: "10.1109/CVPR52733.2024.01605",
-    archival: true
+    doi: "10.1109/CVPR52733.2024.01605"
   },
   "24": {
     ref: 24,
@@ -212,8 +207,7 @@ const CITATIONS_DB = {
     title: "Deep-Learning for Radar: A Survey",
     venue: "IEEE Access, vol. 9, pp. 141800–141818",
     year: "2021",
-    doi: "10.1109/ACCESS.2021.3119561",
-    archival: true
+    doi: "10.1109/ACCESS.2021.3119561"
   },
   "25": {
     ref: 25,
@@ -221,8 +215,7 @@ const CITATIONS_DB = {
     title: "Deep Learning-Based Object Classification on Automotive Radar Spectra",
     venue: "IEEE Radar Conference (RadarConf), Boston, MA, USA, pp. 1–6",
     year: "2019",
-    doi: "10.1109/RADAR.2019.8835742",
-    archival: true
+    doi: "10.1109/RADAR.2019.8835742"
   },
   "26": {
     ref: 26,
@@ -230,8 +223,7 @@ const CITATIONS_DB = {
     title: "CARRADA Dataset: Camera and Automotive Radar Dataset with Range-Angle-Doppler Annotations",
     venue: "Proceedings of the 25th International Conference on Pattern Recognition (ICPR), pp. 5068–5075",
     year: "2020",
-    doi: "10.1109/ICPR48806.2021.9412450",
-    archival: true
+    doi: "10.1109/ICPR48806.2021.9412450"
   },
   "27": {
     ref: 27,
@@ -239,17 +231,15 @@ const CITATIONS_DB = {
     title: "nuScenes: A Multimodal Dataset for Autonomous Driving",
     venue: "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 11621–11631",
     year: "2020",
-    doi: "10.1109/CVPR42600.2020.01164",
-    archival: true
+    doi: "10.1109/CVPR42600.2020.01164"
   },
   "28": {
     ref: 28,
-    authors: "L. Zhang et al.",
-    title: "E-RODNet: Efficient Embedded Radar Object Detection Network",
-    venue: "IEEE Sensors Journal, vol. 24, no. 8, pp. 12050–12061",
-    year: "2024",
-    doi: "10.1109/JSEN.2024.3364912",
-    archival: true
+    authors: "P. Sen, A. Mohammad, and S. Mukhopadhyay",
+    title: "RAVEN: Radially Aligned Visual-Radar Network",
+    venue: "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+    year: "2026",
+    doi: "https://openaccess.thecvf.com"
   },
   "29": {
     ref: 29,
@@ -257,8 +247,7 @@ const CITATIONS_DB = {
     title: "An Introduction to Deep Learning for the Physical Layer",
     venue: "IEEE Transactions on Cognitive Communications and Networking, vol. 3, no. 4, pp. 563–575",
     year: "2017",
-    doi: "10.1109/TCCN.2017.2758370",
-    archival: true
+    doi: "10.1109/TCCN.2017.2758370"
   },
   "30": {
     ref: 30,
@@ -266,8 +255,7 @@ const CITATIONS_DB = {
     title: "The Micro-Doppler Effect in Radar",
     venue: "2nd ed., Norwood, MA, USA: Artech House",
     year: "2019",
-    doi: "ISBN: 978-1630815462",
-    archival: true
+    doi: "ISBN: 978-1630815462"
   },
   "31": {
     ref: 31,
@@ -275,8 +263,7 @@ const CITATIONS_DB = {
     title: "Radar Systems Analysis and Design Using MATLAB",
     venue: "3rd ed., Boca Raton, FL, USA: CRC Press",
     year: "2013",
-    doi: "ISBN: 978-1466560246",
-    archival: true
+    doi: "ISBN: 978-1466560246"
   },
   "32": {
     ref: 32,
@@ -284,8 +271,7 @@ const CITATIONS_DB = {
     title: "Detecting and Classifying Low Probability of Intercept Radar",
     venue: "2nd ed., Norwood, MA, USA: Artech House",
     year: "2009",
-    doi: "ISBN: 978-1596932340",
-    archival: true
+    doi: "ISBN: 978-1596932340"
   }
 };
 
