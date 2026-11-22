@@ -68,6 +68,16 @@ timeline/*
 
 temp_study_topics.md
 
+# Secrets, Tokens & Local Environment Overrides
+.env
+.env.*
+*.env
+*.local.json
+.agents/*.local.json
+kaggle.json
+*.pem
+*.key
+
 # LaTeX Build & Auxiliary Files
 build/
 *.aux

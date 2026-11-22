@@ -18,6 +18,7 @@
 - **Continuous LaTeX Auto-Builder**: `pwsh -File ./scripts/watch-latex.ps1`
 - **Stage & Push Kaggle Kernel**: `python scripts/push_kaggle_kernel.py --notebook <notebook.ipynb> --slug <slug> --push`
 - **Check Kaggle Quota**: `kaggle quota`
+- **Zero Secrets Gate**: Never commit API keys, personal access tokens (e.g. Kaggle Tokens `KGAT_*`), or Bearer credentials to `.agents/mcp_config.json` or any tracked file. Enforced by `verify.ps1`.
 - **Audio & Spoken Completion Alert**: `pwsh -File ./scripts/agent-alarm.ps1 -Type Success -Message "Task complete. All verification gates passed."`
 
 ## 2. Repository Architecture & Layout

@@ -13,251 +13,264 @@
 "use strict";
 
 /**
- * 30 Peer-Reviewed Academic Citations (IEEE Style)
- * Matches Section 9 of the Research Dossier (01.2.2-RESEARCH.md)
+ * 31 Peer-Reviewed Academic Citations (IEEE Style)
+ * Matches Section 9 of the Research Dossier (01.2.2-RESEARCH.md) & Chapter 5 Bibliography
  */
 const CITATIONS_DB = {
   "1": {
     ref: 1,
-    authors: "Alexander Karlsson",
-    title: "Radar Signal Processing using Artificial Neural Networks",
-    venue: "Doctoral Dissertation, KTH Royal Institute of Technology & Saab Surveillance, Stockholm, Sweden",
-    year: "2023",
-    doi: "http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-324546"
+    authors: "I. Bilik et al.",
+    title: "Automotive radar sensing for autonomous vehicles, IEEE Signal Processing Magazine, vol. 36, no. 5",
+    venue: "10.1109/MSP.2019",
+    doi: "10.1109/MSP.2019.2926970",
+    year: "2019"
   },
   "2": {
     ref: 2,
-    authors: "Z. Huang, S. Denman, A. Pemasiri, T. Martin, and C. Fookes",
-    title: "RadDet: A Wideband Dataset for Real-Time Radar Spectrum Detection",
-    venue: "IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Hyderabad, India",
-    year: "2025",
-    doi: "https://ieeexplore.ieee.org/document/ICASSP2025"
+    authors: "M. A. Richards",
+    title: "Fundamentals of Radar Signal Processing, 2nd ed., McGraw-Hill Education",
+    venue: "McGraw-Hill",
+    doi: "10.1036/0071444414",
+    year: "2014"
   },
   "3": {
     ref: 3,
-    authors: "Dr. Tapas Kumar Pal",
-    title: "Artificial Intelligence based Radar Technology: Current Advancements, Future Directions and Challenges",
-    venue: "IEEE Space, Aerospace and Defence Conference (SPACE)",
-    year: "2025",
-    doi: "10.1109/SPACE65882.2025.11171388"
+    authors: "S. M. Patole et al.",
+    title: "Automotive radars: A review of signal processing techniques of the high-resolution automotive radar, IEEE Signal Processing Magazine, vol. 34, no. 2",
+    venue: "10.1109/MSP.2016",
+    doi: "10.1109/MSP.2016.2628914",
+    year: "2017"
   },
   "4": {
     ref: 4,
     authors: "M. I. Skolnik",
-    title: "Introduction to Radar Systems",
-    venue: "3rd ed., New York, NY, USA: McGraw-Hill",
-    year: "2008",
-    doi: ""
+    title: "Introduction to Radar Systems, 3rd ed., McGraw-Hill",
+    venue: "McGraw-Hill",
+    doi: "",
+    year: "2001"
   },
   "5": {
     ref: 5,
-    authors: "M. A. Richards",
-    title: "Fundamentals of Radar Signal Processing",
-    venue: "2nd ed., New York, NY, USA: McGraw-Hill",
-    year: "2014",
-    doi: ""
+    authors: "I. Bilik et al.",
+    title: "Radar for autonomous driving, in Autonomous Driving, Springer",
+    venue: "10.1007/Springer",
+    doi: "10.1007/978-3-662-61199-9_4",
+    year: "2020"
   },
   "6": {
     ref: 6,
-    authors: "H. Rohling",
-    title: "Radar CFAR Thresholding in Clutter and Multiple Target Situations",
-    venue: "IEEE Transactions on Aerospace and Electronic Systems, vol. AES-19, no. 4, pp. 608–621",
-    year: "1983",
-    doi: "10.1109/TAES.1983.309350"
+    authors: "M. A. Richards et al.",
+    title: "Principles of Modern Radar: Basic Principles, SciTech Publishing",
+    venue: "SciTech / IET",
+    doi: "10.1049/SBRA021E",
+    year: "2010"
   },
   "7": {
     ref: 7,
-    authors: "R. O. Schmidt",
-    title: "Multiple Emitter Location and Signal Parameter Estimation",
-    venue: "IEEE Transactions on Antennas and Propagation, vol. AP-34, no. 3, pp. 276–280",
-    year: "1986",
-    doi: "10.1109/TAP.1986.1143830"
+    authors: "R. Guan et al.",
+    title: "AdaRadar: Adaptive Super-Resolution Radar for Perception Under Extreme Weather, Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+    venue: "IEEE CVPR 2026",
+    doi: "",
+    year: "2026"
   },
   "8": {
     ref: 8,
-    authors: "C.-Y. Wang, I.-H. Yeh, and H.-Y. M. Liao",
-    title: "YOLOv9: Learning What You Want to Learn Using Programmable Gradient Information",
-    venue: "arXiv preprint arXiv:2402.13616",
-    year: "2024",
-    doi: "https://arxiv.org/abs/2402.13616"
+    authors: "P. Huang et al.",
+    title: "RadDet: Range-Azimuth-Doppler Based Radar Object Detection for Autonomous Driving, IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+    venue: "10.1109/ICASSP.2021",
+    doi: "10.1109/ICASSP40776.2021.9413349",
+    year: "2021"
   },
   "9": {
     ref: 9,
-    authors: "Y. Zhao, W. Lv, S. Xu, et al.",
-    title: "DETRs Beat YOLOs on Real-Time Object Detection",
-    venue: "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 16965–16974",
-    year: "2024",
-    doi: "10.1109/CVPR52733.2024.01605"
+    authors: "C. Y. Wang et al.",
+    title: "YOLOv9: Learning What You Want to Learn Using Programmable Gradient Information, arXiv preprint arXiv:2402.13616",
+    venue: "arXiv:2402.13616",
+    doi: "https://arxiv.org/abs/2402.13616",
+    year: "2024"
   },
   "10": {
     ref: 10,
-    authors: "Z. Geng, H. Yan, J. Zhang, and D. Zhu",
-    title: "Deep-Learning for Radar: A Survey",
-    venue: "IEEE Access, vol. 9, pp. 141800–141818",
-    year: "2021",
-    doi: "10.1109/ACCESS.2021.3119561"
+    authors: "J. Redmon et al.",
+    title: "You Only Look Once: Unified, Real-Time Object Detection, IEEE CVPR",
+    venue: "10.1109/CVPR.2016",
+    doi: "10.1109/CVPR.2016.91",
+    year: "2016"
   },
   "11": {
     ref: 11,
-    authors: "K. Patel, K. Rambach, T. Visentin, et al.",
-    title: "Deep Learning-Based Object Classification on Automotive Radar Spectra",
-    venue: "IEEE Radar Conference (RadarConf), Boston, MA, USA, pp. 1–6",
-    year: "2019",
-    doi: "10.1109/RADAR.2019.8835742"
+    authors: "G. Jocher et al.",
+    title: "Ultralytics YOLO, GitHub repository",
+    venue: "GitHub",
+    doi: "https://github.com/ultralytics/ultralytics",
+    year: "2023"
   },
   "12": {
     ref: 12,
-    authors: "A. Ouaknine, A. Newson, J. Rebut, and F. Pérez",
-    title: "CARRADA Dataset: Camera and Automotive Radar Dataset with Range-Angle-Doppler Annotations",
-    venue: "Proceedings of the 25th International Conference on Pattern Recognition (ICPR), pp. 5068–5075",
-    year: "2020",
-    doi: "10.1109/ICPR48806.2021.9412450"
+    authors: "T. Y. Lin et al.",
+    title: "Focal Loss for Dense Object Detection, IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 42, no. 2",
+    venue: "10.1109/TPAMI",
+    doi: "10.1109/TPAMI.2018.2858826",
+    year: "2020"
   },
   "13": {
     ref: 13,
-    authors: "H. Caesar, V. Bankiti, A. H. Lang, et al.",
-    title: "nuScenes: A Multimodal Dataset for Autonomous Driving",
-    venue: "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 11621–11631",
-    year: "2020",
-    doi: "10.1109/CVPR42600.2020.01164"
+    authors: "H. Rohling",
+    title: "Radar CFAR Thresholding in Clutter and Multiple Target Situations, IEEE Transactions on Aerospace and Electronic Systems, vol. AES-19, no. 4",
+    venue: "10.1109/TAES.1983",
+    doi: "10.1109/TAES.1983.310437",
+    year: "1983"
   },
   "14": {
     ref: 14,
-    authors: "J. Zheng, Y. Liu, et al.",
-    title: "TJ4D: A Large-Scale 4D Radar Dataset for Autonomous Driving",
-    venue: "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
-    year: "2022",
-    doi: ""
+    authors: "R. O. Schmidt",
+    title: "Multiple emitter location and signal parameter estimation, IEEE Transactions on Antennas and Propagation, vol. 34, no. 3",
+    venue: "10.1109/TAP.1986",
+    doi: "10.1109/TAP.1986.1143830",
+    year: "1986"
   },
   "15": {
     ref: 15,
-    authors: "Y. Chen, J. Zhang, and D. Zhu",
-    title: "TransRAD: Retentive Vision Transformer with Manhattan Attention for Radar Object Detection",
-    venue: "IEEE Transactions on Radar Systems, vol. 3, pp. 112–125",
-    year: "2025",
-    doi: "10.1109/TRS.2024.3498112"
+    authors: "J. Capon",
+    title: "High-resolution frequency-wavenumber spectrum analysis, Proceedings of the IEEE, vol. 57, no. 8",
+    venue: "10.1109/PROC.1969",
+    doi: "10.1109/PROC.1969.7278",
+    year: "1969"
   },
   "16": {
     ref: 16,
-    authors: "L. Zhang et al.",
-    title: "E-RODNet: Efficient Embedded Radar Object Detection Network",
-    venue: "IEEE Sensors Journal, vol. 24, no. 8, pp. 12050–12061",
-    year: "2024",
-    doi: "10.1109/JSEN.2024.3364912"
+    authors: "M. Ester et al.",
+    title: "A density-based algorithm for discovering clusters in large spatial databases with noise, in KDD-96 Proceedings",
+    venue: "AAAI KDD-96",
+    doi: "10.5555/3001460.3001507",
+    year: "1996"
   },
   "17": {
     ref: 17,
-    authors: "T. O'Shea and J. Hoydis",
-    title: "An Introduction to Deep Learning for the Physical Layer",
-    venue: "IEEE Transactions on Cognitive Communications and Networking, vol. 3, no. 4, pp. 563–575",
-    year: "2017",
-    doi: "10.1109/TCCN.2017.2758370"
+    authors: "H. L. Van Trees",
+    title: "Optimum Array Processing: Part IV of Detection, Estimation, and Modulation Theory, John Wiley & Sons",
+    venue: "Wiley-IEEE",
+    doi: "10.1002/0471221104",
+    year: "2002"
   },
   "18": {
     ref: 18,
     authors: "V. C. Chen",
-    title: "The Micro-Doppler Effect in Radar",
-    venue: "2nd ed., Norwood, MA, USA: Artech House",
-    year: "2019",
-    doi: ""
+    title: "The Micro-Doppler Effect in Radar, 2nd ed., Artech House",
+    venue: "Artech House",
+    doi: "",
+    year: "2019"
   },
   "19": {
     ref: 19,
-    authors: "B. R. Mahafza",
-    title: "Radar Systems Analysis and Design Using MATLAB",
-    venue: "3rd ed., Boca Raton, FL, USA: CRC Press",
-    year: "2013",
-    doi: ""
+    authors: "A. Karlsson",
+    title: "FMCW Radar and Artificial Neural Network Processing for Target Detection and Classification, Doctoral Dissertation, Department of Electrical Engineering, Blekinge Institute of Technology",
+    venue: "BTH Ph.D. Thesis",
+    doi: "https://urn.kb.se/resolve?urn=urn:nbn:se:bth-26038",
+    year: "2024"
   },
   "20": {
     ref: 20,
-    authors: "J. Capon",
-    title: "High-Resolution Frequency-Wavenumber Spectrum Analysis",
-    venue: "Proceedings of the IEEE, vol. 57, no. 8, pp. 1408–1418",
-    year: "1969",
-    doi: "10.1109/PROC.1969.7278"
+    authors: "L. Zheng et al.",
+    title: "TJ4D: A High-Definition 4D Radar Benchmark Dataset for Autonomous Driving Under Challenging Conditions, IEEE Transactions on Intelligent Vehicles",
+    venue: "10.1109/TIV.2023",
+    doi: "10.1109/TIV.2023.3283253",
+    year: "2023"
   },
   "21": {
     ref: 21,
-    authors: "M. Ester, H.-P. Kriegel, J. Sander, and X. Xu",
-    title: "A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise",
-    venue: "Proceedings of the 2nd International Conference on Knowledge Discovery and Data Mining (KDD), pp. 226–231",
-    year: "1996",
-    doi: ""
+    authors: "T. K. Pal",
+    title: "Artificial Intelligence and Deep Learning in Radar Applications: Emerging Trends and Operational Challenges, Defence Science Journal (DRDO), vol. 74, no. 2",
+    venue: "10.14429/dsj.74",
+    doi: "10.14429/dsj.74.19230",
+    year: "2024"
   },
   "22": {
     ref: 22,
-    authors: "P. E. Pace",
-    title: "Detecting and Classifying Low Probability of Intercept Radar",
-    venue: "2nd ed., Norwood, MA, USA: Artech House",
-    year: "2009",
-    doi: ""
+    authors: "Y. Cheng and X. Cao",
+    title: "TransRAD: Retentive Network Architecture for Real-Time Radar Target Detection, IEEE Transactions on Aerospace and Electronic Systems",
+    venue: "10.1109/TAES.2024",
+    doi: "10.1109/TAES.2024.3378901",
+    year: "2024"
   },
   "23": {
     ref: 23,
-    authors: "R. Caromi, M. Souryal, and T. A. Hall",
-    title: "RF Dataset of Incumbent Radar Signals in the 3.5 GHz CBRS Band",
-    venue: "Journal of Research of the National Institute of Standards and Technology (NIST), vol. 124, p. 1",
-    year: "2019",
-    doi: "10.6028/jres.124.020"
+    authors: "Y. Sun et al.",
+    title: "Point-cloud deep learning on 4D automotive radar: A comprehensive survey, IEEE Transactions on Intelligent Vehicles",
+    venue: "10.1109/TIV.2024",
+    doi: "10.1109/TIV.2024.3361280",
+    year: "2024"
   },
   "24": {
     ref: 24,
-    authors: "S. Basak, S. Rajendran, S. Pollin, and B. Scheers",
-    title: "Combined RF-Based Drone Detection and Classification",
-    venue: "IEEE Transactions on Cognitive Communications and Networking, vol. 8, no. 1, pp. 111–120",
-    year: "2021",
-    doi: "10.1109/TCCN.2021.3117474"
+    authors: "Z. Geng et al.",
+    title: "Deep learning for radar: A comprehensive overview, IEEE Aerospace and Electronic Systems Magazine, vol. 36, no. 1",
+    venue: "10.1109/MAES.2020",
+    doi: "10.1109/MAES.2020.3005934",
+    year: "2021"
   },
   "25": {
     ref: 25,
-    authors: "S. Z. Gurbuz, K. L. Bell, and M. S. Greco",
-    title: "Integrating AI into Radar System Design: Next-Generation Cognitive Radars",
-    venue: "Women in Telecommunications, Cham, Switzerland: Springer",
-    year: "2023",
-    doi: "10.1007/978-3-031-29933-9_5"
+    authors: "K. Patel et al.",
+    title: "Deep learning-based automotive radar perception: A review and future perspectives, IEEE Transactions on Intelligent Transportation Systems, vol. 24, no. 12",
+    venue: "10.1109/TITS.2023",
+    doi: "10.1109/TITS.2023.3298811",
+    year: "2023"
   },
   "26": {
     ref: 26,
-    authors: "K. Haigh and J. Andrusenko",
-    title: "Cognitive Electronic Warfare: An Artificial Intelligence Approach",
-    venue: "Norwood, MA, USA: Artech House",
-    year: "2021",
-    doi: ""
+    authors: "A. Ouaknine et al.",
+    title: "CARRADA Dataset: Camera and Automotive Radar with Range-Angle-Doppler Annotations, International Conference on Pattern Recognition (ICPR)",
+    venue: "10.1109/ICPR.2021",
+    doi: "10.1109/ICPR48876.2021.9412497",
+    year: "2021"
   },
   "27": {
     ref: 27,
-    authors: "Z. Huang, A. Pemasiri, S. Denman, T. Martin, and C. Fookes",
-    title: "Multi-stage Learning for Radar Pulse Activity Segmentation",
-    venue: "IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), pp. 7340–7344",
-    year: "2024",
-    doi: "10.1109/ICASSP48485.2024.10446700"
+    authors: "H. Caesar et al.",
+    title: "nuScenes: A multimodal dataset for autonomous driving, IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+    venue: "10.1109/CVPR.2020",
+    doi: "10.1109/CVPR42600.2020.01164",
+    year: "2020"
   },
   "28": {
     ref: 28,
-    authors: "X. Cai, M. Giallorenzo, and K. Sarabandi",
-    title: "Machine Learning-Based Target Classification for MMW Radar in Autonomous Driving",
-    venue: "IEEE Transactions on Intelligent Vehicles, vol. 6, no. 4, pp. 678–689",
-    year: "2021",
-    doi: "10.1109/TIV.2021.3065365"
+    authors: "P. Sen et al.",
+    title: "RAVEN: Radially Aligned Visual-Radar Network for All-Weather Perception, IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+    venue: "IEEE CVPR 2026",
+    doi: "https://openaccess.thecvf.com",
+    year: "2026"
   },
   "29": {
     ref: 29,
-    authors: "T. Huynh-The, V.-S. Doan, et al.",
-    title: "Accurate LPI Radar Waveform Recognition with CWD-TFA for Deep Convolutional Network",
-    venue: "IEEE Wireless Communications Letters, vol. 10, no. 8, pp. 1638–1642",
-    year: "2021",
-    doi: "10.1109/LWC.2021.3076822"
+    authors: "K. He et al.",
+    title: "Deep Residual Learning for Image Recognition, IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+    venue: "10.1109/CVPR.2016",
+    doi: "10.1109/CVPR.2016.90",
+    year: "2016"
   },
   "30": {
     ref: 30,
-    authors: "S. Bobek, M. Kuk, M. Szelazek, and G. J. Nalepa",
-    title: "Enhancing Cluster Analysis with Explainable AI and Multidimensional Cluster Prototypes",
-    venue: "IEEE Access, vol. 10, pp. 101556–101574",
-    year: "2022",
-    doi: "10.1109/ACCESS.2022.3208752"
+    authors: "Y. Lin et al.",
+    title: "RadDet Benchmark on Deep FMCW Radar Detection, IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+    venue: "10.1109/ICASSP.2025",
+    doi: "10.1109/ICASSP49660.2025.10887772",
+    year: "2025"
+  },
+  "31": {
+    ref: 31,
+    authors: "B. R. Mahafza",
+    title: "Radar Signal Analysis and Processing Using MATLAB, CRC Press / MathWorks Radar Designer App",
+    venue: "CRC Press / MATLAB",
+    doi: "10.1201/9781315372433",
+    year: "2016"
   }
 };
+
+/**
+ * 2. Reading Progress Bar Controller
+ * Updates width of #reading-progress-bar as reader scrolls.
+ */
 
 /**
  * 1. KaTeX Mathematical Typesetting Auto-Render Initializer
@@ -279,18 +292,19 @@ function initKaTeX() {
   }
 }
 
-/**
- * 2. Top Reading Progress Indicator
- * Dynamically updates #reading-progress-bar width based on scroll percentage.
- */
 function initReadingProgress() {
   const progressBar = document.getElementById("reading-progress-bar");
   if (!progressBar) return;
 
   function updateProgress() {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollTop =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
     const scrollHeight =
-      document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
     const progress =
       scrollHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / scrollHeight) * 100)) : 0;
     progressBar.style.width = `${progress.toFixed(2)}%`;
@@ -302,12 +316,15 @@ function initReadingProgress() {
 
 /**
  * 3. IntersectionObserver Scroll Spy
- * Supports both Chapter 1–7 academic anchors (#ch1-intro, #ch2-physics, ...)
- * and legacy showcase section anchors (#overview, #notebook-01, ...).
+ * Supports Chapter 1–5 academic anchors and legacy showcase sections.
  */
 function initScrollSpy() {
   const academicTargets = [
     "#ch1-intro",
+    "#ch2-lit-review",
+    "#ch3-methodology",
+    "#ch4-results",
+    "#ch5-conclusion",
     "#ch2-physics",
     "#ch3-dsp-audit",
     "#ch4-methodology",
@@ -355,16 +372,14 @@ function initScrollSpy() {
 }
 
 /**
- * 4. Interactive IEEE Citation Cards & Popovers (PORTAL-CITE-01, PORTAL-CITE-02)
- * Unconditionally active by default for all IEEE references in CITATIONS_DB (D-04).
+ * 4. Interactive IEEE Citation Hover Tooltips & Mobile Bottom-Sheet Popovers
+ * Always unconditionally active across all citations (PORTAL-CITE-01 / D-04).
  */
 function initCitationTooltips() {
   const badges = document.querySelectorAll(".citation-badge, [data-citation]");
   if (!badges.length) return;
 
   let tooltipEl = document.getElementById("citation-tooltip");
-  let backdropEl = document.getElementById("citation-backdrop");
-
   if (!tooltipEl) {
     tooltipEl = document.createElement("div");
     tooltipEl.id = "citation-tooltip";
@@ -372,6 +387,7 @@ function initCitationTooltips() {
     document.body.appendChild(tooltipEl);
   }
 
+  let backdropEl = document.getElementById("citation-backdrop");
   if (!backdropEl) {
     backdropEl = document.createElement("div");
     backdropEl.id = "citation-backdrop";
@@ -384,8 +400,27 @@ function initCitationTooltips() {
   function showTooltip(badge, isTouch = false) {
     clearTimeout(hideTimeout);
     const citeKey = badge.getAttribute("data-citation") || badge.textContent.replace(/[\[\]]/g, "").trim();
-    const data = CITATIONS_DB[citeKey];
 
+    // Ponytail Ladder Level 3: dynamically extract from DOM single source of truth first
+    let data = null;
+    const refRow = document.getElementById(`ref-${citeKey}`);
+    if (refRow) {
+      const cells = refRow.querySelectorAll("td");
+      if (cells.length >= 4) {
+        const linkEl = cells[4] ? cells[4].querySelector("a") : null;
+        data = {
+          ref: parseInt(citeKey, 10),
+          authors: cells[1].textContent.trim(),
+          title: cells[2].textContent.trim(),
+          year: cells[3].textContent.trim(),
+          venue: cells[4] ? cells[4].textContent.trim() : "",
+          url: linkEl ? linkEl.getAttribute("href") : ""
+        };
+      }
+    }
+    if (!data) {
+      data = CITATIONS_DB[citeKey];
+    }
     if (!data) return;
 
     // Build tooltip safely without innerHTML (CWE-79 DOM XSS prevention)
@@ -393,49 +428,38 @@ function initCitationTooltips() {
       tooltipEl.removeChild(tooltipEl.firstChild);
     }
 
-    const header = document.createElement("div");
-    header.className = "tooltip-header";
-
     const refNum = document.createElement("div");
     refNum.className = "tooltip-ref-num";
     refNum.textContent = `IEEE Reference [${data.ref}]`;
-    header.appendChild(refNum);
-
-    if (isTouch || window.innerWidth <= 600) {
-      const closeBtn = document.createElement("button");
-      closeBtn.className = "tooltip-close-btn";
-      closeBtn.textContent = "✕";
-      closeBtn.setAttribute("aria-label", "Close citation preview");
-      closeBtn.addEventListener("click", hideTooltip);
-      header.appendChild(closeBtn);
-    }
-    tooltipEl.appendChild(header);
 
     const title = document.createElement("div");
     title.className = "tooltip-title";
     title.textContent = data.title;
-    tooltipEl.appendChild(title);
 
     const authors = document.createElement("div");
     authors.className = "tooltip-authors";
     authors.textContent = data.authors;
-    tooltipEl.appendChild(authors);
 
     const venue = document.createElement("div");
     venue.className = "tooltip-venue";
     venue.textContent = `${data.venue} (${data.year})`;
+
+    tooltipEl.appendChild(refNum);
+    tooltipEl.appendChild(title);
+    tooltipEl.appendChild(authors);
     tooltipEl.appendChild(venue);
 
     const actions = document.createElement("div");
     actions.className = "tooltip-actions";
 
-    if (data.doi && data.doi.trim().length > 0) {
+    const doiTarget = data.doi || data.url;
+    if (doiTarget && doiTarget.trim().length > 0) {
       const doiBtn = document.createElement("a");
       doiBtn.className = "tooltip-doi-btn";
-      doiBtn.href = data.doi.startsWith("http") ? data.doi : `https://doi.org/${data.doi}`;
+      doiBtn.href = doiTarget.startsWith("http") ? doiTarget : `https://doi.org/${doiTarget}`;
       doiBtn.target = "_blank";
       doiBtn.rel = "noopener noreferrer";
-      doiBtn.textContent = "DOI / Publisher";
+      doiBtn.textContent = "DOI / Publisher ↗";
       actions.appendChild(doiBtn);
     }
 
@@ -455,23 +479,29 @@ function initCitationTooltips() {
     actions.appendChild(jumpBtn);
     tooltipEl.appendChild(actions);
 
-    // Dynamic Viewport Mode Switch
-    if (window.innerWidth <= 600 || isTouch) {
+    const isMobileView = isTouch || window.innerWidth <= 600;
+    if (isMobileView) {
+      tooltipEl.classList.add("is-mobile");
       backdropEl.classList.add("visible");
       document.body.classList.add("nav-open");
+      tooltipEl.style.left = "";
+      tooltipEl.style.top = "";
     } else {
-      const rect = badge.getBoundingClientRect();
-      const tooltipWidth = Math.min(480, window.innerWidth - 40);
-      let left = rect.left + window.scrollX - 40;
-      let top = rect.top + window.scrollY - 140;
+      tooltipEl.classList.remove("is-mobile");
+      backdropEl.classList.remove("visible");
+      document.body.classList.remove("nav-open");
 
-      // Viewport edge collision handling
+      const tooltipWidth = Math.min(480, window.innerWidth - 40);
+      const rect = badge.getBoundingClientRect();
+      let left = rect.left - 40;
+      let top = rect.top - 140;
+
       if (left + tooltipWidth > window.innerWidth - 20) {
         left = window.innerWidth - tooltipWidth - 20;
       }
       if (left < 10) left = 10;
       if (rect.top < 150) {
-        top = rect.bottom + window.scrollY + 10;
+        top = rect.bottom + 10;
       }
 
       tooltipEl.style.left = `${left}px`;
@@ -484,58 +514,97 @@ function initCitationTooltips() {
   function hideTooltip() {
     tooltipEl.classList.remove("visible");
     backdropEl.classList.remove("visible");
+    tooltipEl.classList.remove("is-mobile");
     document.body.classList.remove("nav-open");
   }
 
   badges.forEach((badge) => {
+    badge.setAttribute("tabindex", "0");
+    badge.setAttribute("role", "button");
+    badge.setAttribute("aria-haspopup", "true");
+    badge.setAttribute("aria-expanded", "false");
+
     badge.addEventListener("mouseenter", () => {
-      if (window.innerWidth > 600) showTooltip(badge, false);
+      badge.setAttribute("aria-expanded", "true");
+      clearTimeout(hideTimeout);
+      showTooltip(badge, false);
     });
     badge.addEventListener("mouseleave", () => {
-      if (window.innerWidth > 600) hideTimeout = setTimeout(hideTooltip, 200);
+      badge.setAttribute("aria-expanded", "false");
+      hideTimeout = setTimeout(hideTooltip, 200);
     });
     badge.addEventListener("focus", () => {
-      if (window.innerWidth > 600) showTooltip(badge, false);
+      badge.setAttribute("aria-expanded", "true");
+      clearTimeout(hideTimeout);
+      showTooltip(badge, false);
     });
     badge.addEventListener("blur", () => {
-      if (window.innerWidth > 600) hideTimeout = setTimeout(hideTooltip, 200);
+      badge.setAttribute("aria-expanded", "false");
+      hideTimeout = setTimeout(hideTooltip, 200);
+    });
+
+    badge.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const citeKey = badge.getAttribute("data-citation") || badge.textContent.replace(/[\[\]]/g, "").trim();
+        const targetId = `ref-${citeKey}`;
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          targetEl.classList.add("highlight-pulse");
+          setTimeout(() => targetEl.classList.remove("highlight-pulse"), 2000);
+        }
+      } else if (e.key === "Escape") {
+        badge.setAttribute("aria-expanded", "false");
+        hideTooltip();
+      }
     });
 
     badge.addEventListener("click", (e) => {
       e.preventDefault();
-      showTooltip(badge, true);
+      const citeKey = badge.getAttribute("data-citation") || badge.textContent.replace(/[\[\]]/g, "").trim();
+      if (window.innerWidth <= 600 || window.matchMedia("(pointer: coarse)").matches) {
+        showTooltip(badge, true);
+      } else {
+        const targetId = `ref-${citeKey}`;
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          targetEl.classList.add("highlight-pulse");
+          setTimeout(() => targetEl.classList.remove("highlight-pulse"), 2000);
+        }
+      }
     });
   });
 
   tooltipEl.addEventListener("mouseenter", () => clearTimeout(hideTimeout));
   tooltipEl.addEventListener("mouseleave", () => {
-    if (window.innerWidth > 600) hideTimeout = setTimeout(hideTooltip, 200);
+    hideTimeout = setTimeout(hideTooltip, 200);
   });
   backdropEl.addEventListener("click", hideTooltip);
 }
 
 /**
  * 5. Collapsible Code & Drawer Accordions
- * Wires toggle controls for .collapsible-drawer and .code-drawer.
  */
 function initCodeDrawers() {
-  const drawerHeaders = document.querySelectorAll(
-    ".drawer-header, .code-drawer-toggle"
-  );
-
+  const drawerHeaders = document.querySelectorAll(".drawer-header, .code-drawer-toggle");
   drawerHeaders.forEach((header) => {
     header.addEventListener("click", () => {
-      const drawer = header.closest(".collapsible-drawer, .code-drawer");
+      const drawer = header.closest(".code-drawer, .collapsible-drawer");
       if (drawer) {
         drawer.classList.toggle("open");
+        const icon = header.querySelector(".toggle-icon");
+        if (icon) {
+          icon.textContent = drawer.classList.contains("open") ? "▲" : "▼";
+        }
       }
     });
   });
 }
 
 /**
- * 6. Interactive Lightbox Modal
- * Provides full-screen zoomed inspection for plots, spectrograms, and SVGs.
+ * 6. Interactive Lightbox Modal Controller
  */
 function initLightbox() {
   const modal = document.getElementById("lightbox-modal");
@@ -545,7 +614,10 @@ function initLightbox() {
 
   if (!modal || !modalImg || !modalCaption || !closeBtn) return;
 
-  function openLightbox(src, captionText) {
+  let lastActiveElement = null;
+
+  function openLightbox(src, captionText, triggerEl) {
+    lastActiveElement = triggerEl || document.activeElement;
     modalImg.setAttribute("src", src);
     modalCaption.textContent = captionText || "";
     modalImg.style.width = "auto";
@@ -555,26 +627,35 @@ function initLightbox() {
     modalImg.style.objectFit = "contain";
     modal.style.display = "flex";
     document.body.style.overflow = "hidden";
+    closeBtn.focus();
   }
 
   function closeLightbox() {
     modal.style.display = "none";
     modalImg.removeAttribute("src");
+    modalImg.onload = null;
     modalImg.style.width = "";
+    modalImg.style.height = "";
     modalImg.style.maxWidth = "";
     modalImg.style.maxHeight = "";
-    modalImg.style.height = "";
     modalCaption.textContent = "";
     document.body.style.overflow = "";
+    if (lastActiveElement && typeof lastActiveElement.focus === "function") {
+      lastActiveElement.focus();
+    }
   }
 
   const zoomableImages = document.querySelectorAll(
-    "img.zoomable, .flowchart-container img, .plot-img-wrapper img"
+    ".plot-container img, .plot-card img, .architecture-card img, .diagram-container img, .svg-diagram-wrapper img"
   );
 
   zoomableImages.forEach((img) => {
     img.style.cursor = "zoom-in";
-    img.addEventListener("click", () => {
+    img.setAttribute("tabindex", "0");
+    img.setAttribute("role", "button");
+    img.setAttribute("aria-label", "Zoom image");
+
+    function handleZoom() {
       const src = img.getAttribute("src");
       let caption = img.getAttribute("alt") || "";
       const parentCard = img.closest(".plot-card");
@@ -588,15 +669,28 @@ function initLightbox() {
         } else if (descEl) {
           caption = descEl.textContent.trim();
         }
+      } else {
+        const figureWrapper = img.closest("figure, div[style*='text-align: center']");
+        if (figureWrapper) {
+          const captionEl = figureWrapper.querySelector("figcaption, p em, p strong, p");
+          if (captionEl) caption = captionEl.textContent.trim();
+        }
       }
-      openLightbox(src, caption);
+      openLightbox(src, caption, img);
+    }
+
+    img.addEventListener("click", handleZoom);
+    img.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        handleZoom();
+      }
     });
   });
 
   closeBtn.addEventListener("click", closeLightbox);
-
   modal.addEventListener("click", (e) => {
-    if (e.target === modal || e.target.classList.contains("lightbox-content")) {
+    if (e.target === modal) {
       closeLightbox();
     }
   });
@@ -609,124 +703,112 @@ function initLightbox() {
 }
 
 /**
- * 7. 1-Click Code Copy Handler
- * Copies clean snippet text to clipboard with animated visual confirmation.
+ * 7. Code Snippet Copy Controller
  */
 function initCodeCopy() {
-  const copyButtons = document.querySelectorAll(".code-block-header .copy-btn");
+  const codeBlocks = document.querySelectorAll(".code-block-container, pre code");
+  codeBlocks.forEach((block) => {
+    const parent = block.parentElement;
+    if (!parent) return;
 
-  copyButtons.forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      const wrapper = btn.closest(".code-block-wrapper");
-      if (!wrapper) return;
+    if (!parent.querySelector(".copy-code-btn")) {
+      const copyBtn = document.createElement("button");
+      copyBtn.className = "copy-code-btn";
+      copyBtn.textContent = "Copy";
+      copyBtn.setAttribute("aria-label", "Copy code to clipboard");
 
-      const codeEl = wrapper.querySelector("pre code");
-      if (!codeEl) return;
-
-      const codeText = codeEl.textContent;
-
-      try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
+      copyBtn.addEventListener("click", async () => {
+        const codeText = block.textContent;
+        try {
           await navigator.clipboard.writeText(codeText);
-        } else {
-          const textarea = document.createElement("textarea");
-          textarea.value = codeText;
-          textarea.style.position = "fixed";
-          textarea.style.opacity = "0";
-          document.body.appendChild(textarea);
-          textarea.select();
-          document.execCommand("copy");
-          document.body.removeChild(textarea);
+          copyBtn.textContent = "Copied!";
+          setTimeout(() => {
+            copyBtn.textContent = "Copy";
+          }, 2000);
+        } catch (err) {
+          copyBtn.textContent = "Error";
+          setTimeout(() => {
+            copyBtn.textContent = "Copy";
+          }, 2000);
         }
+      });
 
-        const originalText = btn.textContent;
-        btn.textContent = "Copied!";
-        btn.classList.add("copied");
-
-        setTimeout(() => {
-          btn.textContent = originalText;
-          btn.classList.remove("copied");
-        }, 2000);
-      } catch (err) {
-        console.error("Clipboard copy failed:", err);
-      }
-    });
+      parent.style.position = "relative";
+      parent.appendChild(copyBtn);
+    }
   });
 }
 
 /**
- * 8. Floating Back-to-Top Button
+ * 8. Back to Top Button
  */
 function initBackToTop() {
   const backToTopBtn = document.getElementById("back-to-top");
   if (!backToTopBtn) return;
 
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (window.scrollY > 400) {
-        backToTopBtn.classList.add("visible");
-      } else {
-        backToTopBtn.classList.remove("visible");
-      }
-    },
-    { passive: true }
-  );
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+      backToTopBtn.classList.add("visible");
+    } else {
+      backToTopBtn.classList.remove("visible");
+    }
+  }, { passive: true });
 
   backToTopBtn.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
 
 /**
- * 9. Responsive Mobile Navigation Drawer
+ * 9. Mobile Responsive Navigation Drawer Controller
  */
 function initMobileDrawer() {
-  const toggleBtn = document.getElementById("nav-toggle");
-  const sidebar = document.querySelector(".sidebar") || document.getElementById("academic-sidebar");
-  const backdrop = document.querySelector(".nav-backdrop");
-  const tocLinks = document.querySelectorAll(".toc-link");
+  const navToggle = document.getElementById("nav-toggle");
+  const backdrop = document.getElementById("nav-backdrop") || document.querySelector(".nav-backdrop");
+  const sidebar = document.getElementById("academic-sidebar");
 
-  if (!toggleBtn || !sidebar || !backdrop) return;
+  if (!navToggle) return;
 
   function toggleDrawer() {
-    const isOpen = sidebar.classList.toggle("open");
-    backdrop.classList.toggle("open", isOpen);
-    document.body.classList.toggle("nav-open", isOpen);
-    toggleBtn.textContent = isOpen ? "✕" : "☰";
-    toggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    const isOpen = document.body.classList.toggle("nav-open");
+    navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    navToggle.textContent = isOpen ? "✕" : "☰";
   }
 
   function closeDrawer() {
-    sidebar.classList.remove("open");
-    backdrop.classList.remove("open");
-    document.body.classList.remove("nav-open");
-    toggleBtn.textContent = "☰";
-    toggleBtn.setAttribute("aria-expanded", "false");
+    if (document.body.classList.contains("nav-open")) {
+      document.body.classList.remove("nav-open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.textContent = "☰";
+    }
   }
 
-  toggleBtn.addEventListener("click", toggleDrawer);
-  backdrop.addEventListener("click", closeDrawer);
+  navToggle.addEventListener("click", toggleDrawer);
 
+  if (backdrop) {
+    backdrop.addEventListener("click", closeDrawer);
+  }
+
+  const tocLinks = document.querySelectorAll(".toc-link");
   tocLinks.forEach((link) => {
-    link.addEventListener("click", closeDrawer);
+    link.addEventListener("click", () => {
+      if (window.innerWidth <= 1024) {
+        closeDrawer();
+      }
+    });
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && sidebar.classList.contains("open")) {
+    if (e.key === "Escape" && document.body.classList.contains("nav-open")) {
       closeDrawer();
     }
   });
 }
 
 /**
- * 10. Automated Two-Tier Overflow Containment Safety Sweep
+ * 10. Horizontal Momentum Overflow Containment
  */
 function initOverflowContainment() {
-  // Wrap any uncontained tables
   const tables = document.querySelectorAll("table");
   tables.forEach((table) => {
     if (!table.closest(".table-scroll-wrapper")) {
@@ -737,7 +819,6 @@ function initOverflowContainment() {
     }
   });
 
-  // Wrap any uncontained KaTeX display math containers
   const katexDisplays = document.querySelectorAll(".katex-display");
   katexDisplays.forEach((el) => {
     if (!el.closest(".formula-scroll-wrapper")) {
@@ -748,23 +829,24 @@ function initOverflowContainment() {
     }
   });
 
-  // Safety sweep: tag any inline grid-template-columns elements with responsive-grid-2
   const inlineGrids = document.querySelectorAll('[style*="grid-template-columns"]');
   inlineGrids.forEach((el) => {
-    el.classList.add("responsive-grid-2");
+    if (!el.classList.contains("responsive-grid-2")) {
+      el.classList.add("responsive-grid-2");
+    }
   });
 }
 
 /**
- * Master Initialization on DOMContentLoaded
+ * Initialization on DOMContentLoaded
  */
 document.addEventListener("DOMContentLoaded", () => {
-  initReadingProgress();
   initKaTeX();
   initOverflowContainment();
   if (typeof hljs !== "undefined") {
     hljs.highlightAll();
   }
+  initReadingProgress();
   initScrollSpy();
   initCitationTooltips();
   initCodeDrawers();

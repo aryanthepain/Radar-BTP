@@ -1,12 +1,94 @@
 # WORKING.md — Active Sprint & Context Scratchpad
 
-## Current Objective
+## Current Objective: Comprehensive Report Revision & Academic Polish
+
+### VERBATIM USER REQUEST (Recorded for Verification Gate)
+
+```text
+/gsd-verify-work 2.
+remove this "Index Terms: 77 GHz FMCW Radar, Resource-Efficient AI, Radar Signal Processing, Deep Spectrum Detection, RadDet Benchmark, YOLOv9-C, CPU Inference, Constant False Alarm Rate (CFAR), Edge Computing."
+move the old report to a new page and add the link to go to the old report if need be. keep the archived references there as well.
+in bibliography add 19 and 20, 26, 27, 30, 31 as reference as well. mention 19 and 20, 26, 27, as reference in figure 5.1 in repective locations.
+
+i have made some changes myself in the content.
+do not have these scrollbars for formulae as given in the picture.
+
+also in a side chat /add-question what is the stuff in chapter 2 mean. and new question for stuff in table 3.1. new question for this formula X∈C N rx ×N chirp ×N sample
+
+provide a reference to karlssons thesis wherever some topics need to be explained.
+Also please make sure that references numbers Are proper Because there are many places where references are not properly matched With what Point to. For example the trans rAd And carrada datasets Are mentioned in chapter two But are not properly linked up. adaradar and raven are not linked up properly as well. you will need to check all the different references that are there. spin up a subagent to check each and every reference and fix it if required.
+in 3.1 mention that the synthetic radar was created based on the matlab radar designer app and also rference it.
+
+remove the file names from codes -> src/dsp/range_processing.py
+add codes to other section of 3.2.2 as well.
+change the mermaid diagrams for teh flow in chapter 3 to be more presentable and to be suitable for the final a4 eport that we are going to use. these flows will be on one side of the column hence they should be easily readable fro there as well. you can ask me anything if any part is ambiguous.
+
+no need for this Code Listing 3.3: Grayscale Spectrogram Loading and Normalisation
+
+formulae like this C={Rect, Barker, Frank, P1, P2, P3, P4, Px, ZadoffChu, LFM, FMCW} are taking up the whole width when they only need to be in one column. this is seen all across the webpage. spin up a subagent tocheck each of teh formula. \Delta R pprox 0.1499\text{ m} this formula is nt showing properly in chapter 4.
+table 3.2 and 3.3  can be in one column instead of fulll width.
+
+Code Listing 4.1: Calculation of Range and Velocity Errors from Matched CFAR Detections is unnnecessary
+table 4.4 is unnecessary explain using the graph only. there must be A better graph that might be present That corresponds to the whole Training process instead of this smoke one In figure 4.6 a.
+
+The changes I'm telling needs to be changed but also the text around it might need to be changed as well in order to Properly Change the things.
+
+*Partition & Chunking Disclosure Note: The evaluated split (14,001 train / 6,001 val / 20,001 test) reflects the directory structure in the Kaggle benchmark distribution, which differs from the official 20,000 / 14,000 / 6,000 partition in Huang et al. In the multi-SNR evaluation across 6 discrete SNR tiers, integer division (20,001//6=3,333) evaluated 6×3,333=19,998 frames, leaving exactly 3 unassigned residual frames. The 15-epoch YOLOv8n run is demarcated strictly as an internal prototype smoke test. remov this note please in 4.3.2. in table 4.5 no need to mention the small run that is just smoke test. remove from surrounding as well.
+write down this whole prompt as it is somewhere So Things are not missed And are later verified Against the original prompt itself instead of Some context deep down.
+
+we can remove table 5.2 and use figure 5.1 instead to propose the roadmap.
+
+remove this  Laboratory & Hardware Confirmation Protocol
+remove mention of (ONNX Runtime, OpenVINO) from everywhere.
+
+remove this BTP-1 Thesis Portal · Autumn 2026
+KaTeX: Offline (20 Fonts)
+Verified: ICASSP Table III
+
+Course
+DA4098P BTP Project I (Autumn 2026) -> DA4098P BTP Project I
+```
+
+### Action Checklist Derived from User Prompt:
+
+- [x] 0. Prompt saved verbatim in `WORKING.md` (Done).
+- [x] 1. Preserve user changes in `docs/index.html` (check git diff before editing).
+- [x] 2. Remove "Index Terms: 77 GHz FMCW Radar, Resource-Efficient AI..." div completely.
+- [x] 3. Move old 7-chapter report and archived references to `docs/archived-report.html`. Add clean reciprocal links between `index.html` and `archived-report.html`.
+- [x] 4. Fix formulas with horizontal scrollbars (split long side-by-side equations, e.g., $\Delta R$, $\Delta v$, $R_{\max}$, $v_{\max}$ so they wrap nicely within one column without scrollbars).
+- [x] 5. Fix full-width formulas across the page that should be single-column (e.g., $C=\{\text{Rect}, \dots\}$).
+- [x] 6. Fix `\Delta R pprox 0.1499\text{ m}` syntax error in Chapter 4 ($\Delta R \approx 0.15\text{ m}$).
+- [x] 7. Tables 3.2 and 3.3 moved to single column instead of full width.
+- [x] 8. Remove file path headers from code listings (e.g., `src/dsp/range_processing.py`).
+- [x] 9. Remove Code Listing 3.3 (Grayscale Spectrogram Loading and Normalisation) and adjust surrounding text.
+- [x] 10. Add Python code snippets to other subsections of 3.2.2 (e.g., Doppler processing, CFAR, AoA, DBSCAN).
+- [x] 11. Refactor Chapter 3 Mermaid flowcharts to be vertical / single-column presentable, matching A4 column layout.
+- [x] 12. Mention in 3.1 that the synthetic radar was modeled on the MATLAB Radar Designer App and add citation to it.
+- [x] 13. Remove Code Listing 4.1 (Calculation of Range and Velocity Errors) and adjust surrounding text.
+- [x] 14. Remove Table 4.4 and explain using graph only; replace Figure 4.6 (a) smoke run with a full training process curve graph if available (or high-res full curve).
+- [x] 15. Remove the Partition & Chunking Disclosure Note in 4.3.2; remove the 15-epoch smoke test from Table 4.5 and surrounding text.
+- [x] 16. Remove Table 5.2 and use Figure 5.1 to present roadmap.
+- [x] 17. Remove "Laboratory & Hardware Confirmation Protocol".
+- [x] 18. Remove mentions of "(ONNX Runtime, OpenVINO)" from everywhere.
+- [x] 19. Header/Hero cleanups:
+  - Remove "BTP-1 Thesis Portal · Autumn 2026", "KaTeX: Offline (20 Fonts)", "Verified: ICASSP Table III".
+  - Change "DA4098P BTP Project I (Autumn 2026)" to "DA4098P BTP Project I".
+- [x] 20. Reference & Bibliography Audit:
+  - Add references 19, 20, 26, 27, 30, 31 to bibliography.
+  - Mention 19, 20, 26, 27 in Figure 5.1 in respective locations.
+  - Provide citations to Karlsson's PhD thesis wherever topics need explanation.
+  - Fix dataset citations: TransRAD, CARRADA, AdaRadar, RAVEN, etc., verifying every reference mapping in both `index.html` and `app.js`.
+- [x] 21. Draft and formulate the 3 Advisor Defense Focus Questions in chat under `/add-question`:
+  - Q1: What does the stuff in Chapter 2 mean?
+  - Q2: Explanation of Table 3.1 parameters & equations.
+  - Q3: Explanation of tensor formula $X \in \mathbb{C}^{N_{rx} \times N_{chirp} \times N_{sample}}$.
+
+---
 
 - **Project**: Radar DSP & AI Detection Testbench (BTP)
-- **Active Phase**: Phase 2: Multi-Level Decoupled Radar Data Ingestion (Ready to begin)
+- **Active Phase**: Phase 2 Complete (Merged into `main` via PR #24; GitHub Pages live from `main`)
 - **Active Branch**: `main` (clean, fully synced with `origin/main`)
-- **Status**: Phase 1, Phase 1.1, Phase 1.2, Phase 01.2.1, Phase 01.2.2, and Phase 1.3 are all 100% complete, verified, and merged. 58/58 deterministic tests passing at 97.35% coverage.
-- **Next Step**: Plan and execute Phase 2 (Multi-Level Decoupled Radar Data Ingestion, resolving GitHub Issues #2 and #3).
+- **Status**: Phase 2 fully merged, GitHub Issue #21 closed, GitHub Pages deployment run #44406734785 succeeded on `main`. 60/60 deterministic tests passing at 97.35% coverage.
 
 ---
 

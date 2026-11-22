@@ -17,6 +17,7 @@ A phased journey to prepare an undergraduate thesis exploratory presentation for
 - [x] **Phase 01.2.1: Interactive Research Showcase & Thesis Presentation Website** (INSERTED) - Deliver a clean, responsive showcase website for the supervising professor synthesizing all three notebooks, experimental results, comparative radar data progression (toy -> synthetic -> real RadDet), architecture flowcharts, and key code snippets.
 - [x] **Phase 01.2.2: Comprehensive BTP Thesis Report & Academic Publication Showcase Website** (INSERTED) - Deliver publication-grade ~20-page IIT Guwahati BTP Report and rework GitHub Pages website into an academic reading experience for professor finalization.
 - [x] **Phase 1.3: High-Coverage Deterministic Unit & Integration Testing** (INSERTED) - Comprehensive test expansion achieving >=90% code coverage across DSP algorithms, PyTorch dataset/models, and pipeline scripts with pytest-cov.
+- [x] **Phase 2: GitHub Pages Chapter-by-Chapter Content Finalization** - Finalize active 5-chapter manuscript with FMCW mathematical physics derivations, 6-column Classical DSP matrix, RadDet RF terminology, comparative benchmark framing, sequential IEEE citations [1..18], Canva timeline Gantt schedule, and permanent invariant regression gates. (completed 2026-11-18)
 - [x] **Phase 3: Academic Portal Priority 0 Polish: Mobile UI & IEEE Citation Cards** - Deliver publication-grade responsive ergonomics, mobile drawer navigation, formula/table overflow containment (#23), and interactive floating IEEE citation previews (#21) for the thesis portal. (completed 2026-11-19)
 
 ## Phase Details
@@ -148,34 +149,61 @@ Plans:
 - [x] 01.3-02: Author `tests/test_radar_dataset.py` targeting synthetic `RadarDataset` generation, box coordinate math, multi-task heatmap encoding, and DataLoader collate functions.
 - [x] 01.3-03: Author `tests/test_pipeline_scripts.py` targeting `scripts/run_radar_pipeline.py`, `scripts/push_kaggle_kernel.py`, and update `scripts/verify.ps1` with strict `pytest-cov` enforcement.
 
+### Phase 2: GitHub Pages Chapter-by-Chapter Content Finalization
+
+**Goal:** Progressively refine, update, and finalize the academic BTP thesis report content on the GitHub Pages website (`docs/`) chapter-by-chapter based on iterative user-supplied content and guidance, accommodating multiple sequential planning and execution waves within this single phase.
+**Mode:** standard
+**Depends on:** Phase 01.2.2, Phase 1.3
+**Requirements:** GH-PAGES-CONTENT, R1, R2, R3, R4, R5, R6, R7
+**Plans:** 10 plans
+
+Plans:
+
+- [x] 02-01: Update report title, subtitle, overarching research framing, and inject verbatim Chapter 1 content into GitHub Pages.
+- [x] 02-02: Chapter 2 content finalization (Literature Review verbatim injection, citation mapping, and bibliography update).
+- [x] 02-03: Chapter 3 content finalization (Methodology verbatim injection, duplicate cleanup, Section 1.4, Table 2.1, Algorithms 3.1-3.5, Figures 3.1-3.4, Code Listings 3.1-3.3, and TOC link).
+- [x] 02-04: Chapter 4 content finalization (Experimental Results & Analysis, Table III reproduction, fully trained YOLOv9-C empirical metrics, Tables 4.1-4.7, Figures 4.1-4.10, Code Listing 4.1).
+- [x] 02-05: Chapter 5 content finalization (Conclusion & Future Work, Tables 5.1-5.2, Dual-Path Synthesis, Lab Checklist, TOC & ScrollSpy).
+- [x] 02-06: Official abstract finalization (Structured abstract container updated with empirical dual-track summary and index terms).
+- [x] 02-07: Additional thesis artifacts finalization (Gantt chart, appendices, or defense dossier as requested)
+- [x] 02-08-PLAN.md — Evidence audit dossier, FMCW physics recalculation, 5-discrepancy reconciliation, and reference verification in 02-EVIDENCE-AUDIT.md
+- [x] 02-09-PLAN.md — HTML content integration in docs/index.html, RadDet RF terminology rectification, sequential citation renumbering [1..18], docs/app.js tooltip DB sync, archival bibliography segregation, and permanent invariant tests
+- [x] 02-10-PLAN.md — Canva Gantt chart modernization (export high-res graphic from Canva DAHbQ0tvIMc, update timeline_gantt.png and timeline_gantt.svg, update Figure 5.1 caption, alt text, and Section 5.5 narrative to align with A1–A9 milestones, and verify deterministic test suite)
+
 ## Progress
 
 **Execution Status:**
 All planned thesis preparatory and exploratory phases (Phase 1, 1.1, 1.2, 01.2.1, 01.2.2, 1.3) are 100% complete and verified.
+Milestone 1 completed. Phase 2 (GitHub Pages Chapter-by-Chapter Content Finalization) completed and verified.
 
 | Phase                                                                           | Plans Complete | Status    | Completed  |
 | ------------------------------------------------------------------------------- | -------------- | --------- | ---------- |
 | 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams                    | 2/2            | Completed | 2026-09-23 |
 | 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice)    | 5/5            | Completed | 2026-11-02 |
 | 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                      | 3/3            | Completed | 2026-11-03 |
-| 01.2.1. Interactive Research Showcase & Thesis Presentation Website             | 3/3            | Completed   | 2026-11-03 |
-| 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 5/5            | Completed   | 2026-11-10 |
-| 1.3. High-Coverage Deterministic Unit & Integration Testing                     | 3/3            | Completed   | 2026-11-10 |
-| 3. Academic Portal Priority 0 Polish: Mobile UI & IEEE Citation Cards           | 2/2 | Complete    | 2026-11-19 |
+| 01.2.1. Interactive Research Showcase & Thesis Presentation Website             | 3/3            | Completed | 2026-11-03 |
+| 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 5/5            | Completed | 2026-11-10 |
+| 1.3. High-Coverage Deterministic Unit & Integration Testing                     | 3/3            | Completed | 2026-11-10 |
+| 2. GitHub Pages Chapter-by-Chapter Content Finalization                         | 10/10          | Completed | 2026-11-18 |
+| 3. Academic Portal Priority 0 Polish: Mobile UI & IEEE Citation Cards           | 2/2            | Completed | 2026-11-19 |
 
 ## Deferred / GitHub Issue Backlog
 
 Phases 2, 3, and 4 have been removed from the active GSD planning cycle and preserved as discrete, tracked GitHub issues:
+Phases 2, 3, and 4 (from original exploratory scope) have been removed from the active GSD planning cycle and preserved as discrete, tracked GitHub issues:
 
 ### Former Phase 2: Multi-Level Decoupled Radar Data Ingestion
+
 - [#17](https://github.com/aryanthepain/Radar-BTP/issues/17): `feat(dsp): Universal RadarDataAdapter & Level 1/2 Decoupled Ingestion (Raw ADC Cubes & Range-Doppler Tensors)` (DATA-01, DATA-02, DATA-04)
 - [#3](https://github.com/aryanthepain/Radar-BTP/issues/3): `feat(dsp): Level 3 DataFrame & Point Cloud Ingestion with Unit Test Verification` (DATA-03, VERIF-01)
 
 ### Former Phase 3: Pipeline Integration & Deterministic Verification Gates
+
 - [#18](https://github.com/aryanthepain/Radar-BTP/issues/18): `feat(pipeline): Dual-Path Pipeline Integration for Decoupled Radar Ingestion` (VERIF-02)
 - [#19](https://github.com/aryanthepain/Radar-BTP/issues/19): `ci(verif): Verification Gate Expansion & Sub-30s CI Smoke Tests for Ingestion Adapters` (VERIF-02)
 
 ### Former Phase 4: Visual & Interactive Design Cherishments
+
 - [#20](https://github.com/aryanthepain/Radar-BTP/issues/20): `feat(docs): Dynamic Reading Progress Bar & Scroll Tracking in Thesis Portal`
 - [#21](https://github.com/aryanthepain/Radar-BTP/issues/21): `feat(docs): Interactive Floating IEEE Citation Cards & Bibliography Previews`
 - [#22](https://github.com/aryanthepain/Radar-BTP/issues/22): `feat(docs): Academic Reader Embellishments, Code Drawers & Mobile UX Polish`
