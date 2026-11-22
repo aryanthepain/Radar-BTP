@@ -515,7 +515,11 @@ function initCitationTooltips() {
     tooltipEl.classList.remove("visible");
     backdropEl.classList.remove("visible");
     tooltipEl.classList.remove("is-mobile");
-    document.body.classList.remove("nav-open");
+    const navToggle = document.getElementById("nav-toggle");
+    const isDrawerOpen = navToggle && navToggle.getAttribute("aria-expanded") === "true";
+    if (!isDrawerOpen) {
+      document.body.classList.remove("nav-open");
+    }
   }
 
   badges.forEach((badge) => {
@@ -580,6 +584,12 @@ function initCitationTooltips() {
   tooltipEl.addEventListener("mouseenter", () => clearTimeout(hideTimeout));
   tooltipEl.addEventListener("mouseleave", () => {
     hideTimeout = setTimeout(hideTooltip, 200);
+  });
+  tooltipEl.addEventListener("focusin", () => clearTimeout(hideTimeout));
+  tooltipEl.addEventListener("focusout", (e) => {
+    if (!tooltipEl.contains(e.relatedTarget)) {
+      hideTimeout = setTimeout(hideTooltip, 200);
+    }
   });
   backdropEl.addEventListener("click", hideTooltip);
 }
@@ -776,12 +786,20 @@ function initMobileDrawer() {
   }
 
   function closeDrawer() {
-    if (document.body.classList.contains("nav-open")) {
+    navToggle.setAttribute("aria-expanded", "false");
+    navToggle.textContent = "☰";
+    const citationTooltip = document.getElementById("citation-tooltip");
+    const isCitationOpen = citationTooltip && citationTooltip.classList.contains("is-mobile") && citationTooltip.classList.contains("visible");
+    if (!isCitationOpen) {
       document.body.classList.remove("nav-open");
-      navToggle.setAttribute("aria-expanded", "false");
-      navToggle.textContent = "☰";
     }
   }
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 1024) {
+      closeDrawer();
+    }
+  });
 
   navToggle.addEventListener("click", toggleDrawer);
 
