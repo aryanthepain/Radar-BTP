@@ -899,6 +899,10 @@ body {
   max-height: none !important;
 }
 
+#lightbox-img.zoomed ~ #lightbox-caption {
+  display: none !important;
+}
+
 #lightbox-caption {
   color: var(--text-primary);
   font-size: 0.95rem;
@@ -1732,9 +1736,7 @@ img, svg, .figure-container, .diagram-container {
   }
 
   .sidebar.open,
-  #academic-sidebar.open,
-  body.nav-open .sidebar,
-  body.nav-open #academic-sidebar {
+  #academic-sidebar.open {
     left: 0 !important;
     visibility: visible !important;
     pointer-events: auto !important;
@@ -1754,8 +1756,7 @@ img, svg, .figure-container, .diagram-container {
     transition: opacity 0.25s ease;
   }
 
-  .nav-backdrop.open,
-  body.nav-open .nav-backdrop {
+  .nav-backdrop.open {
     display: block !important;
     opacity: 1 !important;
     pointer-events: auto !important;

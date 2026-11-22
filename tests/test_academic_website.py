@@ -432,9 +432,9 @@ def test_mobile_drawer_synchronization_and_styles():
     assert 'sidebar.classList.remove("open")' in js, "app.js closeDrawer must remove .open from sidebar"
     assert 'backdrop.classList.remove("open")' in js, "app.js closeDrawer must remove .open from backdrop"
 
-    # 2. Dual-selector resilience in styles.css
-    assert "body.nav-open .sidebar" in css, "styles.css must support body.nav-open .sidebar"
-    assert "body.nav-open .nav-backdrop" in css, "styles.css must support body.nav-open .nav-backdrop"
+    # 2. Dual-class synchronization resilience in styles.css
+    assert ".sidebar.open" in css and "#academic-sidebar.open" in css, "styles.css must govern sidebar with .open"
+    assert ".nav-backdrop.open" in css, "styles.css must govern backdrop with .open"
 
     # 3. WebKit text size adjust protection against aggressive mobile font boosting
     assert "-webkit-text-size-adjust: 100%" in css, "styles.css must enforce -webkit-text-size-adjust: 100%"

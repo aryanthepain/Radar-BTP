@@ -661,10 +661,26 @@ function initLightbox() {
     }
   }
 
-  modalImg.addEventListener("click", (e) => {
-    e.stopPropagation();
+  modalImg.setAttribute("tabindex", "0");
+  modalImg.setAttribute("role", "button");
+  modalImg.setAttribute("aria-label", "Toggle image magnification");
+
+  function toggleModalZoom() {
     const isZoomed = modalImg.classList.toggle("zoomed");
     modalImg.style.cursor = isZoomed ? "zoom-out" : "zoom-in";
+    modalImg.setAttribute("aria-expanded", isZoomed ? "true" : "false");
+  }
+
+  modalImg.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleModalZoom();
+  });
+
+  modalImg.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleModalZoom();
+    }
   });
 
   const zoomableImages = document.querySelectorAll(
@@ -712,8 +728,21 @@ function initLightbox() {
 
   closeBtn.addEventListener("click", closeLightbox);
   modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
+    if (e.target === modal || e.target.classList.contains("lightbox-content")) {
       closeLightbox();
+    }
+  });
+
+  modal.addEventListener("keydown", (e) => {
+    if (e.key === "Tab" && modal.style.display === "flex") {
+      const focusable = [closeBtn, modalImg];
+      if (document.activeElement === closeBtn && !e.shiftKey) {
+        e.preventDefault();
+        modalImg.focus();
+      } else if (document.activeElement === modalImg && e.shiftKey) {
+        e.preventDefault();
+        closeBtn.focus();
+      }
     }
   });
 
