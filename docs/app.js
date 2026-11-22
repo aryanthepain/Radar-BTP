@@ -548,13 +548,11 @@ function initLightbox() {
   function openLightbox(src, captionText) {
     modalImg.setAttribute("src", src);
     modalCaption.textContent = captionText || "";
-    if (src && src.toLowerCase().endsWith(".svg")) {
-      modalImg.style.width = "92vw";
-      modalImg.style.maxWidth = "1200px";
-    } else {
-      modalImg.style.width = "auto";
-      modalImg.style.maxWidth = "90vw";
-    }
+    modalImg.style.width = "auto";
+    modalImg.style.maxWidth = src && src.toLowerCase().endsWith(".svg") ? "min(92vw, 1100px)" : "90vw";
+    modalImg.style.maxHeight = "76vh";
+    modalImg.style.height = "auto";
+    modalImg.style.objectFit = "contain";
     modal.style.display = "flex";
     document.body.style.overflow = "hidden";
   }
@@ -564,6 +562,8 @@ function initLightbox() {
     modalImg.removeAttribute("src");
     modalImg.style.width = "";
     modalImg.style.maxWidth = "";
+    modalImg.style.maxHeight = "";
+    modalImg.style.height = "";
     modalCaption.textContent = "";
     document.body.style.overflow = "";
   }
@@ -580,7 +580,14 @@ function initLightbox() {
       const parentCard = img.closest(".plot-card");
       if (parentCard) {
         const titleEl = parentCard.querySelector(".plot-title");
-        if (titleEl) caption = titleEl.textContent;
+        const descEl = parentCard.querySelector("p em, .plot-desc");
+        if (titleEl && descEl) {
+          caption = titleEl.textContent.trim() + " — " + descEl.textContent.trim();
+        } else if (titleEl) {
+          caption = titleEl.textContent.trim();
+        } else if (descEl) {
+          caption = descEl.textContent.trim();
+        }
       }
       openLightbox(src, caption);
     });
@@ -739,6 +746,12 @@ function initOverflowContainment() {
       el.parentNode.insertBefore(wrapper, el);
       wrapper.appendChild(el);
     }
+  });
+
+  // Safety sweep: tag any inline grid-template-columns elements with responsive-grid-2
+  const inlineGrids = document.querySelectorAll('[style*="grid-template-columns"]');
+  inlineGrids.forEach((el) => {
+    el.classList.add("responsive-grid-2");
   });
 }
 

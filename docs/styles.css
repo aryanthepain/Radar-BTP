@@ -71,16 +71,24 @@
 html {
   scroll-behavior: smooth;
   font-family: var(--font-sans);
+  font-size: 16px;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  max-width: 100%;
 }
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
   background-color: var(--bg-primary);
   background-image: 
     radial-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
@@ -95,7 +103,11 @@ body {
 .app-container {
   display: flex;
   width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
   min-height: 100vh;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 /* Sticky Sidebar */
@@ -290,11 +302,12 @@ body {
 
 /* Main Content Area */
 .content {
-  flex-grow: 1;
-  max-width: var(--content-max-width);
-  margin: 0 auto;
-  padding: 2.5rem 3rem 6rem;
-  width: calc(100% - var(--sidebar-width));
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 1320px;
+  margin: 0;
+  padding: 2.5rem 3.5rem 6rem;
+  box-sizing: border-box;
 }
 
 /* Section Common Styling */
@@ -473,6 +486,8 @@ body {
   border-radius: var(--radius-md);
   margin: 1.5rem 0;
   overflow: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .code-block-header {
@@ -828,18 +843,19 @@ body {
 #lightbox-modal {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: var(--bg-overlay);
-  backdrop-filter: blur(8px);
-  z-index: 1000;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 14, 23, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 200000 !important;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1.5rem;
   animation: fadeIn 0.2s ease-out;
+  box-sizing: border-box;
 }
 
 @keyframes fadeIn {
@@ -850,7 +866,7 @@ body {
 .lightbox-content {
   position: relative;
   max-width: 95vw;
-  max-height: 90vh;
+  max-height: 88vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -858,33 +874,39 @@ body {
 }
 
 #lightbox-img {
-  max-width: 92vw;
-  max-height: 82vh;
-  width: auto;
-  object-fit: contain;
+  max-width: 90vw !important;
+  max-height: 76vh !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(0, 240, 255, 0.3);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.85);
   background: var(--bg-card);
 }
 
 #lightbox-caption {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-size: 0.95rem;
   margin-top: 1rem;
   text-align: center;
-  max-width: 800px;
-  line-height: 1.4;
+  max-width: 850px;
+  line-height: 1.5;
+  font-weight: 500;
+  background: rgba(15, 23, 42, 0.85);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
 }
 
 #lightbox-close {
-  position: absolute;
-  top: 1.5rem;
-  right: 2rem;
-  background: rgba(15, 23, 42, 0.8);
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: rgba(15, 23, 42, 0.9);
   border: 1px solid var(--border-color);
   color: var(--text-primary);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -893,11 +915,13 @@ body {
   justify-content: center;
   cursor: pointer;
   transition: all var(--transition-fast);
+  z-index: 200001 !important;
 }
 
 #lightbox-close:hover {
   background: var(--accent-rose);
   border-color: var(--accent-rose);
+  transform: scale(1.08);
 }
 
 /* ==========================================================================
@@ -972,10 +996,9 @@ body {
 .nav-backdrop {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.6);
   z-index: 99;
   opacity: 0;
@@ -1097,51 +1120,17 @@ body.nav-open {
   line-height: 1.65;
   border-radius: 0 0 6px 6px;
   padding: 1.25rem 1.5rem;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .code-block-wrapper code {
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-@media (max-width: 1024px) {
-  .nav-toggle-btn {
-    display: flex !important;
-  }
 
-  .sidebar, #academic-sidebar {
-    position: fixed;
-    left: -290px;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), left 0.3s ease;
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.7);
-  }
-
-  .sidebar.open, #academic-sidebar.open {
-    left: 0;
-  }
-
-  .nav-backdrop.open {
-    display: block !important;
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .content {
-    width: 100%;
-    padding: 2rem 1.5rem 5rem;
-  }
-
-  .plot-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .grid-2, .grid-3 {
-    grid-template-columns: 1fr;
-  }
-
-  .conclusions-grid {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* ==========================================================================
    Publication-Grade Academic Reading Portal Overhaul (Phase 01.2.2 Plan 03)
@@ -1219,11 +1208,12 @@ body.nav-open {
 
 /* Academic Article Wrapper & Paper Typography */
 .academic-paper-content {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2.5rem 2rem 6rem;
+  max-width: 1320px;
+  margin: 0;
+  padding: 2.5rem 3.5rem 6rem;
   font-family: var(--font-sans);
   color: var(--text-primary, #f8fafc);
+  box-sizing: border-box;
 }
 
 .academic-paper-content h1,
@@ -1256,16 +1246,15 @@ body.nav-open {
   column-count: 2;
   column-gap: 2.5rem;
   column-rule: 1px solid var(--border-color, #1e293b);
-  text-align: justify;
-  text-justify: inter-word;
-  hyphens: auto;
+  text-align: left;
+  hyphens: manual;
   margin-bottom: 2rem;
-  line-height: 1.75;
-  font-size: 0.975rem;
+  line-height: 1.8;
+  font-size: 1.05rem;
 }
 
 .academic-two-column p {
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.25rem;
 }
 
 /* Full-Width Breakout for Large Figures, Spectrograms, and Multi-Column Tables */
@@ -1523,6 +1512,8 @@ body.nav-open {
   overflow: hidden;
   background: var(--bg-code, #0b1120);
   break-inside: avoid;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .drawer-header, .code-drawer-toggle {
@@ -1534,6 +1525,9 @@ body.nav-open {
   cursor: pointer;
   user-select: none;
   transition: background var(--transition-fast, 0.2s);
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  gap: 0.5rem;
 }
 
 .drawer-header:hover, .code-drawer-toggle:hover {
@@ -1547,12 +1541,17 @@ body.nav-open {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-primary, #f8fafc);
+  flex: 1 1 auto;
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .drawer-icon {
   transition: transform 0.25s ease;
   font-size: 0.75rem;
   color: var(--text-muted, #64748b);
+  flex-shrink: 0;
 }
 
 .collapsible-drawer.open .drawer-icon, .code-drawer.open .drawer-icon {
@@ -1562,6 +1561,9 @@ body.nav-open {
 .drawer-content {
   display: none;
   border-top: 1px solid var(--border-color, #1e293b);
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  box-sizing: border-box !important;
 }
 
 .collapsible-drawer.open .drawer-content, .code-drawer.open .drawer-content {
@@ -1582,25 +1584,20 @@ body.nav-open {
   -webkit-overflow-scrolling: touch;
   margin: 1.5rem 0;
   scrollbar-width: thin;
-  scrollbar-color: var(--border-color, #334155) transparent;
+  scrollbar-color: rgba(56, 189, 248, 0.3) rgba(15, 23, 42, 0.4);
 }
 
+/* Remove fake overlay shadows that caused dark rectangular scrolling artifacts */
 .table-scroll-wrapper::after,
 .formula-scroll-wrapper::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 24px;
-  background: linear-gradient(to right, transparent, rgba(3, 7, 18, 0.75));
-  pointer-events: none;
-  opacity: 0.85;
+  display: none !important;
+  content: none !important;
 }
 
 .table-scroll-wrapper table,
 .table-scroll-wrapper .master-table {
-  font-size: clamp(0.75rem, 1.8vw, 0.84rem) !important;
+  font-size: clamp(0.92rem, 1.1vw, 1rem) !important;
+  line-height: 1.55;
   min-width: 580px;
 }
 
@@ -1609,10 +1606,10 @@ body.nav-open {
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  font-size: clamp(0.85em, 2.2vw, 1.05em);
+  font-size: clamp(0.96em, 1.4vw, 1.08em);
   padding: 0.5rem 0;
   max-width: 100%;
-  margin: 1rem 0;
+  margin: 1.25rem 0;
   scrollbar-width: thin;
 }
 
@@ -1633,6 +1630,144 @@ body.nav-open {
 img, svg, .figure-container, .diagram-container {
   max-width: 100% !important;
   height: auto !important;
+}
+
+/* Figure zoom hover affordance in article cards */
+.plot-card img.zoomable {
+  cursor: zoom-in;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.plot-card img.zoomable:hover {
+  transform: scale(1.015);
+  border-color: rgba(56, 189, 248, 0.6) !important;
+}
+
+/* Responsive Grid Primitives (Auto-fit with max-width containment) */
+.responsive-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT & MOBILE NAVIGATION DRAWER (PORTAL-MOB-01, PORTAL-MOB-03)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  html, body {
+    overflow-x: clip !important;
+    max-width: 100% !important;
+  }
+
+  /* Mobile Navigation Toggle Button - Fixed Viewport Pinned 100% of the Time */
+  .nav-toggle-btn {
+    display: flex !important;
+    position: fixed !important;
+    top: 1rem !important;
+    right: 1rem !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.35rem !important;
+    z-index: 100001 !important;
+    cursor: pointer !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  /* Lightbox close button offset on mobile to never overlap hamburger button */
+  #lightbox-close {
+    top: 1rem !important;
+    right: 4.5rem !important;
+  }
+
+  /* Floating Back to Top Button on Mobile */
+  #back-to-top {
+    right: 1.25rem !important;
+    bottom: 1.5rem !important;
+    z-index: 99998 !important;
+  }
+
+  /* Off-Canvas Navigation Drawer */
+  .sidebar,
+  #academic-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: -320px !important;
+    width: 280px !important;
+    max-width: 85vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    z-index: 100000 !important;
+    visibility: hidden;
+    pointer-events: none;
+    transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s !important;
+    box-shadow: 4px 0 25px rgba(0, 0, 0, 0.8) !important;
+  }
+
+  .sidebar.open,
+  #academic-sidebar.open {
+    left: 0 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  /* Darkened Backdrop Scrim */
+  .nav-backdrop {
+    display: none;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.65) !important;
+    z-index: 99999 !important;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .nav-backdrop.open {
+    display: block !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  /* Full-Width App Container & Main Content Reflow */
+  .app-container {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: clip !important;
+  }
+
+  .content,
+  .academic-paper-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 2rem 1rem 5rem !important;
+    margin: 0 !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: clip !important;
+  }
+
+  .responsive-grid-2,
+  .plot-grid,
+  .grid-2,
+  .grid-3,
+  .conclusions-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 /* Responsive Two-Column Collapse */

@@ -2,7 +2,16 @@
 phase: 03-academic-portal-priority-0-polish-mobile-ui-ieee-citation-ca
 plan: 02
 subsystem: ui
-tags: [ieee-citations, mobile-bottom-sheet, citation-popover, pulse-animation, viewport-clamping, safe-dom, vanillajs]
+tags:
+  [
+    ieee-citations,
+    mobile-bottom-sheet,
+    citation-popover,
+    pulse-animation,
+    viewport-clamping,
+    safe-dom,
+    vanillajs,
+  ]
 
 # Dependency graph
 requires:
@@ -29,7 +38,14 @@ actuals:
 # Tech tracking
 tech-stack:
   added: []
-  patterns: [adaptive-citation-popover, mobile-bottom-sheet, highlight-pulse-animation, collision-boundary-clamping, safe-dom-construction]
+  patterns:
+    [
+      adaptive-citation-popover,
+      mobile-bottom-sheet,
+      highlight-pulse-animation,
+      collision-boundary-clamping,
+      safe-dom-construction,
+    ]
 
 key-files:
   created: []
@@ -93,7 +109,7 @@ coverage:
     description: "Universal verification gate pass rate (100%), coverage >= 90%, and offline resilience"
     requirement: PORTAL-VERIF-01
     verification:
-      - kind: script
+      - kind: other
         ref: scripts/verify.ps1
         status: pass
     human_judgment: false
@@ -148,9 +164,9 @@ Each task was committed atomically:
 
 ## Decisions Made
 
-- *D-03 (Citation Tooltip Ergonomics):* Dual-mode display: elevated floating popover on desktop with collision clamping; slide-up bottom-sheet on mobile (<600px) with backdrop scrim and Section 9 pulse jump.
-- *D-04 (Elimination of Gating Flag):* Fully un-gate citation tooltips; remove `window.ENABLE_CITATION_TOOLTIPS` so all 30 citations in `CITATIONS_DB` are interactive by default.
-- *D-07 (Safe DOM Construction):* Strictly assemble DOM nodes using `document.createElement()` and `textContent` to eliminate CWE-79 DOM XSS risks.
+- _D-03 (Citation Tooltip Ergonomics):_ Dual-mode display: elevated floating popover on desktop with collision clamping; slide-up bottom-sheet on mobile (<600px) with backdrop scrim and Section 9 pulse jump.
+- _D-04 (Elimination of Gating Flag):_ Fully un-gate citation tooltips; remove `window.ENABLE_CITATION_TOOLTIPS` so all 30 citations in `CITATIONS_DB` are interactive by default.
+- _D-07 (Safe DOM Construction):_ Strictly assemble DOM nodes using `document.createElement()` and `textContent` to eliminate CWE-79 DOM XSS risks.
 
 ## Deviations from Plan
 

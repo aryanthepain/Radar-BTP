@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="./assets/vendor/highlight/vs2015.min.css">
 
   <!-- Publication-Grade Academic Reading Portal Stylesheet -->
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=1.2.0">
 </head>
 <body>
 
@@ -424,7 +424,7 @@ class FMCWRadarSimulator:
 
         <!-- DSP Figures Grid -->
         <div class="full-width-breakout">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+          <div class="responsive-grid-2">
             
             <div class="plot-card" style="background: rgba(15, 23, 42, 0.9); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; text-align: center;">
               <div class="plot-title" style="font-size: 0.95rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.5rem;">
@@ -914,7 +914,7 @@ class RadarObjectDetectorCNN(nn.Module):
 
         <!-- Deep Learning Architecture & Data Figures -->
         <div class="full-width-breakout" style="margin-top: 2rem;">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 1.5rem;">
+          <div class="responsive-grid-2">
             
             <div class="plot-card" style="background: rgba(15, 23, 42, 0.9); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; text-align: center;">
               <div class="plot-title" style="font-size: 0.95rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.5rem;">
@@ -967,12 +967,12 @@ class RadarObjectDetectorCNN(nn.Module):
 
         <!-- Multi-Stage End-to-End Latency Waterfall Timing Budget Table -->
         <div class="full-width-breakout" style="margin: 1.5rem 0;">
-          <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; overflow-x: auto;">
+          <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; overflow: hidden;">
             <div style="font-size: 1.05rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.75rem; text-align: center;">
               Multi-Stage End-to-End Latency Waterfall Timing Budget Table (Heterogeneous Radar Perception Pipeline)
             </div>
             <div class="table-scroll-wrapper">
-              <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem; color: #cbd5e1; text-align: left;">
+              <table style="width: 100%; border-collapse: collapse; color: #cbd5e1; text-align: left;">
               <thead>
                 <tr style="border-bottom: 2px solid var(--border-color); background: rgba(30, 41, 59, 0.6); color: #f8fafc;">
                   <th style="padding: 10px 12px;">Pipeline Stage</th>
@@ -1060,12 +1060,12 @@ class RadarObjectDetectorCNN(nn.Module):
 
         <!-- ICASSP 2025 Table III Reproduction -->
         <div class="full-width-breakout" style="margin: 1.5rem 0;">
-          <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; overflow-x: auto;">
+          <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; overflow: hidden;">
             <div style="font-size: 1.05rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.75rem; text-align: center;">
               Table III: Comprehensive Benchmark Evaluation on RadDet &amp; NIST-CBRS Datasets (ICASSP 2025 Reproduction)
             </div>
             <div class="table-scroll-wrapper">
-              <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem; color: #cbd5e1; text-align: left;">
+              <table style="width: 100%; border-collapse: collapse; color: #cbd5e1; text-align: left;">
               <thead>
                 <tr style="border-bottom: 2px solid var(--border-color); background: rgba(30, 41, 59, 0.6); color: #f8fafc;">
                   <th style="padding: 10px 12px;">Model Architecture</th>
@@ -1202,12 +1202,12 @@ class RadarObjectDetectorCNN(nn.Module):
 
         <!-- Master Comparison Table (Preserving test_showcase_website.py requirements) -->
         <div class="full-width-breakout" style="margin: 2rem 0;">
-          <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; overflow-x: auto;">
+          <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; overflow: hidden;">
             <div style="font-size: 1.05rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.75rem; text-align: center;">
               7-Metric Master Comparison Table: Classical DSP vs. Deep Perception vs. RadDet Benchmark
             </div>
             <div class="table-scroll-wrapper">
-              <table class="master-table" id="comparison" style="width: 100%; border-collapse: collapse; font-size: 0.84rem; color: #cbd5e1; text-align: left;">
+              <table class="master-table" id="comparison" style="width: 100%; border-collapse: collapse; color: #cbd5e1; text-align: left;">
               <thead>
                 <tr style="border-bottom: 2px solid var(--border-color); background: rgba(30, 41, 59, 0.6); color: #f8fafc;">
                   <th style="padding: 10px 12px; width: 22%;">System Evaluation Metric</th>
@@ -1303,7 +1303,7 @@ class RadarObjectDetectorCNN(nn.Module):
 
         <!-- Empirical Benchmark Figures Grid -->
         <div class="full-width-breakout" style="margin-top: 2rem;">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 1.5rem;">
+          <div class="responsive-grid-2">
             
             <div class="plot-card" style="background: rgba(15, 23, 42, 0.9); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; text-align: center;">
               <div class="plot-title" style="font-size: 0.95rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.5rem;">
@@ -1421,7 +1421,7 @@ class RadarObjectDetectorCNN(nn.Module):
             <div style="font-size: 1.1rem; font-weight: 700; color: #38bdf8; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
               Comprehensive Technical Risk Assessment &amp; Engineering Fallback Pathways
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
+            <div class="conclusions-grid">
               
               <div style="background: rgba(30, 41, 59, 0.5); padding: 1rem; border-radius: var(--radius-sm); border-left: 3px solid #ef4444;">
                 <div style="font-weight: 700; color: #f87171; margin-bottom: 0.4rem; font-size: 0.9rem;">Risk 1: Edge Compute Bottlenecks on Jetson</div>
@@ -1481,7 +1481,7 @@ class RadarObjectDetectorCNN(nn.Module):
           <div style="font-size: 1.05rem; font-weight: 700; color: #38bdf8; margin-bottom: 1rem; text-align: center;">
             Key Academic Conclusions &amp; Defense Findings
           </div>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
+          <div class="conclusions-grid">
             
             <div class="conclusion-card" style="background: rgba(15, 23, 42, 0.9); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; border-top: 3px solid #0284c7;">
               <div style="font-weight: 700; color: #38bdf8; margin-bottom: 0.5rem; font-size: 0.95rem;">1. Classical Heuristic DSP Obsolescence</div>
@@ -1663,7 +1663,7 @@ class RadarObjectDetectorCNN(nn.Module):
   <script src="./assets/vendor/katex/katex.min.js"></script>
   <script src="./assets/vendor/katex/auto-render.min.js"></script>
   <script src="./assets/vendor/highlight/highlight.min.js"></script>
-  <script src="./app.js"></script>
+  <script src="./app.js?v=1.2.0"></script>
 
 </body>
 </html>
