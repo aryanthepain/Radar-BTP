@@ -856,6 +856,8 @@ body {
   padding: 1.5rem;
   animation: fadeIn 0.2s ease-out;
   box-sizing: border-box;
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch !important;
 }
 
 @keyframes fadeIn {
@@ -883,6 +885,16 @@ body {
   border: 1px solid rgba(0, 240, 255, 0.35);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.85);
   background: var(--bg-card);
+  cursor: zoom-in;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center center;
+}
+
+#lightbox-img.zoomed {
+  transform: scale(1.75);
+  cursor: zoom-out !important;
+  max-width: none !important;
+  max-height: none !important;
 }
 
 #lightbox-caption {
@@ -1687,7 +1699,8 @@ img, svg, .figure-container, .diagram-container {
   /* Lightbox close button offset on mobile to never overlap hamburger button */
   #lightbox-close {
     top: 1rem !important;
-    right: 4.5rem !important;
+    right: 1rem !important;
+    z-index: 200002 !important;
   }
 
   /* Floating Back to Top Button on Mobile */
@@ -1715,7 +1728,9 @@ img, svg, .figure-container, .diagram-container {
   }
 
   .sidebar.open,
-  #academic-sidebar.open {
+  #academic-sidebar.open,
+  body.nav-open .sidebar,
+  body.nav-open #academic-sidebar {
     left: 0 !important;
     visibility: visible !important;
     pointer-events: auto !important;
@@ -1735,7 +1750,8 @@ img, svg, .figure-container, .diagram-container {
     transition: opacity 0.25s ease;
   }
 
-  .nav-backdrop.open {
+  .nav-backdrop.open,
+  body.nav-open .nav-backdrop {
     display: block !important;
     opacity: 1 !important;
     pointer-events: auto !important;
@@ -1788,6 +1804,31 @@ img, svg, .figure-container, .diagram-container {
 @media (max-width: 600px) {
   .advisor-defense-card {
     padding: 1rem !important;
+  }
+
+  /* Inline grid column collapse on narrow mobile viewports */
+  div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Mobile Lightbox Scaling and Padding */
+  #lightbox-img {
+    max-height: 65vh !important;
+    max-width: 95vw !important;
+  }
+
+  #lightbox-img.zoomed {
+    transform: scale(1.6);
+    max-height: none !important;
+    max-width: none !important;
+  }
+
+  #lightbox-caption {
+    font-size: 0.8rem !important;
+    padding: 0.4rem 0.6rem !important;
+    margin-top: 0.5rem !important;
+    max-height: 25vh !important;
+    overflow-y: auto !important;
   }
 
   /* Mobile Slide-Up Bottom-Sheet Card (PORTAL-CITE-02) */

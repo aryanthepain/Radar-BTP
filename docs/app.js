@@ -630,20 +630,26 @@ function initLightbox() {
     lastActiveElement = triggerEl || document.activeElement;
     modalImg.setAttribute("src", src);
     modalCaption.textContent = captionText || "";
+    modalImg.classList.remove("zoomed");
+    modalImg.style.cursor = "zoom-in";
     modalImg.style.width = "auto";
     modalImg.style.maxWidth = src && src.toLowerCase().endsWith(".svg") ? "min(92vw, 1100px)" : "90vw";
     modalImg.style.maxHeight = "76vh";
     modalImg.style.height = "auto";
     modalImg.style.objectFit = "contain";
     modal.style.display = "flex";
+    modal.scrollTop = 0;
+    modal.scrollLeft = 0;
     document.body.style.overflow = "hidden";
     closeBtn.focus();
   }
 
   function closeLightbox() {
     modal.style.display = "none";
+    modalImg.classList.remove("zoomed");
     modalImg.removeAttribute("src");
     modalImg.onload = null;
+    modalImg.style.cursor = "";
     modalImg.style.width = "";
     modalImg.style.height = "";
     modalImg.style.maxWidth = "";
@@ -655,8 +661,14 @@ function initLightbox() {
     }
   }
 
+  modalImg.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isZoomed = modalImg.classList.toggle("zoomed");
+    modalImg.style.cursor = isZoomed ? "zoom-out" : "zoom-in";
+  });
+
   const zoomableImages = document.querySelectorAll(
-    ".plot-container img, .plot-card img, .architecture-card img, .diagram-container img, .svg-diagram-wrapper img"
+    "img.zoomable, .zoomable, .plot-container img, .plot-card img, .architecture-card img, .diagram-container img, .svg-diagram-wrapper img, main img:not(#lightbox-img)"
   );
 
   zoomableImages.forEach((img) => {
@@ -680,7 +692,7 @@ function initLightbox() {
           caption = descEl.textContent.trim();
         }
       } else {
-        const figureWrapper = img.closest("figure, div[style*='text-align: center']");
+        const figureWrapper = img.closest("figure, div[style*='text-align: center'], .figure-container, .diagram-container");
         if (figureWrapper) {
           const captionEl = figureWrapper.querySelector("figcaption, p em, p strong, p");
           if (captionEl) caption = captionEl.textContent.trim();
@@ -781,11 +793,15 @@ function initMobileDrawer() {
 
   function toggleDrawer() {
     const isOpen = document.body.classList.toggle("nav-open");
+    if (sidebar) sidebar.classList.toggle("open", isOpen);
+    if (backdrop) backdrop.classList.toggle("open", isOpen);
     navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     navToggle.textContent = isOpen ? "✕" : "☰";
   }
 
   function closeDrawer() {
+    if (sidebar) sidebar.classList.remove("open");
+    if (backdrop) backdrop.classList.remove("open");
     navToggle.setAttribute("aria-expanded", "false");
     navToggle.textContent = "☰";
     const citationTooltip = document.getElementById("citation-tooltip");
