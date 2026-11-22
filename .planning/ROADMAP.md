@@ -17,7 +17,8 @@ A phased journey to prepare an undergraduate thesis exploratory presentation for
 - [x] **Phase 01.2.1: Interactive Research Showcase & Thesis Presentation Website** (INSERTED) - Deliver a clean, responsive showcase website for the supervising professor synthesizing all three notebooks, experimental results, comparative radar data progression (toy -> synthetic -> real RadDet), architecture flowcharts, and key code snippets.
 - [x] **Phase 01.2.2: Comprehensive BTP Thesis Report & Academic Publication Showcase Website** (INSERTED) - Deliver publication-grade ~20-page IIT Guwahati BTP Report and rework GitHub Pages website into an academic reading experience for professor finalization.
 - [x] **Phase 1.3: High-Coverage Deterministic Unit & Integration Testing** (INSERTED) - Comprehensive test expansion achieving >=90% code coverage across DSP algorithms, PyTorch dataset/models, and pipeline scripts with pytest-cov.
-- [x] **Phase 2: GitHub Pages Chapter-by-Chapter Content Finalization** - Finalize active 5-chapter manuscript with FMCW mathematical physics derivations, 6-column Classical DSP matrix, RadDet RF terminology, comparative benchmark framing, sequential IEEE citations [1..18], Canva timeline Gantt schedule, and permanent invariant regression gates.
+- [x] **Phase 2: GitHub Pages Chapter-by-Chapter Content Finalization** - Finalize active 5-chapter manuscript with FMCW mathematical physics derivations, 6-column Classical DSP matrix, RadDet RF terminology, comparative benchmark framing, sequential IEEE citations [1..18], Canva timeline Gantt schedule, and permanent invariant regression gates. (completed 2026-11-18)
+- [x] **Phase 3: Academic Portal Priority 0 Polish: Mobile UI & IEEE Citation Cards** - Deliver publication-grade responsive ergonomics, mobile drawer navigation, formula/table overflow containment (#23), and interactive floating IEEE citation previews (#21) for the thesis portal. (completed 2026-11-19)
 
 ## Phase Details
 
@@ -175,15 +176,16 @@ Plans:
 All planned thesis preparatory and exploratory phases (Phase 1, 1.1, 1.2, 01.2.1, 01.2.2, 1.3) are 100% complete and verified.
 Milestone 1 completed. Phase 2 (GitHub Pages Chapter-by-Chapter Content Finalization) completed and verified.
 
-| Phase                                                                           | Plans Complete | Status   | Completed  |
-| ------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-| 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams                    | 2/2            | Complete | 2026-09-23 |
-| 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice)    | 5/5            | Complete | 2026-11-02 |
-| 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                      | 3/3            | Complete | 2026-11-03 |
-| 01.2.1. Interactive Research Showcase & Thesis Presentation Website             | 3/3            | Complete | 2026-11-03 |
-| 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 5/5            | Complete | 2026-11-10 |
-| 1.3. High-Coverage Deterministic Unit & Integration Testing                     | 3/3            | Complete | 2026-11-10 |
-| 2. GitHub Pages Chapter-by-Chapter Content Finalization                         | 10/10          | Complete | 2026-11-18 |
+| Phase                                                                           | Plans Complete | Status    | Completed  |
+| ------------------------------------------------------------------------------- | -------------- | --------- | ---------- |
+| 1. Compartmentalized Jupyter Walkthroughs & Mermaid Diagrams                    | 2/2            | Completed | 2026-09-23 |
+| 1.1. RadDet Dataset Integration & Spectrum Sensing Benchmark (Limited Slice)    | 5/5            | Completed | 2026-11-02 |
+| 1.2. Full-Scale RadDet Benchmark on Kaggle (S-128 Variant)                      | 3/3            | Completed | 2026-11-03 |
+| 01.2.1. Interactive Research Showcase & Thesis Presentation Website             | 3/3            | Completed | 2026-11-03 |
+| 01.2.2. Comprehensive BTP Thesis Report & Academic Publication Showcase Website | 5/5            | Completed | 2026-11-10 |
+| 1.3. High-Coverage Deterministic Unit & Integration Testing                     | 3/3            | Completed | 2026-11-10 |
+| 2. GitHub Pages Chapter-by-Chapter Content Finalization                         | 10/10          | Completed | 2026-11-18 |
+| 3. Academic Portal Priority 0 Polish: Mobile UI & IEEE Citation Cards           | 2/2            | Completed | 2026-11-19 |
 
 ## Deferred / GitHub Issue Backlog
 
@@ -205,3 +207,23 @@ Phases 2, 3, and 4 (from original exploratory scope) have been removed from the 
 - [#20](https://github.com/aryanthepain/Radar-BTP/issues/20): `feat(docs): Dynamic Reading Progress Bar & Scroll Tracking in Thesis Portal`
 - [#21](https://github.com/aryanthepain/Radar-BTP/issues/21): `feat(docs): Interactive Floating IEEE Citation Cards & Bibliography Previews`
 - [#22](https://github.com/aryanthepain/Radar-BTP/issues/22): `feat(docs): Academic Reader Embellishments, Code Drawers & Mobile UX Polish`
+
+### Phase 3: Academic Portal Priority 0 Polish: Mobile UI & IEEE Citation Cards
+
+**Goal:** Deliver publication-grade mobile responsiveness, touch ergonomics, equation/table overflow handling, and interactive floating IEEE citation previews for the BTP academic thesis reading portal (`docs/index.html` and `docs/styles.css`), fulfilling GitHub Priority 0 issues [#23](https://github.com/aryanthepain/Radar-BTP/issues/23) and [#21](https://github.com/aryanthepain/Radar-BTP/issues/21).
+**Mode**: standard
+**Depends on:** Phase 01.2.2
+**Requirements**: PORTAL-MOB-01, PORTAL-MOB-02, PORTAL-MOB-03, PORTAL-CITE-01, PORTAL-CITE-02, PORTAL-VERIF-01
+**Success Criteria** (what must be TRUE):
+
+1. Responsive mobile navigation drawer with `>=44x44px` touch targets, smooth off-canvas transition, backdrop dismissal, and auto-close on TOC link selection.
+2. Zero horizontal viewport scroll on mobile devices (360px–1024px); wide KaTeX formulas and comparison tables isolated in horizontal momentum scroll containers (`-webkit-overflow-scrolling: touch`).
+3. Fluid two-column to single-column reflow (`column-count: 1 !important`) for `.academic-two-column` below 900px, with responsive header and badge scaling.
+4. Interactive floating IEEE citation cards render on hover/tap for inline citations (`[1]`, `[2]`, etc.) showing paper title, authors, venue, year, and direct DOI/arXiv hyperlinks with viewport collision detection.
+5. All deterministic tests in `tests/test_showcase_website.py` and `tests/test_academic_website.py` pass 100% under `pwsh -File ./scripts/verify.ps1`.
+
+**Plans**: 2/2 plans complete
+
+Plans:
+- [x] 03-01-PLAN.md — Comprehensive mobile navigation drawer, WCAG 2.5.5 touch targets, body scroll lock, two-tier table/math overflow containment, and single-column reflow (Closes #23)
+- [x] 03-02-PLAN.md — Interactive floating IEEE citation cards, mobile bottom-sheet, direct DOI links, Section 9 pulse jump, and universal verification gate (Closes #21)

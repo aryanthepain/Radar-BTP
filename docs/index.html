@@ -14,13 +14,13 @@
   <link rel="stylesheet" href="./assets/vendor/highlight/vs2015.min.css">
 
   <!-- Publication-Grade Academic Reading Portal Stylesheet -->
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=1.2.0">
 </head>
 <body>
 
   <!-- Mobile Navigation Toggle Button -->
-  <button id="nav-toggle" class="nav-toggle-btn" aria-label="Toggle navigation">☰</button>
-  <div class="nav-backdrop"></div>
+  <button id="nav-toggle" class="nav-toggle-btn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="academic-sidebar">☰</button>
+  <div class="nav-backdrop" id="nav-backdrop"></div>
 
   <div class="app-container">
 
@@ -326,7 +326,9 @@
             <strong>Mathematical Formulation of FMCW Transmission:</strong> In a linear frequency-modulated continuous-wave (LFMCW) radar transceiver operating at carrier center frequency $f_c = 77\text{ GHz}$ with sweep bandwidth $B = 1.0\text{ GHz}$ and active chirp duration $T_c = 50\ \mu\text{s}$, the transmitted chirp $s_t(t)$ over fast-time $0 \le t \le T_c$ is expressed as:
           </p>
           <div style="text-align: center; margin: 0.85rem 0;">
-            $$s_t(t) = A_T \cos\left(2\pi f_c t + \pi S t^2 + \phi_0\right)$$
+            <div class="formula-scroll-wrapper">
+$$s_t(t) = A_T \cos\left(2\pi f_c t + \pi S t^2 + \phi_0\right)$$
+</div>
           </div>
           <p>
             where the chirp frequency slope $S$ is defined by $S = \frac{B}{T_c} = \frac{1.0 \times 10^9\text{ Hz}}{50.0 \times 10^{-6}\text{ s}} = 2.0 \times 10^{13}\text{ Hz/s} = 20\text{ THz/s}$, and $A_T$ denotes transmission power amplitude.
@@ -335,7 +337,9 @@
             <strong>Target Reflection, Delay, and Dechirping:</strong> For an illuminated target at initial distance $R_0$ moving with constant radial velocity $v$, the round-trip propagation time delay is $\tau(t) = \frac{2(R_0 + v t)}{c}$, where $c \approx 299{,}792{,}458\text{ m/s}$. The backscattered signal received by the antenna is an attenuated replica $s_r(t) = A_R \cos\left(2\pi f_c (t - \tau(t)) + \pi S (t - \tau(t))^2 + \phi_0\right)$. Mixing $s_t(t)$ with $s_r(t)$ in a quadrature dechirping mixer followed by low-pass filtering removes sum-frequency terms ($2 f_c$), isolating the intermediate-frequency (IF) beat signal $s_b(t)$:
           </p>
           <div style="text-align: center; margin: 0.85rem 0;">
-            $$s_b(t) \approx \frac{A_T A_R}{2} \cos\left(2\pi \left(\frac{2 S R_0}{c} + \frac{2 f_c v}{c}\right) t + \frac{4\pi R_0}{\lambda} + \phi_{\text{residual}}\right)$$
+            <div class="formula-scroll-wrapper">
+$$s_b(t) \approx \frac{A_T A_R}{2} \cos\left(2\pi \left(\frac{2 S R_0}{c} + \frac{2 f_c v}{c}\right) t + \frac{4\pi R_0}{\lambda} + \phi_{\text{residual}}\right)$$
+</div>
           </div>
           <p>
             The beat frequency $f_b \approx \frac{2 S R_0}{c}$ is directly proportional to target range $R_0$, while chirp-to-chirp phase evolution across slow time $\Delta \phi = \frac{4\pi v T_c}{\lambda}$ yields the Doppler velocity shift.
@@ -344,16 +348,24 @@
             <strong>Physical Resolution Limits & Spatial Aperture:</strong> The fundamental physical resolution limits and unambiguous measurement boundaries of the 77 GHz system are governed strictly by the radar physics parameters:
           </p>
           <div style="text-align: center; margin: 0.65rem 0;">
-            $$\Delta R = \frac{c}{2 B} = \frac{299{,}792{,}458}{2 \times 1.0\times 10^9} \approx 0.15\text{ m}$$
+            <div class="formula-scroll-wrapper">
+$$\Delta R = \frac{c}{2 B} = \frac{299{,}792{,}458}{2 \times 1.0\times 10^9} \approx 0.15\text{ m}$$
+</div>
           </div>
           <div style="text-align: center; margin: 0.65rem 0;">
-            $$\Delta v = \frac{\lambda}{2 N_{\text{chirp}} T_c} = \frac{0.003893}{2 \times 128 \times 50\times 10^{-6}} \approx 0.304\text{ m/s}$$
+            <div class="formula-scroll-wrapper">
+$$\Delta v = \frac{\lambda}{2 N_{\text{chirp}} T_c} = \frac{0.003893}{2 \times 128 \times 50\times 10^{-6}} \approx 0.304\text{ m/s}$$
+</div>
           </div>
           <div style="text-align: center; margin: 0.65rem 0;">
-            $$R_{\max} = \frac{F_s c}{2 S} = \frac{5.12\times 10^6 \times 299{,}792{,}458}{2 \times 2.0\times 10^{13}} \approx 38.4\text{ m}$$
+            <div class="formula-scroll-wrapper">
+$$R_{\max} = \frac{F_s c}{2 S} = \frac{5.12\times 10^6 \times 299{,}792{,}458}{2 \times 2.0\times 10^{13}} \approx 38.4\text{ m}$$
+</div>
           </div>
           <div style="text-align: center; margin: 0.65rem 0;">
-            $$v_{\max} = \frac{\lambda}{4 T_c} = \frac{0.003893}{4 \times 50\times 10^{-6}} \approx 19.47\text{ m/s}$$
+            <div class="formula-scroll-wrapper">
+$$v_{\max} = \frac{\lambda}{4 T_c} = \frac{0.003893}{4 \times 50\times 10^{-6}} \approx 19.47\text{ m/s}$$
+</div>
           </div>
           <p>
             For spatial angle estimation using an $N_{\text{rx}} = 4$ element Uniform Linear Array (ULA) with half-wavelength spacing $d = \lambda/2 \approx 1.948\text{ mm}$, the spatial array steering vector for azimuth angle $\theta$ is $\mathbf{a}(\theta) = \left[1, \; e^{j \pi \sin\theta}, \; e^{j 2\pi \sin\theta}, \; e^{j 3\pi \sin\theta}\right]^T$, with a physical diffraction-limited Rayleigh beamwidth $\Delta \theta_{3\text{dB}} \approx \frac{0.886 \lambda}{(N_{\text{rx}}-1)d} \approx 28.6^\circ$.
@@ -449,7 +461,8 @@
           <div style="font-weight: 700; color: #38bdf8; font-size: 1rem; margin-bottom: 0.75rem; text-align: center;">
             Table 2.1: Comparison of the two radar application settings considered in this study
           </div>
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1;">
+          <div class="table-scroll-wrapper">
+<table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1;">
             <thead>
               <tr style="border-bottom: 2px solid #38bdf8; background: rgba(30, 41, 59, 0.6); text-align: left;">
                 <th style="padding: 10px 14px; color: #f8fafc; font-weight: 700;">Aspect</th>
@@ -500,6 +513,7 @@
               </tr>
             </tbody>
           </table>
+</div>
           <p style="font-size: 0.88rem; color: #94a3b8; margin: 1rem 0 0 0; line-height: 1.6; text-align: justify;">
             The two settings provide complementary perspectives on AI-based radar processing. However, their outputs and evaluation metrics are task-dependent, and their experimental results are not directly interchangeable.
           </p>
@@ -657,7 +671,8 @@
           <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
             Table 3.1: Classical Radar Signal Processing Baseline Synthesis Matrix
           </div>
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem; line-height: 1.5; color: #cbd5e1; text-align: left;">
+          <div class="table-scroll-wrapper">
+<table style="width: 100%; border-collapse: collapse; font-size: 0.82rem; line-height: 1.5; color: #cbd5e1; text-align: left;">
             <thead>
               <tr style="border-bottom: 2px solid #38bdf8; background: rgba(30, 41, 59, 0.6); color: #f8fafc;">
                 <th style="padding: 8px 10px; width: 12%;">Method</th>
@@ -719,6 +734,7 @@
               </tr>
             </tbody>
           </table>
+</div>
         </div>
 
         <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin-bottom: 1rem;">
@@ -726,7 +742,9 @@
         </p>
 
         <div style="text-align: center; margin: 1.25rem 0;">
-          $$\mathbf{X}\in\mathbb{C}^{N_{\mathrm{rx}}\times N_{\mathrm{chirp}}\times N_{\mathrm{sample}}}$$
+          <div class="formula-scroll-wrapper">
+$$\mathbf{X}\in\mathbb{C}^{N_{\mathrm{rx}}\times N_{\mathrm{chirp}}\times N_{\mathrm{sample}}}$$
+</div>
         </div>
 
         <div class="academic-two-column">
@@ -794,7 +812,9 @@
           </p>
         </div>
         <div style="text-align: center; margin: 1rem 0;">
-          $$X_r(r,m,n) = \mathrm{FFT}_{n}\left\{ w_r(n) X(r,m,n) \right\}$$
+          <div class="formula-scroll-wrapper">
+$$X_r(r,m,n) = \mathrm{FFT}_{n}\left\{ w_r(n) X(r,m,n) \right\}$$
+</div>
         </div>
         <div class="academic-two-column">
           <p>
@@ -806,7 +826,7 @@
         <div style="margin: 1.25rem 0 1.75rem 0; background: rgba(15, 23, 42, 0.85); border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden;">
           <div style="padding: 0.5rem 1rem; background: rgba(30, 41, 59, 0.7); font-size: 0.78rem; font-weight: 700; color: #38bdf8; display: flex; justify-content: space-between;">
             <span>Code Listing 3.1: Fast-Time Range FFT</span>
-            
+
           </div>
           <pre style="margin: 0; padding: 1rem 1.25rem; font-size: 0.84rem; line-height: 1.55; overflow-x: auto; background: transparent;"><code class="language-python">def process(self, radar_cube):
     # Apply windowing along fast-time dimension (axis=-1)
@@ -834,7 +854,9 @@
           </p>
         </div>
         <div style="text-align: center; margin: 1rem 0;">
-          $$\widetilde{X}_r(r,m,n) = X_r(r,m,n) - \frac{1}{N_c} \sum_{m=0}^{N_c-1} X_r(r,m,n)$$
+          <div class="formula-scroll-wrapper">
+$$\widetilde{X}_r(r,m,n) = X_r(r,m,n) - \frac{1}{N_c} \sum_{m=0}^{N_c-1} X_r(r,m,n)$$
+</div>
         </div>
         <div class="academic-two-column">
           <p>
@@ -870,7 +892,9 @@
           </p>
         </div>
         <div style="text-align: center; margin: 1rem 0;">
-          $$X_{rd}(r,m,n) = \mathrm{FFT}_{m}\left\{ w_d(m) \widetilde{X}_r(r,m,n) \right\}$$
+          <div class="formula-scroll-wrapper">
+$$X_{rd}(r,m,n) = \mathrm{FFT}_{m}\left\{ w_d(m) \widetilde{X}_r(r,m,n) \right\}$$
+</div>
         </div>
         <div class="academic-two-column">
           <p>
@@ -887,7 +911,7 @@
     """Computes 2D Range-Doppler Matrix (RDM) across chirps."""
     # Apply Hann window across slow-time chirps (axis=1)
     windowed = range_cube * self.window[np.newaxis, :, np.newaxis]
-    
+
     # Compute 1D FFT along chirps and center zero-Doppler component
     rdm_complex = np.fft.fftshift(np.fft.fft(windowed, n=self.n_fft, axis=1), axes=1)
     return rdm_complex, self.velocity_axis</code></pre>
@@ -971,7 +995,9 @@ pseudo_spectrum = 1.0 / np.maximum(denom, 1e-12)</code></pre>
           </p>
         </div>
         <div style="text-align: center; margin: 1rem 0;">
-          $$x = R\sin\theta, \qquad y = R\cos\theta$$
+          <div class="formula-scroll-wrapper">
+$$x = R\sin\theta, \qquad y = R\cos\theta$$
+</div>
         </div>
         <div class="academic-two-column">
           <p>
@@ -1033,7 +1059,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
         <div style="margin: 1.25rem 0 1.75rem 0; background: rgba(15, 23, 42, 0.85); border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden;">
           <div style="padding: 0.5rem 1rem; background: rgba(30, 41, 59, 0.7); font-size: 0.78rem; font-weight: 700; color: #38bdf8; display: flex; justify-content: space-between;">
             <span>Code Listing 3.7: Forward-Pass Implementation of the Synthetic FMCW Radar CNN</span>
-            
+
           </div>
           <pre style="margin: 0; padding: 1rem 1.25rem; font-size: 0.84rem; line-height: 1.55; overflow-x: auto; background: transparent;"><code class="language-python">def forward(self, x):
     # Shared convolutional feature backbone
@@ -1059,7 +1085,9 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
         </p>
 
         <div style="text-align: center; margin: 1.25rem 0;">
-          $$\mathcal{L} = \mathcal{L}_{\mathrm{cls}} + 2\mathcal{L}_{\mathrm{box}}$$
+          <div class="formula-scroll-wrapper">
+$$\mathcal{L} = \mathcal{L}_{\mathrm{cls}} + 2\mathcal{L}_{\mathrm{box}}$$
+</div>
         </div>
 
         <div class="academic-two-column">
@@ -1121,10 +1149,12 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
 
         <div class="academic-two-column">
           <div style="text-align: center; margin: 0.65rem 0; font-size: 0.88rem;">
-            $$\begin{aligned}
+            <div class="formula-scroll-wrapper">
+$$\begin{aligned}
             \mathcal{C} = \{ &\mathrm{Rect},\ \mathrm{Barker},\ \mathrm{Frank},\ \mathrm{P1},\ \mathrm{P2},\ \mathrm{P3}, \\
             &\mathrm{P4},\ \mathrm{Px},\ \mathrm{ZadoffChu},\ \mathrm{LFM},\ \mathrm{FMCW}\}
             \end{aligned}$$
+</div>
           </div>
         </div>
 
@@ -1144,7 +1174,9 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
           </p>
         </div>
         <div style="text-align: center; margin: 1rem 0;">
-          $$(c, x_c, y_c, w, h)$$
+          <div class="formula-scroll-wrapper">
+$$(c, x_c, y_c, w, h)$$
+</div>
         </div>
         <div class="academic-two-column">
           <p>
@@ -1211,7 +1243,8 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
           <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
             Table 3.2: YOLOv9-C Training Hyperparameters
           </div>
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1; max-width: 600px; margin: 0 auto;">
+          <div class="table-scroll-wrapper">
+<table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1; max-width: 600px; margin: 0 auto;">
             <thead>
               <tr style="border-bottom: 2px solid #38bdf8; background: rgba(30, 41, 59, 0.6); text-align: left;">
                 <th style="padding: 8px 14px; color: #f8fafc; font-weight: 700;">Training Parameter</th>
@@ -1249,6 +1282,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
               </tr>
             </tbody>
           </table>
+</div>
         </div>
         </div>
 
@@ -1306,7 +1340,9 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
         </div>
 
         <div style="text-align: center; margin: 1.25rem 0;">
-          $$\mathrm{SNR} \in \{-20, -12, -4, +4, +12, +20\}\ \mathrm{dB}$$
+          <div class="formula-scroll-wrapper">
+$$\mathrm{SNR} \in \{-20, -12, -4, +4, +12, +20\}\ \mathrm{dB}$$
+</div>
         </div>
 
         <div class="academic-two-column">
@@ -1322,7 +1358,9 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
         </div>
 
         <div style="text-align: center; margin: 1.25rem 0;">
-          $$\mathrm{FPS}_{\mathrm{avg}} = \frac{1000}{\mathrm{Latency}_{\mathrm{mean}}(\mathrm{ms})}$$
+          <div class="formula-scroll-wrapper">
+$$\mathrm{FPS}_{\mathrm{avg}} = \frac{1000}{\mathrm{Latency}_{\mathrm{mean}}(\mathrm{ms})}$$
+</div>
         </div>
 
         <div class="academic-two-column">
@@ -1430,7 +1468,9 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
         </div>
 
         <div style="text-align: center; margin: 1.25rem 0;">
-          $$\min_{\theta,\pi} \mathbb{E}_{x \sim \mathcal{D}} \left[ C(x, \pi(x)) \right]$$
+          <div class="formula-scroll-wrapper">
+$$\min_{\theta,\pi} \mathbb{E}_{x \sim \mathcal{D}} \left[ C(x, \pi(x)) \right]$$
+</div>
         </div>
 
         <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin: 0.75rem 0; text-align: center;">
@@ -1438,7 +1478,9 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
         </p>
 
         <div style="text-align: center; margin: 1rem 0;">
-          $$\mathrm{mAP}(f_\theta, \pi) \ge \mathrm{mAP}_{\mathrm{baseline}} - \epsilon$$
+          <div class="formula-scroll-wrapper">
+$$\mathrm{mAP}(f_\theta, \pi) \ge \mathrm{mAP}_{\mathrm{baseline}} - \epsilon$$
+</div>
         </div>
 
         <p style="font-size: 0.975rem; line-height: 1.75; color: #cbd5e1; margin: 0.75rem 0; text-align: center;">
@@ -1446,7 +1488,9 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
         </p>
 
         <div style="text-align: center; margin: 1rem 0;">
-          $$\mathrm{Latency}_{P95}(f_\theta, \pi) \le \tau_{\max}$$
+          <div class="formula-scroll-wrapper">
+$$\mathrm{Latency}_{P95}(f_\theta, \pi) \le \tau_{\max}$$
+</div>
         </div>
 
         <div class="academic-two-column">
@@ -1474,7 +1518,8 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
           <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
             Table 3.3: Evaluation Dimensions and Quantitative Measures
           </div>
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1; max-width: 700px; margin: 0 auto;">
+          <div class="table-scroll-wrapper">
+<table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.55; color: #cbd5e1; max-width: 700px; margin: 0 auto;">
             <thead>
               <tr style="border-bottom: 2px solid #38bdf8; background: rgba(30, 41, 59, 0.6); text-align: left;">
                 <th style="padding: 8px 14px; color: #f8fafc; font-weight: 700;">Evaluation Dimension</th>
@@ -1508,6 +1553,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
               </tr>
             </tbody>
           </table>
+</div>
         </div>
         </div>
 
@@ -1526,7 +1572,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
         </div>
       </section>
 
-      
+
       <!-- ==================== CHAPTER 4: EXPERIMENTAL RESULTS AND ANALYSIS ==================== -->
       <section id="ch4-results" class="section-block" style="margin-bottom: 3.5rem;">
         <h2>Chapter 4: Experimental Results and Analysis</h2>
@@ -1578,7 +1624,8 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
           <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
             Table 4.1: Configuration of the simulated FMCW radar system
           </div>
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+          <div class="table-scroll-wrapper">
+<table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
             <thead>
               <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
                 <th style="padding: 0.6rem 0.8rem;">Parameter</th>
@@ -1601,6 +1648,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
               <tr><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Maximum unambiguous velocity ($v_{\max}$)</td><td style="padding: 0.55rem 0.8rem; color: #f1f5f9; font-weight: 600;">$\pm 19.47$ m/s</td></tr>
             </tbody>
           </table>
+</div>
         </div>
 
         <div class="academic-two-column">
@@ -1608,19 +1656,25 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
             The theoretical range resolution is determined by the transmitted sweep bandwidth:
           </p>
           <div style="text-align: center; margin: 0.75rem 0;">
-            $$\Delta R = \frac{c}{2B}$$
+            <div class="formula-scroll-wrapper">
+$$\Delta R = \frac{c}{2B}$$
+</div>
           </div>
           <p>
             where $c$ is the speed of light and $B$ represents the transmitted bandwidth. For the selected bandwidth of 1 GHz:
           </p>
           <div style="text-align: center; margin: 0.75rem 0;">
-            $$\Delta R \approx 0.15\text{ m}$$
+            <div class="formula-scroll-wrapper">
+$$\Delta R \approx 0.15\text{ m}$$
+</div>
           </div>
           <p>
             Similarly, the theoretical velocity resolution is:
           </p>
           <div style="text-align: center; margin: 0.75rem 0;">
-            $$\Delta v = \frac{\lambda}{2N_c T_c}$$
+            <div class="formula-scroll-wrapper">
+$$\Delta v = \frac{\lambda}{2N_c T_c}$$
+</div>
           </div>
           <p>
             where $N_c$ is the number of chirps and $T_c$ denotes the chirp duration. The configured values yield a velocity resolution of approximately $0.3042\text{ m/s}$.
@@ -1635,7 +1689,9 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
             The generated radar data cube has dimensions:
           </p>
           <div style="text-align: center; margin: 0.75rem 0;">
-            $$\mathbf{X} \in \mathbb{C}^{N_{\mathrm{rx}} \times N_c \times N_s} \quad \text{with} \quad \mathbf{X} \in \mathbb{C}^{4 \times 128 \times 256}$$
+            <div class="formula-scroll-wrapper">
+$$\mathbf{X} \in \mathbb{C}^{N_{\mathrm{rx}} \times N_c \times N_s} \quad \text{with} \quad \mathbf{X} \in \mathbb{C}^{4 \times 128 \times 256}$$
+</div>
           </div>
           <p>
             This corresponds to four receiving channels, 128 successive chirps, and 256 fast-time samples per chirp. The experiment successfully generated the expected complex radar cube, establishing the input to subsequent signal-processing stages.
@@ -1676,7 +1732,9 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
             The clutter attenuation achieved during the experiment is calculated by comparing the power of the range profiles before and after filtering:
           </p>
           <div style="text-align: center; margin: 0.75rem 0;">
-            $$A_{\mathrm{clutter}} = 12.94\text{ dB}$$
+            <div class="formula-scroll-wrapper">
+$$A_{\mathrm{clutter}} = 12.94\text{ dB}$$
+</div>
           </div>
           <p>
             This represents the measured clutter attenuation (defined as the total average signal-power reduction across all range-Doppler cells under slow-time mean-subtraction) for the selected synthetic scene and configured MTI operation. It demonstrates that the filtering stage suppresses the stationary clutter component by 12.94 dB while retaining the moving-target returns required by subsequent Doppler processing.
@@ -1720,7 +1778,8 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
           <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
             Table 4.2: CA-CFAR detection results for the synthetic automotive scene
           </div>
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+          <div class="table-scroll-wrapper">
+<table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
             <thead>
               <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
                 <th style="padding: 0.6rem 0.8rem;">Detection</th>
@@ -1768,6 +1827,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
               </tr>
             </tbody>
           </table>
+</div>
         </div>
 
         <div class="academic-two-column">
@@ -1784,10 +1844,14 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
             For these four associated detections, the absolute range and velocity estimation errors are defined as $e_R = |\hat{R} - R_{\mathrm{GT}}|$ and $e_v = |\hat{v} - v_{\mathrm{GT}}|$. The resulting mean absolute errors are:
           </p>
           <div style="text-align: center; margin: 0.75rem 0;">
-            $$\mathrm{MAE}_R = \frac{0.02 + 0.01 + 0.01 + 0.01}{4} = 0.0125\text{ m}$$
+            <div class="formula-scroll-wrapper">
+$$\mathrm{MAE}_R = \frac{0.02 + 0.01 + 0.01 + 0.01}{4} = 0.0125\text{ m}$$
+</div>
           </div>
           <div style="text-align: center; margin: 0.75rem 0;">
-            $$\mathrm{MAE}_v = \frac{0.21 + 0.07 + 0.02 + 0.12}{4} = 0.105\text{ m/s}$$
+            <div class="formula-scroll-wrapper">
+$$\mathrm{MAE}_v = \frac{0.21 + 0.07 + 0.02 + 0.12}{4} = 0.105\text{ m/s}$$
+</div>
           </div>
           <p>
             These values demonstrate close agreement between the estimated and simulated target parameters in the selected scene. However, the detector also identifies an additional candidate at approximately 11.99 m with nearly zero radial velocity. Its physical origin cannot be established from the available experiment; it may arise from stationary clutter residual, an antenna coupling reflection, or a false alarm. It is therefore classified as an unassociated candidate rather than definitively rejected.
@@ -1819,7 +1883,8 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
           <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
             Table 4.3: Angular estimates returned by the AoA experiment
           </div>
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+          <div class="table-scroll-wrapper">
+<table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
             <thead>
               <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
                 <th style="padding: 0.6rem 0.8rem;">Estimation Method</th>
@@ -1849,6 +1914,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
               </tr>
             </tbody>
           </table>
+</div>
         </div>
 
         <div class="academic-two-column">
@@ -1883,7 +1949,9 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
             Following candidate detection and spatial estimation, the processing pipeline converts polar target measurements into Cartesian coordinates:
           </p>
           <div style="text-align: center; margin: 0.75rem 0;">
-            $$x = R\sin\theta, \qquad y = R\cos\theta$$
+            <div class="formula-scroll-wrapper">
+$$x = R\sin\theta, \qquad y = R\cos\theta$$
+</div>
           </div>
           <p>
             DBSCAN is then applied to group spatially related detections into object-level clusters <a href="#ref-16" class="citation-badge" data-citation="16">[16]</a>. The implementation uses Cartesian position and a scaled velocity component as the clustering features. For each cluster, quantities such as its centroid, mean velocity, estimated azimuth, total detection power, and spatial bounds are computed.
@@ -1921,7 +1989,9 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
             The network, <code>RadarObjectDetectorCNN</code>, contains a shared convolutional feature extractor with residual blocks, followed by separate classification and coordinate-regression heads. The executed notebook instantiates the model with 24 base filters, yielding:
           </p>
           <div style="text-align: center; margin: 0.75rem 0;">
-            $$136{,}041\text{ trainable parameters}$$
+            <div class="formula-scroll-wrapper">
+$$136{,}041\text{ trainable parameters}$$
+</div>
           </div>
           <p>
             Its forward pass produces five-channel classification heatmaps and four-channel coordinate-regression outputs. The experiment uses a cached dataset of 32 synthetic radar samples with an 80:20 split (25 training, 7 validation). Training was performed over five epochs using batch size 6 on CPU under PyTorch 2.6.0 with AdamW ($\text{lr} = 2\times 10^{-3}$, weight decay $10^{-4}$) and cosine annealing.
@@ -1930,14 +2000,16 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
             The model uses the composite classification and regression loss:
           </p>
           <div style="text-align: center; margin: 0.75rem 0;">
-            $$\mathcal{L} = \mathcal{L}_{\mathrm{BCE}} + 2\mathcal{L}_{\mathrm{SmoothL1}}$$
+            <div class="formula-scroll-wrapper">
+$$\mathcal{L} = \mathcal{L}_{\mathrm{BCE}} + 2\mathcal{L}_{\mathrm{SmoothL1}}$$
+</div>
           </div>
           <p>
             As illustrated in Figure 4.6 (a), the composite multi-task training loss decreases steadily across all epochs (from 0.7788 to 0.4908), confirming rapid gradient descent convergence within 26.89 seconds. The validation loss achieves its minimum of 0.4933 at epoch 3 before displaying a minor stabilization bounce, characteristic of early parameter convergence on the synthetic Range-Doppler representations.
           </p>
         </div>
 
-        
+
 
         <div class="academic-two-column">
           <p>
@@ -1981,10 +2053,12 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
             The S-128 representation uses a $128\times 128$ spectrogram over a 500 MHz frequency bandwidth and a 2 ms observation interval. The eleven modulation categories considered are:
           </p>
           <div style="text-align: center; margin: 0.65rem 0; font-size: 0.88rem;">
-            $$\begin{aligned}
+            <div class="formula-scroll-wrapper">
+$$\begin{aligned}
             \mathcal{C} = \{ &\mathrm{Rect},\ \mathrm{Barker},\ \mathrm{Frank},\ \mathrm{P1},\ \mathrm{P2},\ \mathrm{P3}, \\
             &\mathrm{P4},\ \mathrm{Px},\ \mathrm{ZadoffChu},\ \mathrm{LFM},\ \mathrm{FMCW}\}
             \end{aligned}$$
+</div>
           </div>
           <p>
             The dataset preparation pipeline ingests single-channel spectrograms and parses YOLO-format annotations, where each bounding box bounds the temporal and frequency extent of an active radar pulse. While a local 60-image micro-slice (40 train, 15 val, 5 test) was used for pipeline sanity checks, the full benchmark requires training and evaluation over the complete multi-class distribution.
@@ -1996,7 +2070,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
           <p>
             To establish an empirical baseline on real wideband radar spectrograms, a comparative benchmark was conducted using Ultralytics YOLOv9-C (GELAN-C, 25.30M parameters) on an NVIDIA Tesla T4 GPU (14.56 GB VRAM) on the Kaggle GPU platform, compared against the published ICASSP 2025 Table III benchmark by Lin et al. The model was trained across 40,003 real RadDet-9T wideband RF spectrogram frames (14,001 train, 6,001 val, 20,001 test) spanning all 11 radar modulation classes (such as LFM, FMCW, Barker, Frank, and polyphase codes) without physical road-scene conflation.
           </p>
-          
+
           <p>
             Training was executed with AdamW and automatic mixed precision (AMP) over 66 epochs, terminating via early stopping (patience 20) with a total training duration of 1 hour 11 minutes 52 seconds (4,245.68 seconds). Over the 66 epochs, the training losses declined monotonically: bounding-box loss decreased from 2.198 to 1.014, classification loss from 2.011 to 1.339, and distribution-focal loss (DFL) from 0.912 to 0.767, representing a greater than 50% loss reduction across all heads. Validation box loss converged stably to 0.8851 with zero numerical anomalies.
           </p>
@@ -2013,7 +2087,8 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
           <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
             Table 4.5: Full-Scale RadDet Benchmark Performance and System Characteristics (YOLOv9-C)
           </div>
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+          <div class="table-scroll-wrapper">
+<table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
             <thead>
               <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
                 <th style="padding: 0.6rem 0.8rem;">Dimension</th>
@@ -2074,6 +2149,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
               </tr>
             </tbody>
           </table>
+</div>
         </div>
 
         <!-- Figure 4.7: Full-scale RadDet YOLOv9-C training and validation metrics progression -->
@@ -2111,7 +2187,9 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
             Radar target detection degrades non-linearly under heavy RF interference, thermal noise, and ground clutter. To evaluate robustness against channel noise and reproduce the published ICASSP 2025 Table III benchmark by Lin et al. <a href="#ref-30" class="citation-badge" data-citation="30">[30]</a> under identical $128\times 128$ spatial resolution ($S-128$), 20,001 test frames were partitioned into six distinct signal-to-noise ratio (SNR) tiers (3,333 frames each) spanning:
           </p>
           <div style="text-align: center; margin: 0.75rem 0;">
-            $$\mathcal{S} = \{-20, -12, -4, +4, +12, +20\}\text{ dB}$$
+            <div class="formula-scroll-wrapper">
+$$\mathcal{S} = \{-20, -12, -4, +4, +12, +20\}\text{ dB}$$
+</div>
           </div>
           <p>
             Across these six tiers, YOLOv9-C achieved a grand mean $\text{mAP}_{50} = \mathbf{25.25\%}$ and $\text{mAP}_{50:95} = \mathbf{19.03\%}$, matching the published paper state-of-the-art (YOLOv9-M: $25.93\%$ and $19.47\%$) within absolute margins of $-0.68\%$ and $-0.44\%$ respectively. Furthermore, YOLOv9-C outperforms the published YOLOv8-M baseline ($24.81\%\ \text{mAP}_{50}$ and $18.90\%\ \text{mAP}_{50:95}$).
@@ -2130,7 +2208,8 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
           <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
             Table 4.6: Multi-SNR quantitative breakdown and reproduction of ICASSP 2025 Table III benchmark
           </div>
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+          <div class="table-scroll-wrapper">
+<table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
             <thead>
               <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
                 <th style="padding: 0.6rem 0.8rem;">Model / SNR Tier (dB)</th>
@@ -2216,6 +2295,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
               </tr>
             </tbody>
           </table>
+</div>
         </div>
 
         <!-- Figure 4.8: Multi-SNR detection accuracy curves -->
@@ -2298,7 +2378,8 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
           <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
             Table 4.7: Summary of measured computational quantities and outstanding evaluations
           </div>
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+          <div class="table-scroll-wrapper">
+<table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
             <thead>
               <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
                 <th style="padding: 0.6rem 0.8rem;">Quantity</th>
@@ -2321,6 +2402,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
               <tr><td style="padding: 0.55rem 0.8rem; color: #cbd5e1;">Quantisation and pruning performance</td><td style="padding: 0.55rem 0.8rem; color: #eab308;">In progress</td><td style="padding: 0.55rem 0.8rem; color: #eab308;">Deferred to comparative evaluation phase</td></tr>
             </tbody>
           </table>
+</div>
         </div>
 
         <h4 style="margin-top: 2rem; margin-bottom: 0.75rem; color: #93c5fd;">4.4.5 Implications for Resource-Efficient AI</h4>
@@ -2412,7 +2494,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
       </section>
 
 
-      
+
       <!-- ==================== CHAPTER 5: CONCLUSION AND FUTURE WORK ==================== -->
       <section id="ch5-conclusion" class="section-block" style="margin-bottom: 3.5rem;">
         <h2>Chapter 5: Conclusion and Future Work</h2>
@@ -2442,7 +2524,8 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
           <div style="font-weight: 700; color: #38bdf8; font-size: 0.98rem; margin-bottom: 0.75rem; text-align: center;">
             Table 5.1: Objective achievement summary
           </div>
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+          <div class="table-scroll-wrapper">
+<table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
             <thead>
               <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
                 <th style="padding: 0.6rem 0.8rem;">Objective</th>
@@ -2493,6 +2576,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
               </tr>
             </tbody>
           </table>
+</div>
         </div>
 
         <div class="academic-two-column">
@@ -2591,7 +2675,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
           </p>
         </div>
 
-        
+
 
         <!-- Figure 5.1: Academic Research Schedule for BTP-1 and Proposed BTP-2 Activities -->
         <div style="text-align: center; margin: 2.25rem 0;">
@@ -2617,7 +2701,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
           </p>
         </div>
 
-        
+
 
         <h3 style="margin-top: 2.25rem; margin-bottom: 1rem; color: #38bdf8;">5.7 Final Conclusion</h3>
         <div class="academic-two-column">
@@ -2687,7 +2771,8 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
         </p>
 
         <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem 1.5rem; overflow-x: auto;">
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
+          <div class="table-scroll-wrapper">
+<table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; line-height: 1.6; text-align: left;">
             <thead>
               <tr style="border-bottom: 2px solid var(--border-color); color: #f1f5f9;">
                 <th style="padding: 0.6rem 0.8rem; width: 60px;">Ref</th>
@@ -2917,6 +3002,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
               </tr>
             </tbody>
           </table>
+</div>
         </div>
       </section>
 
@@ -2940,7 +3026,7 @@ labels = DBSCAN(eps=1.5, min_samples=1).fit_predict(features)</code></pre>
   <script src="./assets/vendor/katex/katex.min.js"></script>
   <script src="./assets/vendor/katex/auto-render.min.js"></script>
   <script src="./assets/vendor/highlight/highlight.min.js"></script>
-  <script src="./app.js"></script>
+  <script src="./app.js?v=1.2.0"></script>
 
 </body>
 </html>

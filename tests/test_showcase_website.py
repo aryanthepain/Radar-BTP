@@ -297,6 +297,44 @@ class TestShowcaseWebsite(unittest.TestCase):
             f"Expected at least 6 professor conclusion cards, found {conclusion_count}",
         )
 
+    def test_05_mobile_ergonomics_and_citation_assets(self):
+        """Verifies mobile drawer ergonomics, touch targets, overflow wrappers, and offline resilience."""
+        index_path = DOCS_DIR / "index.html"
+        styles_path = DOCS_DIR / "styles.css"
+        app_path = DOCS_DIR / "app.js"
+
+        with open(index_path, "r", encoding="utf-8") as f:
+            html_content = f.read()
+        with open(styles_path, "r", encoding="utf-8") as f:
+            css_content = f.read()
+        with open(app_path, "r", encoding="utf-8") as f:
+            js_content = f.read()
+
+        # Navigation drawer and backdrop presence
+        self.assertIn('id="nav-toggle"', html_content)
+        self.assertIn('id="nav-backdrop"', html_content)
+        self.assertIn('aria-controls="academic-sidebar"', html_content)
+        self.assertIn("table-scroll-wrapper", html_content)
+
+        # CSS mobile touch targets and overflow rules
+        self.assertIn("body.nav-open", css_content)
+        self.assertIn(".table-scroll-wrapper", css_content)
+        self.assertIn(".formula-scroll-wrapper", css_content)
+        self.assertIn("min-width: 44px", css_content)
+        self.assertIn("min-height: 44px", css_content)
+        self.assertIn("-webkit-overflow-scrolling: touch", css_content)
+
+        # JS mobile navigation, citation popovers, and safety sweep
+        self.assertIn("initMobileDrawer", js_content)
+        self.assertIn("initCitationTooltips", js_content)
+        self.assertIn("initOverflowContainment", js_content)
+
+        # Re-verify offline resilience: zero external CDNs across HTML, CSS, and JS
+        for forbidden in ["unpkg.com", "cdnjs.cloudflare.com", "cdn.jsdelivr.net", "fonts.googleapis.com"]:
+            self.assertNotIn(forbidden, html_content)
+            self.assertNotIn(forbidden, css_content)
+            self.assertNotIn(forbidden, js_content)
+
 
 if __name__ == "__main__":
     unittest.main()

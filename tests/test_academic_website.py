@@ -292,3 +292,126 @@ def test_scope_and_archival_preservation():
             assert not git_diff_origin.stdout.strip(), (
                 f"templates/BTP_Report_Template_Overleaf/ must have zero diff against origin/main! Found:\n{git_diff_origin.stdout}"
             )
+
+
+def test_mobile_drawer_and_touch_targets():
+    """Verify WCAG 2.5.5 touch target standard (>=44x44px), mobile drawer ergonomics, and scroll-lock."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+    with open(STYLES_CSS, "r", encoding="utf-8") as f:
+        css = f.read()
+    with open(APP_JS, "r", encoding="utf-8") as f:
+        js = f.read()
+
+    # Touch target standards in CSS for nav-toggle
+    assert ".nav-toggle-btn" in css, "CSS must define .nav-toggle-btn"
+    assert "min-width: 44px" in css, "nav-toggle must have min-width: 44px per WCAG 2.5.5"
+    assert "min-height: 44px" in css, "nav-toggle must have min-height: 44px per WCAG 2.5.5"
+    assert ":focus-visible" in css, "nav-toggle must have :focus-visible focus ring"
+
+    # Accessible ARIA attributes on #nav-toggle
+    assert 'id="nav-toggle"' in html, "HTML must contain #nav-toggle"
+    assert 'aria-expanded=' in html, "#nav-toggle must declare aria-expanded attribute"
+    assert 'aria-controls="academic-sidebar"' in html, "#nav-toggle must declare aria-controls='academic-sidebar'"
+    assert 'id="nav-backdrop"' in html, "Backdrop must have id='nav-backdrop'"
+
+    # Background body scroll-lock
+    assert "body.nav-open" in css, "CSS must define body.nav-open scroll lock rule"
+    assert "overflow: hidden" in css and "touch-action: none" in css, "body.nav-open must enforce overflow: hidden and touch-action: none"
+
+    # Touch target minimum 44px on TOC links
+    assert "min-height: 44px" in css and ".toc-link" in css, "TOC links must have min-height: 44px per WCAG 2.5.5"
+
+    # Mobile drawer logic in app.js
+    assert "initMobileDrawer" in js, "app.js must declare initMobileDrawer function"
+    assert "nav-open" in js, "initMobileDrawer must toggle nav-open on document.body"
+    assert "aria-expanded" in js, "initMobileDrawer must update aria-expanded"
+    assert "✕" in js and "☰" in js, "initMobileDrawer must morph icon between '☰' and '✕'"
+    assert "Escape" in js, "initMobileDrawer must support Escape key drawer dismissal"
+
+
+def test_overflow_containment_and_scroll_wrappers():
+    """Verify two-tier horizontal momentum scroll containers for tables and KaTeX formulas."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+    with open(STYLES_CSS, "r", encoding="utf-8") as f:
+        css = f.read()
+    with open(APP_JS, "r", encoding="utf-8") as f:
+        js = f.read()
+
+    # CSS classes for momentum scroll wrappers
+    assert ".table-scroll-wrapper" in css, "CSS must define .table-scroll-wrapper"
+    assert ".formula-scroll-wrapper" in css, "CSS must define .formula-scroll-wrapper"
+    assert "-webkit-overflow-scrolling: touch" in css, "Must enable -webkit-overflow-scrolling: touch for iOS momentum"
+    assert "clamp(" in css, "Must define clamp() font scaling to guarantee minimum readability floor"
+
+    # Single-column reflow rule below 900px
+    assert "column-count: 1" in css, "Two-column layout must collapse to single column below 900px"
+
+    # Image and SVG responsiveness
+    assert "max-width: 100%" in css, "Must constrain images and SVGs to 100% width"
+
+    # HTML semantic scroll wrappers for major tables
+    assert '<div class="table-scroll-wrapper">' in html, "index.html must enclose wide tables in .table-scroll-wrapper"
+    assert html.count('class="table-scroll-wrapper"') >= 4, "All major tables must have .table-scroll-wrapper"
+    assert '<div class="formula-scroll-wrapper">' in html, "index.html must contain .formula-scroll-wrapper for display math"
+
+    # Client-side automated safety sweep in app.js
+    assert "initOverflowContainment" in js, "app.js must declare initOverflowContainment safety sweep"
+    assert "closest" in js, "initOverflowContainment must inspect closest wrapper before tagging"
+
+
+def test_citation_popover_engine_and_mobile_sheet():
+    """Verify adaptive IEEE citation popover card behavior (D-01..D-05)."""
+    with open(STYLES_CSS, "r", encoding="utf-8") as f:
+        css = f.read()
+    with open(APP_JS, "r", encoding="utf-8") as f:
+        js = f.read()
+
+    # Absence of gating debug flag (D-04)
+    assert "ENABLE_CITATION_TOOLTIPS" not in js, "Citation cards must be unconditionally active (D-04)"
+
+    # Mobile bottom sheet CSS rules and keyframes
+    assert "highlightPulse" in css or "@keyframes highlightPulse" in css, "CSS must define @keyframes highlightPulse"
+    assert ".highlight-pulse" in css, "CSS must define .highlight-pulse"
+    assert ".citation-backdrop" in css, "CSS must define .citation-backdrop"
+    assert "safe-area-inset-bottom" in css, "Must support mobile safe-area insets"
+    assert "16px 16px 0 0" in css, "Mobile bottom-sheet must have rounded top corners"
+
+    # Action buttons styling in CSS
+    assert ".tooltip-doi-btn" in css, "CSS must style .tooltip-doi-btn"
+    assert ".tooltip-jump-btn" in css, "CSS must style .tooltip-jump-btn"
+
+    # Smooth scroll to Section 9 and pulse animation in app.js
+    assert "scrollIntoView" in js, "app.js must smooth-scroll to bibliography target"
+    assert "highlight-pulse" in js, "app.js must add .highlight-pulse animation class to reference item"
+    assert "tooltip-doi-btn" in js, "app.js must construct DOI link button"
+    assert "tooltip-jump-btn" in js, "app.js must construct Section 9 jump button"
+
+    # Touch tap-to-inspect (prevents immediate jump) and backdrop dismissal
+    assert "e.preventDefault()" in js, "Citation badge click must prevent default immediate anchor jump"
+    assert "showTooltip(badge, true)" in js, "Citation badge click must open bottom-sheet with isTouch=true"
+    assert "backdropEl.addEventListener(\"click\", hideTooltip)" in js or "backdropEl" in js, "Backdrop must dismiss bottom-sheet"
+    assert "nav-open" in js, "Touch/mobile bottom-sheet must apply nav-open scroll lock"
+
+
+def test_desktop_citation_tooltip_collision_clamping():
+    """Verify desktop floating tooltip viewport boundary clamping and collision avoidance (D-03)."""
+    with open(STYLES_CSS, "r", encoding="utf-8") as f:
+        css = f.read()
+    with open(APP_JS, "r", encoding="utf-8") as f:
+        js = f.read()
+
+    # Desktop card styling (max-width: 480px)
+    assert "max-width: 480px" in css, "CSS must declare max-width: 480px for desktop tooltip"
+
+    # JS Boundary clamping calculations
+    assert "Math.min(480, window.innerWidth - 40)" in js, "app.js must dynamically calculate tooltip width up to 480px"
+    assert "getBoundingClientRect" in js, "app.js must inspect badge bounding rectangle"
+    assert "rect.left" in js and "rect.top" in js, "app.js must calculate relative badge coordinates"
+    assert "left + tooltipWidth > window.innerWidth" in js, "app.js must clamp right viewport collision"
+    assert "rect.top < 150" in js, "app.js must flip tooltip below badge when top boundary is exceeded"
+
+    # Hover timeout debounce
+    assert "hideTimeout = setTimeout(hideTooltip, 200)" in js, "app.js must debounce tooltip hiding with 200ms grace period"
+    assert "clearTimeout(hideTimeout)" in js, "app.js must cancel pending hide timeout upon hover re-entry"
