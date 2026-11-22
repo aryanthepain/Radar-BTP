@@ -415,3 +415,68 @@ def test_desktop_citation_tooltip_collision_clamping():
     # Hover timeout debounce
     assert "hideTimeout = setTimeout(hideTooltip, 200)" in js, "app.js must debounce tooltip hiding with 200ms grace period"
     assert "clearTimeout(hideTimeout)" in js, "app.js must cancel pending hide timeout upon hover re-entry"
+
+
+def test_mobile_drawer_synchronization_and_styles():
+    """Verify dual-class synchronization (.open and nav-open), text-size-adjust, and mobile header typography."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+    with open(STYLES_CSS, "r", encoding="utf-8") as f:
+        css = f.read()
+    with open(APP_JS, "r", encoding="utf-8") as f:
+        js = f.read()
+
+    # 1. Dual-class synchronization in app.js
+    assert 'sidebar.classList.toggle("open", isOpen)' in js, "app.js must toggle .open on sidebar"
+    assert 'backdrop.classList.toggle("open", isOpen)' in js, "app.js must toggle .open on backdrop"
+    assert 'sidebar.classList.remove("open")' in js, "app.js closeDrawer must remove .open from sidebar"
+    assert 'backdrop.classList.remove("open")' in js, "app.js closeDrawer must remove .open from backdrop"
+
+    # 2. Dual-class synchronization resilience in styles.css
+    assert ".sidebar.open" in css and "#academic-sidebar.open" in css, "styles.css must govern sidebar with .open"
+    assert ".nav-backdrop.open" in css, "styles.css must govern backdrop with .open"
+
+    # 3. WebKit text size adjust protection against aggressive mobile font boosting
+    assert "-webkit-text-size-adjust: 100%" in css, "styles.css must enforce -webkit-text-size-adjust: 100%"
+    assert "text-size-adjust: 100%" in css, "styles.css must enforce text-size-adjust: 100%"
+
+    # 4. Fluid mobile header typography
+    assert ".paper-header h1" in css, "styles.css must define mobile typography for .paper-header h1"
+    assert "overflow-wrap: break-word" in css, "styles.css must enable overflow-wrap: break-word for long titles"
+
+    # 5. Viewport meta tag declaration
+    assert 'name="viewport"' in html and "width=device-width" in html, "index.html must declare standard viewport"
+
+
+def test_interactive_lightbox_and_zoomable_figures():
+    """Verify image zoom lightbox selector, tap-to-magnify scaling, and mobile close button."""
+    with open(INDEX_HTML, "r", encoding="utf-8") as f:
+        html = f.read()
+    with open(STYLES_CSS, "r", encoding="utf-8") as f:
+        css = f.read()
+    with open(APP_JS, "r", encoding="utf-8") as f:
+        js = f.read()
+
+    # 1. Zoomable selector in app.js covers img.zoomable and all report figures
+    assert "img.zoomable" in js, "app.js must include img.zoomable in zoomable query selector"
+    assert "main img:not(#lightbox-img)" in js, "app.js must fallback to main img:not(#lightbox-img)"
+
+    # 2. In-modal tap-to-magnify in app.js
+    assert 'modalImg.classList.toggle("zoomed")' in js, "modalImg click must toggle zoomed class"
+    assert 'modalImg.style.cursor = isZoomed ? "zoom-out" : "zoom-in"' in js or 'zoom-out' in js, "modalImg cursor must reflect zoom state"
+    assert 'modalImg.classList.remove("zoomed")' in js, "openLightbox and closeLightbox must reset zoomed state"
+
+    # 3. Lightbox styles in styles.css
+    assert "#lightbox-img.zoomed" in css, "styles.css must style #lightbox-img.zoomed"
+    assert "scale(1.75)" in css, "styles.css must provide desktop magnification scale"
+    assert "scale(1.6)" in css, "styles.css must provide mobile magnification scale"
+    assert "overflow: auto" in css, "styles.css must enable overflow: auto on lightbox modal for pan-scrolling"
+
+    # 4. Mobile close button position and z-index
+    assert "#lightbox-close" in css, "styles.css must style #lightbox-close"
+    assert "200002" in css, "styles.css must give #lightbox-close top z-index (200002) above modal (200000)"
+
+    # 5. All 20 figures in index.html declare class zoomable
+    zoomable_count = html.count('class="zoomable"') + html.count("class='zoomable'")
+    assert zoomable_count >= 20, f"Expected at least 20 zoomable images in index.html, found {zoomable_count}"
+
