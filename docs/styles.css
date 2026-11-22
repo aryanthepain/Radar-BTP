@@ -77,6 +77,8 @@ html {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   width: 100%;
   max-width: 100%;
 }
@@ -1674,6 +1676,8 @@ img, svg, .figure-container, .diagram-container {
   html, body {
     overflow-x: clip !important;
     max-width: 100% !important;
+    -webkit-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
   }
 
   /* Mobile Navigation Toggle Button - Fixed Viewport Pinned 100% of the Time */
@@ -1802,6 +1806,34 @@ img, svg, .figure-container, .diagram-container {
 }
 
 @media (max-width: 600px) {
+  .paper-header {
+    margin-bottom: 1.75rem !important;
+    padding-bottom: 1.25rem !important;
+  }
+
+  .paper-header h1 {
+    font-size: clamp(1.35rem, 5.5vw, 1.75rem) !important;
+    line-height: 1.25 !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .paper-header div[style*="font-size: 1.25rem"] {
+    font-size: clamp(0.92rem, 3.8vw, 1.05rem) !important;
+    line-height: 1.4 !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .paper-header div[style*="font-size: 0.85rem"] {
+    font-size: clamp(0.72rem, 2.8vw, 0.82rem) !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .paper-abstract {
+    padding: 1rem 1.15rem !important;
+  }
+
   .advisor-defense-card {
     padding: 1rem !important;
   }
